@@ -1,0 +1,157 @@
+\ProvidesFile{ch-front.tex}[2022-10-05 front matter chapter]
+%
+%  This is the ``front matter'' for the thesis.
+%
+%  REFERENCES
+%
+%    TCMOS17
+%      The Chicago Manual of Style Online, 17th edition.
+%      https://www.chicagomanualofstyle.org/home.html
+%      retrieved on 2020-02-29
+%
+%    TEMPL
+%      Thesis and Disertation Office Templates.
+%      https://www.purdue.edu/gradschool/research/thesis/templates.html
+%      retrieved on 2020-02-29
+%
+%    WNNCD
+%    Webster's Ninth New Collegiate Dictionary.
+%
+
+%
+%   Only Purdue University uses this page
+%
+%   Comment out \begin{statement} through \end{statement}
+%   if you are not at Purdue University.
+%
+% Statement of Thesis/Dissertation Approval Page
+% This page is REQUIRED.  The page should be numbered "2"
+% and should NOT be listed in your TABLE OF CONTENTS.
+\begin{statement}
+  % Delete or add \entry commands as needed for all committe members.
+  \entry{Dr.~Arun Mannodi-Kanakkithodi, Chair}{School of Materials Engineering}
+  \entry{Dr.~Alejandro Strachan}{School of Materials Engineering}
+  \entry{Dr.~Kendra Erk}{School of Materials Engineering}
+  % There should be one \approvedby command containing the
+  % "FORM 9 THESIS FORM HEAD NAME HERE" (from TEMPL, retrieved on 2020-03-01).
+  \approvedby{Pending FORM 9 Approval}
+\end{statement}
+
+% Dedication page is optional.
+% A name and often a message in tribute to a person or cause.
+% References: WEB9 332.
+\begin{dedication}
+  To my family
+\end{dedication}
+
+% Acknowledgements page is optional but most theses include
+% a brief statement of appreciation or recognition of special
+% assistance.
+\begin{acknowledgments}
+  I am grateful for the guidance of my advisor, Dr.~Arun
+  Mannodi-Kanakkithodi.
+  The Ross Fellowship awarded to me by Purdue University Graduate
+  School helped fund my work.
+  The Rosen Center of Advanced Computing provided the computational
+  resources needed to conduct simulations, store data, and train models.
+\end{acknowledgments}
+
+% The preface is optional.
+% References: TCMOS17 1.49, WEB9 927.
+\begin{preface}
+  This is the preface.
+\end{preface}
+
+% The Table of Contents is required.
+% The Table of Contents will be automatically created for you
+% using information you supply in
+%     \chapter
+%     \section
+%     \subsection
+%     \subsubsection
+%     commands.
+\pdfbookmark{TABLE OF CONTENTS}{Contents}
+\tableofcontents
+
+% If your thesis has tables, a list of tables is required.
+% The List of Tables will be automatically created for you using
+% information you supply in
+%     \begin{table} ... \end{table}
+% environments.
+\listoftables
+
+% If your thesis has figures, a list of figures is required.
+% The List of Figures will be automatically created for you using
+% information you supply in
+%     \begin{figure} ... \end{figure}
+% environments.
+\listoffigures
+
+% If your thesis has listings, a list of listings is required.
+% The List of Listings will be automatically created for you using
+% information you supply in
+%     \begin{ZZlisting} ... \end{ZZlisting}
+% environments.
+\ZZlistoflistings
+
+% If your thesis has protocols, you may want to do a list of protocols.
+% The List of Protocols will be automatically created for you using
+% information you supply in
+%     \begin{protocol} ... \end{protocol}
+% environments.
+\listofprotocols
+
+% If your thesis has schemes, you may want to do a list of schemes.
+% The List of Schemes will be automatically created for you using
+% information you supply in
+%     \begin{scheme} ... \end{scheme}
+% environments.
+\listofschemes
+
+% List of Symbols is optional.
+\begin{symbols}
+  $m$& mass\cr
+  $v$& velocity\cr
+\end{symbols}
+
+% List of Abbreviations is optional.
+\begin{abbreviations}
+  abbr& abbreviation\cr
+  bcf& billion cubic feet\cr
+  BMOC& big man on campus\cr
+\end{abbreviations}
+
+% Nomenclature is optional.
+\begin{nomenclature}
+  alanine& 2-Aminopropanoic acid\\
+\end{nomenclature}
+
+% Glossary is optional.
+\begin{glossary}
+  philtrum& the groove between the nose and upper lip\\
+\end{glossary}
+
+\begin{abstract}%
+  In this article, we report machine learning models trained on existing
+  datasets of halide perovskite bandgaps based on first principles
+  computations performed at different fidelities. The primary objective
+  of these models is to predict the perovskite bandgap using the
+  composition and inherent elemental properties as descriptors,
+  eventually leading to accurate prediction and screening across much
+  larger chemical spaces. We utilize a recently published density
+  functional theory (DFT) dataset of > 1000 perovskite bandgaps from 4
+  different levels of theory, added to an experimental perovskite
+  bandgap dataset of $\sim$ 100 points, to train random forest
+  regression (RFR), Gaussian process regression (GPR), and Sure
+  Independent Screening and Sparsifying Operator (SISSO) regression
+  models, with data fidelity added as one-hot encoded features. We find
+  that xxx yields the best model with a bandgap root mean square error
+  of zzz on the total dataset and zzz on just the experimental
+  points. SISSO provides compound features and functions for direct
+  prediction of band gap, but errors are larger than from RFR and
+  GPR. Additional insights are gained from Pearson correlation and
+  Shapley analysis. Finally, the best model is deployed for prediction
+  of experimental band gap of $\sim$ 40,000 hypothetical compounds,
+  based on which we screen yyy compounds with band gap predicted to be
+  between 1 and 2 eV.
+\end{abstract}
