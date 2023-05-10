@@ -1,0 +1,213 @@
+% Created 2023-05-10 Wed 18:29
+% Intended LaTeX compiler: pdflatex
+\documentclass[10pt, compress, aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{ptm}
+
+\institute[Mannodi Group]{\inst{1} Purdue Materials Engineering\\Professor Arun Mannodi-Kanakkithodi}
+%\setbeamertemplate{caption}[numbered]
+\beamertemplatenavigationsymbolsempty
+%
+\usepackage{mathtools}%% bugfixing and additional tools for amsmath
+\usepackage{amsfonts}%% formal math fonts
+\usepackage{physics}%% powerful mathematics shorthand
+\usepackage{bm}%% bold math
+\usepackage{gensymb}%% inter-environment consistent measurment unit symbols
+\usepackage{upgreek}%% easy lower and uppercase nonitalicized greek letters
+\usepackage[version=3]{mhchem}%% for writing chemical formulae
+%
+\usepackage[%
+%citestyle=authoryear-icomp,
+%bibstyle=authoryear-icomp,
+style=authortitle-tcomp,
+%style=verbose,
+autocite=footnote,
+hyperref=true,
+backref=true,
+maxcitenames=3,
+url=true,
+backend=biber,
+natbib=true,
+]{biblatex}
+\addbibresource{~/org/bibliotex/bibliotex.bib}
+%
+%% \renewbibmacro*{cite:title}{%
+%%   \printtext[bibhyperref]{%
+%%     \printfield[citetitle]{labeltitle}%
+%%     \setunit{\space}%
+%%     \printtext[parens]{\printdate}%
+%%   }%
+%% }
+%
+\usepackage{svg}
+\svgsetup{%
+inkscapelatex=false,
+inkscapeformat=png,
+inkscapedpi=300,
+}
+\svgpath{{/home/panos/Pictures/figs}}
+\setbeamertemplate{footline}{%
+\hfill
+\vspace*{0.1cm}
+\insertframenumber\slash\inserttotalframenumber
+\hspace*{0.2cm}
+}
+\usetheme{default}
+\author{Panayotis Manganaris}
+\date{\today}
+\title{presentation}
+\hypersetup{
+ pdfauthor={Panayotis Manganaris},
+ pdftitle={presentation},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Perovskites}
+\label{sec:org5b130d6}
+\begin{frame}[label={sec:org8ac2ed3}]{Perovskites Recent History}
+Notable oxide perovskites and properties circa 2006\autocite{jiang-2006-predic-lattic}
+
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\small
+\begin{center}
+\begin{tabular}{ll}
+<K,Ba>BiO3 & super-conduction\\[0pt]
+Pb<Zr,Ti>O3 & piezoelectric action\\[0pt]
+Pb<Mb,Mg>O3 & relaxor ferroelectric\\[0pt]
+BaTiO3 & dielectric properties\\[0pt]
+\end{tabular}
+\end{center}
+\end{column}
+\begin{column}{0.5\columnwidth}
+\small
+\begin{center}
+\begin{tabular}{ll}
+Pb<Zr,Ti>O3 & electro-optic\\[0pt]
+LaMnO3 & magneto-resistance\\[0pt]
+LaCrO3 & catalytic\\[0pt]
+BaCeO3 & photonic conductivity\\[0pt]
+\end{tabular}
+\end{center}
+\end{column}
+\end{columns}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=170]{Introduction_To_Perovskites/2022-07-14_15-32-57_screenshot.png}
+\caption{Barium Titanate functional ceramic}
+\end{figure}
+\end{frame}
+
+\begin{frame}[label={sec:orgc8cabcf}]{Halide Perovskites}
+\begin{columns}
+\begin{column}{0.4\columnwidth}
+\begin{block}{Solar Energy Harvesting}
+\begin{itemize}
+\item 2009 : \(\ch{MAPbI_3}\) dye-sensitized absorber with 3.8\% PCE\autocite{kojima-2009-organ-halid}
+\item 2011 : absorber efficiency doubles\autocite{im-2011}
+\item 2013 : \(\ch{MAPbX_3}\) found to transport holes+electrons\autocite{saliba-2014-influen-therm}
+\end{itemize}
+
+\alert{Data-Driven Design} accelerates development
+\end{block}
+\end{column}
+\begin{column}{0.6\columnwidth}
+\begin{center}
+\includegraphics[width=115]{Introduction_To_Perovskites/2022-07-15_23-57-31_screenshot.png}
+\end{center}
+Perovskite Solar Absorber Layer\footnote{\tiny{}Photo by Dennis Schroeder\newline{}National Renewable Energy Laboratory}
+\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[allowframebreaks]{Hybrid Organic-Inorganic Perovskites}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{center}
+\includegraphics[height=90]{Introduction_To_Perovskites/2022-07-18_13-42-36_screenshot.png}
+\end{center}
+
+\(\alpha\)-Phase \(Pm\bar{3}m\) Hybrid Perovskite Crystal\autocite{yan-2016-defec-physic}
+
+\ch{ABX_3} with A=\ch{CH3NH3+} (MA)
+\end{column}
+\begin{column}{0.5\columnwidth}
+\begin{center}
+\includegraphics[angle=90,height=90]{Introduction_To_Perovskites/2022-07-13_19-55-58_screenshot.png}
+\end{center}
+2-D Ruddlesden-Popper \(Pbca\) Hybrid Perovskite Crystal\autocite{hong-2021-layer-edge}
+
+\(\ch{L_2BX_4}\) with \(L=\ch{C4H12N+}\) (BA)
+
+Generalizes to LA\textsubscript{m-1}B\textsubscript{m}X\textsubscript{3m+1} perovskite with m>1
+\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[label={sec:org580ee3e}]{Attractive Properties of Perovskites}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{center}
+\includegraphics[width=200]{Introduction_To_Perovskites/2022-07-16_01-34-42_screenshot.png}
+\end{center}
+Typical severity of gap states\autocite{mannodi-kanakkithodi-2020-defec-energ}
+\end{column}
+\begin{column}{0.5\columnwidth}
+\begin{itemize}
+\item robust against carrier scattering\autocite{yan-2016-defec-physic}
+\item spontaneously forming
+\begin{itemize}
+\item high energy defects unlikely
+\end{itemize}
+\item edge-states
+\item finite internal dipole moments\autocite{hong-2021-layer-edge}
+\begin{itemize}
+\item ferroellectrically aligned ligands
+\item long luminescence lifetimes
+\end{itemize}
+\item hydro-stability\autocite{fu-2021-two-dimen}
+\begin{itemize}
+\item hydrophobic ligands
+\end{itemize}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{Bib}
+\label{sec:org7625965}
+\begin{frame}[label={sec:org57aa444}]{References}
+\AtNextBibliography{\tiny}
+\printbibliography
+\end{frame}
+\section{SI}
+\label{sec:org406cbf8}
+\begin{frame}[label={sec:org92bfff7}]{Data Pre-Processing}
+\begin{center}
+\includegraphics[width=300]{/home/panos/Pictures/flowcharts/data_proc.png}
+\end{center}
+Data pre-processing Workflow to Implement with Python Pandas
+\end{frame}
+\begin{frame}[label={sec:org296e1f8}]{Machine Learning Pipeline}
+\begin{center}
+\includegraphics[width=300]{/home/panos/Pictures/flowcharts/ML_pipe.png}
+\end{center}
+Machine Learning Pipeline to Implement with Python SciKit-Learn
+\end{frame}
+\end{document}

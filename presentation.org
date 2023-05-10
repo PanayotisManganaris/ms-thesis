@@ -1,0 +1,182 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "STATUSLOG") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:t todo:t |:t
+#+title: presentation
+#+author: Panayotis Manganaris
+#+email: panos.manganaris@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 28.2 (Org mode 9.5.5)
+#+cite_export: biblatex
+#+latex_class: beamer
+#+latex_class_options: [10pt, compress, aspectratio=169]
+#+latex_header:
+#+latex_header_extra:
+#+description:
+#+keywords:
+#+subtitle:
+#+latex_compiler: pdflatex
+#+date: \today
+#+setupfile: ~/org/beamer_header.org
+#+PROPERTY: header-args :session mrg :kernel mrg :results raw drawer :eval never-export
+* Perovskites
+# first, explain what perovskites are and why you should care
+#  -- BaTiO3 familiarity
+#  -- halide evolution good for photovoltaics
+#  -- hybrid evolution relevant to soft materials
+# third, discuss characterizing this feature
+** Perovskites Recent History                                      :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** Oxide Perovskites                                     :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+Notable oxide perovskites and properties circa 2006[cite:@jiang-2006-predic-lattic]
+
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+# relaxor : character w/ highly nonlinear dielectric constant and
+# diffused ferroelectric to para electric phase transition (no well
+# defined Curie temperature)
+\small
+| <K,Ba>BiO3  | super-conduction      |
+| Pb<Zr,Ti>O3 | piezoelectric action  |
+| Pb<Mb,Mg>O3 | relaxor ferroelectric |
+| BaTiO3      | dielectric properties |
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+\small
+| Pb<Zr,Ti>O3 | electro-optic         |
+| LaMnO3      | magneto-resistance    |
+| LaCrO3      | catalytic             |
+| BaCeO3      | photonic conductivity |
+*** fig                                                   :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+#+DOWNLOADED: screenshot @ 2022-07-14 15:32:57
+#+CAPTION: Barium Titanate functional ceramic
+#+attr_latex: :width 170
+[[file:Introduction_To_Perovskites/2022-07-14_15-32-57_screenshot.png]]
+
+** Halide Perovskites                                              :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+**** Solar Energy Harvesting                                     :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+# Silicon PVs had 55 years of development ahead of Halide perovskites!
+- 2009 : \(\ch{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE[cite:@kojima-2009-organ-halid]
+- 2011 : absorber efficiency doubles[cite:@im-2011]
+- 2013 : \(\ch{MAPbX_3}\) found to transport holes+electrons[cite:@saliba-2014-influen-therm]
+
+*Data-Driven Design* accelerates development
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+#+DOWNLOADED: screenshot @ 2022-07-15 23:57:31
+#+attr_latex: :width 115
+[[file:Introduction_To_Perovskites/2022-07-15_23-57-31_screenshot.png]]
+Perovskite Solar Absorber Layer[fn:1]
+** Hybrid Organic-Inorganic Perovskites                            :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:BEAMER_opt: allowframebreaks
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+DOWNLOADED: screenshot @ 2022-07-18 13:42:36
+#+attr_latex: :height 90
+#+attr_org: :width 90
+[[file:Introduction_To_Perovskites/2022-07-18_13-42-36_screenshot.png]]
+
+\(\alpha\)-Phase \(Pm\bar{3}m\) Hybrid Perovskite Crystal[cite:@yan-2016-defec-physic]
+
+\ch{ABX_3} with A=\ch{CH3NH3+} (MA)
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+DOWNLOADED: screenshot @ 2022-07-13 19:55:58
+#+attr_latex: :height 90 :options angle=90
+#+attr_org: :width 90
+[[file:Introduction_To_Perovskites/2022-07-13_19-55-58_screenshot.png]]
+2-D Ruddlesden-Popper \(Pbca\) Hybrid Perovskite Crystal[cite:@hong-2021-layer-edge]
+
+\(\ch{L_2BX_4}\) with \(L=\ch{C4H12N+}\) (BA)
+
+Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
+# This has an additional *Ligand* in this structure
+# maybe start with more of why perovskites are useful, instead of telling us what they are
+** Attractive Properties of Perovskites                            :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+# part of a larger collection on perovskite Property-Structure Relationships
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+DOWNLOADED: screenshot @ 2022-07-16 01:34:42
+#+attr_latex: :width 200
+[[file:Introduction_To_Perovskites/2022-07-16_01-34-42_screenshot.png]]
+Typical severity of gap states[cite:@mannodi-kanakkithodi-2020-defec-energ]
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- robust against carrier scattering[cite:@yan-2016-defec-physic]
+- spontaneously forming
+  - high energy defects unlikely
+- edge-states
+- finite internal dipole moments[cite:@hong-2021-layer-edge]
+  - ferroellectrically aligned ligands
+  - long luminescence lifetimes
+- hydro-stability[cite:@fu-2021-two-dimen]
+  - hydrophobic ligands
+
+* COMMENT Design of Crystals
+* COMMENT Models
+* COMMENT Results
+* Bib
+** References                                                      :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+#+LATEX:\AtNextBibliography{\tiny}
+#+LATEX:\printbibliography
+* SI
+** Data Pre-Processing                                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+#+attr_latex: :width 300
+[[file:~/Pictures/flowcharts/data_proc.png]]
+Data pre-processing Workflow to Implement with Python Pandas
+** Machine Learning Pipeline                                       :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+#+attr_latex: :width 300
+[[file:~/Pictures/flowcharts/ML_pipe.png]]
+Machine Learning Pipeline to Implement with Python SciKit-Learn
+* Footnotes
+[fn:1]\tiny{}Photo by Dennis Schroeder\newline{}National Renewable Energy Laboratory
