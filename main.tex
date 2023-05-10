@@ -1,0 +1,566 @@
+% \ProvidesFile{thesis.tex}[2022-10-05 PurdueThesis thesis.tex file]
+
+% institution
+% Choose an institution name from the following list:
+%     VALUE                   COMMENT
+%     Purdue University
+%     University of Hawaii    don't include the 'okina character here,
+%                             it will get printed automatically
+\def\ZZinstitution{Purdue University}
+
+% campus
+% Choose a campus from the following list:
+%     VALUE               COMMENT
+%     Bloomington
+%     Fort\space Wayne
+%     Hammond
+%     Indianapolis
+%     Manoa               don't include the macron character here,
+%                         it will get printed automatically
+%     Reno
+%     Westville
+%     West\space Lafayette
+\def\ZZcampus{West\space Lafayette}
+
+% program
+% Choose a program from the following list:
+%     Aeronautics and Astronautics
+%     Agricultural and Biological Engineering
+%     Agricultural Economics
+%     Agronomy
+%     American Studies
+%     Animal Sciences
+%     Anthropology
+%     Art and Design
+%     Aviation and Transportation Technology
+%     Basic Medical Sciences
+%     Biochemistry
+%     Biological Sciences
+%     Biology
+%     Biomedical Engineering
+%     Botany and Plant Pathology
+%     Chemical Engineering
+%     Chemistry
+%     Chemistry and Chemical Biology
+%     Child Development and Family Studies
+%     Civil and Mechanical Engineering
+%     Civil Engineering
+%     Communication
+%     Communications
+%     Comparitive Pathobiology
+%     Computer and Information Science
+%     Computer and Information Technology
+%     Computer Graphics Technology
+%     Computer Science
+%     Construction Management Technology
+%     Consumer Science
+%     Curriculum and Instruction
+%     Earth, Atmospheric, and Planetary Sciences
+%     Economics
+%     Educational Studies
+%     Electrical and Computer Engineering
+%     Engineering Education
+%     English
+%     Entomology
+%     Food Science
+%     Forensic and Investigative Sciences
+%     Forestry and Natural Resources
+%     Health and Kinesiology
+%     Health Sciences
+%     History
+%     History and Philosphy
+%     Horticulture
+%     Hospitality and Tourism Management
+%     Human Development and Family Studies
+%     Industrial and Physical Pharmacy
+%     Industrial Engineering
+%     Interdisciplinary Biomedical Studies Program
+%     Interdisciplinary Studies (Comparitive Literature)
+%     Languages and Cultures
+%     Linguistics
+%     Management
+%     Materials Engineering
+%     Mathematical Sciences
+%     Mathematics
+%     Mechanical and Energy Engineering
+%     Mechanical Engineering
+%     Mechnical and Civil Engineering
+%     Medicinal Chemistry and Molecular Pharmacology
+%     Nuclear Engineering
+%     Nursing
+%     Nutrition Science
+%     Organizational Behavior and Human Resource Management
+%     Pharmacy Practice
+%     Philosophy
+%     Philosophy and Literature
+%     Physics
+%     Physics and Astronomy
+%     Political Science
+%     Psychological Sciences
+%     Sociology
+%     Speech, Language, and Hearing Sciences
+%     Statistics
+%     Technology
+%     Technology Leadership and Innovation
+%     Theatre
+%     Veterinary Clinical Sciences
+%     Youth Development and Agricultural Education
+\def\ZZprogram{Materials Engineering}
+
+% degree
+% Choose a degree from the following list:
+%     Doctor of Audiology
+%     Doctor of Nursing Practice
+%     Doctor of Philosophy
+%     Doctor of Technology
+%     Master of Arts
+%     Master of Fine Arts
+%     Master of Library Science
+%     Master of Science
+%     Master of Science in Agriculture
+%     Master of Science in Aviation and Aerospace Management
+%     Master of Science in Aeronautics and Astronautics
+%     Master of Science in Agricultural and Biological Engineering
+%     Master of Science in Building Construction Management
+%     Master of Science in Biomedical Engineering
+%     Master of Science in Chemical Engineering
+%     Master of Science in Civil Engineering
+%     Master of Science in Electrical and Computer Engineering
+%     Master of Science in Engineering
+%     Master of Science in Education
+%     Master of Science in Human Resources Management
+%     Master of Science in Industrial Engineering
+%     Master of Science in Industrial Technology
+%     Master of Science in Mechanical Engineering
+%     Master of Science in Materials Engineering
+%     Master of Science in Nuclear Engineering
+\def\ZZdegree{Master of Science}
+\def\ZZauthor{Panayotis T. Manganaris}
+% A Dissertation, A Master's Bypass Report, A Preliminary Report, A Thesis
+\def\ZZdocument{A Thesis}
+% May, August, December followed by a space
+% then year from 2020 to 2030
+\def\ZZgraduation{May 2023}
+\def\ZZtitle{
+  This is the Title%
+%  This is the First Line\\[-6pt]
+%  and this is the Second Line%
+}
+
+\def\ZZshowcolophon{false}
+\def\ZZshowdiagonalline{false}
+\def\ZZshowgridlines{false}
+\def\ZZshowmarginlines{false}
+\def\ZZshowtimestamp{false}
+% false, true, wide
+\def\ZZtodonotes{false}
+% Mark Senn uses an `optional-debugging-code.tex file' but does not
+% distribute it.  The following line won't do anything if you don't
+% have an optional-debugging-code.tex file so you can leave it the
+% way it is.
+\InputIfFileExists{optional-debugging-code.tex}{}{}
+
+% \includeonly{ch-introduction,ap-about-appendices}
+
+\documentclass{PurdueThesis}
+
+%%%% \ExplSyntaxOn                         %%%% changed 2021-07-27 by mark
+%%%% \bool_set_true:N \ZZCenterCaptionB    %%%% changed 2021-07-27 by mark
+%%%% \ExplSyntaxOff                        %%%% changed 2021-07-27 by mark
+
+\def\ZZatinformation{}
+% If you are at the Hammond or Westville campus
+% remove the "%" from the begining of the next line.
+%\def\ZZatinformation{~at~Purdue~Northwest}
+
+% If the title contains commas, do, for example,
+% \def\ZZtitle{WIRELESS POWER TRANSFER:
+% EFFICIENCY, FAR FIELD, DIRECTIVITY, AND PHASED ARRAY ANTENNAS}
+
+\graphicspath{{graphics/}}
+\makeatletter
+  \def\input@path{{packages/}}
+\makeatother
+
+% To override the default choices picked by \ConfigureBibliography, change,
+% \ConfigureBibliography
+% to
+    % \ConfigureBibliography
+    \newcommand{\ZZBibProcessor}{BibLaTeX}
+    \usepackage[backend=biber, citestyle=apa, dashed=false, sortcites=true, style=apa]{biblatex}
+    \addbibresource{all-biblatex.bib}
+
+% If you don't want to ignore urldate fields,
+% comment out (put "%" before) the next ten lines.
+% \DeclareSourcemap
+%   {
+%     \maps[datatype=bibtex]
+%     {
+%       % Ignore "urldate = {...}" in .bib files.
+%       % See the first complete example on page 201 of
+%       %     https://mirrors.rit.edu/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
+%       \map
+%         {
+%           \step[fieldset=urldate, null]
+%         }
+%         % Enter approximate (circa) dates using, for example,
+%         % "year = c2020"  See
+%         %     https://tex.stackexchange.com/questions/224617/what-is-the-correct-way-to-handle-approximate-dates-in-biblatex
+%       \map[overwrite=false]
+%         {
+%           \step[fieldsource=year]
+%           \step[fieldset=sortyear, origfieldval, final]
+%           \step[fieldsource=sortyear, match={c}, replace={}]
+%         }
+%     }
+%   }
+
+\usepackage{bold-extra}
+\usepackage{chemfig}
+\usepackage
+[
+  n,            % or lambda
+  advantage,
+  operators,
+  sets,
+  adversary,
+  landau,
+  probability,
+  notions,
+  logic,
+  ff,
+  mm,
+  primitives,
+  events,
+  complexity,
+  oracles,
+  asymptotics,
+  keys,
+]{cryptocode}
+\usepackage{fancyvrb}
+  \DefineShortVerb{\|}% so "|verbatim|" will be verbatim
+\usepackage{filehook}
+\usepackage[T1]{fontenc}% So "_" will work in URLs when using BibTeX.
+\usepackage{listings}% For nlui testing.
+\usepackage[version=4]{mhchem}
+  \newcommand{\nitrate}{\ce{NO3{-}}}
+  \newcommand{\pnitrate}{(\nitrate)}
+  \newcommand{\vpnitrate}{nitrate (\nitrate)}
+\usepackage{cancel}% \cancel, \highlight for inter-op with siunitx package
+% \usepackage{enumitem}% Redefine description, enumerate, and itemize lists.
+% \setlist[itemize]{leftmargin=7pt,rightmargin=24pt}
+\usepackage{etoc}% fix warnings
+% Define \setmaxprintline{number_of_columns}.
+% \usepackage{hardwrap}
+\usepackage{makeidx}% For indexing.  Making an index is optional.
+  \makeindex
+  \renewcommand{\indexname}{INDEX}
+\usepackage{mathtools}% amsmath envs and beyond
+\usepackage{media9}% define \includemedia.
+\usepackage{multicol}
+\usepackage{pa-ditto}% Define \ditto.
+\usepackage{pa-figure-dash}% \FigureDash is a dash the width of a digit in the current font.
+\usepackage{pa-logos}% For PurdueThesis, PuTh, TeX, LaTeX, METAFONT, METAPOST, etc. related logos.
+\usepackage{pa-mismath}% Follow ISO 80000-2:2019
+  % Tell mismath to put e, i, j, and pi in upright font automatically.
+  \enumber   %     \mathit e
+  \inumber   %     \mathit i
+  \jnumber   %     \mathit j
+  \pinumber  %     \itpi
+\usepackage{pa-repeat}% Define \MyRepeat{what}{repeat}.
+\usepackage{placeins}% Define \FloatBarrier process all unprocessed floats (tables, figures, etc.).
+\let\st\relax% Undefine \st so soul will load without an error.
+\usepackage{soul}% Define \hl.
+\usepackage{textcomp}% Define \textcent.
+% \usepackage{tipa}% !!! This doesn't work yet, figure it out later.
+\usepackage{tikz}
+  \usetikzlibrary{arrows.meta}
+  \usepackage{circuitikz}
+  \usepackage{menukeys}
+  \usetikzlibrary{3d}
+  \usetikzlibrary{calc,shadows,shapes.misc,shapes.symbols}
+  \usetikzlibrary{decorations.text}
+  \usetikzlibrary{decorations.pathmorphing}% noisy shapes
+  \usetikzlibrary{fit}
+  \usetikzlibrary{backgrounds}% drawing the background after the foreground
+% Needed for the Feynman diagram in ap-physics.tex.
+% Tikz-feynman requires LuaLaTeX instead of pdflatex be run.
+% LuaLaTeX screws up spacing in the list of figures so this
+% is not loaded and LuaLaTeX should not be used.
+\usepackage[compat=1.1.0]{tikz-feynman}
+\newcommand{\tabularspace}{\noalign{\vspace*{2pt}}}% The vertical space between a table heading and the table contents
+\usepackage{xfrac}
+% Define \I.
+% \I1 does \indent once, \I2 does \indent twice, etc.
+\newcommand{\I}[1]{\MyRepeat{\indent}{#1}}
+
+% Define \MyI.
+% Typeset my input.
+\long\def\MyI#1%
+  {%
+    {%
+      \fontsize{8}{10}\tt
+      \VerbatimInput
+        [
+          firstnumber = 1,
+          numbers     = left,
+          xleftmargin = 0.33in,
+        ]%
+        {#1}
+    }%
+  }
+
+% Define \MyIO.
+% Typeset my input and output.
+% The input will all be on the same page.
+% The output may be split over multiple pages.
+\newcommand{\MyIO}
+  {%
+    \input{z.out}
+
+    {%
+      \fontsize{8}{10}\tt
+      \VerbatimInput
+        [
+          firstnumber = 1,
+          numbers     = left,
+          xleftmargin = 0.33in,
+        ]
+        {z.out}
+    }
+    \FloatBarrier
+  }
+
+% Define \NL (newline) so LaTeX goes to the next output line.
+% Just doing \\ complains
+%     ! LaTeX Error: There's no line here to end.
+% \mbox{} is an empty math box.
+\newcommand{\NL}{\mbox{}\\}
+
+\listfiles% Print used files + version numbers in log
+
+\usepackage{pa-typographic-conventions}% after \usepackage{tikz} for typographical conventions
+\usepackage{covington}% example env
+\usepackage{slgloss}
+
+% If you need to change the hyphenation points of a word in the text
+% you can do, for example,
+%     \hyphenation{ve-ry-od-dly-hy-phen-at-ed}
+
+\begin{document}
+
+\setcounter{tocdepth}{3}
+
+\maketitle
+
+% Define front matter
+%     dedication
+%     acknowledgments
+%     preface
+%     table of contents
+%     list of tables
+%     list of figures
+%     list of symbols
+%     abbreviations
+%     nomenclature
+%     glossary
+%     abstract
+\include{ch-front}
+
+% Introductions may precede the first chapters or major divisions of theses.
+% Reference: TM2017, page 31.
+\include{ch-introduction}
+
+\include{ch-do-not-use-these-packages}
+
+% Summary and/or conclusions are optional but often used.
+% The summary and/or conclusions often are the last
+% major division(s) of the text.
+% Reference: TM2017 page 32.
+\include{ch-summary}
+
+% Recommendations are optional.
+% You may include recommendations as a major division if your
+% subject matter and research dictate.
+% Reference: TM2017 page 32.
+\include{ch-recommendations}
+
+% Test \begin{refsection}...\end{refsection}.
+\include{ch-test}
+
+% \immediate\setlength{\bibhang}{-3in}
+% \immediate\setlength{\itemindent}{3in}
+% \immediate\setlength{\rightmargin}{3in}
+
+%
+% This is only done if you are using BibLaTeX.
+%
+\makeatletter  % commented out on 2022-01-26
+  \defbibenvironment{bibliography}
+    {%
+      \list
+        {%
+          \printtext[labelnumberwidth]%
+          {%
+            \printfield{prefixnumber}%
+            \printfield{labelnumber}%
+          }%
+        }%
+        {%
+          \setlength{\bibhang}{1in} %%%%% was 0pt
+          \setlength{\itemindent}{1in}%  -\leftmargin} %%%%% was 0pt
+          \setlength{\itemsep}{\bibitemsep}%
+          \setlength{\leftmargin}{0pt}%  .22in} % 0.42in}
+          \setlength{\parsep}{\bibparsep}%
+           \setlength{\rightmargin}{0.33in}%
+        }%
+    }
+    {\endlist}
+    {\item}
+\makeatother  % commented out on 2022-01-26
+
+% \immediate\setlength{\labelnumberwidth}{1.5in} %%%%% was commented out
+\setlength{\labelwidth}{1.5in}
+\def\sllnsez{[999] }
+
+{%
+  % Make _ in URLs visible.
+  % \def\t{\char'137}%
+  \catcode`*=\active
+  \def*{\char'137}%  \char'137 is _
+  \PrintBibliography
+}
+
+% Appendices are optional.  Not all theses contain appendices.
+% An appendix is used for supplementary illustrative material,
+% original data, computer programs, and other material that is not
+% necessarily appropriate for inclusion within the text of your
+% thesis.
+% Reference: TM2017 page 33.
+%
+% Use ``\appendix'' for one appendix or ``\appendices'' for more than
+% one appendix.
+\appendices
+
+  % "About Appendices" appendix.
+  \include{ap-about-appendices}
+
+  % "Bugs" appendix.
+  \include{ap-bugs}
+
+  % Check margins.
+  \include{ap-check-margins}
+
+  % Demonstrate how to do separate appendices per chapter.
+  \include{ap-chapter-appendices}
+
+  % Demonstrate how to do separate references per chapter.
+  % \include{ap-chapter-references}
+
+  % Citations and references.
+  \include{ap-citations-references}
+
+  % Common mistakes.
+  \include{ap-common-mistakes}
+
+  % Defining commands.
+  \include{ap-defining-commands}
+
+  % Figures.
+  \include{ap-figures}
+
+  % Frequently Asked Questions.
+  \include{ap-frequently-asked-questions}
+
+  % Graphics.
+  \include{ap-graphics}
+
+  % Ignore these references.
+  \include{ap-ignore-these-references}
+
+  % Logos.
+  \include{ap-logos}
+
+  % Miscellaneous.
+  \include{ap-miscellaneous}
+
+  % Numbers and Units.
+  \include{ap-numbers-and-units}
+
+  % Resources.
+  \include{ap-resources}
+
+  % Tables.
+  \include{ap-tables}
+
+  % Special characters.
+  \include{ap-special-characters}
+
+  % Testing.
+  \include{ap-testing}
+
+  % Text.
+  \include{ap-text}
+
+  % Video.
+  % \include{ap-video}
+
+  % Astronomy.
+  \include{ap-astronomy}
+
+  % Biology.
+  \include{ap-biology}
+
+  % Chemistry.
+  \include{ap-chemistry}
+
+  % Computer Science.
+  \include{ap-computer-science}
+
+  % Electrical Engineering.
+  \include{ap-electrical-engineering}
+
+  % Linguistics.
+  \include{ap-linguistics}
+
+  % Mathematics.
+  \include{ap-mathematics}
+
+  % Music.
+  \include{ap-music}
+
+  % \include{ap-physics}
+  % The examples in ap-physics require LuaLaTeX but LuaLaTeX
+  % screws up the spacing in the List of Figures.  So, the
+  % ap-physics file is not included.
+  %
+  % For some reason, ap-physics doesn't work when using BibTeX.
+  % Just enclosing \include{ap-physics} in braces, i..e.,
+  %     {
+  %       \include{ap-physics}
+  %     }
+  % doesn't help so it is only loaded if we are using BibLaTeX.
+
+  % Notes and footnotes are optional.
+  % Reference: TM2017 page 34.
+  % I have not implemented this yet.  Mark Senn 2002-06-03
+
+  % A vita is optional for masters theses
+  % and required for doctoral dissertations.
+  % Reference: TM2017 page 13.
+  \include{ap-vita}
+
+  % Listing or including publications(s) is optional.
+  \include{ap-publications}
+
+  % Print the index.
+  % The index is optional.
+  \pdfbookmark{INDEX}{index}
+  \printindex
+
+  % If \ZZshowcolophon is true, print the colophon.
+  \pdfbookmark{COLOPHON}{colophon}
+  \ifthen{\equal{true}{\ZZshowcolophon}}
+    {\include{ap-colophon}}
+
+\end{document}
