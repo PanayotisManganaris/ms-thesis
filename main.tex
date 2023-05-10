@@ -353,44 +353,11 @@
 
 \maketitle
 
-% Define front matter
-%     dedication
-%     acknowledgments
-%     preface
-%     table of contents
-%     list of tables
-%     list of figures
-%     list of symbols
-%     abbreviations
-%     nomenclature
-%     glossary
-%     abstract
 \include{ch-front}
 
 % Introductions may precede the first chapters or major divisions of theses.
 % Reference: TM2017, page 31.
 \include{ch-introduction}
-
-\include{ch-do-not-use-these-packages}
-
-% Summary and/or conclusions are optional but often used.
-% The summary and/or conclusions often are the last
-% major division(s) of the text.
-% Reference: TM2017 page 32.
-\include{ch-summary}
-
-% Recommendations are optional.
-% You may include recommendations as a major division if your
-% subject matter and research dictate.
-% Reference: TM2017 page 32.
-\include{ch-recommendations}
-
-% Test \begin{refsection}...\end{refsection}.
-\include{ch-test}
-
-% \immediate\setlength{\bibhang}{-3in}
-% \immediate\setlength{\itemindent}{3in}
-% \immediate\setlength{\rightmargin}{3in}
 
 %
 % This is only done if you are using BibLaTeX.
@@ -431,127 +398,12 @@
   \PrintBibliography
 }
 
-% Appendices are optional.  Not all theses contain appendices.
-% An appendix is used for supplementary illustrative material,
-% original data, computer programs, and other material that is not
-% necessarily appropriate for inclusion within the text of your
-% thesis.
-% Reference: TM2017 page 33.
-%
 % Use ``\appendix'' for one appendix or ``\appendices'' for more than
 % one appendix.
 \appendices
 
   % "About Appendices" appendix.
   \include{ap-about-appendices}
-
-  % "Bugs" appendix.
-  \include{ap-bugs}
-
-  % Check margins.
-  \include{ap-check-margins}
-
-  % Demonstrate how to do separate appendices per chapter.
-  \include{ap-chapter-appendices}
-
-  % Demonstrate how to do separate references per chapter.
-  % \include{ap-chapter-references}
-
-  % Citations and references.
-  \include{ap-citations-references}
-
-  % Common mistakes.
-  \include{ap-common-mistakes}
-
-  % Defining commands.
-  \include{ap-defining-commands}
-
-  % Figures.
-  \include{ap-figures}
-
-  % Frequently Asked Questions.
-  \include{ap-frequently-asked-questions}
-
-  % Graphics.
-  \include{ap-graphics}
-
-  % Ignore these references.
-  \include{ap-ignore-these-references}
-
-  % Logos.
-  \include{ap-logos}
-
-  % Miscellaneous.
-  \include{ap-miscellaneous}
-
-  % Numbers and Units.
-  \include{ap-numbers-and-units}
-
-  % Resources.
-  \include{ap-resources}
-
-  % Tables.
-  \include{ap-tables}
-
-  % Special characters.
-  \include{ap-special-characters}
-
-  % Testing.
-  \include{ap-testing}
-
-  % Text.
-  \include{ap-text}
-
-  % Video.
-  % \include{ap-video}
-
-  % Astronomy.
-  \include{ap-astronomy}
-
-  % Biology.
-  \include{ap-biology}
-
-  % Chemistry.
-  \include{ap-chemistry}
-
-  % Computer Science.
-  \include{ap-computer-science}
-
-  % Electrical Engineering.
-  \include{ap-electrical-engineering}
-
-  % Linguistics.
-  \include{ap-linguistics}
-
-  % Mathematics.
-  \include{ap-mathematics}
-
-  % Music.
-  \include{ap-music}
-
-  % \include{ap-physics}
-  % The examples in ap-physics require LuaLaTeX but LuaLaTeX
-  % screws up the spacing in the List of Figures.  So, the
-  % ap-physics file is not included.
-  %
-  % For some reason, ap-physics doesn't work when using BibTeX.
-  % Just enclosing \include{ap-physics} in braces, i..e.,
-  %     {
-  %       \include{ap-physics}
-  %     }
-  % doesn't help so it is only loaded if we are using BibLaTeX.
-
-  % Notes and footnotes are optional.
-  % Reference: TM2017 page 34.
-  % I have not implemented this yet.  Mark Senn 2002-06-03
-
-  % A vita is optional for masters theses
-  % and required for doctoral dissertations.
-  % Reference: TM2017 page 13.
-  \include{ap-vita}
-
-  % Listing or including publications(s) is optional.
-  \include{ap-publications}
 
   % Print the index.
   % The index is optional.
