@@ -1,4 +1,4 @@
-% Created 2023-05-10 Wed 18:29
+% Created 2023-05-10 Wed 22:27
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, compress, aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
@@ -14,7 +14,6 @@
 \usepackage{hyperref}
 \usepackage{ptm}
 
-\institute[Mannodi Group]{\inst{1} Purdue Materials Engineering\\Professor Arun Mannodi-Kanakkithodi}
 %\setbeamertemplate{caption}[numbered]
 \beamertemplatenavigationsymbolsempty
 %
@@ -56,18 +55,22 @@ inkscapeformat=png,
 inkscapedpi=300,
 }
 \svgpath{{/home/panos/Pictures/figs}}
+%
 \setbeamertemplate{footline}{%
 \hfill
 \vspace*{0.1cm}
 \insertframenumber\slash\inserttotalframenumber
 \hspace*{0.2cm}
 }
+\institute[Mannodi Group]{
+\inst{1} Purdue Materials Engineering\\Professor Arun Mannodi-Kanakkithodi
+}
 \usetheme{default}
-\author{Panayotis Manganaris}
+\author{Panayotis Manganaris\inst{1}}
 \date{\today}
 \title{presentation}
 \hypersetup{
- pdfauthor={Panayotis Manganaris},
+ pdfauthor={Panayotis Manganaris\inst{1}},
  pdftitle={presentation},
  pdfkeywords={},
  pdfsubject={},

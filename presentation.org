@@ -4,7 +4,7 @@
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+options: timestamp:t title:t toc:t todo:t |:t
 #+title: presentation
-#+author: Panayotis Manganaris
+#+author: Panayotis Manganaris\inst{1}
 #+email: panos.manganaris@gmail.com
 #+language: en
 #+select_tags: export
@@ -13,6 +13,7 @@
 #+cite_export: biblatex
 #+latex_class: beamer
 #+latex_class_options: [10pt, compress, aspectratio=169]
+#+latex_header:\institute[Mannodi Group]{\inst{1} Purdue Materials Engineering\\Professor Arun Mannodi-Kanakkithodi}
 #+latex_header:
 #+latex_header_extra:
 #+description:
