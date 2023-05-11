@@ -84,11 +84,11 @@ Notable oxide perovskites and properties circa 2006
 :BEAMER_env: block
 :END:
 # Silicon PVs had 55 years of development ahead of Halide perovskites!
-- 2009 : \(\ch{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE
+- 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE
   [cite:@kojima-2009-organ-halid]
 - 2011 : absorber efficiency doubles
   [cite:@im-2011]
-- 2013 : \(\ch{MAPbX_3}\) found to transport holes+electrons
+- 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
   [cite:@saliba-2014-influen-therm]
 
 *Data-Driven Design* accelerates development
@@ -103,7 +103,6 @@ Perovskite Solar Absorber Layer[fn:1]
 ** Hybrid Organic-Inorganic Perovskites                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
-:BEAMER_opt: allowframebreaks
 :END:
 *** col                                                             :BMCOL:
 :PROPERTIES:
@@ -117,7 +116,7 @@ Perovskite Solar Absorber Layer[fn:1]
 \(\alpha\)-Phase \(Pm\bar{3}m\) Hybrid Perovskite Crystal
 [cite:@yan-2016-defec-physic]
 
-\ch{ABX_3} with A=\ch{CH3NH3+} (MA)
+\(\ce{ABX3}\) with \(\ce{A=CH3NH3+}\) (MA)
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
@@ -129,7 +128,7 @@ Perovskite Solar Absorber Layer[fn:1]
 2-D Ruddlesden-Popper \(Pbca\) Hybrid Perovskite Crystal
 [cite:@hong-2021-layer-edge]
 
-\(\ch{L_2BX_4}\) with \(L=\ch{C4H12N+}\) (BA)
+\(\ce{L_2BX_4}\) with \(\ce{L=C4H12N+}\) (BA)
 
 Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 # This has an additional *Ligand* in this structure
@@ -154,8 +153,7 @@ Typical severity of gap states
 :END:
 - robust against carrier scattering
   [cite:@yan-2016-defec-physic]
-- spontaneously forming
-  - high energy defects unlikely
+- spontaneously forming high energy defects unlikely
 - edge-states
 - finite internal dipole moments
   [cite:@hong-2021-layer-edge]
