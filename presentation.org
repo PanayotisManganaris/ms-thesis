@@ -12,7 +12,7 @@
 #+creator: Emacs 28.2 (Org mode 9.5.5)
 #+cite_export: biblatex
 #+latex_class: beamer
-#+latex_class_options: [10pt, compress, aspectratio=169]
+#+latex_class_options: [10pt, aspectratio=169, presentation]
 #+latex_header:
 #+latex_header_extra:\institute[Mannodi Group]{
 #+latex_header_extra:\inst{1} Purdue Materials Engineering\\Professor Arun Mannodi-Kanakkithodi
@@ -175,7 +175,10 @@ Typical severity of gap states
 :END:
 #+LATEX:\AtNextBibliography{\tiny}
 #+LATEX:\printbibliography
-* SI
+* SI                                                             :B_appendix:
+:PROPERTIES:
+:BEAMER_env: appendix
+:END:
 ** Data Pre-Processing                                             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
