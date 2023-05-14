@@ -606,8 +606,8 @@ RCAC Bell Computing Cluster
 :PROPERTIES:
 :BEAMER_col: 0.4
 :END:
-#+LATEX: \hspace*{-20cm}
-#+attr_latex: :width 200
+#+LATEX: \hspace*{-1cm}
+#+attr_latex: :width 200 :center nil
 [[file:~/Pictures/mrg-photoshoot/41_Kanakkithodi.jpg]]
 * Bib
 ** References                                                      :B_frame:
