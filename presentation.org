@@ -23,17 +23,44 @@
 #+latex_compiler: pdflatex
 #+date: \today
 #+setupfile: ~/org/beamer_header.org
-#+PROPERTY: header-args :session mrg :kernel mrg :results raw drawer :eval never-export
+#+PROPERTY: header-args:jupyter-python :session mrg :kernel mrg :pandoc org :async yes
+#+PROPERTY: header-args :results scalar drawer :eval never-export :exports results
+* COMMENT dependencies
+#+INCLUDE: /home/panos/Documents/manuscripts/DFT+ML+feature_engineering/dev_dependencies.org
+#+begin_src jupyter-python
+  import re
+  import datetime
+  from plotly.subplots import make_subplots
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+* COMMENT Load data
+#+begin_src jupyter-python
+  Y = pd.read_csv(
+      "~/Documents/manuscripts/DFT+ML+feature_engineering/Y.csv",
+      index_col=0
+  )
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
 * Perovskites
 # first, explain what perovskites are and why you should care
-#  -- BaTiO3 familiarity
-#  -- halide evolution good for photovoltaics
-#  -- hybrid evolution relevant to soft materials
+# - BaTiO3 familiarity
+# - halide evolution good for photovoltaics
+# - hybrid evolution relevant to soft materials
 # third, discuss characterizing this feature
 ** Perovskites Recent History                                      :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+# relaxor : character w/ highly nonlinear dielectric constant and
+# diffused ferroelectric to para electric phase transition (no well
+# defined Curie temperature)
 *** Oxide Perovskites                                     :B_ignoreheading:
 :PROPERTIES:
 :BEAMER_env: ignoreheading
@@ -45,9 +72,6 @@ Notable oxide perovskites and properties circa 2006
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-# relaxor : character w/ highly nonlinear dielectric constant and
-# diffused ferroelectric to para electric phase transition (no well
-# defined Curie temperature)
 \small
 | <K,Ba>BiO3  | super-conduction      |
 | Pb<Zr,Ti>O3 | piezoelectric action  |
@@ -75,6 +99,7 @@ Notable oxide perovskites and properties circa 2006
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+# Silicon PVs had 55 years of development ahead of Halide perovskites!
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.4
@@ -83,7 +108,6 @@ Notable oxide perovskites and properties circa 2006
 :PROPERTIES:
 :BEAMER_env: block
 :END:
-# Silicon PVs had 55 years of development ahead of Halide perovskites!
 - 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE
   [cite:@kojima-2009-organ-halid]
 - 2011 : absorber efficiency doubles
@@ -91,7 +115,7 @@ Notable oxide perovskites and properties circa 2006
 - 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
   [cite:@saliba-2014-influen-therm]
 
-*Data-Driven Design* accelerates development
+HaP PVs become competitive in 2013
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.6
@@ -100,7 +124,107 @@ Notable oxide perovskites and properties circa 2006
 #+attr_latex: :width 115
 [[file:Introduction_To_Perovskites/2022-07-15_23-57-31_screenshot.png]]
 Perovskite Solar Absorber Layer[fn:1]
-** Hybrid Organic-Inorganic Perovskites                            :B_frame:
+** Rapid Rise in Efficiency of Perovskite PVs                      :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+#+begin_src jupyter-python
+  history = pd.read_csv('~/data/perovskites/NREL-pvcell-efficiency.csv', index_col=0)
+  x = "Measurement Date"
+  y = "Combined efficiency (%)"
+
+  history[x] = history[x].apply(lambda x: datetime.datetime.strptime(x, '%m/%d/%Y'))
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(w="280pt")
+  color_map = {
+      ('Crystalline Si Cells', 'Single crystal (non-concentrator)'): px.colors.qualitative.Plotly[0],
+      ('Emerging PV', 'Perovskite cells'): px.colors.qualitative.Plotly[1],
+  }
+
+  traces = []
+  for (cat1, cat2), g in history.groupby(
+      ["Eff. Chart Material Class", "Eff. Chart Cell Type"]
+  ):
+      if (cat1, cat2) in color_map.keys():
+          best = g.groupby(x).max(y)[y].cummax()
+          trace = go.Scatter(
+              x=best.index,
+              y=best,
+              name=f'{cat1}-{cat2}',
+              line_color=color_map[(cat1, cat2)],
+              mode='lines+markers'
+          )
+          traces.append(trace)
+
+  # Create the layout
+  layout = go.Layout(
+      xaxis_title=x, yaxis_title=y,
+      legend=dict(orientation="h", y=1.1)
+  )
+
+  p = go.Figure(data=traces, layout=layout)
+  p.update_xaxes(
+      minor=dict(ticks="inside", showgrid=True)
+  )
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 280pt
+#+CAPTION: 
+[[file:./.ob-jupyter/10239da69f2d0128ccd122b2d3cf4ab49fea84a4.svg]]
+:end:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+- Cumulative maximum efficiency of PVs tested by accredited laboratories[cite:@research-2023-best-resear]
+- Perovskite+Si tandem monolithic cells second only to two-junction \(\ce{GaAs}\)
+
+** Attractive Properties of Perovskites                            :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+# part of a larger collection on perovskite Property-Structure Relationships
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+DOWNLOADED: screenshot @ 2022-07-16 01:34:42
+#+attr_latex: :width 200
+[[file:Introduction_To_Perovskites/2022-07-16_01-34-42_screenshot.png]]
+Typical severity of gap states
+[cite:@mannodi-kanakkithodi-2020-defec-energ]
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- robust against carrier scattering
+  [cite:@yan-2016-defec-physic]
+- spontaneously forming high energy defects unlikely
+- edge-states
+- finite internal dipole moments
+  [cite:@hong-2021-layer-edge]
+  - ferroellectrically aligned ligands
+  - long luminescence lifetimes
+- hydro-stability
+  [cite:@fu-2021-two-dimen]
+  - hydrophobic ligands
+
+** COMMENT Hybrid Organic-Inorganic Perovskites                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -133,43 +257,363 @@ Perovskite Solar Absorber Layer[fn:1]
 Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 # This has an additional *Ligand* in this structure
 # maybe start with more of why perovskites are useful, instead of telling us what they are
-** Attractive Properties of Perovskites                            :B_frame:
+* Data
+# rationalize the use of various features in models
+# codomain side
+# - choose to model perovskite band gaps
+# domain side
+# - various empirical tolerance factors emphasize using the ionic radius
+# - use the Electronegativity, etc, etc
+** Data Driven Materials Design                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-# part of a larger collection on perovskite Property-Structure Relationships
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-#+DOWNLOADED: screenshot @ 2022-07-16 01:34:42
-#+attr_latex: :width 200
-[[file:Introduction_To_Perovskites/2022-07-16_01-34-42_screenshot.png]]
-Typical severity of gap states
-[cite:@mannodi-kanakkithodi-2020-defec-energ]
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-- robust against carrier scattering
-  [cite:@yan-2016-defec-physic]
-- spontaneously forming high energy defects unlikely
-- edge-states
-- finite internal dipole moments
-  [cite:@hong-2021-layer-edge]
-  - ferroellectrically aligned ligands
-  - long luminescence lifetimes
-- hydro-stability
-  [cite:@fu-2021-two-dimen]
-  - hydrophobic ligands
+#+attr_latex: :width 390
+#+CAPTION: Workflow for accelerating testing and development of new PV materials[cite:@yang-2023-high-throug;@pablo-2019-new-front]
+#+attr_org: :width 90
+[[file:DDD-flowchart.png]]
 
-* COMMENT Design of Crystals
+** multi-fidelity model development workflow                       :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+*flowchart*
+
+simultaneously utilize multiple measurements made of the same
+composition in training models.[cite:@manganaris-2022-mrs-comput]
+
+** Tolerance                                                       :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+# consider focusing only on one equation -- maybe just Octahedral
+*** Perovskite Stability                                          :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+Stability of high symmetry \alpha phase depends on the ABX member's
+ionic radii satisfying Goldschmidt's tolerance:
+[cite:@yin-2015-halid-perov]
+
+\[
+1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+\]
+
+Empiricallly, it is *Necessary* that A must be much larger than B
+for Perovskite formation. B is usually a large atom (e.g. Pb, Sn) in
+Halide Perovskites. So A is suitably occupied by a Molecule -- an
+amine -- with an effective ionic radius.
+[cite:@kieslich-2015-exten-toler]
+** Other Tolerance Factors in Literature                           :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** Octahedral Factor                                             :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+\[
+o=\frac{r_B}{r_X}
+\]
+*** Bartel Tolerance                                              :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+\[
+t_{Bartel}=\frac{r_X}{r_B}-[1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})}]
+\]
+proposed recently
+[cite:@bartel-2019-new-toler]
+*** Ionic Radii                                                   :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+# all tolerance conditions fitted on distributions of Ionic Radii.
+# we will use this information in our models, but in what way?
+# maybe, dynamically compute effective ionic radii
+- Elemental Radii are well documented in public databases
+- Molecular Radii are defined in various ways, mostly for small
+  molecules.
+** Motives for Alternative Features                                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** Plan of Investigation                                         :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+1. relate various bulk properties of molecules to performance of
+   existing perovskite solar absorbers
+2. extrapolate into the unknown
+*** Known Organic Constituents currently in use                   :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+Literature provides examples of known performant ligands:
+- Methylammonium (Cationic Methylamine)
+  [cite:@yan-2016-defec-physic]
+- Formamidium (Cationic Formamidine)
+  [cite:@dimesso-2016-inves-formam]
+- Guanidinium (Cationic Guanidine)
+  [cite:@zhang-2019-perov-photov]
+- Butylammonium (Cationic Butylamine)
+  [cite:@hong-2021-layer-edge]
+
+** Constituent Properties                                          :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** Twelve Properties per \(\ce{ABX_3}\) constituent              :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- Ionic Radius
+- Boiling Temperature
+- Melting Temperature
+- Density
+- Atomic Weight
+- Electron Affinity
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- Ionization Energy
+- Heat of Fusion
+- Heat of Vaporization
+- Electronegativity
+- Atomic Number
+- Period
+
+* Multi-Fidelity Learning
+# I selected this methods
+# because
+** ML Architectures                                                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+# Gaussian process modeling is a particularly elegant sort of machine
+# learning. Lots of history and a large body of work continuously
+# improving them.
+*** Non-Parametric Regression                                     :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- Decision Tree
+- Random Forest
+- Kernel Ridge
+- Gaussian Process
+*** Parametric Regression                                         :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- Linear
+- Logistic
+- SISSO
+- Neural Network
+- Gaussian Process (sometimes)
+
 * COMMENT Models
 * COMMENT Results
+** Screening on Band Gap                                           :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+# We model bend gaps because of correlation to SLME
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="210pt")
+  p = px.scatter(Y[Y.LoT == "EXP"], x="bg_eV", y="efficiency", color="mix")
+  p.update_xaxes(range=(0, 4), title="Band Gap [eV]")
+  p.update_yaxes(range=(0, 0.25), title="Power Conversion Efficiency")
+  p.update_layout(showlegend=False,
+                  xaxis_tickfont_size=20, yaxis_tickfont_size=20,
+                  xaxis_titlefont_size=24, yaxis_titlefont_size=24)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 210pt
+[[file:./.ob-jupyter/2b677464785e9d1d299f0f955a3af16e9c3b5f7e.svg]]
+:end:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="210pt")
+  p = px.scatter(Y[Y.LoT == "PBE"], x="bg_eV", y="efficiency", color="mix")
+  p.update_xaxes(range=(0, 4), title="Band Gap [eV]")
+  p.update_yaxes(range=(0, 0.25), title="SLME")
+  p.update_layout(xaxis_tickfont_size=20, yaxis_tickfont_size=20,
+                  xaxis_titlefont_size=24, yaxis_titlefont_size=24)
+  # Add screening lines
+  h_lin1 = go.layout.Shape(type='line',
+                           x0=1.0, y0=0.0,
+                           x1=1.0, y1=0.25,
+                           line=dict(color='black', width=2))
+  h_lin2 = go.layout.Shape(type='line',
+                           x0=2.5, y0=0.0,
+                           x1=2.5, y1=0.25,
+                           line=dict(color='black', width=2))
+  v_line = go.layout.Shape(type='line',
+                           x0=0.0, y0=0.15,
+                           x1=4.0, y1=0.15,
+                           line=dict(color='black', width=2))
+  rect = go.layout.Shape(type='rect', #line=dict(color='blue', width=2)
+                         x0=1.0, y0=0.15,
+                         x1=2.5, y1=0.25,
+                         fillcolor='blue', opacity=0.2)
+  p.add_shape(h_lin1)
+  p.add_shape(h_lin2)
+  p.add_shape(v_line)
+  p.add_shape(rect)
+
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 210pt
+[[file:./.ob-jupyter/0c4832ea502cef117df59890aa3341839c46147b.svg]]
+:end:
+
+*** non                                                   :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+SLME metric accounts for more energetic processes than
+Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
+of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.1]
+
+* COMMENT CGCNN
+** CGCNN Introduction                                              :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+- uses pymatgen to make crystal graphs
+- predefined sets of features for every atom involved in computation
+  [cite:@xie-2018-cryst-graph]
+
+* COMMENT MEGnet
+** MEGnet Introduction                                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+- uses pymatgen to make crystal graphs
+- invites use of custom feature sets
+  [cite:@ward-2016-gener-purpos;@chen-2019-graph-networ]
+- MFGnet capable of multi-fidelity regressions
+  [cite:@chen-2021-learn-proper;@chen-2020-multi-fidel]
+
+* COMMENT ALIGNN
+** band gap learning curve                                         :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+#+attr_latex: :width 250pt
+[[file:/home/panos/data/alignn/dist_bg_32_100/lc.svg]]
+# - uses cgcnn feature set
+** band gap parity                                                 :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
+#+attr_latex: :width 250
+[[file:/home/panos/data/alignn/dist_bg_32_100/pp.svg]]
+*** Score                                                   :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_env: block
+:BEAMER_col: 0.3
+:END:
+| partition |     rmse |
+|-----------+----------|
+| test      | 0.063789 |
+| train     | 0.211039 |
+** Decomposition Energy learning curve                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+#+attr_latex: :width 250
+[[file:/home/panos/data/alignn/dist_de_32_100/lc.svg]]
+** Decomposition Energy parity                                     :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
+#+attr_latex: :width 250
+[[file:/home/panos/data/alignn/dist_de_32_100/pp.svg]]
+*** Score                                                   :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_env: block
+:BEAMER_col: 0.3
+:END:
+| partition |     rmse |
+|-----------+----------|
+| test      | 0.012009 |
+| train     | 0.081978 |
+
+* Credit
+** Acknowledgements                                                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+**** Research Group                                              :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+I am greatful to
+- Professor Arun Mannodi-Kanakkithodi for his mentorship and knowledge.
+- Jiaqi Yang for his collaboration
+- Habibur Rahman for his friendship and curiosity
+**** COMMENT Experimental Collaborators                          :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+Thanks to Professor David Fenning, Dr. Rishi Kumar for working with us
+to validate simulations and predictions.
+**** Funding                                                     :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- Ross Fellowship
+- Professor Arun's startup research grant F.10023800.05.002
+**** Resources                                                   :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+RCAC Bell Computing Cluster
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+#+LATEX: \hspace*{-20cm}
+#+attr_latex: :width 200
+[[file:~/Pictures/mrg-photoshoot/41_Kanakkithodi.jpg]]
 * Bib
 ** References                                                      :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
+:BEAMER_opt: allowframebreaks
 :END:
 #+LATEX:\AtNextBibliography{\tiny}
 #+LATEX:\printbibliography
@@ -192,4 +636,17 @@ Data pre-processing Workflow to Implement with Python Pandas
 [[file:~/Pictures/flowcharts/ML_pipe.png]]
 Machine Learning Pipeline to Implement with Python SciKit-Learn
 * Footnotes
+
 [fn:1]\tiny{}Photo by Dennis Schroeder\newline{}National Renewable Energy Laboratory
+
+# :var c=""
+# \n#+CAPTION: $c
+#+NAME: wrap
+#+begin_src bash :var p="" :var w="300pt"
+  echo -ne "$p \n#+attr_latex: :width $w"
+#+end_src
+
+#+NAME: wraptbl
+#+begin_src bash :var p="" :var w="300pt" :var c=""
+  echo -ne "$p \n#+CAPTION: $c "
+#+end_src

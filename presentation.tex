@@ -1,4 +1,4 @@
-% Created 2023-05-10 Wed 23:19
+% Created 2023-05-14 Sun 19:04
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -77,8 +77,8 @@ inkscapedpi=300,
 \end{frame}
 
 \section{Perovskites}
-\label{sec:orgcf5e07c}
-\begin{frame}[label={sec:org7a49dd3}]{Perovskites Recent History}
+\label{sec:org86c92da}
+\begin{frame}[label={sec:orgd469d47}]{Perovskites Recent History}
 Notable oxide perovskites and properties circa 2006
 \autocite{jiang-2006-predic-lattic}
 
@@ -113,7 +113,7 @@ BaCeO3 & photonic conductivity\\[0pt]
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org0c88d2a}]{Halide Perovskites}
+\begin{frame}[label={sec:org1fbe00f}]{Halide Perovskites}
 \begin{columns}
 \begin{column}{0.4\columnwidth}
 \begin{block}{Solar Energy Harvesting}
@@ -126,7 +126,7 @@ BaCeO3 & photonic conductivity\\[0pt]
 \autocite{saliba-2014-influen-therm}
 \end{itemize}
 
-\alert{Data-Driven Design} accelerates development
+HaP PVs become competitive in 2013
 \end{block}
 \end{column}
 \begin{column}{0.6\columnwidth}
@@ -137,32 +137,27 @@ Perovskite Solar Absorber Layer\footnote{\tiny{}Photo by Dennis Schroeder\newlin
 \end{column}
 \end{columns}
 \end{frame}
-\begin{frame}[allowframebreaks]{Hybrid Organic-Inorganic Perovskites}
+\begin{frame}[label={sec:org168b2d7}]{Rapid Rise in Efficiency of Perovskite PVs}
 \begin{columns}
-\begin{column}{0.5\columnwidth}
-\begin{center}
-\includegraphics[height=90]{Introduction_To_Perovskites/2022-07-18_13-42-36_screenshot.png}
-\end{center}
-
-\(\alpha\)-Phase \(Pm\bar{3}m\) Hybrid Perovskite Crystal
-\autocite{yan-2016-defec-physic}
-
-\(\ce{ABX3}\) with \(\ce{A=CH3NH3+}\) (MA)
+\begin{column}{0.6\columnwidth}
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=280pt]{./.ob-jupyter/10239da69f2d0128ccd122b2d3cf4ab49fea84a4}
+\caption{}
+\end{figure}
 \end{column}
-\begin{column}{0.5\columnwidth}
-\begin{center}
-\includegraphics[angle=90,height=90]{Introduction_To_Perovskites/2022-07-13_19-55-58_screenshot.png}
-\end{center}
-2-D Ruddlesden-Popper \(Pbca\) Hybrid Perovskite Crystal
-\autocite{hong-2021-layer-edge}
 
-\(\ce{L_2BX_4}\) with \(\ce{L=C4H12N+}\) (BA)
-
-Generalizes to LA\textsubscript{m-1}B\textsubscript{m}X\textsubscript{3m+1} perovskite with m>1
+\begin{column}{0.4\columnwidth}
+\begin{itemize}
+\item Cumulative maximum efficiency of PVs tested by accredited laboratories\autocite{research-2023-best-resear}
+\item Perovskite+Si tandem monolithic cells second only to two-junction \(\ce{GaAs}\)
+\end{itemize}
 \end{column}
 \end{columns}
 \end{frame}
-\begin{frame}[label={sec:org63d11ca}]{Attractive Properties of Perovskites}
+
+\begin{frame}[label={sec:org94c6e6e}]{Attractive Properties of Perovskites}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{center}
@@ -171,14 +166,12 @@ Generalizes to LA\textsubscript{m-1}B\textsubscript{m}X\textsubscript{3m+1} pero
 Typical severity of gap states
 \autocite{mannodi-kanakkithodi-2020-defec-energ}
 \end{column}
+
 \begin{column}{0.5\columnwidth}
 \begin{itemize}
 \item robust against carrier scattering
 \autocite{yan-2016-defec-physic}
-\item spontaneously forming
-\begin{itemize}
-\item high energy defects unlikely
-\end{itemize}
+\item spontaneously forming high energy defects unlikely
 \item edge-states
 \item finite internal dipole moments
 \autocite{hong-2021-layer-edge}
@@ -196,21 +189,200 @@ Typical severity of gap states
 \end{columns}
 \end{frame}
 
+\section{Data}
+\label{sec:org19b4039}
+\begin{frame}[label={sec:org1332dad}]{Data Driven Materials Design}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=390]{DDD-flowchart.png}
+\caption{Workflow for accelerating testing and development of new PV materials\autocite{yang-2023-high-throug,pablo-2019-new-front}}
+\end{figure}
+\end{frame}
+
+\begin{frame}[label={sec:orgb6295f1}]{multi-fidelity model development workflow}
+\alert{flowchart}
+
+simultaneously utilize multiple measurements made of the same
+composition in training models.\autocite{manganaris-2022-mrs-comput}
+\end{frame}
+
+\begin{frame}[label={sec:org0897ce6}]{Screening on Band Gap}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+ 
+\begin{center}
+\includesvg[width=210pt]{./.ob-jupyter/2b677464785e9d1d299f0f955a3af16e9c3b5f7e}
+\end{center}
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+ 
+\begin{center}
+\includesvg[width=210pt]{./.ob-jupyter/0c4832ea502cef117df59890aa3341839c46147b}
+\end{center}
+\end{column}
+\end{columns}
+
+SLME metric accounts for more energetic processes than
+Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
+of bandgaps determined according to level of theory\autocite[p.1]{yu-2012-ident-poten}
+\end{frame}
+
+\begin{frame}[label={sec:orgb31e4ee}]{Tolerance}
+\begin{block}{Perovskite Stability}
+Stability of high symmetry \(\alpha\) phase depends on the ABX member's
+ionic radii satisfying Goldschmidt's tolerance:
+\autocite{yin-2015-halid-perov}
+
+\[
+1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+\]
+
+Empiricallly, it is \alert{Necessary} that A must be much larger than B
+for Perovskite formation. B is usually a large atom (e.g. Pb, Sn) in
+Halide Perovskites. So A is suitably occupied by a Molecule -- an
+amine -- with an effective ionic radius.
+\autocite{kieslich-2015-exten-toler}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:orgd049ab4}]{Other Tolerance Factors in Literature}
+\begin{block}{Octahedral Factor}
+\[
+o=\frac{r_B}{r_X}
+\]
+\end{block}
+\begin{block}{Bartel Tolerance}
+\[
+t_{Bartel}=\frac{r_X}{r_B}-[1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})}]
+\]
+proposed recently
+\autocite{bartel-2019-new-toler}
+\end{block}
+\begin{block}{Ionic Radii}
+\begin{itemize}
+\item Elemental Radii are well documented in public databases
+\item Molecular Radii are defined in various ways, mostly for small
+molecules.
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org4610e6d}]{Motives for Alternative Features}
+\begin{block}{Plan of Investigation}
+\begin{enumerate}
+\item relate various bulk properties of molecules to performance of
+existing perovskite solar absorbers
+\item extrapolate into the unknown
+\end{enumerate}
+\end{block}
+\begin{block}{Known Organic Constituents currently in use}
+Literature provides examples of known performant ligands:
+\begin{itemize}
+\item Methylammonium (Cationic Methylamine)
+\autocite{yan-2016-defec-physic}
+\item Formamidium (Cationic Formamidine)
+\autocite{dimesso-2016-inves-formam}
+\item Guanidinium (Cationic Guanidine)
+\autocite{zhang-2019-perov-photov}
+\item Butylammonium (Cationic Butylamine)
+\autocite{hong-2021-layer-edge}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:orgfa9408f}]{Constituent Properties}
+\begin{block}{Twelve Properties per \(\ce{ABX_3}\) constituent}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{itemize}
+\item Ionic Radius
+\item Boiling Temperature
+\item Melting Temperature
+\item Density
+\item Atomic Weight
+\item Electron Affinity
+\end{itemize}
+\end{column}
+\begin{column}{0.5\columnwidth}
+\begin{itemize}
+\item Ionization Energy
+\item Heat of Fusion
+\item Heat of Vaporization
+\item Electronegativity
+\item Atomic Number
+\item Period
+\end{itemize}
+\end{column}
+\end{columns}
+\end{block}
+\end{frame}
+
+\section{Multi-Fidelity Learning}
+\label{sec:orgdd5df3c}
+\begin{frame}[label={sec:org34eb9c2}]{ML Architectures}
+\begin{block}{Non-Parametric Regression}
+\begin{itemize}
+\item Decision Tree
+\item Random Forest
+\item Kernel Ridge
+\item Gaussian Process
+\end{itemize}
+\end{block}
+\begin{block}{Parametric Regression}
+\begin{itemize}
+\item Linear
+\item Logistic
+\item SISSO
+\item Neural Network
+\item Gaussian Process (sometimes)
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Credit}
+\label{sec:org9e7c9be}
+\begin{frame}[label={sec:orgb2fdb98}]{Acknowledgements}
+\begin{columns}
+\begin{column}{0.6\columnwidth}
+\begin{block}{Research Group}
+I am greatful to
+\begin{itemize}
+\item Professor Arun Mannodi-Kanakkithodi for his mentorship and knowledge.
+\item Jiaqi Yang for his collaboration
+\item Habibur Rahman for his friendship and curiosity
+\end{itemize}
+\end{block}
+\begin{block}{Funding}
+\begin{itemize}
+\item Ross Fellowship
+\item Professor Arun's startup research grant F.10023800.05.002
+\end{itemize}
+\end{block}
+\begin{block}{Resources}
+RCAC Bell Computing Cluster
+\end{block}
+\end{column}
+\begin{column}{0.4\columnwidth}
+\hspace*{-20cm}
+\begin{center}
+\includegraphics[width=200]{/home/panos/Pictures/mrg-photoshoot/41_Kanakkithodi.jpg}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
 \section{Bib}
-\label{sec:orgcacb5ff}
-\begin{frame}[label={sec:orge63e173}]{References}
+\label{sec:org5b56996}
+\begin{frame}[allowframebreaks]{References}
 \AtNextBibliography{\tiny}
 \printbibliography
 \end{frame}
-\section{SI}
-\label{sec:org2778532}
-\begin{frame}[label={sec:orge0924f0}]{Data Pre-Processing}
+\appendix
+\begin{frame}[label={sec:orgec90664}]{Data Pre-Processing}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/data_proc.png}
 \end{center}
 Data pre-processing Workflow to Implement with Python Pandas
 \end{frame}
-\begin{frame}[label={sec:orga7b1a97}]{Machine Learning Pipeline}
+\begin{frame}[label={sec:org58215ef}]{Machine Learning Pipeline}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/ML_pipe.png}
 \end{center}
