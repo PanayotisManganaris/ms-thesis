@@ -11,6 +11,7 @@
 #+exclude_tags: noexport
 #+creator: Emacs 28.2 (Org mode 9.5.5)
 #+cite_export: biblatex
+#+bibliography: local-bib.bib
 #+latex_class: beamer
 #+latex_class_options: [10pt, aspectratio=169, presentation]
 #+latex_header:
