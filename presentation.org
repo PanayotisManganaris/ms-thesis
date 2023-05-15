@@ -53,8 +53,7 @@
 # first, explain what perovskites are and why you should care
 # - BaTiO3 familiarity
 # - halide evolution good for photovoltaics
-# - hybrid evolution relevant to soft materials
-# third, discuss characterizing this feature
+# discuss properties which contribute to this performance
 ** Perovskites Recent History                                      :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -259,12 +258,13 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 # This has an additional *Ligand* in this structure
 # maybe start with more of why perovskites are useful, instead of telling us what they are
 * Data
+# discuss DMD in general
 # rationalize the use of various features in models
 # codomain side
-# - choose to model perovskite band gaps
+# - choose to model perovskite band gaps per SQ criterion
 # domain side
-# - various empirical tolerance factors emphasize using the ionic radius
-# - use the Electronegativity, etc, etc
+# - various empirical tolerance factors used in screening
+# - discuss use of Electronegativity, etc, etc
 ** Data Driven Materials Design                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -420,11 +420,17 @@ Literature provides examples of known performant ligands:
 
 * COMMENT Models
 * COMMENT Results
+# SLME improves on SQ to give us performant range of band gaps
+# - accounts for additional energetic processes
+# - dipole-allowed, dipole-forbidden, indirect band gap
+# model bg because 
+# - bg models are more generally useful than SLME
+# - SLME is more expensive to compute
+#
 ** Screening on Band Gap                                           :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-# We model bend gaps because of correlation to SLME
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
