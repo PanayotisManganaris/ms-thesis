@@ -274,68 +274,6 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 #+attr_org: :width 90
 [[file:DDD-flowchart.png]]
 
-** multi-fidelity model development workflow                       :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-*flowchart*
-
-simultaneously utilize multiple measurements made of the same
-composition in training models.[cite:@manganaris-2022-mrs-comput]
-
-** Tolerance                                                       :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-# consider focusing only on one equation -- maybe just Octahedral
-*** Perovskite Stability                                          :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-Stability of high symmetry \alpha phase depends on the ABX member's
-ionic radii satisfying Goldschmidt's tolerance:
-[cite:@yin-2015-halid-perov]
-
-\[
-1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
-\]
-
-Empiricallly, it is *Necessary* that A must be much larger than B
-for Perovskite formation. B is usually a large atom (e.g. Pb, Sn) in
-Halide Perovskites. So A is suitably occupied by a Molecule -- an
-amine -- with an effective ionic radius.
-[cite:@kieslich-2015-exten-toler]
-** Other Tolerance Factors in Literature                           :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-*** Octahedral Factor                                             :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-\[
-o=\frac{r_B}{r_X}
-\]
-*** Bartel Tolerance                                              :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-\[
-t_{Bartel}=\frac{r_X}{r_B}-[1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})}]
-\]
-proposed recently
-[cite:@bartel-2019-new-toler]
-*** Ionic Radii                                                   :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-# all tolerance conditions fitted on distributions of Ionic Radii.
-# we will use this information in our models, but in what way?
-# maybe, dynamically compute effective ionic radii
-- Elemental Radii are well documented in public databases
-- Molecular Radii are defined in various ways, mostly for small
-  molecules.
 ** Motives for Alternative Features                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -393,6 +331,16 @@ Literature provides examples of known performant ligands:
 * Multi-Fidelity Learning
 # I selected this methods
 # because
+** multi-fidelity model development workflow                       :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+*flowchart*
+
+simultaneously utilize multiple measurements made of the same
+composition in training models.[cite:@manganaris-2022-mrs-comput]
+
 ** ML Architectures                                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -501,6 +449,56 @@ Literature provides examples of known performant ligands:
 SLME metric accounts for more energetic processes than
 Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
 of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.1]
+
+** Tolerance Factor                                                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** Perovskite Stability                                          :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+Stability of high symmetry \alpha phase depends on the ABX member's
+ionic radii satisfying Goldschmidt's tolerance:
+[cite:@yin-2015-halid-perov]
+
+\[
+1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+\]
+
+Empirically, it is *necessary* that A must be much larger than B
+for Perovskite formation. B is usually a large atom (e.g. Pb, Sn) in
+Halide Perovskites. So A is suitably occupied by a Molecule -- an
+amine -- with an effective ionic radius.
+[cite:@kieslich-2015-exten-toler]
+** Other Tolerance Factors in Literature                           :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+# all tolerance conditions fitted on distributions of Ionic Radii.
+*** Octahedral Factor                                             :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+\[
+o=\frac{r_B}{r_X}
+\]
+*** Bartel Tolerance                                              :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+\[
+t_{Bartel}=\frac{r_X}{r_B}-[1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})}]
+\]
+proposed recently
+[cite:@bartel-2019-new-toler]
+*** Ionic Radii                                                   :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- Elemental Radii are well documented in public databases
+- Molecular Radii are defined in various ways, mostly for small
+  molecules.
 
 * COMMENT CGCNN
 ** CGCNN Introduction                                              :B_frame:
