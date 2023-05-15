@@ -1,4 +1,4 @@
-% Created 2023-05-14 Sun 19:48
+% Created 2023-05-15 Mon 15:11
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -39,7 +39,7 @@ url=true,
 backend=biber,
 natbib=true,
 ]{biblatex}
-\addbibresource{~/org/bibliotex/bibliotex.bib}
+\addbibresource{/home/panos/Documents/masters/local-bib.bib}
 %
 \usepackage{svg}
 \svgsetup{%
@@ -77,8 +77,8 @@ inkscapedpi=300,
 \end{frame}
 
 \section{Perovskites}
-\label{sec:org81a926c}
-\begin{frame}[label={sec:orgd8e91ac}]{Perovskites Recent History}
+\label{sec:org656d171}
+\begin{frame}[label={sec:orgf2be2d1}]{Perovskites Recent History}
 Notable oxide perovskites and properties circa 2006
 \autocite{jiang-2006-predic-lattic}
 
@@ -113,7 +113,7 @@ BaCeO3 & photonic conductivity\\[0pt]
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org26e740a}]{Halide Perovskites}
+\begin{frame}[label={sec:org6681e92}]{Halide Perovskites}
 \begin{columns}
 \begin{column}{0.4\columnwidth}
 \begin{block}{Solar Energy Harvesting}
@@ -137,7 +137,7 @@ Perovskite Solar Absorber Layer\footnote{\tiny{}Photo by Dennis Schroeder\newlin
 \end{column}
 \end{columns}
 \end{frame}
-\begin{frame}[label={sec:org673da6f}]{Rapid Rise in Efficiency of Perovskite PVs}
+\begin{frame}[label={sec:org01ba61e}]{Rapid Rise in Efficiency of Perovskite PVs}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
  
@@ -157,7 +157,7 @@ Perovskite Solar Absorber Layer\footnote{\tiny{}Photo by Dennis Schroeder\newlin
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orga4ecd3c}]{Attractive Properties of Perovskites}
+\begin{frame}[label={sec:org21036a9}]{Attractive Properties of Perovskites}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{center}
@@ -190,8 +190,8 @@ Typical severity of gap states
 \end{frame}
 
 \section{Data}
-\label{sec:orgfdb3e81}
-\begin{frame}[label={sec:org3c5c6b5}]{Data Driven Materials Design}
+\label{sec:org9715996}
+\begin{frame}[label={sec:org83c39ed}]{Data Driven Materials Design}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=390]{DDD-flowchart.png}
@@ -199,52 +199,7 @@ Typical severity of gap states
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org7d1a240}]{multi-fidelity model development workflow}
-\alert{flowchart}
-
-simultaneously utilize multiple measurements made of the same
-composition in training models.\autocite{manganaris-2022-mrs-comput}
-\end{frame}
-
-\begin{frame}[label={sec:orga49c0c4}]{Tolerance}
-\begin{block}{Perovskite Stability}
-Stability of high symmetry \(\alpha\) phase depends on the ABX member's
-ionic radii satisfying Goldschmidt's tolerance:
-\autocite{yin-2015-halid-perov}
-
-\[
-1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
-\]
-
-Empiricallly, it is \alert{Necessary} that A must be much larger than B
-for Perovskite formation. B is usually a large atom (e.g. Pb, Sn) in
-Halide Perovskites. So A is suitably occupied by a Molecule -- an
-amine -- with an effective ionic radius.
-\autocite{kieslich-2015-exten-toler}
-\end{block}
-\end{frame}
-\begin{frame}[label={sec:org0613579}]{Other Tolerance Factors in Literature}
-\begin{block}{Octahedral Factor}
-\[
-o=\frac{r_B}{r_X}
-\]
-\end{block}
-\begin{block}{Bartel Tolerance}
-\[
-t_{Bartel}=\frac{r_X}{r_B}-[1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})}]
-\]
-proposed recently
-\autocite{bartel-2019-new-toler}
-\end{block}
-\begin{block}{Ionic Radii}
-\begin{itemize}
-\item Elemental Radii are well documented in public databases
-\item Molecular Radii are defined in various ways, mostly for small
-molecules.
-\end{itemize}
-\end{block}
-\end{frame}
-\begin{frame}[label={sec:org063973e}]{Motives for Alternative Features}
+\begin{frame}[label={sec:org6b6b6fe}]{Motives for Alternative Features}
 \begin{block}{Plan of Investigation}
 \begin{enumerate}
 \item relate various bulk properties of molecules to performance of
@@ -267,7 +222,7 @@ Literature provides examples of known performant ligands:
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org61d4bbe}]{Constituent Properties}
+\begin{frame}[label={sec:org541b5a8}]{Constituent Properties}
 \begin{block}{Twelve Properties per \(\ce{ABX_3}\) constituent}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
@@ -295,8 +250,21 @@ Literature provides examples of known performant ligands:
 \end{frame}
 
 \section{Multi-Fidelity Learning}
-\label{sec:org95b04b4}
-\begin{frame}[label={sec:org940ce11}]{ML Architectures}
+\label{sec:orgc097e80}
+\begin{frame}[label={sec:org9fd1881}]{multi-fidelity model development workflow}
+\alert{flowchart}
+
+simultaneously utilize multiple measurements made of the same
+composition in training models.\autocite{manganaris-2022-mrs-comput}
+\end{frame}
+\begin{frame}[label={sec:orgbdabc80}]{variability in band gaps per fidelity}
+ 
+\begin{center}
+\includesvg[width=300pt]{./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3}
+\end{center}
+\end{frame}
+
+\begin{frame}[label={sec:org64106c1}]{ML Architectures}
 \begin{block}{Non-Parametric Regression}
 \begin{itemize}
 \item Decision Tree
@@ -308,7 +276,6 @@ Literature provides examples of known performant ligands:
 \begin{block}{Parametric Regression}
 \begin{itemize}
 \item Linear
-\item Logistic
 \item SISSO
 \item Neural Network
 \item Gaussian Process (sometimes)
@@ -317,8 +284,8 @@ Literature provides examples of known performant ligands:
 \end{frame}
 
 \section{Credit}
-\label{sec:org1328192}
-\begin{frame}[label={sec:org4427712}]{Acknowledgements}
+\label{sec:orga6b7206}
+\begin{frame}[label={sec:org6492e2e}]{Acknowledgements}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{block}{Research Group}
@@ -346,19 +313,19 @@ RCAC Bell Computing Cluster
 \end{columns}
 \end{frame}
 \section{Bib}
-\label{sec:orgf046f29}
+\label{sec:org42bddb0}
 \begin{frame}[allowframebreaks]{References}
 \AtNextBibliography{\tiny}
 \printbibliography
 \end{frame}
 \appendix
-\begin{frame}[label={sec:orgc715c61}]{Data Pre-Processing}
+\begin{frame}[label={sec:org0503b51}]{Data Pre-Processing}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/data_proc.png}
 \end{center}
 Data pre-processing Workflow to Implement with Python Pandas
 \end{frame}
-\begin{frame}[label={sec:org6140282}]{Machine Learning Pipeline}
+\begin{frame}[label={sec:orga0e5ee9}]{Machine Learning Pipeline}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/ML_pipe.png}
 \end{center}

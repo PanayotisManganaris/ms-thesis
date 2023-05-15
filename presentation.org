@@ -340,6 +340,24 @@ Literature provides examples of known performant ligands:
 
 simultaneously utilize multiple measurements made of the same
 composition in training models.[cite:@manganaris-2022-mrs-comput]
+** variability in band gaps per fidelity                           :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="300pt")
+  p = px.box(Y, y="bg_eV", x="LoT")
+  p.update_yaxes(title="Band Gap [eV]")
+  p.update_xaxes(title_font_size=24)
+  p.update_yaxes(title_font_size=24, tickfont_size=20)
+  p.show('svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+[[file:./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3.svg]]
+:end:
 
 ** ML Architectures                                                :B_frame:
 :PROPERTIES:
@@ -361,7 +379,6 @@ composition in training models.[cite:@manganaris-2022-mrs-comput]
 :BEAMER_env: block
 :END:
 - Linear
-- Logistic
 - SISSO
 - Neural Network
 - Gaussian Process (sometimes)
