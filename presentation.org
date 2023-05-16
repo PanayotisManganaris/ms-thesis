@@ -133,7 +133,7 @@
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-# just a few seconds to establish bredth of context
+# just a few seconds to establish breadth of context
 # relaxor : character w/ highly nonlinear dielectric constant and
 # diffused ferroelectric to para electric phase transition (no well
 # defined Curie temperature)
@@ -505,7 +505,7 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 - Atomic Number
 - Period
 
-** bivariate analysis                                              :B_frame:
+** Bivariate Analysis                                              :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -526,7 +526,8 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 :END:
 - high fidelity :: prior on variance is narrow
 - low fidelity :: prior on variance is wide
-** multi-fidelity model development workflow                       :B_frame:
+
+** Multi-Fidelity Model Development Workflow                       :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -536,17 +537,16 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 simultaneously utilize multiple measurements made of the same
 composition in training models.[cite:@manganaris-2022-mrs-comput]
 
-
 * Models
 # SLME improves on SQ to give us performant range of band gaps
 # - accounts for additional energetic processes
 # - dipole-allowed, dipole-forbidden, indirect band gap
 # focus on EXP rmse -- I have the ability!
-** compare 3 methods                                               :B_frame:
+** Compare Three Methods                                           :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-** Interpreting models                                             :B_frame:
+** Interpreting Models                                             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -555,7 +555,7 @@ composition in training models.[cite:@manganaris-2022-mrs-comput]
 :BEAMER_env: frame
 :END:
 * Results
-** Make predictions on domain subset                               :B_frame:
+** Make Predictions on Domain Subset                               :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -687,7 +687,7 @@ proposed recently
 | test      | 0.012009 |
 | train     | 0.081978 |
 * Summary
-** review everything                                               :B_frame:
+** Review of Work                                                  :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
