@@ -272,6 +272,9 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 
 * Machine Learning In Materials Science
 # discuss DDMD in group context + introduce ML
+# discuss DFT in general -- distance myself from data
+# be prepared to discuss on functionals
+# combinatorially scaling chemical space
 ** Data Driven Materials Design                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -281,6 +284,10 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 #+attr_org: :width 90
 [[file:DDD-flowchart.png]]
 
+** COMMENT DFT                                                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 ** Machine Learning In Materials Science                           :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -331,10 +338,10 @@ Literature provides examples of known performant ligands:
   [cite:@hong-2021-layer-edge]
 
 * Data
-# discuss DFT in general -- distance myself from data
-# be prepared to reflect on functionals
+# model bg because 
+# - bg models are more generally useful than SLME
+# - SLME is more expensive to compute
 
-# combinatorially scaling chemical space
 # rationalize the use of various features in models
 # explain the features vectors, illustrate them graphically somehow
 # codomain side
@@ -508,7 +515,17 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 * Multi-Fidelity Learning
 # challenges of learning from multiple fidelities
 # compare to multi-task learning
-** Challenges of Learning from 
+# the model places more weight on different observations
+# - I created yogi! place higher weight on EXP LoT while optimizing hyperparameters
+# - oversampling is an alternative
+# show uncertainties in GPR posterior over 5 plots
+# Bootstrapping is
+** Challenges of Learning from Overlapping datasets                :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- high fidelity :: prior on variance is narrow
+- low fidelity :: prior on variance is wide
 ** multi-fidelity model development workflow                       :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -520,13 +537,10 @@ simultaneously utilize multiple measurements made of the same
 composition in training models.[cite:@manganaris-2022-mrs-comput]
 
 
-* COMMENT Results
+* Models
 # SLME improves on SQ to give us performant range of band gaps
 # - accounts for additional energetic processes
 # - dipole-allowed, dipole-forbidden, indirect band gap
-# model bg because 
-# - bg models are more generally useful than SLME
-# - SLME is more expensive to compute
 # focus on EXP rmse -- I have the ability!
 ** compare 3 methods                                               :B_frame:
 :PROPERTIES:
@@ -540,6 +554,7 @@ composition in training models.[cite:@manganaris-2022-mrs-comput]
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+* Results
 ** Make predictions on domain subset                               :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
