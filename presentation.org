@@ -85,6 +85,9 @@
   color_map = {
       ('Crystalline Si Cells', 'Single crystal (non-concentrator)'): px.colors.qualitative.Plotly[0],
       ('Emerging PV', 'Perovskite cells'): px.colors.qualitative.Plotly[1],
+      ('Single-Junction GaAs', 'Single crystal'): px.colors.qualitative.Plotly[0],
+      ('Emerging PV', 'Perovskite/Si tandem (monolithic)'): px.colors.qualitative.Plotly[1],
+      ('Thin-Film Technologies', 'CdTe'): px.colors.qualitative.Plotly[2],
   }
 
   traces = []
@@ -119,7 +122,7 @@
 :results:
  
 #+attr_latex: :width 280pt
-[[file:./.ob-jupyter/10239da69f2d0128ccd122b2d3cf4ab49fea84a4.svg]]
+[[file:./.ob-jupyter/5a70cef7f43718d2462f4328daceef604482623e.svg]]
 :end:
 
 *** col                                                             :BMCOL:
