@@ -52,6 +52,19 @@
 - visible spectrum solar absorbers
 - semiconductors
 - efficiency
+**** Solar Energy Harvesting                               :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_env: block
+:BEAMER_col: 0.5
+:END:
+- 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE
+  [cite:@kojima-2009-organ-halid]
+- 2011 : absorber efficiency doubles
+  [cite:@im-2011]
+- 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
+  [cite:@saliba-2014-influen-therm]
+
+HaP PVs become competitive in 2013
 ** Rapid Rise of Perovskite PVs                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -181,18 +194,7 @@ Notable oxide perovskites and properties circa 2006
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-**** Solar Energy Harvesting                                     :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-- 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE
-  [cite:@kojima-2009-organ-halid]
-- 2011 : absorber efficiency doubles
-  [cite:@im-2011]
-- 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
-  [cite:@saliba-2014-influen-therm]
 
-HaP PVs become competitive in 2013
 *** COMMENT col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
