@@ -1,4 +1,4 @@
-% Created 2023-05-15 Mon 15:11
+% Created 2023-05-15 Mon 20:25
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -40,6 +40,7 @@ backend=biber,
 natbib=true,
 ]{biblatex}
 \addbibresource{/home/panos/Documents/masters/local-bib.bib}
+\addbibresource{~/org/bibliotex/bibliotex.bib}
 %
 \usepackage{svg}
 \svgsetup{%
@@ -61,10 +62,10 @@ inkscapedpi=300,
 \usetheme{default}
 \author{Panayotis Manganaris\inst{1}}
 \date{\today}
-\title{presentation}
+\title{Machine Learning Perovskite Bandgaps for Improved Photovoltaics}
 \hypersetup{
  pdfauthor={Panayotis Manganaris\inst{1}},
- pdftitle={presentation},
+ pdftitle={Machine Learning Perovskite Bandgaps for Improved Photovoltaics},
  pdfkeywords={},
  pdfsubject={},
  pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
@@ -76,12 +77,35 @@ inkscapedpi=300,
 \tableofcontents
 \end{frame}
 
-\section{Perovskites}
-\label{sec:org656d171}
-\begin{frame}[label={sec:orgf2be2d1}]{Perovskites Recent History}
+\section{Background}
+\label{sec:orgb2331fb}
+\begin{frame}[label={sec:orgd7f75f9}]{Photovoltaic Power Generation}
+\begin{itemize}
+\item visible spectrum solar absorbers
+\item semiconductors
+\item efficiency
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:orgf8abbd6}]{Rapid Rise of Perovskite PVs}
+\begin{columns}
+\begin{column}{0.6\columnwidth}
+\begin{center}
+\includegraphics[width=250pt]{Perovskites/2023-05-15_18-16-32_screenshot.png}
+\end{center}
+\end{column}
+
+\begin{column}{0.4\columnwidth}
+\begin{itemize}
+\item Cumulative maximum efficiency of PVs tested by accredited laboratories\autocite{research-2023-best-resear}
+\item Perovskite+Si tandem monolithic cells second only to two-junction \(\ce{GaAs}\)
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label={sec:orged427e8}]{What's a Perovskite?}
 Notable oxide perovskites and properties circa 2006
 \autocite{jiang-2006-predic-lattic}
-
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \small
@@ -113,9 +137,9 @@ BaCeO3 & photonic conductivity\\[0pt]
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org6681e92}]{Halide Perovskites}
+\begin{frame}[label={sec:org122a40a}]{Halide Perovskites}
 \begin{columns}
-\begin{column}{0.4\columnwidth}
+\begin{column}{0.5\columnwidth}
 \begin{block}{Solar Energy Harvesting}
 \begin{itemize}
 \item 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8\% PCE
@@ -129,69 +153,17 @@ BaCeO3 & photonic conductivity\\[0pt]
 HaP PVs become competitive in 2013
 \end{block}
 \end{column}
-\begin{column}{0.6\columnwidth}
-\begin{center}
-\includegraphics[width=115]{Introduction_To_Perovskites/2022-07-15_23-57-31_screenshot.png}
-\end{center}
-Perovskite Solar Absorber Layer\footnote{\tiny{}Photo by Dennis Schroeder\newline{}National Renewable Energy Laboratory}
-\end{column}
-\end{columns}
-\end{frame}
-\begin{frame}[label={sec:org01ba61e}]{Rapid Rise in Efficiency of Perovskite PVs}
-\begin{columns}
-\begin{column}{0.6\columnwidth}
- 
-\begin{figure}[htbp]
-\centering
-\includesvg[width=280pt]{./.ob-jupyter/10239da69f2d0128ccd122b2d3cf4ab49fea84a4}
-\caption{}
-\end{figure}
-\end{column}
-
-\begin{column}{0.4\columnwidth}
-\begin{itemize}
-\item Cumulative maximum efficiency of PVs tested by accredited laboratories\autocite{research-2023-best-resear}
-\item Perovskite+Si tandem monolithic cells second only to two-junction \(\ce{GaAs}\)
-\end{itemize}
-\end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}[label={sec:org21036a9}]{Attractive Properties of Perovskites}
-\begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{center}
-\includegraphics[width=200]{Introduction_To_Perovskites/2022-07-16_01-34-42_screenshot.png}
+\includegraphics[width=.9\linewidth]{hybrid-HaP.png}
 \end{center}
-Typical severity of gap states
-\autocite{mannodi-kanakkithodi-2020-defec-energ}
-\end{column}
-
-\begin{column}{0.5\columnwidth}
-\begin{itemize}
-\item robust against carrier scattering
-\autocite{yan-2016-defec-physic}
-\item spontaneously forming high energy defects unlikely
-\item edge-states
-\item finite internal dipole moments
-\autocite{hong-2021-layer-edge}
-\begin{itemize}
-\item ferroellectrically aligned ligands
-\item long luminescence lifetimes
-\end{itemize}
-\item hydro-stability
-\autocite{fu-2021-two-dimen}
-\begin{itemize}
-\item hydrophobic ligands
-\end{itemize}
-\end{itemize}
 \end{column}
 \end{columns}
 \end{frame}
 
-\section{Data}
-\label{sec:org9715996}
-\begin{frame}[label={sec:org83c39ed}]{Data Driven Materials Design}
+\section{Machine Learning In Materials Science}
+\label{sec:org0931430}
+\begin{frame}[label={sec:org964a9a9}]{Data Driven Materials Design}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=390]{DDD-flowchart.png}
@@ -199,30 +171,74 @@ Typical severity of gap states
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org6b6b6fe}]{Motives for Alternative Features}
-\begin{block}{Plan of Investigation}
-\begin{enumerate}
-\item relate various bulk properties of molecules to performance of
-existing perovskite solar absorbers
-\item extrapolate into the unknown
-\end{enumerate}
-\end{block}
-\begin{block}{Known Organic Constituents currently in use}
-Literature provides examples of known performant ligands:
+\begin{frame}[label={sec:org2e28c9b}]{Machine Learning In Materials Science}
+An increasingly popular technique for accelerating discovery and
+development\autocite{pablo-2019-new-front}
 \begin{itemize}
-\item Methylammonium (Cationic Methylamine)
-\autocite{yan-2016-defec-physic}
-\item Formamidium (Cationic Formamidine)
-\autocite{dimesso-2016-inves-formam}
-\item Guanidinium (Cationic Guanidine)
-\autocite{zhang-2019-perov-photov}
-\item Butylammonium (Cationic Butylamine)
-\autocite{hong-2021-layer-edge}
+\item force fields
+\item property-prediction
+\item building on dft
 \end{itemize}
+\end{frame}
+\begin{frame}[label={sec:org8e08a8c}]{Regression}
+\end{frame}
+
+\begin{frame}[label={sec:orgcab7d15}]{Learning Algorithms}
+\begin{itemize}
+\item Decision Tree
+\item Random Forest
+\item Linear
+\item SISSO
+\item Gaussian Process
+\end{itemize}
+\end{frame}
+
+\section{Data}
+\label{sec:orgf869c1b}
+\begin{frame}[label={sec:org49e7695}]{Band Gap Relates to Efficiency}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+ 
+\begin{center}
+\includesvg[width=210pt]{./.ob-jupyter/2b677464785e9d1d299f0f955a3af16e9c3b5f7e}
+\end{center}
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+ 
+\begin{center}
+\includesvg[width=210pt]{./.ob-jupyter/0c4832ea502cef117df59890aa3341839c46147b}
+\end{center}
+\end{column}
+\end{columns}
+
+SLME metric accounts for more energetic processes than
+Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
+of bandgaps determined according to level of theory\autocite[p.1]{yu-2012-ident-poten}
+\end{frame}
+
+\begin{frame}[label={sec:org6dc9425}]{Effect of DFT Functionals Levels of Theory}
+\begin{center}
+\includegraphics[width=.9\linewidth]{Data/2023-05-15_20-04-18_screenshot.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[label={sec:orgfdb3599}]{Variation in Band Gap changes with Level of Theory}
+ 
+\begin{center}
+\includesvg[width=300pt]{./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3}
+\end{center}
+\end{frame}
+
+\begin{frame}[label={sec:orgabe6329}]{Features of Perovskites Descriptive of Band Gap}
+\begin{block}{composition vectors}
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org541b5a8}]{Constituent Properties}
+\begin{frame}[label={sec:org991223b}]{Sample Space}
+\end{frame}
+
+\begin{frame}[label={sec:org2e55e52}]{Constituent Properties}
 \begin{block}{Twelve Properties per \(\ce{ABX_3}\) constituent}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
@@ -249,43 +265,32 @@ Literature provides examples of known performant ligands:
 \end{block}
 \end{frame}
 
+\begin{frame}[label={sec:org3f2baf5}]{bivariate analysis}
+\begin{itemize}
+\item correlations can be surprising
+\item some confirm physical expectations
+\end{itemize}
+\end{frame}
+
 \section{Multi-Fidelity Learning}
-\label{sec:orgc097e80}
-\begin{frame}[label={sec:org9fd1881}]{multi-fidelity model development workflow}
+\label{sec:org6599713}
+\begin{frame}[label={sec:org19c5349}]{Challenges of Learning from}
+\end{frame}
+\begin{frame}[label={sec:org8196b23}]{multi-fidelity model development workflow}
 \alert{flowchart}
 
 simultaneously utilize multiple measurements made of the same
 composition in training models.\autocite{manganaris-2022-mrs-comput}
 \end{frame}
-\begin{frame}[label={sec:orgbdabc80}]{variability in band gaps per fidelity}
- 
-\begin{center}
-\includesvg[width=300pt]{./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3}
-\end{center}
-\end{frame}
 
-\begin{frame}[label={sec:org64106c1}]{ML Architectures}
-\begin{block}{Non-Parametric Regression}
-\begin{itemize}
-\item Decision Tree
-\item Random Forest
-\item Kernel Ridge
-\item Gaussian Process
-\end{itemize}
-\end{block}
-\begin{block}{Parametric Regression}
-\begin{itemize}
-\item Linear
-\item SISSO
-\item Neural Network
-\item Gaussian Process (sometimes)
-\end{itemize}
-\end{block}
-\end{frame}
 
+\section{Summary}
+\label{sec:org69935b8}
+\begin{frame}[label={sec:org4e5e961}]{review everything}
+\end{frame}
 \section{Credit}
-\label{sec:orga6b7206}
-\begin{frame}[label={sec:org6492e2e}]{Acknowledgements}
+\label{sec:org8af9a23}
+\begin{frame}[label={sec:orgc2cf4d0}]{Acknowledgements}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{block}{Research Group}
@@ -313,22 +318,33 @@ RCAC Bell Computing Cluster
 \end{columns}
 \end{frame}
 \section{Bib}
-\label{sec:org42bddb0}
+\label{sec:orgc074de6}
 \begin{frame}[allowframebreaks]{References}
 \AtNextBibliography{\tiny}
 \printbibliography
 \end{frame}
 \appendix
-\begin{frame}[label={sec:org0503b51}]{Data Pre-Processing}
+\begin{frame}[label={sec:orga9e2c3c}]{Data Pre-Processing}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/data_proc.png}
 \end{center}
 Data pre-processing Workflow to Implement with Python Pandas
 \end{frame}
-\begin{frame}[label={sec:orga0e5ee9}]{Machine Learning Pipeline}
+\begin{frame}[label={sec:org70807f8}]{Machine Learning Pipeline}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/ML_pipe.png}
 \end{center}
 Machine Learning Pipeline to Implement with Python SciKit-Learn
+\end{frame}
+\begin{frame}[label={sec:org075e190}]{DFT Functionals Effect Band Structure Calculation in HaPs}
+\begin{itemize}
+\item D3
+\item SOC
+\item PBE semi-local vs HSE hybrid
+\begin{itemize}
+\item (effects on electronic structure)
+\item computational heft
+\end{itemize}
+\end{itemize}
 \end{frame}
 \end{document}

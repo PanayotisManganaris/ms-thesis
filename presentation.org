@@ -3,7 +3,7 @@
 #+options: d:(not "STATUSLOG") date:t e:t email:nil f:t inline:t num:t
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+options: timestamp:t title:t toc:t todo:t |:t
-#+title: presentation
+#+title: Machine Learning Perovskite Bandgaps for Improved Photovoltaics
 #+author: Panayotis Manganaris\inst{1}
 #+email: panos.manganaris@gmail.com
 #+language: en
@@ -37,98 +37,35 @@
 #+RESULTS:
 :results:
 :end:
-* COMMENT Load data
-#+begin_src jupyter-python
-  Y = pd.read_csv(
-      "~/Documents/manuscripts/DFT+ML+feature_engineering/Y.csv",
-      index_col=0
-  )
-#+end_src
 
-#+RESULTS:
-:results:
-:end:
-
-* Perovskites
-# first, explain what perovskites are and why you should care
-# - BaTiO3 familiarity
-# - halide evolution good for photovoltaics
+* Background
+# Introduce PVs
+# - absorb visible spectrum
+# explain what perovskites are and why you should care
+# - familiar BaTiO3
+# - halide perovskites
 # discuss properties which contribute to this performance
-** Perovskites Recent History                                      :B_frame:
+** Photovoltaic Power Generation                                   :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-# relaxor : character w/ highly nonlinear dielectric constant and
-# diffused ferroelectric to para electric phase transition (no well
-# defined Curie temperature)
-*** Oxide Perovskites                                     :B_ignoreheading:
-:PROPERTIES:
-:BEAMER_env: ignoreheading
-:END:
-Notable oxide perovskites and properties circa 2006
-[cite:@jiang-2006-predic-lattic]
-
-**** col                                                           :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-\small
-| <K,Ba>BiO3  | super-conduction      |
-| Pb<Zr,Ti>O3 | piezoelectric action  |
-| Pb<Mb,Mg>O3 | relaxor ferroelectric |
-| BaTiO3      | dielectric properties |
-**** col                                                           :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-\small
-| Pb<Zr,Ti>O3 | electro-optic         |
-| LaMnO3      | magneto-resistance    |
-| LaCrO3      | catalytic             |
-| BaCeO3      | photonic conductivity |
-*** fig                                                   :B_ignoreheading:
-:PROPERTIES:
-:BEAMER_env: ignoreheading
-:END:
-#+DOWNLOADED: screenshot @ 2022-07-14 15:32:57
-#+CAPTION: Barium Titanate functional ceramic
-#+attr_latex: :width 170
-[[file:Introduction_To_Perovskites/2022-07-14_15-32-57_screenshot.png]]
-
-** Halide Perovskites                                              :B_frame:
+- visible spectrum solar absorbers
+- semiconductors
+- efficiency
+** Rapid Rise of Perovskite PVs                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-# Silicon PVs had 55 years of development ahead of Halide perovskites!
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.4
-:END:
-**** Solar Energy Harvesting                                     :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-- 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE
-  [cite:@kojima-2009-organ-halid]
-- 2011 : absorber efficiency doubles
-  [cite:@im-2011]
-- 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
-  [cite:@saliba-2014-influen-therm]
-
-HaP PVs become competitive in 2013
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.6
 :END:
-#+DOWNLOADED: screenshot @ 2022-07-15 23:57:31
-#+attr_latex: :width 115
-[[file:Introduction_To_Perovskites/2022-07-15_23-57-31_screenshot.png]]
-Perovskite Solar Absorber Layer[fn:1]
-** Rapid Rise in Efficiency of Perovskite PVs                      :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-*** col                                                             :BMCOL:
+
+#+DOWNLOADED: screenshot @ 2023-05-15 18:16:32
+#+attr_latex: :width 250pt
+[[file:Perovskites/2023-05-15_18-16-32_screenshot.png]]
+
+*** COMMENT col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.6
 :END:
@@ -182,7 +119,6 @@ Perovskite Solar Absorber Layer[fn:1]
 :results:
  
 #+attr_latex: :width 280pt
-#+CAPTION: 
 [[file:./.ob-jupyter/10239da69f2d0128ccd122b2d3cf4ab49fea84a4.svg]]
 :end:
 
@@ -193,7 +129,83 @@ Perovskite Solar Absorber Layer[fn:1]
 - Cumulative maximum efficiency of PVs tested by accredited laboratories[cite:@research-2023-best-resear]
 - Perovskite+Si tandem monolithic cells second only to two-junction \(\ce{GaAs}\)
 
-** Attractive Properties of Perovskites                            :B_frame:
+** What's a Perovskite?                                            :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+# just a few seconds to establish bredth of context
+# relaxor : character w/ highly nonlinear dielectric constant and
+# diffused ferroelectric to para electric phase transition (no well
+# defined Curie temperature)
+*** Oxide Perovskites                                     :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+Notable oxide perovskites and properties circa 2006
+[cite:@jiang-2006-predic-lattic]
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+\small
+| <K,Ba>BiO3  | super-conduction      |
+| Pb<Zr,Ti>O3 | piezoelectric action  |
+| Pb<Mb,Mg>O3 | relaxor ferroelectric |
+| BaTiO3      | dielectric properties |
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+\small
+| Pb<Zr,Ti>O3 | electro-optic         |
+| LaMnO3      | magneto-resistance    |
+| LaCrO3      | catalytic             |
+| BaCeO3      | photonic conductivity |
+*** fig                                                   :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+#+DOWNLOADED: screenshot @ 2022-07-14 15:32:57
+#+CAPTION: Barium Titanate functional ceramic
+#+attr_latex: :width 170
+[[file:Introduction_To_Perovskites/2022-07-14_15-32-57_screenshot.png]]
+
+** Halide Perovskites                                              :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+**** Solar Energy Harvesting                                     :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE
+  [cite:@kojima-2009-organ-halid]
+- 2011 : absorber efficiency doubles
+  [cite:@im-2011]
+- 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
+  [cite:@saliba-2014-influen-therm]
+
+HaP PVs become competitive in 2013
+*** COMMENT col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+DOWNLOADED: screenshot @ 2022-07-15 23:57:31
+#+attr_latex: :width 115
+[[file:Introduction_To_Perovskites/2022-07-15_23-57-31_screenshot.png]]
+Perovskite Solar Absorber Layer[fn:1]
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+latex_attr: :width 140
+[[file:hybrid-HaP.png]]
+
+** COMMENT Attractive Properties of Perovskites                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -228,6 +240,8 @@ Typical severity of gap states
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+# This has an additional *Ligand* in this structure
+# maybe start with more of why perovskites are useful, instead of telling us what they are
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
@@ -255,16 +269,9 @@ Typical severity of gap states
 \(\ce{L_2BX_4}\) with \(\ce{L=C4H12N+}\) (BA)
 
 Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
-# This has an additional *Ligand* in this structure
-# maybe start with more of why perovskites are useful, instead of telling us what they are
-* Data
-# discuss DMD in general
-# rationalize the use of various features in models
-# codomain side
-# - choose to model perovskite band gaps per SQ criterion
-# domain side
-# - various empirical tolerance factors used in screening
-# - discuss use of Electronegativity, etc, etc
+
+* Machine Learning In Materials Science
+# discuss DDMD in group context + introduce ML
 ** Data Driven Materials Design                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -274,7 +281,31 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 #+attr_org: :width 90
 [[file:DDD-flowchart.png]]
 
-** Motives for Alternative Features                                :B_frame:
+** Machine Learning In Materials Science                           :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+An increasingly popular technique for accelerating discovery and
+development[cite:@pablo-2019-new-front]
+- force fields
+- property-prediction
+- building on dft
+** Regression                                                      :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+** Learning Algorithms                                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+- Decision Tree
+- Random Forest
+- Linear
+- SISSO
+- Gaussian Process
+
+** COMMENT Motives for Alternative Features                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -299,100 +330,21 @@ Literature provides examples of known performant ligands:
 - Butylammonium (Cationic Butylamine)
   [cite:@hong-2021-layer-edge]
 
-** Constituent Properties                                          :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-*** Twelve Properties per \(\ce{ABX_3}\) constituent              :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-**** col                                                           :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-- Ionic Radius
-- Boiling Temperature
-- Melting Temperature
-- Density
-- Atomic Weight
-- Electron Affinity
-**** col                                                           :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-- Ionization Energy
-- Heat of Fusion
-- Heat of Vaporization
-- Electronegativity
-- Atomic Number
-- Period
+* Data
+# discuss DFT in general -- distance myself from data
+# be prepared to reflect on functionals
 
-* Multi-Fidelity Learning
-# I selected this methods
-# because
-** multi-fidelity model development workflow                       :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-*flowchart*
-
-simultaneously utilize multiple measurements made of the same
-composition in training models.[cite:@manganaris-2022-mrs-comput]
-** variability in band gaps per fidelity                           :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-#+begin_src jupyter-python :post wrap(*this*, w="300pt")
-  p = px.box(Y, y="bg_eV", x="LoT")
-  p.update_yaxes(title="Band Gap [eV]")
-  p.update_xaxes(title_font_size=24)
-  p.update_yaxes(title_font_size=24, tickfont_size=20)
-  p.show('svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 300pt
-[[file:./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3.svg]]
-:end:
-
-** ML Architectures                                                :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-# Gaussian process modeling is a particularly elegant sort of machine
-# learning. Lots of history and a large body of work continuously
-# improving them.
-*** Non-Parametric Regression                                     :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-- Decision Tree
-- Random Forest
-- Kernel Ridge
-- Gaussian Process
-*** Parametric Regression                                         :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-- Linear
-- SISSO
-- Neural Network
-- Gaussian Process (sometimes)
-
-* COMMENT Models
-* COMMENT Results
-# SLME improves on SQ to give us performant range of band gaps
-# - accounts for additional energetic processes
-# - dipole-allowed, dipole-forbidden, indirect band gap
-# model bg because 
-# - bg models are more generally useful than SLME
-# - SLME is more expensive to compute
-#
-** Screening on Band Gap                                           :B_frame:
+# combinatorially scaling chemical space
+# rationalize the use of various features in models
+# explain the features vectors, illustrate them graphically somehow
+# codomain side
+# - choose to model perovskite band gaps per SQ criterion
+# domain side
+# - various empirical tolerance factors used in screening
+# - discuss use of Electronegativity, etc, etc
+# pearson plots solidify the vector concept
+# - Show Correlations with each LoT!
+** Band Gap Relates to Efficiency                                  :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -467,6 +419,132 @@ SLME metric accounts for more energetic processes than
 Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
 of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.1]
 
+** Effect of DFT Functionals Levels of Theory                      :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+#+DOWNLOADED: screenshot @ 2023-05-15 20:04:18
+#+latex_attr: :width 400
+[[file:Data/2023-05-15_20-04-18_screenshot.png]]
+
+** Variation in Band Gap changes with Level of Theory              :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+#+begin_src jupyter-python
+  Y = pd.read_csv(
+      "~/Documents/manuscripts/DFT+ML+feature_engineering/Y.csv",
+      index_col=0
+  )
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="300pt")
+  p = px.box(Y, y="bg_eV", x="LoT")
+  p.update_yaxes(title="Band Gap [eV]")
+  p.update_xaxes(title_font_size=24)
+  p.update_yaxes(title_font_size=24, tickfont_size=20)
+  p.show('svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+[[file:./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3.svg]]
+:end:
+
+** Features of Perovskites Descriptive of Band Gap                 :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** composition vectors
+
+** Sample Space                                                    :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+
+** Constituent Properties                                          :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** Twelve Properties per \(\ce{ABX_3}\) constituent              :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- Ionic Radius
+- Boiling Temperature
+- Melting Temperature
+- Density
+- Atomic Weight
+- Electron Affinity
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- Ionization Energy
+- Heat of Fusion
+- Heat of Vaporization
+- Electronegativity
+- Atomic Number
+- Period
+
+** bivariate analysis                                              :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+- correlations can be surprising
+- some confirm physical expectations
+
+* Multi-Fidelity Learning
+# challenges of learning from multiple fidelities
+# compare to multi-task learning
+** Challenges of Learning from 
+** multi-fidelity model development workflow                       :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+*flowchart*
+
+simultaneously utilize multiple measurements made of the same
+composition in training models.[cite:@manganaris-2022-mrs-comput]
+
+
+* COMMENT Results
+# SLME improves on SQ to give us performant range of band gaps
+# - accounts for additional energetic processes
+# - dipole-allowed, dipole-forbidden, indirect band gap
+# model bg because 
+# - bg models are more generally useful than SLME
+# - SLME is more expensive to compute
+# focus on EXP rmse -- I have the ability!
+** compare 3 methods                                               :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+** Interpreting models                                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+** Shapely Additive Explanation (SHAP)                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+** Make predictions on domain subset                               :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
 ** Tolerance Factor                                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -517,6 +595,10 @@ proposed recently
 - Molecular Radii are defined in various ways, mostly for small
   molecules.
 
+** Screening Yields                                                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 * COMMENT CGCNN
 ** CGCNN Introduction                                              :B_frame:
 :PROPERTIES:
@@ -537,7 +619,7 @@ proposed recently
 - MFGnet capable of multi-fidelity regressions
   [cite:@chen-2021-learn-proper;@chen-2020-multi-fidel]
 
-* COMMENT ALIGNN
+* COMMENT Ongoing work
 ** band gap learning curve                                         :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -564,13 +646,13 @@ proposed recently
 |-----------+----------|
 | test      | 0.063789 |
 | train     | 0.211039 |
-** Decomposition Energy learning curve                             :B_frame:
+** COMMENT Decomposition Energy learning curve                             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
 #+attr_latex: :width 250
 [[file:/home/panos/data/alignn/dist_de_32_100/lc.svg]]
-** Decomposition Energy parity                                     :B_frame:
+** COMMENT Decomposition Energy parity                                     :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -589,7 +671,11 @@ proposed recently
 |-----------+----------|
 | test      | 0.012009 |
 | train     | 0.081978 |
-
+* Summary
+** review everything                                               :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 * Credit
 ** Acknowledgements                                                :B_frame:
 :PROPERTIES:
@@ -657,6 +743,15 @@ Data pre-processing Workflow to Implement with Python Pandas
 #+attr_latex: :width 300
 [[file:~/Pictures/flowcharts/ML_pipe.png]]
 Machine Learning Pipeline to Implement with Python SciKit-Learn
+** DFT Functionals Effect Band Structure Calculation in HaPs       :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+- D3
+- SOC
+- PBE semi-local vs HSE hybrid
+  - (effects on electronic structure)
+  - computational heft
 * Footnotes
 
 [fn:1]\tiny{}Photo by Dennis Schroeder\newline{}National Renewable Energy Laboratory
