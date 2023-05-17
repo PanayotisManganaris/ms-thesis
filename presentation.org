@@ -203,6 +203,12 @@ Notable oxide perovskites and properties circa 2006
 :BEAMER_col: 0.5
 :END:
 
+#+caption: \(\ce{ABX3}\) Chemical Domain
+| /      | <  |    |    |    |    |    |
+| A-site | MA | FA | Cs | Rb | K  |    |
+| B-site | Pb | Sn | Ge | Ba | Sr | Ca |
+| X-site | I  | Br | Cl |    |    |    |
+
 *** COMMENT col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5

@@ -1,4 +1,4 @@
-% Created 2023-05-15 Mon 20:25
+% Created 2023-05-16 Tue 22:46
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -40,7 +40,6 @@ backend=biber,
 natbib=true,
 ]{biblatex}
 \addbibresource{/home/panos/Documents/masters/local-bib.bib}
-\addbibresource{~/org/bibliotex/bibliotex.bib}
 %
 \usepackage{svg}
 \svgsetup{%
@@ -78,15 +77,37 @@ inkscapedpi=300,
 \end{frame}
 
 \section{Background}
-\label{sec:orgb2331fb}
-\begin{frame}[label={sec:orgd7f75f9}]{Photovoltaic Power Generation}
+\label{sec:orgce13dd3}
+\begin{frame}[label={sec:org90aa522}]{Photovoltaic Power Generation}
+\begin{columns}
+\begin{column}{0.3\columnwidth}
+\begin{center}
+\includegraphics[width=100]{thin-film-PV.png}
+\end{center}
+\begin{center}
+\includegraphics[width=90]{Si-HaP-tandem-PV.png}
+\end{center}
+
+\tiny{}\center{}Perovskite Applications\footnote{\tiny{}\href{https://www.lesker.com/newweb/ped/applications/perovskite-research.cfm }{www.lesker.com}}
+\end{column}
+\begin{column}{0.7\columnwidth}
+\begin{block}{Solar Energy Harvesting}
 \begin{itemize}
-\item visible spectrum solar absorbers
-\item semiconductors
-\item efficiency
+\item 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8\% PCE
+\autocite{kojima-2009-organ-halid}
+\item 2011 : absorber efficiency doubles
+\autocite{im-2011}
+\item 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
+\autocite{saliba-2014-influen-therm}
 \end{itemize}
+
+
+HaP PVs become competitive in 2013
+\end{block}
+\end{column}
+\end{columns}
 \end{frame}
-\begin{frame}[label={sec:orgf8abbd6}]{Rapid Rise of Perovskite PVs}
+\begin{frame}[label={sec:orgcdf8b37}]{Rapid Rise of Perovskite PVs}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{center}
@@ -103,7 +124,7 @@ inkscapedpi=300,
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orged427e8}]{What's a Perovskite?}
+\begin{frame}[label={sec:orgaa0f698}]{What's a Perovskite?}
 Notable oxide perovskites and properties circa 2006
 \autocite{jiang-2006-predic-lattic}
 \begin{columns}
@@ -137,22 +158,20 @@ BaCeO3 & photonic conductivity\\[0pt]
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org122a40a}]{Halide Perovskites}
+\begin{frame}[label={sec:org5650a47}]{Halide Perovskites}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
-\begin{block}{Solar Energy Harvesting}
-\begin{itemize}
-\item 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8\% PCE
-\autocite{kojima-2009-organ-halid}
-\item 2011 : absorber efficiency doubles
-\autocite{im-2011}
-\item 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
-\autocite{saliba-2014-influen-therm}
-\end{itemize}
-
-HaP PVs become competitive in 2013
-\end{block}
+\begin{table}[htbp]
+\caption{\(\ce{ABX3}\) Chemical Domain}
+\centering
+\begin{tabular}{l|llllll}
+A-site & \ACRshort{ma} & \ACRshort{fa} & Cs & Rb & K & \\[0pt]
+B-site & Pb & Sn & Ge & Ba & Sr & Ca\\[0pt]
+X-site & I & Br & Cl &  &  & \\[0pt]
+\end{tabular}
+\end{table}
 \end{column}
+
 \begin{column}{0.5\columnwidth}
 \begin{center}
 \includegraphics[width=.9\linewidth]{hybrid-HaP.png}
@@ -162,16 +181,16 @@ HaP PVs become competitive in 2013
 \end{frame}
 
 \section{Machine Learning In Materials Science}
-\label{sec:org0931430}
-\begin{frame}[label={sec:org964a9a9}]{Data Driven Materials Design}
-\begin{figure}[htbp]
-\centering
+\label{sec:orgf62a8f0}
+\begin{frame}[label={sec:org6a2f5ad}]{Data Driven Materials Design}
+\begin{center}
 \includegraphics[width=390]{DDD-flowchart.png}
-\caption{Workflow for accelerating testing and development of new PV materials\autocite{yang-2023-high-throug,pablo-2019-new-front}}
-\end{figure}
+\end{center}
+\center{}\vspace{-0.5cm}Workflow for accelerating testing and development of new PV materials
+\autocite{yang-2023-high-throug,pablo-2019-new-front}
 \end{frame}
 
-\begin{frame}[label={sec:org2e28c9b}]{Machine Learning In Materials Science}
+\begin{frame}[label={sec:orgd1306af}]{Machine Learning In Materials Science}
 An increasingly popular technique for accelerating discovery and
 development\autocite{pablo-2019-new-front}
 \begin{itemize}
@@ -180,10 +199,10 @@ development\autocite{pablo-2019-new-front}
 \item building on dft
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:org8e08a8c}]{Regression}
+\begin{frame}[label={sec:org0b7c33a}]{Regression}
 \end{frame}
 
-\begin{frame}[label={sec:orgcab7d15}]{Learning Algorithms}
+\begin{frame}[label={sec:org6e7e229}]{Learning Algorithms}
 \begin{itemize}
 \item Decision Tree
 \item Random Forest
@@ -194,8 +213,8 @@ development\autocite{pablo-2019-new-front}
 \end{frame}
 
 \section{Data}
-\label{sec:orgf869c1b}
-\begin{frame}[label={sec:org49e7695}]{Band Gap Relates to Efficiency}
+\label{sec:orgfac9444}
+\begin{frame}[label={sec:org6498f75}]{Band Gap Relates to Efficiency}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
  
@@ -217,28 +236,28 @@ Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
 of bandgaps determined according to level of theory\autocite[p.1]{yu-2012-ident-poten}
 \end{frame}
 
-\begin{frame}[label={sec:org6dc9425}]{Effect of DFT Functionals Levels of Theory}
+\begin{frame}[label={sec:org6f1475a}]{Effect of DFT Functionals Levels of Theory}
 \begin{center}
 \includegraphics[width=.9\linewidth]{Data/2023-05-15_20-04-18_screenshot.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgfdb3599}]{Variation in Band Gap changes with Level of Theory}
+\begin{frame}[label={sec:org5670c66}]{Variation in Band Gap changes with Level of Theory}
  
 \begin{center}
 \includesvg[width=300pt]{./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3}
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgabe6329}]{Features of Perovskites Descriptive of Band Gap}
+\begin{frame}[label={sec:orge51580d}]{Features of Perovskites Descriptive of Band Gap}
 \begin{block}{composition vectors}
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org991223b}]{Sample Space}
+\begin{frame}[label={sec:org8725de9}]{Sample Space}
 \end{frame}
 
-\begin{frame}[label={sec:org2e55e52}]{Constituent Properties}
+\begin{frame}[label={sec:org7167c35}]{Constituent Properties}
 \begin{block}{Twelve Properties per \(\ce{ABX_3}\) constituent}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
@@ -265,7 +284,7 @@ of bandgaps determined according to level of theory\autocite[p.1]{yu-2012-ident-
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org3f2baf5}]{bivariate analysis}
+\begin{frame}[label={sec:org02c7a5f}]{Bivariate Analysis}
 \begin{itemize}
 \item correlations can be surprising
 \item some confirm physical expectations
@@ -273,30 +292,100 @@ of bandgaps determined according to level of theory\autocite[p.1]{yu-2012-ident-
 \end{frame}
 
 \section{Multi-Fidelity Learning}
-\label{sec:org6599713}
-\begin{frame}[label={sec:org19c5349}]{Challenges of Learning from}
+\label{sec:orgea80fb5}
+\begin{frame}[label={sec:org89ec1aa}]{Challenges of Learning from Overlapping datasets}
+\begin{description}
+\item[{high fidelity}] prior on variance is narrow
+\item[{low fidelity}] prior on variance is wide
+\end{description}
 \end{frame}
-\begin{frame}[label={sec:org8196b23}]{multi-fidelity model development workflow}
+
+\begin{frame}[label={sec:orga754722}]{Multi-Fidelity Model Development Workflow}
 \alert{flowchart}
 
 simultaneously utilize multiple measurements made of the same
 composition in training models.\autocite{manganaris-2022-mrs-comput}
 \end{frame}
 
-
-\section{Summary}
-\label{sec:org69935b8}
-\begin{frame}[label={sec:org4e5e961}]{review everything}
+\section{Models}
+\label{sec:org98f5768}
+\begin{frame}[label={sec:orgbd012ff}]{Compare Three Methods}
 \end{frame}
+\begin{frame}[label={sec:orgf43f51d}]{Interpreting Models}
+\end{frame}
+\begin{frame}[label={sec:org4d6b75b}]{Shapely Additive Explanation (SHAP)}
+\end{frame}
+\section{Results}
+\label{sec:orgdebc8bf}
+\begin{frame}[label={sec:orgcfbe984}]{Make Predictions on Domain Subset}
+\end{frame}
+
+\begin{frame}[label={sec:orgb71d26e}]{Tolerance Factor}
+\begin{block}{Perovskite Stability}
+Stability of high symmetry \(\alpha\) phase depends on the ABX member's
+ionic radii satisfying Goldschmidt's tolerance:
+\autocite{yin-2015-halid-perov}
+
+\[
+1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+\]
+
+Empirically, it is \alert{necessary} that A must be much larger than B
+for Perovskite formation. B is usually a large atom (e.g. Pb, Sn) in
+Halide Perovskites. So A is suitably occupied by a Molecule -- an
+amine -- with an effective ionic radius.
+\autocite{kieslich-2015-exten-toler}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org638cbf4}]{Other Tolerance Factors in Literature}
+\begin{block}{Octahedral Factor}
+\[
+o=\frac{r_B}{r_X}
+\]
+\end{block}
+\begin{block}{Bartel Tolerance}
+\[
+t_{Bartel}=\frac{r_X}{r_B}-[1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})}]
+\]
+proposed recently
+\autocite{bartel-2019-new-toler}
+\end{block}
+\begin{block}{Ionic Radii}
+\begin{itemize}
+\item Elemental Radii are well documented in public databases
+\item Molecular Radii are defined in various ways, mostly for small
+molecules.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:org99453c5}]{Screening Yields}
+\end{frame}
+\section{Summary}
+\label{sec:org17925d3}
+\begin{frame}[label={sec:orgb42e787},fragile]{Review of Work}
+ \begin{itemize}
+\item preexisting data set of \textasciitilde{}500 samples from domain of \textasciitilde{}40000 single-site mixed compositions
+\item extract features using \texttt{cmcl}
+\item train models of band gaps measured at multiple fidelities
+\item ascertain best model
+\item analyze model accuracy, interpretability of bias and variance
+\item make predictions on whole sample domain
+\item Screen for viable candidate compositions
+\end{itemize}
+\end{frame}
+
 \section{Credit}
-\label{sec:org8af9a23}
-\begin{frame}[label={sec:orgc2cf4d0}]{Acknowledgements}
+\label{sec:orgdaee5ac}
+\begin{frame}[label={sec:org41869d9}]{Acknowledgements}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{block}{Research Group}
-I am greatful to
+I am grateful to
 \begin{itemize}
-\item Professor Arun Mannodi-Kanakkithodi for his mentorship and knowledge.
+\item Professor Arun Mannodi-Kanakkithodi for his mentorship, support, and knowledge.
+\item Professor Erk for her guidance and council
+\item Professor Strachan for his instruction
 \item Jiaqi Yang for his collaboration
 \item Habibur Rahman for his friendship and curiosity
 \end{itemize}
@@ -304,7 +393,7 @@ I am greatful to
 \begin{block}{Funding}
 \begin{itemize}
 \item Ross Fellowship
-\item Professor Arun's startup research grant F.10023800.05.002
+\item Professor Arun's startup research grant
 \end{itemize}
 \end{block}
 \begin{block}{Resources}
@@ -318,25 +407,25 @@ RCAC Bell Computing Cluster
 \end{columns}
 \end{frame}
 \section{Bib}
-\label{sec:orgc074de6}
+\label{sec:orgca11aa3}
 \begin{frame}[allowframebreaks]{References}
 \AtNextBibliography{\tiny}
 \printbibliography
 \end{frame}
 \appendix
-\begin{frame}[label={sec:orga9e2c3c}]{Data Pre-Processing}
+\begin{frame}[label={sec:orgba6575d}]{Data Pre-Processing}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/data_proc.png}
 \end{center}
 Data pre-processing Workflow to Implement with Python Pandas
 \end{frame}
-\begin{frame}[label={sec:org70807f8}]{Machine Learning Pipeline}
+\begin{frame}[label={sec:org1e77e44}]{Machine Learning Pipeline}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/ML_pipe.png}
 \end{center}
 Machine Learning Pipeline to Implement with Python SciKit-Learn
 \end{frame}
-\begin{frame}[label={sec:org075e190}]{DFT Functionals Effect Band Structure Calculation in HaPs}
+\begin{frame}[label={sec:orgba2335f}]{DFT Functionals Effect Band Structure Calculation in HaPs}
 \begin{itemize}
 \item D3
 \item SOC
