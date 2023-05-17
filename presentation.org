@@ -51,24 +51,18 @@
 :END:
 **** col                                                           :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.5
+:BEAMER_col: 0.3
 :END:
-Perovskite Semiconductor Application in thin film and tandem PV devices[fn:2]
-***** non                                               :B_ignoreheading:
-:PROPERTIES:
-:BEAMER_env: ignoreheading
-:END:
+#+attr_latex: :width 100
 [[file:thin-film-PV.png]]
-***** non                                               :B_ignoreheading:
-:PROPERTIES:
-:BEAMER_env: ignoreheading
-:END:
+#+attr_latex: :width 90
 [[file:Si-HaP-tandem-PV.png]]
 
+\tiny{}\center{}Perovskite Applications[fn:2]
 **** Solar Energy Harvesting                               :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_env: block
-:BEAMER_col: 0.5
+:BEAMER_col: 0.7
 :END:
 - 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE
   [cite:@kojima-2009-organ-halid]
@@ -76,6 +70,7 @@ Perovskite Semiconductor Application in thin film and tandem PV devices[fn:2]
   [cite:@im-2011]
 - 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
   [cite:@saliba-2014-influen-therm]
+
 
 HaP PVs become competitive in 2013
 ** Rapid Rise of Perovskite PVs                                    :B_frame:
@@ -795,7 +790,7 @@ Machine Learning Pipeline to Implement with Python SciKit-Learn
   - computational heft
 * Footnotes
 
-[fn:2]https://www.lesker.com/newweb/ped/applications/perovskite-research.cfm 
+[fn:2]\tiny{}[[https://www.lesker.com/newweb/ped/applications/perovskite-research.cfm ][www.lesker.com]]
 [fn:1]\tiny{}Photo by Dennis Schroeder\newline{}National Renewable Energy Laboratory
 
 # :var c=""
