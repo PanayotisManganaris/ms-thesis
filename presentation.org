@@ -725,8 +725,10 @@ proposed recently
 :PROPERTIES:
 :BEAMER_env: block
 :END:
-I am greatful to
-- Professor Arun Mannodi-Kanakkithodi for his mentorship and knowledge.
+I am grateful to
+- Professor Arun Mannodi-Kanakkithodi for his mentorship, support, and knowledge.
+- Professor Erk for her guidance and council
+- Professor Strachan for his instruction
 - Jiaqi Yang for his collaboration
 - Habibur Rahman for his friendship and curiosity
 **** COMMENT Experimental Collaborators                          :B_block:
@@ -740,7 +742,8 @@ to validate simulations and predictions.
 :BEAMER_env: block
 :END:
 - Ross Fellowship
-- Professor Arun's startup research grant F.10023800.05.002
+- Professor Arun's startup research grant
+# F.10023800.05.002
 **** Resources                                                   :B_block:
 :PROPERTIES:
 :BEAMER_env: block
