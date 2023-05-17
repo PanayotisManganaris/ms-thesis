@@ -696,6 +696,14 @@ proposed recently
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+- preexisting data set of ~500 samples from domain of ~40000 single-site mixed compositions
+- extract features using =cmcl=
+- train models of band gaps measured at multiple fidelities
+- ascertain best model
+- analyze model accuracy, interpretability of bias and variance
+- make predictions on whole sample domain
+- Screen for viable candidate compositions
+
 * Credit
 ** Acknowledgements                                                :B_frame:
 :PROPERTIES:
