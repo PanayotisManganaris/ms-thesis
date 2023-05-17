@@ -49,9 +49,22 @@
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-- visible spectrum solar absorbers
-- semiconductors
-- efficiency
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+Perovskite Semiconductor Application in thin film and tandem PV devices[fn:2]
+***** non                                               :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+[[file:thin-film-PV.png]]
+***** non                                               :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+[[file:Si-HaP-tandem-PV.png]]
+
 **** Solar Energy Harvesting                               :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_env: block
@@ -782,6 +795,7 @@ Machine Learning Pipeline to Implement with Python SciKit-Learn
   - computational heft
 * Footnotes
 
+[fn:2]https://www.lesker.com/newweb/ped/applications/perovskite-research.cfm 
 [fn:1]\tiny{}Photo by Dennis Schroeder\newline{}National Renewable Energy Laboratory
 
 # :var c=""
