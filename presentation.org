@@ -293,9 +293,10 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 :BEAMER_env: frame
 :END:
 #+attr_latex: :width 390
-#+CAPTION: Workflow for accelerating testing and development of new PV materials[cite:@yang-2023-high-throug;@pablo-2019-new-front]
 #+attr_org: :width 90
 [[file:DDD-flowchart.png]]
+\center{}\vspace{-0.5cm}Workflow for accelerating testing and development of new PV materials
+[cite:@yang-2023-high-throug;@pablo-2019-new-front]
 
 ** COMMENT DFT                                                             :B_frame:
 :PROPERTIES:
