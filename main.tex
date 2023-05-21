@@ -218,17 +218,17 @@
 In this article, we report machine learning models trained on existing
 datasets of halide perovskite bandgaps based on first principles
 computations performed at different fidelities. The primary objective
-of these models is to predict the perovskite bandgap using the
+of these models is to predict the perovskite band gap using the
 composition and inherent elemental properties as descriptors,
 eventually leading to accurate prediction and screening across much
 larger chemical spaces. We utilize a recently published density
-functional theory (DFT) dataset of > 1300 perovskite bandgaps from 4
+functional theory (DFT) dataset of > 1300 perovskite band gaps from 4
 different levels of theory, added to an experimental perovskite
-bandgap dataset of ~100 points, to train random forest
+band gap dataset of ~100 points, to train random forest
 regression (RFR), Gaussian process regression (GPR), and Sure
 Independent Screening and Sparsifying Operator (SISSO) regression
 models, with data fidelity added as one-hot encoded features. We find
-that RFR yields the best model with a bandgap root mean square error
+that RFR yields the best model with a band gap root mean square error
 of 0.124738 on the total dataset and 0.154448 on just the experimental
 points. SISSO provides compound features and functions for direct
 prediction of band gap, but errors are larger than from RFR and
