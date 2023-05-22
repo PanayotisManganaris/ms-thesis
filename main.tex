@@ -244,8 +244,14 @@
   of 0.12 on the total dataset and 0.15 on the experimental
   points. SISSO provided compound features and functions for direct
   prediction of band gap, but errors were larger than from RFR and
-  GPR. Additional insights were gained from Pearson correlation and
-  Shapley additive explanation (SHAP) analysis of learned descriptors.
+  GPR. Additional insights gained from Pearson correlation and
+  Shapley additive explanation (SHAP) analysis of learned descriptors suggest
+  the RFR models performed best because of (a) their focus on
+  identifying and capturing relevant feature interactions and (b) their
+  flexibility to represent nonlinear relationships between such
+  interactions and the band gap
+  % and (c) their benefit as an ensemble model to improve predictions
+  % by reducing the variance of errors
   The best model was deployed for predicting
   experimental band gap of \textasciitilde{}40,000 hypothetical compounds,
   based on which we screened \textasciitilde{}3000 stable compounds with band gap predicted to be
