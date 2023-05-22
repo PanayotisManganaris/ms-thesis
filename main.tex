@@ -239,16 +239,17 @@
   band gap dataset of \textasciitilde{}100 points, to train random forest
   regression (RFR), Gaussian process regression (GPR), and Sure
   Independent Screening and Sparsifying Operator (SISSO) regression
-  models, with data fidelity added as one-hot encoded features. We find
+  models, with data fidelity added as one-hot encoded features. I found
   that RFR yields the best model with a band gap root mean square error
   of 0.124738 on the total dataset and 0.154448 on just the experimental
   points. SISSO provides compound features and functions for direct
   prediction of band gap, but errors are larger than from RFR and
   GPR. Additional insights are gained from Pearson correlation and
-  Shapley analysis. Finally, the best model is deployed for prediction
+  Shapley additive explanation (SHAP) analysis of learned descriptors.
+  Finally, the best model is deployed for prediction
   of experimental band gap of \textasciitilde{}40,000 hypothetical compounds,
   based on which we screen \textasciitilde{}3000 stable compounds with band gap predicted to be
-  between 1 and 2 eV.
+  between 1 and 2.5 eV at experimental accuracy.
 \end{abstract}
 
 \setcounter{tocdepth}{3}
