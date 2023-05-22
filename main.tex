@@ -221,6 +221,7 @@
   absorption in solar cells. I identified mixtures of candidate
   constituents at the A, B or X sites of the perovskite unit cell
   which leveraged how mixed perovskite band gaps ``bow'' away from
+  the linear interpolations predicted by
   Vegard's law of mixing to obtain a selection of stable perovskites
   with band gaps in an ideal range of 1 to 2.5 eV for visible light
   spectrum absorption.
@@ -235,7 +236,7 @@
   I utilize a recently published density
   functional theory (DFT) dataset of > 1300 perovskite band gaps from 4
   different levels of theory, added to an experimental perovskite
-  band gap dataset of ~100 points, to train random forest
+  band gap dataset of \textasciitilde{}100 points, to train random forest
   regression (RFR), Gaussian process regression (GPR), and Sure
   Independent Screening and Sparsifying Operator (SISSO) regression
   models, with data fidelity added as one-hot encoded features. We find
@@ -245,8 +246,8 @@
   prediction of band gap, but errors are larger than from RFR and
   GPR. Additional insights are gained from Pearson correlation and
   Shapley analysis. Finally, the best model is deployed for prediction
-  of experimental band gap of ~40,000 hypothetical compounds,
-  based on which we screen ~3000 stable compounds with band gap predicted to be
+  of experimental band gap of \textasciitilde{}40,000 hypothetical compounds,
+  based on which we screen \textasciitilde{}3000 stable compounds with band gap predicted to be
   between 1 and 2 eV.
 \end{abstract}
 
