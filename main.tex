@@ -215,40 +215,40 @@
 \begin{document}
 
 \begin{abstract}
-  A wide range of optoelectronic applications demand semiconductors to
-  be optimized for purpose. My research focused on addressing the
-  problem of optimizing Halide perovskite composition for photovoltaic
+  A wide range of optoelectronic applications demand semiconductors
+  optimized for purpose. My research focused on data-driven identification
+  of Halide perovskite compositions for optimum photovoltaic
   absorption in solar cells. I identified mixtures of candidate
   constituents at the A, B or X sites of the perovskite unit cell
   which leveraged how mixed perovskite band gaps ``bow'' away from
   the linear interpolations predicted by
   Vegard's law of mixing to obtain a selection of stable perovskites
-  with band gaps in an ideal range of 1 to 2.5 eV for visible light
+  with band gaps in the ideal range of 1 to 2.5 eV for visible light
   spectrum absorption.
 
   I trained machine learning models on previously reported
   datasets of halide perovskite band gaps based on first principles
   computations performed at different fidelities. The primary objective
-  of these models is to predict the perovskite band gap using the
+  of these models was to predict the perovskite band gap using the
   composition and inherent elemental properties as descriptors,
   eventually leading to accurate prediction and screening across the much
   larger chemical space from which the data samples were drawn.
-  I utilize a recently published density
-  functional theory (DFT) dataset of > 1300 perovskite band gaps from 4
+  I utilized a recently published density
+  functional theory (DFT) dataset of more than 1300 perovskite band gaps from 4
   different levels of theory, added to an experimental perovskite
   band gap dataset of \textasciitilde{}100 points, to train random forest
   regression (RFR), Gaussian process regression (GPR), and Sure
-  Independent Screening and Sparsifying Operator (SISSO) regression
+  Independence Screening and Sparsifying Operator (SISSO) regression
   models, with data fidelity added as one-hot encoded features. I found
   that RFR yields the best model with a band gap root mean square error
-  of 0.124738 on the total dataset and 0.154448 on just the experimental
-  points. SISSO provides compound features and functions for direct
-  prediction of band gap, but errors are larger than from RFR and
-  GPR. Additional insights are gained from Pearson correlation and
+  of 0.12 on the total dataset and 0.15 on the experimental
+  points. SISSO provided compound features and functions for direct
+  prediction of band gap, but errors were larger than from RFR and
+  GPR. Additional insights were gained from Pearson correlation and
   Shapley additive explanation (SHAP) analysis of learned descriptors.
-  Finally, the best model is deployed for prediction
-  of experimental band gap of \textasciitilde{}40,000 hypothetical compounds,
-  based on which we screen \textasciitilde{}3000 stable compounds with band gap predicted to be
+  The best model was deployed for predicting
+  experimental band gap of \textasciitilde{}40,000 hypothetical compounds,
+  based on which we screened \textasciitilde{}3000 stable compounds with band gap predicted to be
   between 1 and 2.5 eV at experimental accuracy.
 \end{abstract}
 
