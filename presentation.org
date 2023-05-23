@@ -1,10 +1,10 @@
 #+options: ':nil *:t -:t ::t <:t H:2 \n:nil ^:t arch:headline
 #+options: author:t broken-links:nil c:nil creator:nil
-#+options: d:(not "STATUSLOG") date:t e:t email:nil f:t inline:t num:t
-#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:("TODO" "DONE" "NEXT") tex:t
 #+options: timestamp:t title:t toc:t todo:t |:t
-#+title: Machine Learning Perovskite Bandgaps for Improved Photovoltaics
-#+author: Panayotis Manganaris\inst{1}
+#+title: \Huge{}Machine Learning Perovskite Bandgaps for Improved Photovoltaics
+#+author: \large{}Panayotis Manganaris\inst{1}
 #+email: panos.manganaris@gmail.com
 #+language: en
 #+select_tags: export
@@ -15,8 +15,8 @@
 #+latex_class: beamer
 #+latex_class_options: [10pt, aspectratio=169, presentation]
 #+latex_header:
-#+latex_header_extra:\institute[Mannodi Group]{
-#+latex_header_extra:\inst{1} Purdue Materials Engineering\\Professor Arun Mannodi-Kanakkithodi
+#+latex_header_extra:\institute[Mannodi Group]{\large{}
+#+latex_header_extra:\inst{1} Purdue Materials Engineering\\Advisor Arun Mannodi-Kanakkithodi
 #+latex_header_extra:}
 #+description:
 #+keywords:
