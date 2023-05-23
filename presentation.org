@@ -750,8 +750,7 @@ band gap at higher levels of theory correlate with composition differently[cite:
 :PROPERTIES:
 :BEAMER_env: block
 :END:
-- high fidelity :: prior on variance is narrow
-- low fidelity :: prior on variance is wide
+- weight scores to reward models faithful to higher fidelities
 
 ** Multi-Fidelity Model Development Workflow                       :B_frame:
 :PROPERTIES:
