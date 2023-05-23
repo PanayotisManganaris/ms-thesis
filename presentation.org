@@ -353,6 +353,43 @@ Perovskite Solar Absorber Layer[fn:1]
 
 \center{}2x1x2 supercell
 
+** TODO Design Goals of Perovskite Mixing                          :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+**** Deficiencies in Current Perovskite PVs                      :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+inherent instability/short life-cycle
+- degradation in sunlight
+- soluble in water
+environmental impact
+- toxicity of Lead (Pb)
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+**** *207+ Million* Design Candidates                            :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+
+composition space experiences combinatorial scaling with
+1. size of supercell
+2. constituent options
+
+No distinct patterns between constituents and performance-relevant properties
+
+ demands data-driven design based on
+- high-throughput density functional theory
+- machine learning (ML).
+
 ** COMMENT Attractive Properties of Perovskites                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
