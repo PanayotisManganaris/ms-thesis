@@ -452,7 +452,7 @@ Typical severity of gap states
 
 Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 
-* Machine Learning In Materials Science
+* Computational Methods In Materials Science
 # discuss DDMD in group context + introduce DFT and ML
 # discuss DFT in general -- distance myself from data
 # - why dft? uses quantum mechanics -- still expensive big integral
@@ -485,11 +485,6 @@ development[cite:@pablo-2019-new-front]
 \center{}\vspace{-0.5cm}Workflow for accelerating testing and development of new PV materials
 [cite:@yang-2023-high-throug;@pablo-2019-new-front]
 
-** COMMENT DFT                                                             :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-** Machine Learning In Materials Science                           :B_frame:
 ** Random Forest                                                   :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
