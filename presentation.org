@@ -92,12 +92,18 @@
 
 * Background
 # Introduce PVs
-# - absorb visible spectrum
-# explain what perovskites are and why you should care
-# - familiar BaTiO3
-# - halide perovskites
-# discuss properties which contribute to this performance
-** Photovoltaic Power Generation                                   :B_frame:
+# - the band gap controls the lowest energy photon that can be absorbed
+# - perovskites demonstrate good transport
+# establish recent context
+# - advancements
+# - other applications
+# what perovskites are and why you should care
+# 1. familiar BaTiO3
+# 2. halide perovskites
+# Combinatorial Mixing in-depth Discussion
+# - discuss properties which contribute to this performance
+# - why we need computational methods
+** DONE Photovoltaic (PV) Power Generation                         :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -324,7 +330,6 @@ Perovskite Solar Absorber Layer[fn:1]
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-# part of a larger collection on perovskite Property-Structure Relationships
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
@@ -355,8 +360,6 @@ Typical severity of gap states
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-# This has an additional *Ligand* in this structure
-# maybe start with more of why perovskites are useful, instead of telling us what they are
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
@@ -386,10 +389,12 @@ Typical severity of gap states
 Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 
 * Machine Learning In Materials Science
-# discuss DDMD in group context + introduce ML
+# discuss DDMD in group context + introduce DFT and ML
 # discuss DFT in general -- distance myself from data
-# be prepared to discuss on functionals
+# - why dft? uses quantum mechanics -- still expensive big integral
+# be prepared to discuss functionals
 # combinatorially scaling chemical space
+# bandgaps are unpredictably deviating away from vegard's law.
 ** Data Driven Materials Design                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -636,7 +641,19 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 # - oversampling is an alternative
 # show uncertainties in GPR posterior over 5 plots
 # Bootstrapping is
-** Challenges of Learning from Overlapping datasets                :B_block:
+# show tables -- table showing effect of single-fideltiy training, effect of comp or prop exclusive
+** Multi-fidelity Machine Learning                                 :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+\[
+\hat{y}_i = y_i + \epsilon_i \mbox{ for observations } i=1,…,N
+\]
+
+- high fidelity :: prior on variance is narrow
+- low fidelity :: prior on variance is wide
+
+*** Training Strategy                                             :B_block:
 :PROPERTIES:
 :BEAMER_env: block
 :END:
