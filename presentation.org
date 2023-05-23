@@ -37,7 +37,7 @@
 :results:
 :end:
 
-* setup codes
+* COMMENT setup codes
 #+begin_src jupyter-python
   class QEParser():
       def __init__(self, filepath):
@@ -619,7 +619,7 @@ Literature provides examples of known performant ligands:
 :PROPERTIES:
 :BEAMER_env: ignoreheading
 :END:
-SLME metric accounts for more energetic processes than
+SLME (proxy for PCE[cite:@almora-2020-devic-perfor]) accounts for more energetic processes than
 Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
 of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.1]
 
