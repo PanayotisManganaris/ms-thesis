@@ -699,10 +699,16 @@ Weightable Machine Learning pipeline implemented in Python
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-** Shapely Additive Explanation (SHAP)                             :B_frame:
+
+** SHAP Analyze RFR                                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+
+#+DOWNLOADED: screenshot @ 2023-05-19 13:42:16
+#+attr_latex: :width=450
+[[file:Models/2023-05-19_13-42-16_screenshot.png]]
+
 * Results
 ** Make Predictions on Domain Subset                               :B_frame:
 :PROPERTIES:
