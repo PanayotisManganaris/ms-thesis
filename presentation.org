@@ -988,6 +988,18 @@ Weightable Machine Learning pipeline implemented in Python
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+- desired range \(bg \in [1, 2.5]\) eV
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+#+DOWNLOADED: screenshot @ 2023-05-19 13:23:47
+#+attr_latex: :width 200
+[[file:Results/2023-05-19_13-23-47_screenshot.png]]
 
 ** Tolerance Factor                                                :B_frame:
 :PROPERTIES:
