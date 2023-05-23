@@ -642,12 +642,16 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 - Atomic Number
 - Period
 
-** Bivariate Analysis                                              :B_frame:
+** Bivariate Analysis of Functional Effects                        :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-- correlations can be surprising
-- some confirm physical expectations
+
+band gap at higher levels of theory correlate with composition differently[cite:@yang-2023-high-throug]
+
+#+DOWNLOADED: screenshot @ 2023-05-19 12:18:44
+#+attr_latex: :width 380
+[[file:Data/2023-05-19_12-18-44_screenshot.png]]
 
 * Multi-Fidelity Learning
 # challenges of learning from multiple fidelities
