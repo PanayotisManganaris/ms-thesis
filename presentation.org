@@ -472,6 +472,15 @@ Literature provides examples of known performant ligands:
 # - discuss use of Electronegativity, etc, etc
 # pearson plots solidify the vector concept
 # - Show Correlations with each LoT!
+** Effect of DFT Functionals Levels of Theory                      :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+#+DOWNLOADED: screenshot @ 2023-05-15 20:04:18
+#+latex_attr: :width 400
+[[file:Data/2023-05-15_20-04-18_screenshot.png]]
+
 ** Band Gap Relates to Efficiency                                  :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -546,15 +555,6 @@ Literature provides examples of known performant ligands:
 SLME metric accounts for more energetic processes than
 Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
 of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.1]
-
-** Effect of DFT Functionals Levels of Theory                      :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-#+DOWNLOADED: screenshot @ 2023-05-15 20:04:18
-#+latex_attr: :width 400
-[[file:Data/2023-05-15_20-04-18_screenshot.png]]
 
 ** Variation in Band Gap changes with Level of Theory              :B_frame:
 :PROPERTIES:
