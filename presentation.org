@@ -650,7 +650,13 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 [[file:./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3.svg]]
 :end:
 
-** Features of Perovskites Descriptive of Band Gap                 :B_frame:
+** Collecting experimental data is hard                            :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+# show slide from almora and jacobson paper overview
+# also mention that PBE and HSE take time to generate -- Arun' been getting data for years
+** COMMENT Features of Perovskites Descriptive of Band Gap                 :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
