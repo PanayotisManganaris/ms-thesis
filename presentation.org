@@ -490,28 +490,20 @@ development[cite:@pablo-2019-new-front]
 :BEAMER_env: frame
 :END:
 ** Machine Learning In Materials Science                           :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-An increasingly popular technique for accelerating discovery and
-development[cite:@pablo-2019-new-front]
-- force fields
-- property-prediction
-- building on dft
-** Regression                                                      :B_frame:
+** Random Forest                                                   :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
 
-** Learning Algorithms                                             :B_frame:
+** Gaussian Process                                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-- Decision Tree
-- Random Forest
-- Linear
-- SISSO
-- Gaussian Process
+
+** SISSO                                                           :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 ** COMMENT Motives for Alternative Features                                :B_frame:
 :PROPERTIES:
