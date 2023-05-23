@@ -254,6 +254,11 @@ HaP PVs become competitive in 2013
 :END:
 - Cumulative maximum efficiency of PVs tested by accredited laboratories[cite:@research-2023-best-resear]
 - Perovskite+Si tandem monolithic cells second only to two-junction \(\ce{GaAs}\)
+- Other rising applications
+  - LEDs and photodiodes
+  - infrared sensors
+  - superconductors
+  - quantum bits
 
 ** What's a Perovskite?                                            :B_frame:
 :PROPERTIES:
