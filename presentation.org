@@ -664,11 +664,11 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+#+attr_latex: :width 300
+[[file:~/Pictures/flowcharts/ML_pipe.png]]
 
-*flowchart*
-
-simultaneously utilize multiple measurements made of the same
-composition in training models.[cite:@manganaris-2022-mrs-comput]
+Weightable Machine Learning pipeline implemented in Python
+[cite:@manganaris-2022-mrs-comput]
 
 * Models
 # SLME improves on SQ to give us performant range of band gaps
@@ -895,13 +895,6 @@ RCAC Bell Computing Cluster
 #+attr_latex: :width 300
 [[file:~/Pictures/flowcharts/data_proc.png]]
 Data pre-processing Workflow to Implement with Python Pandas
-** Machine Learning Pipeline                                       :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-#+attr_latex: :width 300
-[[file:~/Pictures/flowcharts/ML_pipe.png]]
-Machine Learning Pipeline to Implement with Python SciKit-Learn
 ** DFT Functionals Effect Band Structure Calculation in HaPs       :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
