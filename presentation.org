@@ -107,6 +107,9 @@
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-22 Mon 16:19]
+:END:
 **** col                                                           :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.3
@@ -173,11 +176,13 @@ E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
 - 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
   [cite:@saliba-2014-influen-therm]
 
-
 HaP PVs become competitive in 2013
-** Rapid Rise of Perovskite PVs                                    :B_frame:
+** NEXT Rapid Rise of Perovskite Photovoltaics                     :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "NEXT"       from              [2023-05-22 Mon 17:08]
 :END:
 *** col                                                             :BMCOL:
 :PROPERTIES:
@@ -260,11 +265,13 @@ HaP PVs become competitive in 2013
   - superconductors
   - quantum bits
 
-** What's a Perovskite?                                            :B_frame:
+** DONE What's a Perovskite?                                       :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-# just a few seconds to establish breadth of context
+:LOGBOOK:
+- State "DONE"       from              [2023-05-22 Mon 17:08]
+:END:
 # relaxor : character w/ highly nonlinear dielectric constant and
 # diffused ferroelectric to para electric phase transition (no well
 # defined Curie temperature)
@@ -960,6 +967,7 @@ for Perovskite formation. B is usually a large atom (e.g. Pb, Sn) in
 Halide Perovskites. So A is suitably occupied by a Molecule -- an
 amine -- with an effective ionic radius.
 [cite:@kieslich-2015-exten-toler]
+
 ** Other Tolerance Factors in Literature                           :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
