@@ -475,6 +475,54 @@ inherent instability/short life-cycle
 environmental impact
 - toxicity of Lead (Pb)
 
+**** fig mixing                                          :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="150pt :options inkscapeformat=png, inkscapedpi=300")
+  p = px.sunburst(Y_big, path=['mix'])
+  p.update_layout(
+      margin=dict(l=0, r=0, t=0, b=0),
+  )
+  # llist = p.data[0].labels
+  # p.data[0].labels = [re.sub("comp__|['\(\),)]", "", l) for l in llist]
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 150pt :options inkscapeformat=png, inkscapedpi=300
+[[file:./.ob-jupyter/c00e21154fba8393ff3d8a9003f9b15830be6eaf.svg]]
+:end:
+
+**** COMMENT fig all components                          :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="150pt :options inkscapeformat=png, inkscapedpi=300")
+  p = px.sunburst(XX_big.iloc[:,1:14].replace(0,np.NaN)
+                    .join(Y_big[['mix']])
+                    .groupby(['mix'])
+                    .sum().reset_index().melt(id_vars=['mix']),
+                  path=['variable'], values='value')
+  p.update_traces(textinfo="label+percent parent")
+
+  p.update_layout(
+      margin=dict(l=0, r=0, t=0, b=0),
+  )
+  llist = p.data[0].labels
+  p.data[0].labels = [re.sub("comp__|['\(\),)]", "", l) for l in llist]
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 150pt :options inkscapeformat=png, inkscapedpi=300
+[[file:./.ob-jupyter/9ef1f8c88bbb340e0556a7542b086725069dbe80.svg]]
+:end:
+
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
