@@ -301,16 +301,29 @@ Notable oxide perovskites and properties circa 2006
 #+attr_latex: :width 170
 [[file:Introduction_To_Perovskites/2022-07-14_15-32-57_screenshot.png]]
 
-** Halide Perovskites                                              :B_frame:
+** DONE Halide Perovskites                                         :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-23 Tue 10:45]
+:END:
 *** col                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.5
+:BEAMER_col: 0.6
 :END:
+- purely inorganic (e.g., CsPbI3)
+- hybrid organic-inorganic (e.g., MAPbBr3)
+  - MA :: methylammonium
+  - FA :: formamidium
+- tailor stability and electronic/optical properties of \(\ce{ABX3}\)
+  compounds by changing
+  - component at each site
+  - mix of components
+  - atom arrangement
+# structure, octahedral arrangements, point defects, interfaces, etc.
 
-#+caption: \(\ce{ABX3}\) Chemical Domain
+#+caption: \(\ce{ABX3}\) Site Candidates
 | /      | <  |    |    |    |    |    |
 | A-site | MA | FA | Cs | Rb | K  |    |
 | B-site | Pb | Sn | Ge | Ba | Sr | Ca |
@@ -318,7 +331,7 @@ Notable oxide perovskites and properties circa 2006
 
 *** COMMENT col                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.5
+:BEAMER_col: 0.4
 :END:
 #+DOWNLOADED: screenshot @ 2022-07-15 23:57:31
 #+attr_latex: :width 115
@@ -326,10 +339,12 @@ Notable oxide perovskites and properties circa 2006
 Perovskite Solar Absorber Layer[fn:1]
 *** col                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.5
+:BEAMER_col: 0.4
 :END:
-#+latex_attr: :width 140
+#+attr_latex: :width 140
 [[file:hybrid-HaP.png]]
+
+\center{}2x1x2 supercell
 
 ** COMMENT Attractive Properties of Perovskites                            :B_frame:
 :PROPERTIES:
