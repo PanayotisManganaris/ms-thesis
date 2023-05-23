@@ -763,6 +763,70 @@ proposed recently
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
+#+attr_latex: :width 120
+[[file:screening_ops.png]]
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
+#+DOWNLOADED: screenshot @ 2023-05-19 13:20:09
+#+attr_latex: :width 260
+[[file:Results/2023-05-19_13-20-09_screenshot.png]]
+
+** Screened Constituent Frequencies                                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+#+DOWNLOADED: screenshot @ 2023-05-19 13:07:38
+#+attr_latex: :width 400
+[[file:Results/2023-05-19_13-07-38_screenshot.png]]
+*** A-site                                                          :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
+- prefer occupying small fraction mixing in most constituents
+- \(\ce{K}\) and \(\ce{Rb}\) also prefer full occupancy
+
+*** B-site                                                          :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
+- favor full occupation a rate of 5-8%
+- showed some preference approaching doping
+
+*** X-site                                                          :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
+- strongly prefer full occupation
+
+** Interpretation                                                  :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+
+#+DOWNLOADED: screenshot @ 2023-05-19 13:21:13
+#+attr_latex: :width 200
+[[file:Results/2023-05-19_13-21-13_screenshot.png]]
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+
+#+DOWNLOADED: screenshot @ 2023-05-19 13:20:09
+#+attr_latex: :width 200
+[[file:Results/2023-05-19_13-20-09_screenshot.png]]
+
 * COMMENT CGCNN
 ** CGCNN Introduction                                              :B_frame:
 :PROPERTIES:
