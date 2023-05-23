@@ -457,46 +457,61 @@ Perovskite Solar Absorber Layer[fn:1]
 
 \center{}2x1x2 supercell
 
-** TODO Design Goals of Perovskite Mixing                          :B_frame:
+** DONE Design Goals and Challenges of Combinatorial Mixing        :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-05-23 Tue 18:43]
 :END:
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-**** Deficiencies in Current Perovskite PVs                      :B_block:
+**** Search for Improved Compounds                               :B_block:
 :PROPERTIES:
 :BEAMER_env: block
 :END:
-inherent instability/short life-cycle
-- degradation in sunlight
-- soluble in water
-environmental impact
-- toxicity of Lead (Pb)
+
+*37,785* out of *207+ Million* compounds possible in a 2x2x2 supercell
+will be examined for solutions to these deficiencies using
+- high-throughput density functional theory
+- data collected from literature
+- multi-fidelity machine learning
+
+# combinatorial growth of composition space with
+# 1. size of supercell
+# 2. constituent options
 
 **** fig mixing                                          :B_ignoreheading:
 :PROPERTIES:
 :BEAMER_env: ignoreheading
 :END:
 #+begin_src jupyter-python :post wrap(*this*, w="150pt :options inkscapeformat=png, inkscapedpi=300")
-  p = px.sunburst(Y_big, path=['mix'])
-  p.update_layout(
-      margin=dict(l=0, r=0, t=0, b=0),
-  )
-  # llist = p.data[0].labels
-  # p.data[0].labels = [re.sub("comp__|['\(\),)]", "", l) for l in llist]
-  p.show(renderer='svg')
+    p = px.sunburst(Y_big, path=['mix'])
+    p.update_layout(
+        margin=dict(l=0, r=0, t=0, b=0),
+        font_size=60
+    )
+    p.update_traces(insidetextorientation='horizontal',
+                    textinfo="label+value")
+    llist = p.data[0].labels
+    p.data[0].labels = [l + '-site mixed' for l in llist]
+    p.show(renderer='svg')
 #+end_src
 
 #+RESULTS:
 :results:
  
 #+attr_latex: :width 150pt :options inkscapeformat=png, inkscapedpi=300
-[[file:./.ob-jupyter/c00e21154fba8393ff3d8a9003f9b15830be6eaf.svg]]
+[[file:./.ob-jupyter/3ed5c0e44a1db77d1bd67911c688251d563c2ef0.svg]]
 :end:
 
-**** COMMENT fig all components                          :B_ignoreheading:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+**** fig all components                                  :B_ignoreheading:
 :PROPERTIES:
 :BEAMER_env: ignoreheading
 :END:
@@ -506,10 +521,12 @@ environmental impact
                     .groupby(['mix'])
                     .sum().reset_index().melt(id_vars=['mix']),
                   path=['variable'], values='value')
-  p.update_traces(textinfo="label+percent parent")
+  p.update_traces(insidetextorientation='horizontal',
+                  textinfo="label+percent parent")
 
   p.update_layout(
       margin=dict(l=0, r=0, t=0, b=0),
+      font_size=30
   )
   llist = p.data[0].labels
   p.data[0].labels = [re.sub("comp__|['\(\),)]", "", l) for l in llist]
@@ -520,27 +537,18 @@ environmental impact
 :results:
  
 #+attr_latex: :width 150pt :options inkscapeformat=png, inkscapedpi=300
-[[file:./.ob-jupyter/9ef1f8c88bbb340e0556a7542b086725069dbe80.svg]]
+[[file:./.ob-jupyter/e5dedf8aa3764c0a663c1bbbd2d70eef512cfa96.svg]]
 :end:
 
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-**** *207+ Million* Design Candidates                            :B_block:
+**** Deficiencies in Leading Perovskite PVs                      :B_block:
 :PROPERTIES:
 :BEAMER_env: block
 :END:
-
-composition space experiences combinatorial scaling with
-1. size of supercell
-2. constituent options
-
-No distinct patterns between constituents and performance-relevant properties
-
- demands data-driven design based on
-- high-throughput density functional theory
-- machine learning (ML).
+inherent instability/short life-cycle
+- degradation in sunlight
+- soluble in water
+environmental impact
+- toxicity of Lead (Pb)
 
 ** COMMENT Attractive Properties of Perovskites                            :B_frame:
 :PROPERTIES:
