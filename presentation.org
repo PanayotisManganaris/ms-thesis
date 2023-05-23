@@ -27,11 +27,63 @@
 #+PROPERTY: header-args:jupyter-python :session mrg :kernel mrg :pandoc org :async yes
 #+PROPERTY: header-args :results scalar drawer :eval never-export :exports results
 * COMMENT dependencies
-#+INCLUDE: /home/panos/Documents/manuscripts/DFT+ML+feature_engineering/dev_dependencies.org
+#+INCLUDE: /home/panos/Documents/manuscripts/DFT+ML+feature_engineering/dependencies.org
 #+begin_src jupyter-python
-  import re
   import datetime
-  from plotly.subplots import make_subplots
+  import io
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+* setup codes
+#+begin_src jupyter-python
+  class QEParser():
+      def __init__(self, filepath):
+          """
+          Parse Quantum Espresso Electronic Structure Output files.
+
+          instantiate QEParser with a path to a QE output file
+
+          call get_df method to return a long dataframe
+          """
+          with open(filepath) as f:
+              lines = f.readlines()
+          self.dstrings = "".join(lines)
+          self.nameblock = re.compile(r"[-.]+\n [A-Za-z0-9\.\s\(#\)-]+[-.]+")
+
+      def string_pop(self, string, delimiter):
+          """ strings are immutable,
+          so this reassigns dstring after splitting """
+          datalist = string.split(delimiter)
+          data = datalist.pop(0)
+          self.dstrings = "".join(datalist)
+          return data
+
+      def get_df(self):
+          """produce dataframe from init file"""
+          nameblocks = re.findall(self.nameblock, self.dstrings)
+          names = list(map(lambda s: s.split("\n")[1:-1], nameblocks))
+          dfs=[]
+          self.dstrings = self.dstrings.replace(nameblocks.pop(0),"")
+          for block,name in zip(nameblocks, names):
+              dstring = self.string_pop(self.dstrings, block)
+              name="\n".join(name).replace(" ", "_").replace("_", "", 1)
+              sio = io.StringIO(dstring, newline='\n')
+              dfs.append(
+                  pd.read_csv(
+                      sio, header=0, on_bad_lines='warn'
+                  ).assign(name=name)
+              )
+              sio = io.StringIO(self.dstrings, newline='\n')
+          name="\n".join(names[-1]).replace(" ", "_").replace("_", "", 1)
+          dfs.append(
+              pd.read_csv(
+                  sio, header=0, on_bad_lines='warn'
+              ).assign(name=name)
+          )
+          return pd.concat(dfs, axis=0)
 #+end_src
 
 #+RESULTS:
@@ -59,10 +111,54 @@
 [[file:Si-HaP-tandem-PV.png]]
 
 \tiny{}\center{}Perovskite Applications[fn:2]
-**** Solar Energy Harvesting                               :B_block:BMCOL:
+
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
+***** Band Gap Effects on Absorption Spectrum                   :B_block:
 :PROPERTIES:
 :BEAMER_env: block
-:BEAMER_col: 0.7
+:END:
+****** col                                                       :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="130pt")
+  df = QEParser('/home/panos/Documents/masters/GaN_ZB_AS.txt').get_df()
+  p = px.line(df, x='Wavelength (nm)', y=' Absorption Coefficient', color='name',
+              height=200, width = 400)
+  p.update_yaxes(title='alpha')
+  p.add_vline(x=628.019, annotation_text='628 nm',
+              line_color='black', line_width=2)
+  # p.add_annotation(text='628 nm', x=628, y=0.1, xanchor='left', xshift=50)
+  p.update_layout(showlegend=False,
+                  margin=dict(t=0,b=0,l=0,r=0))
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 130pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/e7503af7c27d2b1ea6f3f80eb79c3f85ba9928b4.svg]]
+:end:
+
+****** col                                                       :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+
+\begin{align*}
+E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
+\implies \frac{hc}{628\,\si{\nano\meter}} &= 3.16\times{}10^{-19}\,\si{\joule}\\
+&= 1.97\,\si{\electronvolt}
+\end{align*}
+
+***** Perovskite Semiconductors in Solar Energy Harvesting      :B_block:
+:PROPERTIES:
+:BEAMER_env: block
 :END:
 - 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8% PCE
   [cite:@kojima-2009-organ-halid]
