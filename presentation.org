@@ -695,11 +695,211 @@ Weightable Machine Learning pipeline implemented in Python
 # - accounts for additional energetic processes
 # - dipole-allowed, dipole-forbidden, indirect band gap
 # focus on EXP rmse -- I have the ability!
+** COMMENT make subplots
+*** rfr
+#+begin_src jupyter-python
+  data = pd.read_csv(os.path.expanduser('~/data/perovskites/rfr_pred.csv'), index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*)
+  x='true'
+  y='pred'
+  p1 = px.scatter(
+      data[data.partition=='test'],
+      x=x, y=y,
+      # facet_col='partition',
+      hover_name="Formula",
+      color="LoT"
+  )
+  p1.update_traces(
+      marker_size=10.
+      # marker_opacity=0.2,
+      # selector={'marker_symbol':'circle'}
+  )
+  xlims = min(data[x]), max(data[y])
+  ylims = min(data[y]), max(data[y])
+  p1.add_scatter(x = [min(xlims+ylims), max(xlims+ylims)],
+                y = [min(xlims+ylims), max(xlims+ylims)],
+                mode='lines', name="parity", marker=dict(color="black"),
+                row='all', col='all')
+  p1.update_layout(title_text='Band Gaps [eV] (test partition)',
+                  font_family='arial narrow', font_size=30,
+                  margin=dict(t=70,b=0,l=0,r=0))
+  p1.update_xaxes(title='DFT Calculation', constrain='domain', mirror = True)
+  p1.update_yaxes(title='ML Prediction', scaleanchor='x', mirror=True)
+  #p1.update_annotations(visible=False)
+  p1.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+[[file:./.ob-jupyter/7b1068ba48c7e5c707b63c3e5f7f86120dfef44e.svg]]
+:end:
+
+*** gpr
+#+begin_src jupyter-python
+  data = pd.read_csv(os.path.expanduser('~/data/perovskites/gpr_pred.csv'), index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*)
+  x='true'
+  y='pred'
+  p2 = px.scatter(
+      data[data.partition=='test'],
+      x=x, y=y,
+      # facet_col='partition',
+      hover_name="Formula",
+      color="LoT"
+  )
+  p2.update_traces(
+      marker_size=10.
+      # marker_opacity=0.2,
+      # selector={'marker_symbol':'circle'}
+  )
+  xlims = min(data[x]), max(data[y])
+  ylims = min(data[y]), max(data[y])
+  p2.add_scatter(x = [min(xlims+ylims), max(xlims+ylims)],
+                y = [min(xlims+ylims), max(xlims+ylims)],
+                mode='lines', name="parity", marker=dict(color="black"),
+                row='all', col='all')
+  p2.update_layout(title_text='Band Gaps [eV] (test partition)',
+                  font_family='arial narrow', font_size=30,
+                  margin=dict(t=70,b=0,l=0,r=0))
+  p2.update_xaxes(title='DFT Calculation', constrain='domain', mirror = True)
+  p2.update_yaxes(title='ML Prediction', scaleanchor='x', mirror=True)
+  #p2.update_annotations(visible=False)
+  p2.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+[[file:./.ob-jupyter/7d033c28e36559b613f19ef0845e7a919c808d7a.svg]]
+:end:
+
+*** sisso
+#+begin_src jupyter-python
+  data = pd.read_csv(os.path.expanduser('~/data/perovskites/sisso_pred.csv'), index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*)
+  x='true'
+  y='pred'
+  p3 = px.scatter(
+      data[data.partition=='test'],
+      x=x, y=y,
+      # facet_col='partition',
+      hover_name="Formula",
+      color="LoT"
+  )
+  p3.update_traces(
+      marker_size=10.
+      # marker_opacity=0.2,
+      # selector={'marker_symbol':'circle'}
+  )
+  xlims = min(data[x]), max(data[y])
+  ylims = min(data[y]), max(data[y])
+  p3.add_scatter(x = [min(xlims+ylims), max(xlims+ylims)],
+                y = [min(xlims+ylims), max(xlims+ylims)],
+                mode='lines', name="parity", marker=dict(color="black"),
+                row='all', col='all')
+  p3.update_layout(title_text='Band Gaps [eV] (test partition)',
+                  font_family='arial narrow', font_size=30,
+                  margin=dict(t=70,b=0,l=0,r=0))
+  p3.update_xaxes(title='DFT Calculation', constrain='domain', mirror = True)
+  p3.update_yaxes(title='ML Prediction', scaleanchor='x', mirror=True)
+  #p3.update_annotations(visible=False)
+  p3.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+[[file:./.ob-jupyter/1020485c278cdd6b4bc993f9216d595dcf4d08e2.svg]]
+:end:
+
 ** Compare Three Methods                                           :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-** Interpreting Models                                             :B_frame:
+#+begin_src jupyter-python :post wrap(*this*, w="450pt :options inkscapeformat=png, inkscapedpi=300")
+    p0 = make_subplots(rows=1, cols=3, shared_yaxes=True)
+
+    for trace1, trace2, trace3 in zip(p1.data, p2.data, p3.data):
+        p0.add_trace(trace1, row=1, col=1) 
+        p0.add_trace(trace2, row=1, col=2)
+        p0.add_trace(trace3, row=1, col=3)
+
+    import copy
+
+    lo = copy.deepcopy(p0.layout)
+    p0.update_layout(p2.layout)
+    p0.update_layout(xaxis=p2.layout.xaxis, yaxis=p2.layout.yaxis, overwrite=False)
+    p0.update_layout(xaxis2=p1.layout.xaxis, yaxis2=p1.layout.yaxis, overwrite=False)
+    p0.update_layout(xaxis3=p3.layout.xaxis, yaxis3=p3.layout.yaxis, coloraxis=p3.layout.coloraxis, overwrite=False)
+    p0.layout.xaxis2.scaleanchor=None
+    p0.update_layout(lo, overwrite=False)
+    # p0.update_layout(showlegend=False)
+    p0.update_traces(showlegend=False, row=1, col=1)
+    p0.update_traces(showlegend=False, row=1, col=2)
+
+    # p1.update_xaxes(constrain='domain', row=1, col=2)
+    p0.layout['yaxis2']['scaleanchor'] = 'x2'
+    p0.layout['xaxis']['domain'] = [0.0, 0.30]
+    p0.layout['xaxis2']['domain'] = [0.35, 0.65]
+    p0.layout['xaxis3']['domain'] = [0.70, 1.0]
+
+    p0.update_xaxes(tickvals=list(range(8)))
+    p0.update_yaxes(title="RFR Prediction", row=1, col=1)
+    p0.update_yaxes(title="GPR Prediction", title_standoff=0, row=1, col=2)
+    p0.update_yaxes(title="SISSO Prediction", title_standoff=0, row=1, col=3)
+    p0.update_layout(width=1500)
+
+    p0.update_traces(marker_line=dict(color = 'black', width = 1))
+
+    p0.add_annotation(x=2.5, y=6, xref='x', yref='y',
+                      text="r2 = 0.992646<br>maxerr = 0.803245<br>rmse = 0.124738<br>", font_size=20,
+                      showarrow=False)
+
+    p0.add_annotation(x=2.5, y=6, xref='x2', yref='y',
+                      text="r2 = 0.988467<br>maxerr = 1.283692<br>rmse = 0.156214<br>", font_size=20,
+                      showarrow=False)
+
+    p0.add_annotation(x=2.5, y=6, xref='x3', yref='y',
+                      text="r2 = 0.888011<br>maxerr = 2.171309<br>rmse = 0.475881<br>", font_size=20,
+                      showarrow=False)
+
+    p0.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt :options inkscapeformat=png, inkscapedpi=300
+[[file:./.ob-jupyter/f135c78f3459b792a3436307ab575dd3e1669074.svg]]
+:end:
+
+** COMMENT Interpreting Models                                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+** COMMENT Shapely Additive Explanation (SHAP)                             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
