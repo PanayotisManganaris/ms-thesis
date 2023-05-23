@@ -596,8 +596,24 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 :PROPERTIES:
 :BEAMER_env: block
 :END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+- t-SNE projection projects 14D composition vectors to 2D
+- subset of domain has been previously sampled and is available to
+  Mannodi reaserch group
+  [cite:@yang-2023-high-throug]
 
-** Constituent Properties                                          :B_frame:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+#+DOWNLOADED: screenshot @ 2023-05-19 13:44:52
+#+attr_latex: :widh 200
+[[file:Data/2023-05-19_13-44-52_screenshot.png]]
+
+** COMMENT Constituent Properties                                          :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
