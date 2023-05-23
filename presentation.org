@@ -459,6 +459,22 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 # be prepared to discuss functionals
 # combinatorially scaling chemical space
 # bandgaps are unpredictably deviating away from vegard's law.
+** COMMENT DFT                                                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+** ML + DFT for Materials Discovery
+An increasingly popular technique for accelerating discovery and
+development[cite:@pablo-2019-new-front]
+- learn force fields
+- predict properties
+- building on dft
+
+# Forces from DFT vs learned Forces plot
+# show famous discoveries
+# show ML descriptor "shortcut"
+
 ** Data Driven Materials Design                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
