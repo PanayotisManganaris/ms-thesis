@@ -1354,7 +1354,8 @@ proposed recently
 |-----------+----------|
 | test      | 0.012009 |
 | train     | 0.081978 |
-* Summary
+
+* Summary and Conclusions
 ** Review of Work                                                  :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -1366,6 +1367,15 @@ proposed recently
 - analyze model accuracy, interpretability of bias and variance
 - make predictions on whole sample domain
 - Screen for viable candidate compositions
+
+** Conclusions                                                     :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+- RFR yields the best model because
+  - it captures relevant feature interactions as corroborated by Pearson correlations
+  - it flexibly represents nonlinear relationships between feature interactions and band gap
+  - as an ensemble model, it reduces the variance of error
 
 * Credit
 ** Acknowledgements                                                :B_frame:
