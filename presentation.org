@@ -1473,9 +1473,18 @@ Weightable Machine Learning pipeline implemented in Python
 :BEAMER_env: frame
 :END:
 
-#+DOWNLOADED: screenshot @ 2023-05-19 13:42:16
-#+attr_latex: :width=450
-[[file:Models/2023-05-19_13-42-16_screenshot.png]]
+#+DOWNLOADED: screenshot @ 2023-05-24 09:40:46
+#+attr_latex: :width 350
+[[file:Models/2023-05-24_09-40-46_screenshot.png]]
+
+** SHAP Analyze GPR                                                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+#+DOWNLOADED: screenshot @ 2023-05-24 09:42:08
+#+attr_latex: :width 350
+[[file:Models/2023-05-24_09-42-08_screenshot.png]]
 
 * Results
 ** Make Predictions on Domain Subset                               :B_frame:
