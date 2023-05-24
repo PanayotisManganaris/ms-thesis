@@ -635,9 +635,6 @@ development[cite:@pablo-2019-new-front]
 # show famous discoveries
 # show ML descriptor "shortcut"
 
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
 ** DONE Data Driven Materials Design                               :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -966,11 +963,21 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 :END:
 # show slide from almora and jacobson paper overview
 # also mention that PBE and HSE take time to generate -- Arun' been getting data for years
-** COMMENT Features of Perovskites Descriptive of Band Gap                 :B_frame:
+** Describing a Halide Perovskite                                  :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-*** composition vectors
+*** 14 Dimensional Chemical Vector                                :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+
+
+*** Parsing compositions with the =cmcl= library                  :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+
 
 ** Sample Space                                                    :B_block:
 :PROPERTIES:
