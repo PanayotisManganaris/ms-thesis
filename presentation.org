@@ -645,12 +645,28 @@ development[cite:@pablo-2019-new-front]
 \center{}\vspace{-0.5cm}Workflow for accelerating testing and development of new PV materials
 [cite:@yang-2023-high-throug;@pablo-2019-new-front]
 
-** Random Forest                                                   :B_frame:
+** Random Forest Regression (RFR)                                  :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+#+DOWNLOADED: screenshot @ 2023-05-23 20:23:36
+#+attr_latex: :width 260
+[[file:Computational_Methods_In_Materials_Science/2023-05-23_20-23-36_screenshot.png]]
 
-** Gaussian Process                                                :B_frame:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+- trees capture interactions between feature 
+- trees are flexible and may be highly biased to data
+- tree ensemble explains variance in data
+- tree ensemble reduce the variance of error
+
+** Gaussian Process Regression (GPR)                               :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
