@@ -629,13 +629,10 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 :BEAMER_env: frame
 :END:
 
-#+DOWNLOADED: screenshot @ 2023-05-24 05:33:49
-[[file:Computational_Methods_In_Materials_Science/2023-05-24_05-33-49_screenshot.png]]
 #+DOWNLOADED: screenshot @ 2023-05-24 04:42:21
 #+attr_latex: :width 300
 [[file:Computational_Methods_In_Materials_Science/2023-05-24_04-42-21_screenshot.png]]
 
-HSE06 improve band gap predictions compared to PBE[cite:@chan-2010-effic-band]
 
 # An increasingly popular technique for accelerating discovery and
 # development[cite:@pablo-2019-new-front]
@@ -646,6 +643,16 @@ HSE06 improve band gap predictions compared to PBE[cite:@chan-2010-effic-band]
 # Forces from DFT vs learned Forces plot
 # show famous discoveries
 # show ML descriptor "shortcut"
+
+** Machine Learning Examples                                       :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+#+DOWNLOADED: screenshot @ 2023-05-24 05:33:49
+[[file:Computational_Methods_In_Materials_Science/2023-05-24_05-33-49_screenshot.png]]
+
+HSE06 improve band gap predictions compared to PBE[cite:@chan-2010-effic-band]
 
 ** DONE Data Driven Materials Design                               :B_frame:
 :PROPERTIES:
