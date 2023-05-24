@@ -1403,60 +1403,63 @@ Weightable Machine Learning pipeline implemented in Python
 :BEAMER_env: frame
 :END:
 #+begin_src jupyter-python :post wrap(*this*, w="430pt :options inkscapeformat=png, inkscapedpi=300")
-    p0 = make_subplots(rows=1, cols=3, shared_yaxes=True)
+  p0 = make_subplots(rows=1, cols=3, shared_yaxes=True)
 
-    for trace1, trace2, trace3 in zip(p1.data, p2.data, p3.data):
-        p0.add_trace(trace1, row=1, col=1) 
-        p0.add_trace(trace2, row=1, col=2)
-        p0.add_trace(trace3, row=1, col=3)
+  for trace1, trace2, trace3 in zip(p1.data, p2.data, p3.data):
+      p0.add_trace(trace1, row=1, col=1) 
+      p0.add_trace(trace2, row=1, col=2)
+      p0.add_trace(trace3, row=1, col=3)
 
-    import copy
+  import copy
 
-    lo = copy.deepcopy(p0.layout)
-    p0.update_layout(p2.layout)
-    p0.update_layout(xaxis=p2.layout.xaxis, yaxis=p2.layout.yaxis, overwrite=False)
-    p0.update_layout(xaxis2=p1.layout.xaxis, yaxis2=p1.layout.yaxis, overwrite=False)
-    p0.update_layout(xaxis3=p3.layout.xaxis, yaxis3=p3.layout.yaxis, coloraxis=p3.layout.coloraxis, overwrite=False)
-    p0.layout.xaxis2.scaleanchor=None
-    p0.update_layout(lo, overwrite=False)
-    # p0.update_layout(showlegend=False)
-    p0.update_traces(showlegend=False, row=1, col=1)
-    p0.update_traces(showlegend=False, row=1, col=2)
+  lo = copy.deepcopy(p0.layout)
+  p0.update_layout(p2.layout)
+  p0.update_layout(xaxis=p2.layout.xaxis, yaxis=p2.layout.yaxis, overwrite=False)
+  p0.update_layout(xaxis2=p1.layout.xaxis, yaxis2=p1.layout.yaxis, overwrite=False)
+  p0.update_layout(xaxis3=p3.layout.xaxis, yaxis3=p3.layout.yaxis, coloraxis=p3.layout.coloraxis, overwrite=False)
+  p0.layout.xaxis2.scaleanchor=None
+  p0.update_layout(lo, overwrite=False)
+  # p0.update_layout(showlegend=False)
+  p0.update_traces(showlegend=False, row=1, col=1)
+  p0.update_traces(showlegend=False, row=1, col=2)
 
-    # p1.update_xaxes(constrain='domain', row=1, col=2)
-    p0.layout['yaxis2']['scaleanchor'] = 'x2'
-    p0.layout['xaxis']['domain'] = [0.0, 0.30]
-    p0.layout['xaxis2']['domain'] = [0.35, 0.65]
-    p0.layout['xaxis3']['domain'] = [0.70, 1.0]
+  # p1.update_xaxes(constrain='domain', row=1, col=2)
+  p0.layout['yaxis2']['scaleanchor'] = 'x2'
+  p0.layout['xaxis']['domain'] = [0.0, 0.30]
+  p0.layout['xaxis2']['domain'] = [0.35, 0.65]
+  p0.layout['xaxis3']['domain'] = [0.70, 1.0]
 
-    p0.update_xaxes(tickvals=list(range(8)))
-    p0.update_yaxes(title="RFR Prediction", row=1, col=1)
-    p0.update_yaxes(title="GPR Prediction", title_standoff=0, row=1, col=2)
-    p0.update_yaxes(title="SISSO Prediction", title_standoff=0, row=1, col=3)
-    p0.update_layout(width=1500)
+  p0.update_xaxes(tickvals=list(range(8)))
+  p0.update_yaxes(title="RFR Prediction", row=1, col=1)
+  p0.update_yaxes(title="GPR Prediction", title_standoff=0, row=1, col=2)
+  p0.update_yaxes(title="SISSO Prediction", title_standoff=0, row=1, col=3)
+  p0.update_layout(
+      width=1500,
+      # legend= dict(orientation='h', y=-0.5)
+  )
 
-    p0.update_traces(marker_line=dict(color = 'black', width = 1))
+  p0.update_traces(marker_line=dict(color = 'black', width = 1))
 
-    p0.add_annotation(x=2.5, y=6, xref='x', yref='y',
-                      text="r2 = 0.99<br>maxerr = 0.80<br>rmse = 0.12<br>", font_size=20,
-                      showarrow=False)
+  p0.add_annotation(x=2.5, y=6, xref='x', yref='y',
+                    text="r2 = 0.99<br>maxerr = 0.80<br>rmse = 0.12<br>", font_size=20,
+                    showarrow=False)
 
-    p0.add_annotation(x=2.5, y=6, xref='x2', yref='y',
-                      text="r2 = 0.98<br>maxerr = 1.28<br>rmse = 0.15<br>", font_size=20,
-                      showarrow=False)
+  p0.add_annotation(x=2.5, y=6, xref='x2', yref='y',
+                    text="r2 = 0.98<br>maxerr = 1.28<br>rmse = 0.15<br>", font_size=20,
+                    showarrow=False)
 
-    p0.add_annotation(x=2.5, y=6, xref='x3', yref='y',
-                      text="r2 = 0.88<br>maxerr = 2.17<br>rmse = 0.47<br>", font_size=20,
-                      showarrow=False)
+  p0.add_annotation(x=2.5, y=6, xref='x3', yref='y',
+                    text="r2 = 0.88<br>maxerr = 2.17<br>rmse = 0.47<br>", font_size=20,
+                    showarrow=False)
 
-    p0.show(renderer='svg')
+  p0.show(renderer='svg')
 #+end_src
 
 #+RESULTS:
 :results:
  
 #+attr_latex: :width 430pt :options inkscapeformat=png, inkscapedpi=300
-[[file:./.ob-jupyter/997656d00f454cf29e396066f869912b74f4d305.svg]]
+[[file:./.ob-jupyter/7908aac95025c52b8af6320709cb6d12ce1ce488.svg]]
 :end:
 
 ** Scoring Performance                                             :B_frame:
@@ -1472,7 +1475,15 @@ Weightable Machine Learning pipeline implemented in Python
 | rmse HSE(SOC)     | 0.156785 | 0.108867 | 0.572644 |
 | rmse HSE-PBE(SOC) | 0.130696 | 0.133027 | 0.470758 |
 
-** 
+** SISSO Expression                                                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+\begin{align*}
+bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\nonumber\\+-0.5862929089 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\nonumber\\+1.063684923 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\nonumber\\+4.657097107
+\end{align*}
+
 ** COMMENT Interpreting Models                                             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
