@@ -628,27 +628,29 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
 #+DOWNLOADED: screenshot @ 2023-05-24 04:42:21
 #+attr_latex: :width 300
 [[file:Computational_Methods_In_Materials_Science/2023-05-24_04-42-21_screenshot.png]]
 
 
-# An increasingly popular technique for accelerating discovery and
-# development[cite:@pablo-2019-new-front]
-# - learn force fields
-# - predict properties
-# - building on dft
-
-# Forces from DFT vs learned Forces plot
-# show famous discoveries
-# show ML descriptor "shortcut"
+*** Applications                                            :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:BEAMER_env: block
+:END:
+predict anything/make decisions[cite:@pablo-2019-new-front]
+- interatomic force fields
+- predict properties
+- classify observations
 
 ** Machine Learning Examples                                       :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-
 #+DOWNLOADED: screenshot @ 2023-05-24 05:33:49
 [[file:Computational_Methods_In_Materials_Science/2023-05-24_05-33-49_screenshot.png]]
 
