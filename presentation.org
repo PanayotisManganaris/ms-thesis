@@ -974,9 +974,30 @@ SLME (proxy for PCE[cite:@almora-2020-devic-perfor]) accounts for more energetic
 Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
 of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.1]
 
-** Variation in Band Gap changes with Level of Theory              :B_frame:
+** Collecting Data is Hard                                         :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
+experiments take years and, until recently, much labor to collect
+[cite:@almora-2020-devic-perfor]
+#+DOWNLOADED: screenshot @ 2023-05-24 08:01:24
+#+attr_latex: :width 200
+[[file:Data/2023-05-24_08-01-24_screenshot.png]]
+
+ DFT calculations take multiple
+- hours to converge at PBE level
+- days to converge at HSE level
+- days more to debug
+accumulating the HaP dataset took years
+[cite:@yang-2023-high-throug]
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
 :END:
 #+begin_src jupyter-python
   Y = pd.read_csv(
@@ -989,27 +1010,24 @@ of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.
 :results:
 :end:
 
-#+begin_src jupyter-python :post wrap(*this*, w="300pt")
-  p = px.box(Y, y="bg_eV", x="LoT")
-  p.update_yaxes(title="Band Gap [eV]")
-  p.update_xaxes(title_font_size=24)
-  p.update_yaxes(title_font_size=24, tickfont_size=20)
-  p.show('svg')
+#+begin_src jupyter-python :post wrap(*this*, w="120pt")
+    p = px.box(Y, y="bg_eV", x="LoT",
+               width=400, height=700)
+    p.update_xaxes(title_font_size=24, tickfont_size=30,
+                   tickangle=-35, title=None)
+    p.update_yaxes(title="Band Gap [eV]", title_font_size=30,
+                   tickfont_size=30)
+    p.show('svg')
 #+end_src
 
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 300pt
-[[file:./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3.svg]]
+#+attr_latex: :width 120pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/55e458fa81a19544b854f8eb0141c77a857bf06b.svg]]
 :end:
 
-** Collecting experimental data is hard                            :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-# show slide from almora and jacobson paper overview
-# also mention that PBE and HSE take time to generate -- Arun' been getting data for years
 ** Describing a Halide Perovskite                                  :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
