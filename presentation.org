@@ -670,10 +670,131 @@ development[cite:@pablo-2019-new-front]
 - forest explains variance in data
 - forest reduces the variance of error
 
-** Gaussian Process Regression (GPR)                               :B_frame:
+** DONE Gaussian Process Regression (GPR)                          :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-24 Wed 04:27]
+:END:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+Universal approximator based on Bayesian analysis.
+**** Kernel Method                                               :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+the similarity function \(k(x, x')\)
+- defines a "universe" of functions
+- defines a density of functions prior to any data
+- \(x\) is any descriptor describable as self-similar
+**** Drawbacks                                                   :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- \(\mathcal{O}(N^3)\) training time complexity
+- kernels require engineering to accommodate prior expectations
+- break down in sparse spaces/high-dimensional spaces
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+**** COMMENT functions illustration
+#+begin_src jupyter-python
+    from sklearn.gaussian_process import kernels as K
+    from sklearn.gaussian_process import GaussianProcessRegressor
+    kerns = [
+        K.DotProduct(),      
+        1.0 * K.RBF(length_scale=1.0, length_scale_bounds=(1e-1, 10.0))
+    ]
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  def plot_density_samples(gpr_model, n_sample):
+      x = np.linspace(0, 5, 100)
+      x = x.reshape(-1, 1)
+      y_mean, y_std = gpr_model.predict(x, return_std=True)
+      y = gpr_model.sample_y(x, n_sample)
+      df = pd.DataFrame(np.c_[x, y]).set_index(0)
+      p = px.line(df)
+      p.add_scatter(x=x.reshape(-1), y=y_mean,
+                    mode='lines', line_width=5,
+                    line_color='black', name='ridge')
+      return p
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+**** Sample Prior Functions                                      :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="170pt")
+  gpr = GaussianProcessRegressor(kernel=kerns[1], random_state=None)
+
+  p = plot_density_samples(gpr, 5)
+  p.update_layout(showlegend=False,
+                  margin=dict(l=0, r=0, t=0, b=0),
+                  width=400, height=150)
+  p.update_xaxes(title="", tickfont_size=20)
+  p.update_yaxes(title="", tickfont_size=20)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 170pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/ec4d60a2109843449bb674d71a67240d13c1611a.svg]]
+:end:
+
+**** Sample Posteriors                                           :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+#+begin_src jupyter-python
+  rng = np.random.RandomState(4)
+  x_train = rng.uniform(0, 5, 10).reshape(-1, 1)
+  y_train = np.sin((x_train[:, 0] - 2.5) ** 2)
+  n_samples = 1
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="170pt")
+  gpr.fit(x_train, y_train)
+
+  p = plot_density_samples(gpr, 5)
+  p.update_layout(showlegend=False,
+                  margin=dict(l=0, r=0, t=0, b=0),
+                  width=400, height=150)
+  p.update_xaxes(title="", tickfont_size=20, range=(0,5))
+  p.update_yaxes(title="", tickfont_size=20)
+
+  p.add_scatter(x=x_train.reshape(-1), y=y_train, mode="markers", marker_color='red', marker_size=10)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 170pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/eeae18f97963b2846566f847fcd1a8bb5dd88175.svg]]
+:end:
 
 ** SISSO                                                           :B_frame:
 :PROPERTIES:
