@@ -635,9 +635,15 @@ development[cite:@pablo-2019-new-front]
 # show famous discoveries
 # show ML descriptor "shortcut"
 
-** Data Driven Materials Design                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
+:END:
+** DONE Data Driven Materials Design                               :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-24 Wed 04:30]
 :END:
 #+attr_latex: :width 390
 #+attr_org: :width 90
