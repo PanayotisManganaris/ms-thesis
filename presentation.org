@@ -651,7 +651,7 @@ predict anything/make decisions[cite:@pablo-2019-new-front]
 - predict properties
 - classify observations
 
-** Machine Learning Examples                                       :B_frame:
+** Relevant Property Prediction from Literature                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
