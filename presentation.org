@@ -1303,7 +1303,7 @@ Weightable Machine Learning pipeline implemented in Python
 :results:
  
 #+attr_latex: :width 300pt
-[[file:./.ob-jupyter/7b1068ba48c7e5c707b63c3e5f7f86120dfef44e.svg]]
+[[file:./.ob-jupyter/e30b34a286a15da2efbf0c8cf2dcfe208976a543.svg]]
 :end:
 
 *** gpr
@@ -1349,7 +1349,7 @@ Weightable Machine Learning pipeline implemented in Python
 :results:
  
 #+attr_latex: :width 300pt
-[[file:./.ob-jupyter/7d033c28e36559b613f19ef0845e7a919c808d7a.svg]]
+[[file:./.ob-jupyter/8207649382249cb7fc0bd9890e60c2be15801c8f.svg]]
 :end:
 
 *** sisso
@@ -1395,14 +1395,14 @@ Weightable Machine Learning pipeline implemented in Python
 :results:
  
 #+attr_latex: :width 300pt
-[[file:./.ob-jupyter/1020485c278cdd6b4bc993f9216d595dcf4d08e2.svg]]
+[[file:./.ob-jupyter/459743be84c705a5315e80fb969d28abdcad5600.svg]]
 :end:
 
 ** Compare Three Methods                                           :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-#+begin_src jupyter-python :post wrap(*this*, w="450pt :options inkscapeformat=png, inkscapedpi=300")
+#+begin_src jupyter-python :post wrap(*this*, w="430pt :options inkscapeformat=png, inkscapedpi=300")
     p0 = make_subplots(rows=1, cols=3, shared_yaxes=True)
 
     for trace1, trace2, trace3 in zip(p1.data, p2.data, p3.data):
@@ -1438,15 +1438,15 @@ Weightable Machine Learning pipeline implemented in Python
     p0.update_traces(marker_line=dict(color = 'black', width = 1))
 
     p0.add_annotation(x=2.5, y=6, xref='x', yref='y',
-                      text="r2 = 0.992646<br>maxerr = 0.803245<br>rmse = 0.124738<br>", font_size=20,
+                      text="r2 = 0.99<br>maxerr = 0.80<br>rmse = 0.12<br>", font_size=20,
                       showarrow=False)
 
     p0.add_annotation(x=2.5, y=6, xref='x2', yref='y',
-                      text="r2 = 0.988467<br>maxerr = 1.283692<br>rmse = 0.156214<br>", font_size=20,
+                      text="r2 = 0.98<br>maxerr = 1.28<br>rmse = 0.15<br>", font_size=20,
                       showarrow=False)
 
     p0.add_annotation(x=2.5, y=6, xref='x3', yref='y',
-                      text="r2 = 0.888011<br>maxerr = 2.171309<br>rmse = 0.475881<br>", font_size=20,
+                      text="r2 = 0.88<br>maxerr = 2.17<br>rmse = 0.47<br>", font_size=20,
                       showarrow=False)
 
     p0.show(renderer='svg')
@@ -1455,10 +1455,24 @@ Weightable Machine Learning pipeline implemented in Python
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt :options inkscapeformat=png, inkscapedpi=300
-[[file:./.ob-jupyter/f135c78f3459b792a3436307ab575dd3e1669074.svg]]
+#+attr_latex: :width 430pt :options inkscapeformat=png, inkscapedpi=300
+[[file:./.ob-jupyter/997656d00f454cf29e396066f869912b74f4d305.svg]]
 :end:
 
+** Scoring Performance                                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+| Score Categories  |      GPR |      RFR |    SISSO |
+|-------------------+----------+----------+----------|
+| rmse              | 0.156214 | 0.124738 | 0.474754 |
+| rmse EXP          | 0.120475 | 0.154448 | 0.330080 |
+| rmse PBE          | 0.128211 | 0.101872 | 0.395827 |
+| rmse HSE          | 0.214920 | 0.152479 | 0.519706 |
+| rmse HSE(SOC)     | 0.156785 | 0.108867 | 0.572644 |
+| rmse HSE-PBE(SOC) | 0.130696 | 0.133027 | 0.470758 |
+
+** 
 ** COMMENT Interpreting Models                                             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
