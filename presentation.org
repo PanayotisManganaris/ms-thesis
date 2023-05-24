@@ -799,10 +799,32 @@ the similarity function \(k(x, x')\)
 [[file:./.ob-jupyter/eeae18f97963b2846566f847fcd1a8bb5dd88175.svg]]
 :end:
 
-** SISSO                                                           :B_frame:
+** DONE Sure-Independence Screening and Sparsifying Operator (SISSO) :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-24 Wed 05:08]
+:END:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+generalizes "Greedy Pursuit" algorithms
+- Orthogonal Matching Pursuit
+- Basis Pursuit (aka LASSO)
+
+SIS+correlation analysis is a form of orthogonalization
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+#+DOWNLOADED: screenshot @ 2022-12-20 09:09:33
+#+attr_latex: :width 250
+[[file:Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png]]
+Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-physic]
 
 ** COMMENT Motives for Alternative Features                                :B_frame:
 :PROPERTIES:
