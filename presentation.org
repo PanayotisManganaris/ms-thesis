@@ -618,11 +618,15 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 # - why dft? uses quantum mechanics -- still expensive big integral
 # be prepared to discuss functionals
 # combinatorially scaling chemical space
-# bandgaps are unpredictably deviating away from vegard's law.
-** COMMENT DFT                                                             :B_frame:
+# bandgaps are unpredictably deviating away from Vegard's law.
+** Density Functional Theory (DFT)                                 :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+Very impractical to explore combinatorial search space with laboratory experiments
+
+VASP /in silico/ simulation gives more direct, more systematic, less accurate sampling
+[cite:@kresse-1996-effic-iterat;@kresse-1996-effic-ab]
 
 ** Machine Learning for Property Prediction                        :B_frame:
 :PROPERTIES:
