@@ -1731,7 +1731,10 @@ proposed recently
   - it captures relevant feature interactions as corroborated by Pearson correlations
   - it flexibly represents nonlinear relationships between feature interactions and band gap
   - as an ensemble model, it reduces the variance of error
-
+- SISSO is remarkably accurate for its simplicity but it is limited
+  for high fidelity predictions due to the absence of some fidelity
+  variables
+- GPR has potential for further study alongside graph neural networks
 * Credit
 ** Acknowledgements                                                :B_frame:
 :PROPERTIES:
