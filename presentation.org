@@ -630,6 +630,16 @@ development[cite:@pablo-2019-new-front]
 - learn force fields
 - predict properties
 - building on dft
+** Machine Learning Example                                        :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+#+DOWNLOADED: screenshot @ 2023-05-24 05:33:49
+[[file:Computational_Methods_In_Materials_Science/2023-05-24_05-33-49_screenshot.png]]
+
+HSE06 improve band gap predictions compared to PBE[cite:@chan-2010-effic-band]
+
 
 # Forces from DFT vs learned Forces plot
 # show famous discoveries
