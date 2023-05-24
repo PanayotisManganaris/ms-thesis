@@ -1,4 +1,4 @@
-% Created 2023-05-16 Tue 22:46
+% Created 2023-05-24 Wed 09:07
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -40,6 +40,7 @@ backend=biber,
 natbib=true,
 ]{biblatex}
 \addbibresource{/home/panos/Documents/masters/local-bib.bib}
+\addbibresource{~/org/bibliotex/bibliotex.bib}
 %
 \usepackage{svg}
 \svgsetup{%
@@ -55,20 +56,139 @@ inkscapedpi=300,
 \insertframenumber\slash\inserttotalframenumber
 \hspace*{0.2cm}
 }
-\institute[Mannodi Group]{
-\inst{1} Purdue Materials Engineering\\Professor Arun Mannodi-Kanakkithodi
+\institute[Mannodi Group]{\large{}
+\inst{1} Purdue Materials Engineering\\Advisor Arun Mannodi-Kanakkithodi
+}
+\AtBeginSection[]
+{
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents[currentsection]
+\end{frame}
 }
 \usetheme{default}
-\author{Panayotis Manganaris\inst{1}}
+\author{\large{}Panayotis Manganaris\inst{1}}
 \date{\today}
-\title{Machine Learning Perovskite Bandgaps for Improved Photovoltaics}
+\title{\Huge{}Machine Learning Perovskite Bandgaps for Improved Photovoltaics}
 \hypersetup{
- pdfauthor={Panayotis Manganaris\inst{1}},
- pdftitle={Machine Learning Perovskite Bandgaps for Improved Photovoltaics},
+ pdfauthor={\large{}Panayotis Manganaris\inst{1}},
+ pdftitle={\Huge{}Machine Learning Perovskite Bandgaps for Improved Photovoltaics},
  pdfkeywords={},
  pdfsubject={},
  pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
  pdflang={English}}
+
+% Setup for code blocks [1/2]
+
+\usepackage{fvextra}
+
+\fvset{%
+  commandchars=\\\{\},
+  highlightcolor=white!95!black!80!blue,
+  breaklines=true,
+  breaksymbol=\color{white!60!black}\tiny\ensuremath{\hookrightarrow}}
+
+% Make line numbers smaller and grey.
+\renewcommand\theFancyVerbLine{\footnotesize\color{black!40!white}\arabic{FancyVerbLine}}
+
+\usepackage{xcolor}
+
+% In case engrave-faces-latex-gen-preamble has not been run.
+\providecolor{EfD}{HTML}{f7f7f7}
+\providecolor{EFD}{HTML}{28292e}
+
+% Define a Code environment to prettily wrap the fontified code.
+\usepackage[breakable,xparse]{tcolorbox}
+\DeclareTColorBox[]{Code}{o}%
+{colback=EfD!98!EFD, colframe=EfD!95!EFD,
+  fontupper=\footnotesize\setlength{\fboxsep}{0pt},
+  colupper=EFD,
+  IfNoValueTF={#1}%
+  {boxsep=2pt, arc=2.5pt, outer arc=2.5pt,
+    boxrule=0.5pt, left=2pt}%
+  {boxsep=2.5pt, arc=0pt, outer arc=0pt,
+    boxrule=0pt, leftrule=1.5pt, left=0.5pt},
+  right=2pt, top=1pt, bottom=0.5pt,
+  breakable}
+
+% Support listings with captions
+\usepackage{float}
+\floatstyle{plain}
+\newfloat{listing}{htbp}{lst}
+\newcommand{\listingsname}{Listing}
+\floatname{listing}{\listingsname}
+\newcommand{\listoflistingsname}{List of Listings}
+\providecommand{\listoflistings}{\listof{listing}{\listoflistingsname}}
+
+
+% Setup for code blocks [2/2]: syntax highlighting colors
+
+\newcommand\efstrut{\vrule height 2.1ex depth 0.8ex width 0pt}
+\definecolor{EFD}{HTML}{000000}
+\definecolor{EfD}{HTML}{ffffff}
+\newcommand{\EFD}[1]{\textcolor{EFD}{#1}} % default
+\definecolor{EFh}{HTML}{7f7f7f}
+\newcommand{\EFh}[1]{\textcolor{EFh}{#1}} % shadow
+\definecolor{EFsc}{HTML}{228b22}
+\newcommand{\EFsc}[1]{\textcolor{EFsc}{\textbf{#1}}} % success
+\definecolor{EFw}{HTML}{ff8e00}
+\newcommand{\EFw}[1]{\textcolor{EFw}{\textbf{#1}}} % warning
+\definecolor{EFe}{HTML}{ff0000}
+\newcommand{\EFe}[1]{\textcolor{EFe}{\textbf{#1}}} % error
+\definecolor{EFc}{HTML}{b22222}
+\newcommand{\EFc}[1]{\textcolor{EFc}{#1}} % font-lock-comment-face
+\definecolor{EFcd}{HTML}{b22222}
+\newcommand{\EFcd}[1]{\textcolor{EFcd}{#1}} % font-lock-comment-delimiter-face
+\definecolor{EFs}{HTML}{8b2252}
+\newcommand{\EFs}[1]{\textcolor{EFs}{#1}} % font-lock-string-face
+\definecolor{EFd}{HTML}{8b2252}
+\newcommand{\EFd}[1]{\textcolor{EFd}{#1}} % font-lock-doc-face
+\definecolor{EFm}{HTML}{008b8b}
+\newcommand{\EFm}[1]{\textcolor{EFm}{#1}} % font-lock-doc-markup-face
+\definecolor{EFk}{HTML}{9370db}
+\newcommand{\EFk}[1]{\textcolor{EFk}{#1}} % font-lock-keyword-face
+\definecolor{EFb}{HTML}{483d8b}
+\newcommand{\EFb}[1]{\textcolor{EFb}{#1}} % font-lock-builtin-face
+\definecolor{EFf}{HTML}{0000ff}
+\newcommand{\EFf}[1]{\textcolor{EFf}{#1}} % font-lock-function-name-face
+\definecolor{EFv}{HTML}{a0522d}
+\newcommand{\EFv}[1]{\textcolor{EFv}{#1}} % font-lock-variable-name-face
+\definecolor{EFt}{HTML}{228b22}
+\newcommand{\EFt}[1]{\textcolor{EFt}{#1}} % font-lock-type-face
+\definecolor{EFo}{HTML}{008b8b}
+\newcommand{\EFo}[1]{\textcolor{EFo}{#1}} % font-lock-constant-face
+\definecolor{EFwr}{HTML}{ff0000}
+\newcommand{\EFwr}[1]{\textcolor{EFwr}{\textbf{#1}}} % font-lock-warning-face
+\newcommand{\EFnc}[1]{#1} % font-lock-negation-char-face
+\definecolor{EFpp}{HTML}{483d8b}
+\newcommand{\EFpp}[1]{\textcolor{EFpp}{#1}} % font-lock-preprocessor-face
+\newcommand{\EFrc}[1]{\textbf{#1}} % font-lock-regexp-grouping-construct
+\newcommand{\EFrb}[1]{\textbf{#1}} % font-lock-regexp-grouping-backslash
+\newcommand{\EFob}[1]{#1} % org-block
+\definecolor{EFhn}{HTML}{008b8b}
+\newcommand{\EFhn}[1]{\textcolor{EFhn}{#1}} % highlight-numbers-number
+\definecolor{EFhq}{HTML}{9370db}
+\newcommand{\EFhq}[1]{\textcolor{EFhq}{#1}} % highlight-quoted-quote
+\definecolor{EFhs}{HTML}{008b8b}
+\newcommand{\EFhs}[1]{\textcolor{EFhs}{#1}} % highlight-quoted-symbol
+\definecolor{EFrda}{HTML}{707183}
+\newcommand{\EFrda}[1]{\textcolor{EFrda}{#1}} % rainbow-delimiters-depth-1-face
+\definecolor{EFrdb}{HTML}{7388d6}
+\newcommand{\EFrdb}[1]{\textcolor{EFrdb}{#1}} % rainbow-delimiters-depth-2-face
+\definecolor{EFrdc}{HTML}{909183}
+\newcommand{\EFrdc}[1]{\textcolor{EFrdc}{#1}} % rainbow-delimiters-depth-3-face
+\definecolor{EFrdd}{HTML}{709870}
+\newcommand{\EFrdd}[1]{\textcolor{EFrdd}{#1}} % rainbow-delimiters-depth-4-face
+\definecolor{EFrde}{HTML}{907373}
+\newcommand{\EFrde}[1]{\textcolor{EFrde}{#1}} % rainbow-delimiters-depth-5-face
+\definecolor{EFrdf}{HTML}{6276ba}
+\newcommand{\EFrdf}[1]{\textcolor{EFrdf}{#1}} % rainbow-delimiters-depth-6-face
+\definecolor{EFrdg}{HTML}{858580}
+\newcommand{\EFrdg}[1]{\textcolor{EFrdg}{#1}} % rainbow-delimiters-depth-7-face
+\definecolor{EFrdh}{HTML}{80a880}
+\newcommand{\EFrdh}[1]{\textcolor{EFrdh}{#1}} % rainbow-delimiters-depth-8-face
+\definecolor{EFrdi}{HTML}{887070}
+\newcommand{\EFrdi}[1]{\textcolor{EFrdi}{#1}} % rainbow-delimiters-depth-9-face
 \begin{document}
 
 \maketitle
@@ -77,8 +197,8 @@ inkscapedpi=300,
 \end{frame}
 
 \section{Background}
-\label{sec:orgce13dd3}
-\begin{frame}[label={sec:org90aa522}]{Photovoltaic Power Generation}
+\label{sec:org4a9fd49}
+\begin{frame}[label={sec:orge93a328}]{Photovoltaic (PV) Power Generation}
 \begin{columns}
 \begin{column}{0.3\columnwidth}
 \begin{center}
@@ -90,8 +210,28 @@ inkscapedpi=300,
 
 \tiny{}\center{}Perovskite Applications\footnote{\tiny{}\href{https://www.lesker.com/newweb/ped/applications/perovskite-research.cfm }{www.lesker.com}}
 \end{column}
+
 \begin{column}{0.7\columnwidth}
-\begin{block}{Solar Energy Harvesting}
+\begin{block}{Band Gap Effects on Absorption Spectrum}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+ 
+\begin{center}
+\includesvg[width=130pt]{./.ob-jupyter/e7503af7c27d2b1ea6f3f80eb79c3f85ba9928b4}
+\end{center}
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+\begin{align*}
+E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
+\implies \frac{hc}{628\,\si{\nano\meter}} &= 3.16\times{}10^{-19}\,\si{\joule}\\
+&= 1.97\,\si{\electronvolt}
+\end{align*}
+\end{column}
+\end{columns}
+\end{block}
+
+\begin{block}{Perovskite Semiconductors in Solar Energy Harvesting}
 \begin{itemize}
 \item 2009 : \(\ce{MAPbI_3}\) dye-sensitized absorber with 3.8\% PCE
 \autocite{kojima-2009-organ-halid}
@@ -101,13 +241,12 @@ inkscapedpi=300,
 \autocite{saliba-2014-influen-therm}
 \end{itemize}
 
-
 HaP PVs become competitive in 2013
 \end{block}
 \end{column}
 \end{columns}
 \end{frame}
-\begin{frame}[label={sec:orgcdf8b37}]{Rapid Rise of Perovskite PVs}
+\begin{frame}[label={sec:orgf3e517e}]{Rapid Rise of Perovskite Photovoltaics}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{center}
@@ -119,12 +258,19 @@ HaP PVs become competitive in 2013
 \begin{itemize}
 \item Cumulative maximum efficiency of PVs tested by accredited laboratories\autocite{research-2023-best-resear}
 \item Perovskite+Si tandem monolithic cells second only to two-junction \(\ce{GaAs}\)
+\item Other rising applications
+\begin{itemize}
+\item LEDs and photodiodes
+\item infrared sensors
+\item superconductors
+\item quantum bits
+\end{itemize}
 \end{itemize}
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgaa0f698}]{What's a Perovskite?}
+\begin{frame}[label={sec:orgd39e928}]{What's a Perovskite?}
 Notable oxide perovskites and properties circa 2006
 \autocite{jiang-2006-predic-lattic}
 \begin{columns}
@@ -158,31 +304,126 @@ BaCeO3 & photonic conductivity\\[0pt]
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org5650a47}]{Halide Perovskites}
+\begin{frame}[label={sec:org1032f49}]{Halide Perovskites}
 \begin{columns}
-\begin{column}{0.5\columnwidth}
+\begin{column}{0.6\columnwidth}
+\begin{itemize}
+\item purely inorganic (e.g., CsPbI3)
+\item hybrid organic-inorganic (e.g., MAPbBr3)
+\begin{description}
+\item[{MA}] methylammonium
+\item[{FA}] formamidium
+\end{description}
+\item tailor stability and electronic/optical properties of \(\ce{ABX3}\)
+compounds by changing
+\begin{itemize}
+\item component at each site
+\item mix of components
+\item atom arrangement
+\end{itemize}
+\end{itemize}
+
 \begin{table}[htbp]
-\caption{\(\ce{ABX3}\) Chemical Domain}
+\caption{\(\ce{ABX3}\) Site Candidates}
 \centering
 \begin{tabular}{l|llllll}
-A-site & \ACRshort{ma} & \ACRshort{fa} & Cs & Rb & K & \\[0pt]
+A-site & MA & FA & Cs & Rb & K & \\[0pt]
 B-site & Pb & Sn & Ge & Ba & Sr & Ca\\[0pt]
 X-site & I & Br & Cl &  &  & \\[0pt]
 \end{tabular}
 \end{table}
 \end{column}
 
-\begin{column}{0.5\columnwidth}
+\begin{column}{0.4\columnwidth}
 \begin{center}
-\includegraphics[width=.9\linewidth]{hybrid-HaP.png}
+\includegraphics[width=140]{hybrid-HaP.png}
 \end{center}
+
+\center{}2x1x2 supercell
 \end{column}
 \end{columns}
 \end{frame}
 
-\section{Machine Learning In Materials Science}
-\label{sec:orgf62a8f0}
-\begin{frame}[label={sec:org6a2f5ad}]{Data Driven Materials Design}
+\begin{frame}[label={sec:org2a2c27e}]{Design Goals and Challenges of Combinatorial Mixing}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{block}{Search for Improved Compounds}
+\alert{37,785} out of \alert{207+ Million} compounds possible in a 2x2x2 supercell
+will be examined for solutions to these deficiencies using
+\begin{itemize}
+\item high-throughput density functional theory
+\item data collected from literature
+\item multi-fidelity machine learning
+\end{itemize}
+\end{block}
+
+ 
+\begin{center}
+\includesvg[inkscapeformat=png, inkscapedpi=300,width=150pt]{./.ob-jupyter/3ed5c0e44a1db77d1bd67911c688251d563c2ef0}
+\end{center}
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+ 
+\begin{center}
+\includesvg[inkscapeformat=png, inkscapedpi=300,width=150pt]{./.ob-jupyter/e5dedf8aa3764c0a663c1bbbd2d70eef512cfa96}
+\end{center}
+
+\begin{block}{Deficiencies in Leading Perovskite PVs}
+inherent instability/short life-cycle
+\begin{itemize}
+\item degradation in sunlight
+\item soluble in water
+\end{itemize}
+environmental impact
+\begin{itemize}
+\item toxicity of Lead (Pb)
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{Computational Methods In Materials Science}
+\label{sec:orgbdff140}
+\begin{frame}[label={sec:org934949b}]{Density Functional Theory (DFT)}
+Very impractical to explore combinatorial search space with laboratory experiments
+
+VASP \emph{in silico} simulation gives more direct, more systematic, less accurate sampling
+\autocite{kresse-1996-effic-iterat,kresse-1996-effic-ab}
+\end{frame}
+
+\begin{frame}[label={sec:org0edc18a}]{Machine Learning for Property Prediction}
+\begin{columns}
+\begin{column}{0.7\columnwidth}
+\begin{center}
+\includegraphics[width=300]{Computational_Methods_In_Materials_Science/2023-05-24_04-42-21_screenshot.png}
+\end{center}
+\end{column}
+
+
+\begin{column}{0.3\columnwidth}
+\begin{block}{Applications}
+predict anything/make decisions\autocite{pablo-2019-new-front}
+\begin{itemize}
+\item interatomic force fields
+\item predict properties
+\item classify observations
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label={sec:org238cf05}]{Relevant Property Prediction from Literature}
+\begin{center}
+\includegraphics[width=.9\linewidth]{Computational_Methods_In_Materials_Science/2023-05-24_05-33-49_screenshot.png}
+\end{center}
+
+HSE06 improve band gap predictions compared to PBE\autocite{chan-2010-effic-band}
+\end{frame}
+
+\begin{frame}[label={sec:org10d41ce}]{Data Driven Materials Design}
 \begin{center}
 \includegraphics[width=390]{DDD-flowchart.png}
 \end{center}
@@ -190,31 +431,94 @@ X-site & I & Br & Cl &  &  & \\[0pt]
 \autocite{yang-2023-high-throug,pablo-2019-new-front}
 \end{frame}
 
-\begin{frame}[label={sec:orgd1306af}]{Machine Learning In Materials Science}
-An increasingly popular technique for accelerating discovery and
-development\autocite{pablo-2019-new-front}
+\begin{frame}[label={sec:org4aebd18}]{Random Forest Regression (RFR)}
+\begin{columns}
+\begin{column}{0.6\columnwidth}
+\begin{center}
+\includegraphics[width=260]{Computational_Methods_In_Materials_Science/2023-05-23_20-23-36_screenshot.png}
+\end{center}
+\end{column}
+
+\begin{column}{0.4\columnwidth}
 \begin{itemize}
-\item force fields
-\item property-prediction
-\item building on dft
+\item trees capture interactions between feature
+\item trees are flexible and may be highly biased to data
+\item forest explains variance in data
+\item forest reduces the variance of error
 \end{itemize}
-\end{frame}
-\begin{frame}[label={sec:org0b7c33a}]{Regression}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org6e7e229}]{Learning Algorithms}
+\begin{frame}[label={sec:orgcd7bfaa}]{Gaussian Process Regression (GPR)}
+\begin{columns}
+\begin{column}{0.6\columnwidth}
+Universal approximator based on Bayesian analysis.
+\begin{block}{Kernel Method}
+the similarity function \(k(x, x')\)
 \begin{itemize}
-\item Decision Tree
-\item Random Forest
-\item Linear
-\item SISSO
-\item Gaussian Process
+\item defines a "universe" of functions
+\item defines a density of functions prior to any data
+\item \(x\) is any descriptor describable as self-similar
 \end{itemize}
+\end{block}
+\begin{block}{Drawbacks}
+\begin{itemize}
+\item \(\mathcal{O}(N^3)\) training time complexity
+\item kernels require engineering to accommodate prior expectations
+\item break down in sparse spaces/high-dimensional spaces
+\end{itemize}
+\end{block}
+\end{column}
+
+\begin{column}{0.4\columnwidth}
+\begin{block}{Sample Prior Functions}
+ 
+\begin{center}
+\includesvg[width=170pt]{./.ob-jupyter/ec4d60a2109843449bb674d71a67240d13c1611a}
+\end{center}
+\end{block}
+
+\begin{block}{Sample Posteriors}
+ 
+\begin{center}
+\includesvg[width=170pt]{./.ob-jupyter/eeae18f97963b2846566f847fcd1a8bb5dd88175}
+\end{center}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label={sec:org647d55c}]{Sure-Independence Screening and Sparsifying Operator (SISSO)}
+\begin{columns}
+\begin{column}{0.4\columnwidth}
+generalizes "Greedy Pursuit" algorithms
+\begin{itemize}
+\item Orthogonal Matching Pursuit
+\item Basis Pursuit (aka LASSO)
+\end{itemize}
+
+SIS+correlation analysis is a form of orthogonalization
+\end{column}
+
+\begin{column}{0.6\columnwidth}
+\begin{center}
+\includegraphics[width=250]{Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png}
+\end{center}
+Notice SIS re-iterations explain the residual\autocite{ghiringhelli-2017-learn-physic}
+\end{column}
+\end{columns}
 \end{frame}
 
 \section{Data}
-\label{sec:orgfac9444}
-\begin{frame}[label={sec:org6498f75}]{Band Gap Relates to Efficiency}
+\label{sec:org68165c9}
+\begin{frame}[label={sec:org40221df}]{Effect of DFT Functionals Levels of Theory}
+\begin{center}
+\includegraphics[width=.9\linewidth]{Data/2023-05-15_20-04-18_screenshot.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[label={sec:orgcbff2f4}]{Band Gap Relates to Efficiency}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
  
@@ -231,33 +535,95 @@ development\autocite{pablo-2019-new-front}
 \end{column}
 \end{columns}
 
-SLME metric accounts for more energetic processes than
+SLME (proxy for PCE\autocite{almora-2020-devic-perfor}) accounts for more energetic processes than
 Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
 of bandgaps determined according to level of theory\autocite[p.1]{yu-2012-ident-poten}
 \end{frame}
 
-\begin{frame}[label={sec:org6f1475a}]{Effect of DFT Functionals Levels of Theory}
+\begin{frame}[label={sec:orgd83d6fd}]{Collecting Data is Hard}
+\begin{columns}
+\begin{column}{0.7\columnwidth}
+experiments take years and, until recently, much labor to collect
+\autocite{almora-2020-devic-perfor}
 \begin{center}
-\includegraphics[width=.9\linewidth]{Data/2023-05-15_20-04-18_screenshot.png}
+\includegraphics[width=200]{Data/2023-05-24_08-01-24_screenshot.png}
 \end{center}
-\end{frame}
 
-\begin{frame}[label={sec:org5670c66}]{Variation in Band Gap changes with Level of Theory}
+DFT calculations take multiple
+\begin{itemize}
+\item hours to converge at PBE level
+\item days to converge at HSE level
+\item days more to debug
+\end{itemize}
+accumulating the HaP dataset took years
+\autocite{yang-2023-high-throug}
+\end{column}
+
+\begin{column}{0.3\columnwidth}
  
 \begin{center}
-\includesvg[width=300pt]{./.ob-jupyter/e044073b053593cbfe267508875c51401afb43a3}
+\includesvg[width=120pt]{./.ob-jupyter/55e458fa81a19544b854f8eb0141c77a857bf06b}
 \end{center}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orge51580d}]{Features of Perovskites Descriptive of Band Gap}
-\begin{block}{composition vectors}
+\begin{frame}[label={sec:org7efbd36},fragile]{Describing a Halide Perovskite}
+ \begin{columns}
+\begin{column}{0.4\columnwidth}
+\begin{block}{14 Dimensional Chemical Vector}
+ 
+\begin{center}
+\includesvg[width=170pt]{./.ob-jupyter/3f9092c825b142b1da90f67f4b672476f485574b}
+\end{center}
 \end{block}
+\end{column}
+
+\begin{column}{0.6\columnwidth}
+\begin{block}{Parsing compositions using \texttt{cmcl}}
+\begin{Code}
+\begin{Verbatim}
+\color{EFD}\EFk{import} cmcl
+\EFv{Y} = load\_codomain\_subset()
+\EFv{df} = Y.Formula.to\_frame().ft.comp()
+df.\EFv{index} = Y.Formula
+\EFb{print}(df)
+\end{Verbatim}
+\end{Code}
+
+\begin{small}
+\begin{verbatim}
+                    FA   Pb   Sn    I   MA   Br
+Formula                                        
+FAPb_0.7Sn_0.3I_3  1.0  0.7  0.3  3.0  NaN  NaN
+MAPb(I0.9Br0.1)3   NaN  1.0  NaN  2.7  1.0  0.3
+\end{verbatim}
+\end{small}
+\end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org8725de9}]{Sample Space}
+\begin{frame}[label={sec:org7736450}]{Sample Space}
+\begin{columns}
+\begin{column}{0.4\columnwidth}
+\begin{itemize}
+\item t-SNE projection projects 14D composition vectors to 2D
+\item subset of domain has been previously sampled and is available to
+Mannodi reaserch group
+\autocite{yang-2023-high-throug}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.6\columnwidth}
+\begin{center}
+\includegraphics[width=.9\linewidth]{Data/2023-05-19_13-44-52_screenshot.png}
+\end{center}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org7167c35}]{Constituent Properties}
+\begin{frame}[label={sec:orgfc3d793}]{Constituent Properties}
 \begin{block}{Twelve Properties per \(\ce{ABX_3}\) constituent}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
@@ -282,45 +648,85 @@ of bandgaps determined according to level of theory\autocite[p.1]{yu-2012-ident-
 \end{column}
 \end{columns}
 \end{block}
+
+compute by averaging elemental properties obtained from Mendeleev database
+\autocite{mentel-2014}
+by atomic weight of constituent in compount
 \end{frame}
 
-\begin{frame}[label={sec:org02c7a5f}]{Bivariate Analysis}
-\begin{itemize}
-\item correlations can be surprising
-\item some confirm physical expectations
-\end{itemize}
+\begin{frame}[label={sec:org2e43c1e}]{Bivariate Analysis of Functional Effects}
+ 
+\begin{center}
+\includesvg[width=400pt]{./.ob-jupyter/936ea994119ed4e82dc02a3d1b1fd48bf89083da}
+\end{center}
+
+band gap at higher levels of theory correlate with composition differently\autocite{yang-2023-high-throug}
 \end{frame}
 
 \section{Multi-Fidelity Learning}
-\label{sec:orgea80fb5}
-\begin{frame}[label={sec:org89ec1aa}]{Challenges of Learning from Overlapping datasets}
+\label{sec:org3ad1eb6}
+\begin{frame}[label={sec:orgd56814f}]{Multi-fidelity Machine Learning}
+\[
+\hat{y}_i = y_i + \epsilon_i \mbox{ for observations } i=1,…,N
+\]
+
 \begin{description}
 \item[{high fidelity}] prior on variance is narrow
 \item[{low fidelity}] prior on variance is wide
 \end{description}
+
+\begin{block}{Training Strategy}
+\begin{itemize}
+\item oversampling
+\item weight scores to reward models faithful to higher fidelities
+\item sequential learning/delta learning
+\item co-Kriging
+\end{itemize}
+\end{block}
 \end{frame}
 
-\begin{frame}[label={sec:orga754722}]{Multi-Fidelity Model Development Workflow}
-\alert{flowchart}
+\begin{frame}[label={sec:orge7bf990}]{Multi-Fidelity Model Development Workflow}
+\begin{center}
+\includegraphics[width=300]{/home/panos/Pictures/flowcharts/ML_pipe.png}
+\end{center}
 
-simultaneously utilize multiple measurements made of the same
-composition in training models.\autocite{manganaris-2022-mrs-comput}
+Weightable Machine Learning pipeline implemented in Python
+\autocite{manganaris-2022-mrs-comput}
 \end{frame}
 
 \section{Models}
-\label{sec:org98f5768}
-\begin{frame}[label={sec:orgbd012ff}]{Compare Three Methods}
-\end{frame}
-\begin{frame}[label={sec:orgf43f51d}]{Interpreting Models}
-\end{frame}
-\begin{frame}[label={sec:org4d6b75b}]{Shapely Additive Explanation (SHAP)}
-\end{frame}
-\section{Results}
-\label{sec:orgdebc8bf}
-\begin{frame}[label={sec:orgcfbe984}]{Make Predictions on Domain Subset}
+\label{sec:org2928124}
+\begin{frame}[label={sec:org9b452ea}]{Compare Three Methods}
+ 
+\begin{center}
+\includesvg[inkscapeformat=png, inkscapedpi=300,width=450pt]{./.ob-jupyter/f135c78f3459b792a3436307ab575dd3e1669074}
+\end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgb71d26e}]{Tolerance Factor}
+\begin{frame}[label={sec:org4969afb}]{SHAP Analyze RFR}
+\begin{center}
+\includegraphics[width=.9\linewidth]{Models/2023-05-19_13-42-16_screenshot.png}
+\end{center}
+\end{frame}
+
+\section{Results}
+\label{sec:orgf9002d7}
+\begin{frame}[label={sec:org8f9edb9}]{Make Predictions on Domain Subset}
+\begin{columns}
+\begin{column}{0.4\columnwidth}
+\begin{itemize}
+\item desired range \(bg \in [1, 2.5]\) eV
+\end{itemize}
+\end{column}
+\begin{column}{0.6\columnwidth}
+\begin{center}
+\includegraphics[width=200]{Results/2023-05-19_13-23-47_screenshot.png}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label={sec:org177a289}]{Tolerance Factor}
 \begin{block}{Perovskite Stability}
 Stability of high symmetry \(\alpha\) phase depends on the ABX member's
 ionic radii satisfying Goldschmidt's tolerance:
@@ -337,7 +743,8 @@ amine -- with an effective ionic radius.
 \autocite{kieslich-2015-exten-toler}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:org638cbf4}]{Other Tolerance Factors in Literature}
+
+\begin{frame}[label={sec:org232b1fa}]{Other Tolerance Factors in Literature}
 \begin{block}{Octahedral Factor}
 \[
 o=\frac{r_B}{r_X}
@@ -359,11 +766,67 @@ molecules.
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org99453c5}]{Screening Yields}
+\begin{frame}[label={sec:orgb21ad6c}]{Screening Yields}
+\begin{columns}
+\begin{column}{0.3\columnwidth}
+\begin{center}
+\includegraphics[width=120]{screening_ops.png}
+\end{center}
+\end{column}
+\begin{column}{0.7\columnwidth}
+\begin{center}
+\includegraphics[width=260]{Results/2023-05-19_13-20-09_screenshot.png}
+\end{center}
+\end{column}
+\end{columns}
 \end{frame}
-\section{Summary}
-\label{sec:org17925d3}
-\begin{frame}[label={sec:orgb42e787},fragile]{Review of Work}
+
+\begin{frame}[label={sec:org299c7b5}]{Screened Constituent Frequencies}
+\begin{center}
+\includegraphics[width=400]{Results/2023-05-19_13-07-38_screenshot.png}
+\end{center}
+\begin{columns}
+\begin{column}{0.3\columnwidth}
+\begin{itemize}
+\item prefer occupying small fraction mixing in most constituents
+\item \(\ce{K}\) and \(\ce{Rb}\) also prefer full occupancy
+\end{itemize}
+\end{column}
+
+\begin{column}{0.3\columnwidth}
+\begin{itemize}
+\item favor full occupation a rate of 5-8\%
+\item showed some preference approaching doping
+\end{itemize}
+\end{column}
+
+\begin{column}{0.3\columnwidth}
+\begin{itemize}
+\item strongly prefer full occupation
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label={sec:orgd74661b}]{Interpretation}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{center}
+\includegraphics[width=200]{Results/2023-05-19_13-21-13_screenshot.png}
+\end{center}
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+\begin{center}
+\includegraphics[width=200]{Results/2023-05-19_13-20-09_screenshot.png}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{Summary and Conclusions}
+\label{sec:org51ca0ed}
+\begin{frame}[label={sec:org5405d17},fragile]{Review of Work}
  \begin{itemize}
 \item preexisting data set of \textasciitilde{}500 samples from domain of \textasciitilde{}40000 single-site mixed compositions
 \item extract features using \texttt{cmcl}
@@ -375,9 +838,20 @@ molecules.
 \end{itemize}
 \end{frame}
 
+\begin{frame}[label={sec:org45dd8db}]{Conclusions}
+\begin{itemize}
+\item RFR yields the best model because
+\begin{itemize}
+\item it captures relevant feature interactions as corroborated by Pearson correlations
+\item it flexibly represents nonlinear relationships between feature interactions and band gap
+\item as an ensemble model, it reduces the variance of error
+\end{itemize}
+\end{itemize}
+\end{frame}
+
 \section{Credit}
-\label{sec:orgdaee5ac}
-\begin{frame}[label={sec:org41869d9}]{Acknowledgements}
+\label{sec:org290ce3a}
+\begin{frame}[label={sec:org6037eec}]{Acknowledgements}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{block}{Research Group}
@@ -407,25 +881,19 @@ RCAC Bell Computing Cluster
 \end{columns}
 \end{frame}
 \section{Bib}
-\label{sec:orgca11aa3}
+\label{sec:org7c4125c}
 \begin{frame}[allowframebreaks]{References}
 \AtNextBibliography{\tiny}
 \printbibliography
 \end{frame}
 \appendix
-\begin{frame}[label={sec:orgba6575d}]{Data Pre-Processing}
+\begin{frame}[label={sec:orgf5ebe74}]{Data Pre-Processing}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/data_proc.png}
 \end{center}
 Data pre-processing Workflow to Implement with Python Pandas
 \end{frame}
-\begin{frame}[label={sec:org1e77e44}]{Machine Learning Pipeline}
-\begin{center}
-\includegraphics[width=300]{/home/panos/Pictures/flowcharts/ML_pipe.png}
-\end{center}
-Machine Learning Pipeline to Implement with Python SciKit-Learn
-\end{frame}
-\begin{frame}[label={sec:orgba2335f}]{DFT Functionals Effect Band Structure Calculation in HaPs}
+\begin{frame}[label={sec:orgdfdab8e}]{DFT Functionals Effect Band Structure Calculation in HaPs}
 \begin{itemize}
 \item D3
 \item SOC
