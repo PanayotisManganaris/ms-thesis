@@ -1560,14 +1560,9 @@ bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusio
 #+attr_latex: :width 350
 [[file:Models/2023-05-24_09-40-46_screenshot.png]]
 
-** SHAP Analyze GPR                                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-
-#+DOWNLOADED: screenshot @ 2023-05-24 09:42:08
-#+attr_latex: :width 350
-[[file:Models/2023-05-24_09-42-08_screenshot.png]]
 
 * Results
 ** Make Predictions on Domain Subset                               :B_frame:
@@ -1753,6 +1748,7 @@ bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusio
   for high fidelity predictions due to the absence of some fidelity
   variables
 - GPR has potential for further study alongside graph neural networks
+
 * Credit
 ** Acknowledgements                                                :B_frame:
 :PROPERTIES:
@@ -1825,6 +1821,15 @@ Data pre-processing Workflow to Implement with Python Pandas
 - PBE semi-local vs HSE hybrid
   - (effects on electronic structure)
   - computational heft
+** SHAP Analyze GPR                                                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+#+DOWNLOADED: screenshot @ 2023-05-24 09:42:08
+#+attr_latex: :width 350
+[[file:Models/2023-05-24_09-42-08_screenshot.png]]
+
 * Footnotes
 
 [fn:2]\tiny{}[[https://www.lesker.com/newweb/ped/applications/perovskite-research.cfm ][www.lesker.com]]
