@@ -999,6 +999,8 @@ SLME (proxy for PCE[cite:@almora-2020-devic-perfor]) accounts for more energetic
 Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
 of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.1]
 
+[cite:@yang-2023-high-throug]
+
 ** Collecting Data is Hard                                         :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -1482,6 +1484,7 @@ Weightable Machine Learning pipeline implemented in Python
 
 #+RESULTS:
 :results:
+  [cite:@manganaris-2022-mrs-comput]
  
 #+attr_latex: :width 430pt :options inkscapeformat=png, inkscapedpi=300
 [[file:./.ob-jupyter/7908aac95025c52b8af6320709cb6d12ce1ce488.svg]]
@@ -1513,10 +1516,11 @@ bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusio
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-** COMMENT Shapely Additive Explanation (SHAP)                             :B_frame:
+** Shapely Additive Explanation (SHAP)                             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+[cite:@lundberg-2017-unified-approac]
 
 ** SHAP Analyze RFR                                                :B_frame:
 :PROPERTIES:
