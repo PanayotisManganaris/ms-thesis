@@ -237,25 +237,50 @@ no target transformations yet
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-#+begin_src jupyter-python :post wrap(*this*, w="130pt")
+#+begin_src jupyter-python
   df = QEParser('/home/panos/Documents/masters/GaN_ZB_AS.txt').get_df()
-  p = px.line(df, x='Wavelength (nm)', y=' Absorption Coefficient', color='name',
-              height=200, width = 400)
-  p.update_yaxes(title='alpha')
-  p.add_vline(x=628.019, annotation_text='628 nm',
-              line_color='black', line_width=2)
-  # p.add_annotation(text='628 nm', x=628, y=0.1, xanchor='left', xshift=50)
-  p.update_layout(showlegend=False,
-                  margin=dict(t=0,b=0,l=0,r=0))
-  p.show(renderer='svg')
+#+end_src
+
+#+begin_src jupyter-python :post wrap(*this*, w="130pt")
+  p0 = make_subplots(rows=2, cols=1, shared_xaxes=True)
+
+  p1 = px.line(df, x='Wavelength (nm)', y=' Absorption Coefficient', color='name',
+              height=200, width = 400,)
+  p1.update_yaxes(title='alpha')
+
+  p0.add_trace(p1.data[0], row=1, col=1)
+  colorsteps = 750
+  p0.add_trace(go.Bar(
+      y=['spectrum']*colorsteps,
+      x=[1]*colorsteps,
+      orientation='h',
+      marker=dict(
+          color=list(range(colorsteps)),
+          colorscale='Rainbow',
+          cmin=103,
+          cmax=750,
+          showscale=False
+      )
+  ), row=2, col=1)
+
+  p0.update_xaxes(range=[103, 750])
+  p0.update_yaxes(visible=False, row=2, col=1)
+
+  p0.add_vline(x=628.019, annotation_text='628 nm', annotation_font_size=40,
+               line_color='black', line_width=2, row=1, col=1)
+  p0.update_layout(
+      showlegend=False,
+      margin=dict(t=0,b=0,l=0,r=0),
+      yaxis_domain = [0.1, 1.0], yaxis2_domain = [0.0, 0.1]
+  )
+  p0.show(renderer='svg')
 #+end_src
 
 #+RESULTS:
 :results:
  
 #+attr_latex: :width 130pt
-#+attr_org: :width 640
-[[file:./.ob-jupyter/e7503af7c27d2b1ea6f3f80eb79c3f85ba9928b4.svg]]
+[[file:./.ob-jupyter/cccae4e4cfe972af740ccc5c35b127fa19f8c26b.svg]]
 :end:
 
 ****** col                                                       :BMCOL:
