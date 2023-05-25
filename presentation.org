@@ -483,19 +483,28 @@ Perovskite Solar Absorber Layer[fn:1]
 \center{}2x1x2 supercell
 
 ** DONE Design Goals and Challenges of Combinatorial Mixing        :B_frame:
+** DONE Perovskite Formability                                     :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
 :LOGBOOK:
-- State "DONE"       from "TODO"       [2023-05-23 Tue 18:43]
-:END:
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
+- State "DONE"       from "TODO"       [2023-05-25 Thu 16:16]
 :END:
 **** Search for Improved Compounds                               :B_block:
+- A must be much larger than B for Perovskite formation
+- Various tolerance factors have been designed to describe this constraint
+- B usually large (e.g. Pb, Sn) in Halide Perovskites
+- A accommodates amines with large effective ionic radii[cite:@kieslich-2015-exten-toler]
+- for \alpha phase stability
+[cite:@yin-2015-halid-perov;@bartel-2019-new-toler]
+
+*** Goldschmidt tolerance                                   :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_env: block
+:BEAMER_col: 0.33
 :END:
 
 *37,785* out of *207+ Million* compounds possible in a 2x2x2 supercell
@@ -503,14 +512,18 @@ will be examined for solutions to these deficiencies using
 - high-throughput density functional theory
 - data collected from literature
 - multi-fidelity machine learning
+\[
+1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+\]
 
 # combinatorial growth of composition space with
 # 1. size of supercell
 # 2. constituent options
-
 **** fig mixing                                          :B_ignoreheading:
+*** Octahedral Factor                                       :B_block:BMCOL:
 :PROPERTIES:
-:BEAMER_env: ignoreheading
+:BEAMER_env: block
+:BEAMER_col: 0.33
 :END:
 #+begin_src jupyter-python :post wrap(*this*, w="150pt :options inkscapeformat=png, inkscapedpi=300")
     p = px.sunburst(Y_big, path=['mix'])
@@ -531,7 +544,23 @@ will be examined for solutions to these deficiencies using
 #+attr_latex: :width 150pt :options inkscapeformat=png, inkscapedpi=300
 [[file:./.ob-jupyter/3ed5c0e44a1db77d1bd67911c688251d563c2ef0.svg]]
 :end:
+\[
+0.67 \approx o=\frac{r_B}{r_X}
+\]
 
+*** Bartel Tolerance                                        :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_env: block
+:BEAMER_col: 0.33
+:END:
+
+\[
+4.0 \gtrapprox t_{Bartel}=\frac{r_X}{r_B}-[1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})}]
+\]
+
+:PROPERTIES:
+:BEAMER_env: block
+:END:
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
@@ -1557,57 +1586,6 @@ bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusio
 #+DOWNLOADED: screenshot @ 2023-05-19 13:23:47
 #+attr_latex: :width 200
 [[file:Results/2023-05-19_13-23-47_screenshot.png]]
-
-** Tolerance Factor                                                :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-*** Perovskite Stability                                          :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-Stability of high symmetry \alpha phase depends on the ABX member's
-ionic radii satisfying Goldschmidt's tolerance:
-[cite:@yin-2015-halid-perov]
-
-\[
-1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
-\]
-
-Empirically, it is *necessary* that A must be much larger than B
-for Perovskite formation. B is usually a large atom (e.g. Pb, Sn) in
-Halide Perovskites. So A is suitably occupied by a Molecule -- an
-amine -- with an effective ionic radius.
-[cite:@kieslich-2015-exten-toler]
-
-** Other Tolerance Factors in Literature                           :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-# all tolerance conditions fitted on distributions of Ionic Radii.
-*** Octahedral Factor                                             :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-\[
-o=\frac{r_B}{r_X}
-\]
-*** Bartel Tolerance                                              :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-\[
-t_{Bartel}=\frac{r_X}{r_B}-[1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})}]
-\]
-proposed recently
-[cite:@bartel-2019-new-toler]
-*** Ionic Radii                                                   :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-- Elemental Radii are well documented in public databases
-- Molecular Radii are defined in various ways, mostly for small
-  molecules.
 
 ** Screening Yields                                                :B_frame:
 :PROPERTIES:
