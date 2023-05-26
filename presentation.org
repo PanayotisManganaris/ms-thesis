@@ -1653,7 +1653,7 @@ bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
 :BEAMER_col: 0.3
 :END:
 - prefer occupying small fraction mixing in most constituents
-- \(\ce{K}\) and \(\ce{Rb}\) also prefer full occupancy
+- \(\ce{K}\) and \(\ce{Rb}\) also prefer full occupancy. No \(\ce{K}\)!
 
 *** B-site                                                          :BMCOL:
 :PROPERTIES:
