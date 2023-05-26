@@ -630,6 +630,10 @@ will be examined for solutions to these deficiencies using
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+Professor Arun and Jiaqi have generated some of the largest pervoskite DFT databases
+[cite:@yang-2023-high-throug;@pablo-2019-new-front]
+
+sampling variation in composition, structure mutation, phase, etc
 ** COMMENT Attractive Properties of Perovskites                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
