@@ -1495,15 +1495,15 @@ Weightable Machine Learning pipeline implemented in Python
   p0.update_traces(marker_line=dict(color = 'black', width = 1))
 
   p0.add_annotation(x=2.5, y=6, xref='x', yref='y',
-                    text="r2 = 0.99<br>maxerr = 0.80<br>rmse = 0.12<br>", font_size=20,
+                    text="r2 = 0.99<br>maxerr = 0.80<br>rmse = 0.12<br>", font_size=40,
                     showarrow=False)
 
   p0.add_annotation(x=2.5, y=6, xref='x2', yref='y',
-                    text="r2 = 0.98<br>maxerr = 1.28<br>rmse = 0.15<br>", font_size=20,
+                    text="r2 = 0.98<br>maxerr = 1.28<br>rmse = 0.15<br>", font_size=40,
                     showarrow=False)
 
   p0.add_annotation(x=2.5, y=6, xref='x3', yref='y',
-                    text="r2 = 0.88<br>maxerr = 2.17<br>rmse = 0.47<br>", font_size=20,
+                    text="r2 = 0.88<br>maxerr = 2.17<br>rmse = 0.47<br>", font_size=40,
                     showarrow=False)
 
   p0.show(renderer='svg')
@@ -1521,14 +1521,17 @@ Weightable Machine Learning pipeline implemented in Python
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-| Score Categories  |      GPR |      RFR |    SISSO |
-|-------------------+----------+----------+----------|
-| rmse              | 0.156214 | 0.124738 | 0.474754 |
-| rmse EXP          | 0.120475 | 0.154448 | 0.330080 |
-| rmse PBE          | 0.128211 | 0.101872 | 0.395827 |
-| rmse HSE          | 0.214920 | 0.152479 | 0.519706 |
-| rmse HSE(SOC)     | 0.156785 | 0.108867 | 0.572644 |
-| rmse HSE-PBE(SOC) | 0.130696 | 0.133027 | 0.470758 |
+| Score Categories  |  GPR |  RFR | SISSO |
+|-------------------+------+------+-------|
+| rmse              | 0.15 | 0.12 |  0.47 |
+| rmse EXP          | 0.12 | 0.15 |  0.33 |
+| rmse PBE          | 0.12 | 0.10 |  0.39 |
+| rmse HSE          | 0.21 | 0.15 |  0.51 |
+| rmse HSE(SOC)     | 0.15 | 0.10 |  0.57 |
+| rmse HSE-PBE(SOC) | 0.13 | 0.13 |  0.47 |
+
+- add details
+- best model selected from 30000 models
 
 ** SISSO Expression                                                :B_frame:
 :PROPERTIES:
@@ -1536,13 +1539,18 @@ Weightable Machine Learning pipeline implemented in Python
 :END:
 
 \begin{align*}
-bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\nonumber\\+-0.5862929089 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\nonumber\\+1.063684923 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\nonumber\\+4.657097107
+bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
+                       &-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\\
+               +-0.586 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\\
+                +1.064 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\\
+                +4.657
 \end{align*}
 
 ** COMMENT Interpreting Models                                             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+
 ** Shapely Additive Explanation (SHAP)                             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -1564,9 +1572,6 @@ bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusio
 :BEAMER_env: frame
 :END:
 
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.4
