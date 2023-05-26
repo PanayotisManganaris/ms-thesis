@@ -1613,7 +1613,11 @@ bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
 :PROPERTIES:
 :BEAMER_col: 0.4
 :END:
-- desired range \(bg \in [1, 2.5]\) eV
+
+- Make predictions on domain set using RFR best model
+- Visualize predictions on t-SNE clustering
+- desired range \(bg \in [1, 2]\) eV
+
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.6
