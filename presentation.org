@@ -1305,7 +1305,11 @@ by atomic weight of constituent in compount
 
 band gap at higher levels of theory correlate with composition differently[cite:@yang-2023-high-throug]
 
-* Multi-Fidelity Learning
+
+* NEXT Multi-Fidelity Learning
+:LOGBOOK:
+- State "NEXT"       from              [2023-05-24 Wed 11:51]
+:END:
 # challenges of learning from multiple fidelities
 # compare to multi-task learning
 # the model places more weight on different observations
