@@ -1566,9 +1566,9 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
 [[file:./.ob-jupyter/7908aac95025c52b8af6320709cb6d12ce1ce488.svg]]
 :end:
 
-** Scoring Performance                                             :B_frame:
+*** col                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_env: frame
+:BEAMER_col: 0.7
 :END:
 | Score Categories  |  GPR |  RFR | SISSO |
 |-------------------+------+------+-------|
@@ -1579,8 +1579,11 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
 | rmse HSE(SOC)     | 0.15 | 0.10 |  0.57 |
 | rmse HSE-PBE(SOC) | 0.13 | 0.13 |  0.47 |
 
-- add details
-- best model selected from 30000 models
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
+- best RFR selected from >30000 models
 
 ** SISSO Expression                                                :B_frame:
 :PROPERTIES:
