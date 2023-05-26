@@ -1293,10 +1293,11 @@ band gap at higher levels of theory correlate with composition differently[cite:
 :PROPERTIES:
 :BEAMER_env: block
 :END:
-- oversampling
-- weight scores to reward models faithful to higher fidelities
-- sequential learning/delta learning
-- co-Kriging
+- [ ] oversampling
+- [X] weight scores on higher fidelities to reward target accuracy
+- [ ] sequential learning/delta learning
+- [ ] co-Kriging
+
 
 ** Multi-Fidelity Model Development Workflow                       :B_frame:
 :PROPERTIES:
