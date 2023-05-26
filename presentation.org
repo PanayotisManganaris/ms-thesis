@@ -634,6 +634,62 @@ Professor Arun and Jiaqi have generated some of the largest pervoskite DFT datab
 [cite:@yang-2023-high-throug;@pablo-2019-new-front]
 
 sampling variation in composition, structure mutation, phase, etc
+** Collecting Data is Hard                                         :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
+experiments take years and, until recently, much labor to collect
+[cite:@almora-2020-devic-perfor]
+#+DOWNLOADED: screenshot @ 2023-05-24 08:01:24
+#+attr_latex: :width 200
+[[file:Data/2023-05-24_08-01-24_screenshot.png]]
+
+DFT calculations take multiple
+- hours to converge at PBE level
+- days to converge at HSE level
+- days more to debug
+accumulating the HaP dataset took years
+[cite:@yang-2023-high-throug]
+
+# show 
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
+#+begin_src jupyter-python
+  Y = pd.read_csv(
+      "~/Documents/manuscripts/DFT+ML+feature_engineering/Y.csv",
+      index_col=0
+  )
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="120pt")
+    p = px.box(Y, y="bg_eV", x="LoT",
+               width=400, height=700)
+    p.update_xaxes(title_font_size=24, tickfont_size=30,
+                   tickangle=-35, title=None)
+    p.update_yaxes(title="Band Gap [eV]", title_font_size=30,
+                   tickfont_size=30)
+    p.show('svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 120pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/55e458fa81a19544b854f8eb0141c77a857bf06b.svg]]
+:end:
+
+
 ** COMMENT Attractive Properties of Perovskites                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -1072,60 +1128,6 @@ determined according to level of theory[cite:@yu-2012-ident-poten p.1]
 Inform screening criterion reported by these results[cite:@yang-2023-high-throug] 
 - SLME used as computational proxy for PCE
 - Experimental data[cite:@almora-2020-devic-perfor] broadly agrees with PBE simulation
-
-** Collecting Data is Hard                                         :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.7
-:END:
-experiments take years and, until recently, much labor to collect
-[cite:@almora-2020-devic-perfor]
-#+DOWNLOADED: screenshot @ 2023-05-24 08:01:24
-#+attr_latex: :width 200
-[[file:Data/2023-05-24_08-01-24_screenshot.png]]
-
- DFT calculations take multiple
-- hours to converge at PBE level
-- days to converge at HSE level
-- days more to debug
-accumulating the HaP dataset took years
-[cite:@yang-2023-high-throug]
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.3
-:END:
-#+begin_src jupyter-python
-  Y = pd.read_csv(
-      "~/Documents/manuscripts/DFT+ML+feature_engineering/Y.csv",
-      index_col=0
-  )
-#+end_src
-
-#+RESULTS:
-:results:
-:end:
-
-#+begin_src jupyter-python :post wrap(*this*, w="120pt")
-    p = px.box(Y, y="bg_eV", x="LoT",
-               width=400, height=700)
-    p.update_xaxes(title_font_size=24, tickfont_size=30,
-                   tickangle=-35, title=None)
-    p.update_yaxes(title="Band Gap [eV]", title_font_size=30,
-                   tickfont_size=30)
-    p.show('svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 120pt
-#+attr_org: :width 640
-[[file:./.ob-jupyter/55e458fa81a19544b854f8eb0141c77a857bf06b.svg]]
-:end:
 
 ** Describing a Halide Perovskite                                  :B_frame:
 :PROPERTIES:
