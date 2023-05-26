@@ -450,8 +450,8 @@ Notable oxide perovskites and properties circa 2006
 :END:
 - purely inorganic (e.g., CsPbI3)
 - hybrid organic-inorganic (e.g., MAPbBr3)
-  - MA :: methylammonium
-  - FA :: formamidium
+  - MA :: methylammonium \(\ce{CH3NH3+}\)
+  - FA :: formamidium \(\ce{CH(NH2)2+}\)
 - tailor stability and electronic/optical properties of \(\ce{ABX3}\)
   compounds by changing
   - component at each site
@@ -480,7 +480,7 @@ Perovskite Solar Absorber Layer[fn:1]
 #+attr_latex: :width 140
 [[file:hybrid-HaP.png]]
 
-\center{}2x1x2 supercell
+\center{}2x2x2 \alpha-phase supercell 
 
 ** DONE Design Goals and Challenges of Combinatorial Mixing        :B_frame:
 ** DONE Perovskite Formability                                     :B_frame:
