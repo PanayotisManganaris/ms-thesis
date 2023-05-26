@@ -1191,7 +1191,7 @@ accumulating the HaP dataset took years
 :results:
  
 #+attr_latex: :width 170pt
-[[file:./.ob-jupyter/3f9092c825b142b1da90f67f4b672476f485574b.svg]]
+[[file:./.ob-jupyter/da7cd23fd96270d3ac27a2e5a2ec43022527f56a.svg]]
 :end:
 
 *** Parsing compositions using =cmcl=                       :B_block:BMCOL:
@@ -1274,7 +1274,7 @@ compute by averaging elemental properties obtained from Mendeleev database
 [cite:@mentel-2014]
 by atomic weight of constituent in compount
 
-** Bivariate Analysis of Functional Effects                        :B_frame:
+** TODO Bivariate Analysis of Functional Effects                   :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -1283,10 +1283,11 @@ by atomic weight of constituent in compount
 # [[file:Data/2023-05-19_12-18-44_screenshot.png]]
 
 #+begin_src jupyter-python :post wrap(*this*, "400pt")
-  sub = pearson.iloc[0:5, 17:54]
+  sub = pearson.iloc[0:5, 19:55]
   p = px.imshow(sub, color_continuous_scale='RdBu_r', zmin=-1, zmax=1,
                 labels=dict(color="Pearson Coefficient"),
-                height=400, width=900, aspect=1.5
+                height=400, width=900, aspect=1.5,
+                text_auto='.2f'
                 )
   p.update_xaxes(tickangle=-35, tickfont_size = 15)
   p.update_yaxes(tickangle=-35, tickfont_size = 15)
@@ -1309,7 +1310,7 @@ by atomic weight of constituent in compount
 :results:
  
 #+attr_latex: :width 400pt
-[[file:./.ob-jupyter/936ea994119ed4e82dc02a3d1b1fd48bf89083da.svg]]
+[[file:./.ob-jupyter/5f33f326b391e633e7fa8e1d2594fc7176d8ceaf.svg]]
 :end:
 
 band gap at higher levels of theory correlate with composition differently[cite:@yang-2023-high-throug]
