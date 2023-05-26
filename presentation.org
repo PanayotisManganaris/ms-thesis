@@ -1558,12 +1558,12 @@ bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusio
 #+attr_latex: :width 350
 [[file:Models/2023-05-24_09-40-46_screenshot.png]]
 
+* Discovery of Suitable Compositions
+** Make Predictions on *40000* Hypothetical Compounds              :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
 
-* Results
-** Make Predictions on Domain Subset                               :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
