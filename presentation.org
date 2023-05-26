@@ -1734,6 +1734,14 @@ bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusio
 - make predictions on whole sample domain
 - Screen for viable candidate compositions
 
+** TODO publications presentations and other contributions         :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+- Defects paper, GNN paper, *my paper*, Jiaqi's.
+= presentation (DS02 poster), symposium, Nanohub tutorial
+- My github, yogi, cmcl, spyglass, pysisso, etc
+
 ** Conclusions                                                     :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
