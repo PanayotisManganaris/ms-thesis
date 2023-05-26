@@ -987,49 +987,56 @@ Literature provides examples of known performant ligands:
 #+latex_attr: :width 400
 [[file:Data/2023-05-15_20-04-18_screenshot.png]]
 
-** Band Gap Relates to Efficiency                                  :B_frame:
+** TODO Spectroscopic Limited Maximum Efficiency (SLME)            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-#+begin_src jupyter-python :post wrap(*this*, w="210pt")
-  p = px.scatter(Y[Y.LoT == "EXP"], x="bg_eV", y="efficiency", color="mix")
-  p.update_xaxes(range=(0, 4), title="Band Gap [eV]")
-  p.update_yaxes(range=(0, 0.25), title="Power Conversion Efficiency")
-  p.update_layout(showlegend=False,
-                  xaxis_tickfont_size=20, yaxis_tickfont_size=20,
-                  xaxis_titlefont_size=24, yaxis_titlefont_size=24)
-  p.show(renderer='svg')
-#+end_src
+SLME accounts for more energetic processes than Shockley-Queisser
+criterion (\(bg \approx 1.3\)) allowing selection on range of bandgaps
+determined according to level of theory[cite:@yu-2012-ident-poten p.1]
 
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 210pt
-[[file:./.ob-jupyter/2b677464785e9d1d299f0f955a3af16e9c3b5f7e.svg]]
-:end:
-
-*** col                                                             :BMCOL:
+** DONE Absorbance Relates to Power Conversion in Our Data         :B_frame:
 :PROPERTIES:
-:BEAMER_col: 0.5
+:BEAMER_env: frame
 :END:
-#+begin_src jupyter-python :post wrap(*this*, w="210pt")
-  p = px.scatter(Y[Y.LoT == "PBE"], x="bg_eV", y="efficiency", color="mix")
-  p.update_xaxes(range=(0, 4), title="Band Gap [eV]")
-  p.update_yaxes(range=(0, 0.25), title="SLME")
-  p.update_layout(xaxis_tickfont_size=20, yaxis_tickfont_size=20,
-                  xaxis_titlefont_size=24, yaxis_titlefont_size=24)
-  # Add screening lines
+:LOGBOOK:
+- State "DONE"       from              [2023-05-26 Fri 15:21]
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="370pt")
+  p0 = make_subplots(rows=1, cols=2, shared_yaxes=True)
+
+  p1 = px.scatter(
+      Y[Y.LoT == "EXP"], x="bg_eV", y="efficiency", color="mix",
+  )
+  p2 = px.scatter(
+      Y[Y.LoT == "PBE"], x="bg_eV", y="efficiency", color="mix",
+  )
+
+  for trace1, trace2 in zip(p1.data, p2.data):
+      p0.add_trace(trace1, row=1, col=1)
+      p0.add_trace(trace2, row=1, col=2)
+
+  p0.update_xaxes(
+      range=(0, 4), title="Band Gap [eV]",
+      tickfont_size=20
+  )
+  p0.update_yaxes(
+      tickfont_size=20
+  )
+  p0.update_yaxes(row=1, col=1,
+                 title="Power Conversion Efficiency",
+                 )
+  p0.update_yaxes(row=1, col=2,
+                 title="SLME for PBE<br>Absorption Spectra",
+                 )
+
   h_lin1 = go.layout.Shape(type='line',
                            x0=1.0, y0=0.0,
                            x1=1.0, y1=0.25,
                            line=dict(color='black', width=2))
   h_lin2 = go.layout.Shape(type='line',
-                           x0=2.5, y0=0.0,
-                           x1=2.5, y1=0.25,
+                           x0=2.0, y0=0.0,
+                           x1=2.0, y1=0.25,
                            line=dict(color='black', width=2))
   v_line = go.layout.Shape(type='line',
                            x0=0.0, y0=0.15,
@@ -1037,32 +1044,32 @@ Literature provides examples of known performant ligands:
                            line=dict(color='black', width=2))
   rect = go.layout.Shape(type='rect', #line=dict(color='blue', width=2)
                          x0=1.0, y0=0.15,
-                         x1=2.5, y1=0.25,
+                         x1=2.0, y1=0.25,
                          fillcolor='blue', opacity=0.2)
-  p.add_shape(h_lin1)
-  p.add_shape(h_lin2)
-  p.add_shape(v_line)
-  p.add_shape(rect)
+  p0.add_shape(h_lin1, row=1, col=2)
+  p0.add_shape(h_lin2, row=1, col=2)
+  p0.add_shape(v_line, row=1, col=2)
+  p0.add_shape(rect, row=1, col=2)
 
-  p.show(renderer='svg')
+  p0.update_layout(
+      margin=dict(t=0,b=0,l=0,r=0),
+      showlegend=False,
+      width=800, height=300
+  )
+
+  p0.show(renderer='svg')
 #+end_src
 
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 210pt
-[[file:./.ob-jupyter/0c4832ea502cef117df59890aa3341839c46147b.svg]]
+#+attr_latex: :width 370pt
+[[file:./.ob-jupyter/3d9a2ab16919627b5827851152eba8c5c9d8f494.svg]]
 :end:
 
-*** non                                                   :B_ignoreheading:
-:PROPERTIES:
-:BEAMER_env: ignoreheading
-:END:
-SLME (proxy for PCE[cite:@almora-2020-devic-perfor]) accounts for more energetic processes than
-Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing selection on range
-of bandgaps determined according to level of theory[cite:@yu-2012-ident-poten p.1]
-
-[cite:@yang-2023-high-throug]
+Inform screening criterion reported by these results[cite:@yang-2023-high-throug] 
+- SLME used as computational proxy for PCE
+- Experimental data[cite:@almora-2020-devic-perfor] broadly agrees with PBE simulation
 
 ** Collecting Data is Hard                                         :B_frame:
 :PROPERTIES:
