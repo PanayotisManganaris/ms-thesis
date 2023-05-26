@@ -777,8 +777,10 @@ predict anything/make decisions[cite:@pablo-2019-new-front]
 :PROPERTIES:
 :BEAMER_col: 0.4
 :END:
-- trees capture interactions between feature 
+Decision Tree algorithm memorizes an algorithmic path to the target
+- trees capture interactions between features
 - trees are flexible and may be highly biased to data
+The forest of random trees averages many paths
 - forest explains variance in data
 - forest reduces the variance of error
 
