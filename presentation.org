@@ -1386,14 +1386,8 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
   p1 = px.scatter(
       data[data.partition=='test'],
       x=x, y=y,
-      # facet_col='partition',
       hover_name="Formula",
       color="LoT"
-  )
-  p1.update_traces(
-      marker_size=10.
-      # marker_opacity=0.2,
-      # selector={'marker_symbol':'circle'}
   )
   xlims = min(data[x]), max(data[y])
   ylims = min(data[y]), max(data[y])
@@ -1401,12 +1395,6 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
                 y = [min(xlims+ylims), max(xlims+ylims)],
                 mode='lines', name="parity", marker=dict(color="black"),
                 row='all', col='all')
-  p1.update_layout(title_text='Band Gaps [eV] (test partition)',
-                  font_family='arial narrow', font_size=30,
-                  margin=dict(t=70,b=0,l=0,r=0))
-  p1.update_xaxes(title='DFT Calculation', constrain='domain', mirror = True)
-  p1.update_yaxes(title='ML Prediction', scaleanchor='x', mirror=True)
-  #p1.update_annotations(visible=False)
   p1.show(renderer='svg')
 #+end_src
 
@@ -1414,7 +1402,7 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
 :results:
  
 #+attr_latex: :width 300pt
-[[file:./.ob-jupyter/e30b34a286a15da2efbf0c8cf2dcfe208976a543.svg]]
+[[file:./.ob-jupyter/8627f511ab579771837323905248dcab187ef0d2.svg]]
 :end:
 
 *** gpr
@@ -1432,14 +1420,8 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
   p2 = px.scatter(
       data[data.partition=='test'],
       x=x, y=y,
-      # facet_col='partition',
       hover_name="Formula",
       color="LoT"
-  )
-  p2.update_traces(
-      marker_size=10.
-      # marker_opacity=0.2,
-      # selector={'marker_symbol':'circle'}
   )
   xlims = min(data[x]), max(data[y])
   ylims = min(data[y]), max(data[y])
@@ -1447,12 +1429,6 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
                 y = [min(xlims+ylims), max(xlims+ylims)],
                 mode='lines', name="parity", marker=dict(color="black"),
                 row='all', col='all')
-  p2.update_layout(title_text='Band Gaps [eV] (test partition)',
-                  font_family='arial narrow', font_size=30,
-                  margin=dict(t=70,b=0,l=0,r=0))
-  p2.update_xaxes(title='DFT Calculation', constrain='domain', mirror = True)
-  p2.update_yaxes(title='ML Prediction', scaleanchor='x', mirror=True)
-  #p2.update_annotations(visible=False)
   p2.show(renderer='svg')
 #+end_src
 
@@ -1460,7 +1436,7 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
 :results:
  
 #+attr_latex: :width 300pt
-[[file:./.ob-jupyter/8207649382249cb7fc0bd9890e60c2be15801c8f.svg]]
+[[file:./.ob-jupyter/c846ffe7a1311d7c23c3944591435e4c04db8f90.svg]]
 :end:
 
 *** sisso
@@ -1478,14 +1454,8 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
   p3 = px.scatter(
       data[data.partition=='test'],
       x=x, y=y,
-      # facet_col='partition',
       hover_name="Formula",
       color="LoT"
-  )
-  p3.update_traces(
-      marker_size=10.
-      # marker_opacity=0.2,
-      # selector={'marker_symbol':'circle'}
   )
   xlims = min(data[x]), max(data[y])
   ylims = min(data[y]), max(data[y])
@@ -1493,12 +1463,6 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
                 y = [min(xlims+ylims), max(xlims+ylims)],
                 mode='lines', name="parity", marker=dict(color="black"),
                 row='all', col='all')
-  p3.update_layout(title_text='Band Gaps [eV] (test partition)',
-                  font_family='arial narrow', font_size=30,
-                  margin=dict(t=70,b=0,l=0,r=0))
-  p3.update_xaxes(title='DFT Calculation', constrain='domain', mirror = True)
-  p3.update_yaxes(title='ML Prediction', scaleanchor='x', mirror=True)
-  #p3.update_annotations(visible=False)
   p3.show(renderer='svg')
 #+end_src
 
@@ -1506,14 +1470,14 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
 :results:
  
 #+attr_latex: :width 300pt
-[[file:./.ob-jupyter/459743be84c705a5315e80fb969d28abdcad5600.svg]]
+[[file:./.ob-jupyter/1bbf90fc6004a4cabc25d940f058ea6f7fb3368f.svg]]
 :end:
 
-** Compare Three Methods                                           :B_frame:
+** Test 282 Band Gap Predictions                                   :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-#+begin_src jupyter-python :post wrap(*this*, w="430pt :options inkscapeformat=png, inkscapedpi=300")
+#+begin_src jupyter-python :post wrap(*this*, w="400pt")
   p0 = make_subplots(rows=1, cols=3, shared_yaxes=True)
 
   for trace1, trace2, trace3 in zip(p1.data, p2.data, p3.data):
@@ -1521,46 +1485,63 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
       p0.add_trace(trace2, row=1, col=2)
       p0.add_trace(trace3, row=1, col=3)
 
-  import copy
+  p0.update_xaxes(tickvals=list(range(8)))
+  p0.update_yaxes(row=1, col=1,
+                  title="RFR Prediction",
+                  title_font_size=24,
+                  tickfont_size=20,
+                  )
+  p0.update_yaxes(row=1, col=2,
+                  title="GPR Prediction", title_standoff=0,
+                  title_font_size=24,
+                  tickfont_size=20,
+                  )
+  p0.update_yaxes(row=1, col=3,
+                  title="SISSO Prediction", title_standoff=0,
+                  title_font_size=24,
+                  tickfont_size=20,
+                  )
+  p0.update_layout(
+      width=1500,
+      legend= dict(orientation='h', y=-0.3)
+  )
 
-  lo = copy.deepcopy(p0.layout)
-  p0.update_layout(p2.layout)
-  p0.update_layout(xaxis=p2.layout.xaxis, yaxis=p2.layout.yaxis, overwrite=False)
-  p0.update_layout(xaxis2=p1.layout.xaxis, yaxis2=p1.layout.yaxis, overwrite=False)
-  p0.update_layout(xaxis3=p3.layout.xaxis, yaxis3=p3.layout.yaxis, coloraxis=p3.layout.coloraxis, overwrite=False)
-  p0.layout.xaxis2.scaleanchor=None
-  p0.update_layout(lo, overwrite=False)
-  # p0.update_layout(showlegend=False)
+  p0.layout.xaxis.scaleanchor="y"
+  p0.layout.xaxis2.scaleanchor="y2"
+  p0.layout.xaxis3.scaleanchor="y3"
+
   p0.update_traces(showlegend=False, row=1, col=1)
   p0.update_traces(showlegend=False, row=1, col=2)
 
-  # p1.update_xaxes(constrain='domain', row=1, col=2)
-  p0.layout['yaxis2']['scaleanchor'] = 'x2'
-  p0.layout['xaxis']['domain'] = [0.0, 0.30]
-  p0.layout['xaxis2']['domain'] = [0.35, 0.65]
-  p0.layout['xaxis3']['domain'] = [0.70, 1.0]
+  p0.update_xaxes(mirror=True,
+                  constrain='domain', title='DFT Calculation',
+                  title_font_size=24,)
+  p0.update_yaxes(mirror=True)
 
-  p0.update_xaxes(tickvals=list(range(8)))
-  p0.update_yaxes(title="RFR Prediction", row=1, col=1)
-  p0.update_yaxes(title="GPR Prediction", title_standoff=0, row=1, col=2)
-  p0.update_yaxes(title="SISSO Prediction", title_standoff=0, row=1, col=3)
-  p0.update_layout(
-      width=1500,
-      # legend= dict(orientation='h', y=-0.5)
+  p0.update_traces(
+      line=dict(color = 'black', width = 4),
+  )
+  p0.update_traces(
+      marker_line=dict(color = 'black', width = 1),
+      marker_size=6,
+      selector={'marker_symbol':'circle'}
   )
 
-  p0.update_traces(marker_line=dict(color = 'black', width = 1))
+  p0.update_layout(
+      margin=dict(t=0, b=0, l=0, r=0),
+      width=800, height=330
+  )
 
   p0.add_annotation(x=2.5, y=6, xref='x', yref='y',
-                    text="r2 = 0.99<br>maxerr = 0.80<br>rmse = 0.12<br>", font_size=40,
+                    text="r2 = 0.99<br>maxerr = 0.80<br>rmse = 0.12<br>", font_size=15,
                     showarrow=False)
 
   p0.add_annotation(x=2.5, y=6, xref='x2', yref='y',
-                    text="r2 = 0.98<br>maxerr = 1.28<br>rmse = 0.15<br>", font_size=40,
+                    text="r2 = 0.98<br>maxerr = 1.28<br>rmse = 0.15<br>", font_size=15,
                     showarrow=False)
 
   p0.add_annotation(x=2.5, y=6, xref='x3', yref='y',
-                    text="r2 = 0.88<br>maxerr = 2.17<br>rmse = 0.47<br>", font_size=40,
+                    text="r2 = 0.88<br>maxerr = 2.17<br>rmse = 0.47<br>", font_size=15,
                     showarrow=False)
 
   p0.show(renderer='svg')
@@ -1569,13 +1550,36 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 430pt :options inkscapeformat=png, inkscapedpi=300
-[[file:./.ob-jupyter/7908aac95025c52b8af6320709cb6d12ce1ce488.svg]]
+#+attr_latex: :width 400pt
+[[file:./.ob-jupyter/3133b81a112f13e387878a1d018b864f057d9f03.svg]]
 :end:
 
 *** col                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.7
+:BEAMER_col: 0.3
+:END:
+Best RFR selected from >30k differently parametrized models
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
+Best GPR utilizes non-stationary Matern kernel with \(\nu=3\slash{}2\)
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
+Best SISSO model using only 11 features outperforms OLS on 55 features
+
+** Compare RMSE at different positions                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
 :END:
 | Score Categories  |  GPR |  RFR | SISSO |
 |-------------------+------+------+-------|
@@ -1588,10 +1592,11 @@ Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
 
 *** col                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.3
+:BEAMER_col: 0.5
 :END:
-- best RFR selected from >30000 models
-
+- partitioned scores obtained from Yogi[fn:3] 
+- 
+  
 ** SISSO Expression                                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
