@@ -1350,6 +1350,14 @@ Weightable Machine Learning pipeline implemented in Python
 # - accounts for additional energetic processes
 # - dipole-allowed, dipole-forbidden, indirect band gap
 # focus on EXP rmse -- I have the ability!
+** Model Training                                                  :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+# show test/train split and scoring flowchart
+- I made a split
+- after rigorous HPO[cite:@manganaris-2022-mrs-comput]
+
 ** COMMENT make subplots
 *** rfr
 #+begin_src jupyter-python
@@ -1548,7 +1556,6 @@ Weightable Machine Learning pipeline implemented in Python
 
 #+RESULTS:
 :results:
-  [cite:@manganaris-2022-mrs-comput]
  
 #+attr_latex: :width 430pt :options inkscapeformat=png, inkscapedpi=300
 [[file:./.ob-jupyter/7908aac95025c52b8af6320709cb6d12ce1ce488.svg]]
