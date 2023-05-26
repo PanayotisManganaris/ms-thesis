@@ -1342,7 +1342,7 @@ band gap at higher levels of theory correlate with composition differently[cite:
 #+attr_latex: :width 300
 [[file:~/Pictures/flowcharts/ML_pipe.png]]
 
-Weightable Machine Learning pipeline implemented in Python
+Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
 [cite:@manganaris-2022-mrs-comput]
 
 * Models
@@ -1891,6 +1891,7 @@ Data pre-processing Workflow to Implement with Python Pandas
 
 * Footnotes
 
+[fn:3]\tiny{}https://github.com/PanayotisManganaris/yogi
 [fn:2]\tiny{}[[https://www.lesker.com/newweb/ped/applications/perovskite-research.cfm ][www.lesker.com]]
 [fn:1]\tiny{}Photo by Dennis Schroeder\newline{}National Renewable Energy Laboratory
 
