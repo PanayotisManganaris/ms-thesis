@@ -526,12 +526,17 @@ The following definitions approximate \alpha phase stability
 4 \gtrapprox b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
 \]
 
-** TODO My Thesis Design Goals                                     :B_frame:
+** TODO My Thesis Research Overview                                :B_frame:
 # make the chemical space clear (table)
 # use DFT + ML to discover attractive candidates
 # make two slides out of this -- show deficiencies
 # show what mixing at A B X means!!
-** DONE Design Goals and Challenges of Combinatorial Mixing        :B_frame:
+
+# combinatorial growth of composition space with
+# 1. size of supercell
+# 2. constituent options
+
+** DONE Design Goals in *14-Dimensional* Composition Space         :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -620,10 +625,10 @@ will be examined for solutions to these deficiencies using
 - data collected from literature
 - multi-fidelity machine learning
 
-# combinatorial growth of composition space with
-# 1. size of supercell
-# 2. constituent options
-
+** TODO Sample of 14-Dimensional Composition Space                 :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 ** COMMENT Attractive Properties of Perovskites                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -734,6 +739,7 @@ predict anything/make decisions[cite:@pablo-2019-new-front]
 - predict properties
 - classify observations
 
+** DONE Data Driven Framework for Perovskite Discovery             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
