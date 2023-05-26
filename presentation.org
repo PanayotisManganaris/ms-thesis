@@ -246,7 +246,6 @@ no target transformations yet
 
   p1 = px.line(df, x='Wavelength (nm)', y=' Absorption Coefficient', color='name',
               height=200, width = 400,)
-  p1.update_yaxes(title='alpha')
 
   p0.add_trace(p1.data[0], row=1, col=1)
   colorsteps = 750
@@ -263,8 +262,10 @@ no target transformations yet
       )
   ), row=2, col=1)
 
-  p0.update_xaxes(range=[103, 750])
+  p0.update_xaxes(range=[103, 750], tickfont_size=30)
+  p0.update_xaxes(title='wavelength [nm]', row=2, col=1, title_font_size=30)
   p0.update_yaxes(visible=False, row=2, col=1)
+  p0.update_yaxes(title='alpha', row=1, col=1, title_font_size=30, tickfont_size=30)
 
   p0.add_vline(x=628.019, annotation_text='628 nm', annotation_font_size=40,
                line_color='black', line_width=2, row=1, col=1)
@@ -280,7 +281,7 @@ no target transformations yet
 :results:
  
 #+attr_latex: :width 130pt
-[[file:./.ob-jupyter/cccae4e4cfe972af740ccc5c35b127fa19f8c26b.svg]]
+[[file:./.ob-jupyter/e44c0e6b821bb2eea4fc6ed321c93e99352b8192.svg]]
 :end:
 
 ****** col                                                       :BMCOL:
