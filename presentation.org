@@ -90,7 +90,7 @@
 :results:
 :end:
 
-* COMMENT load and pre-process sample
+* COMMENT load sample and spaces
 #+begin_src jupyter-python
   Xt = pd.read_csv("./X_t.csv", index_col=0)
   Xc = pd.read_csv("./X_c.csv", index_col=0)
@@ -104,90 +104,17 @@
 :end:
 
 #+begin_src jupyter-python
-  X_big = pd.read_csv("./X_big.csv", index_col=0)
-  Y_big = pd.read_csv("./Y_big.csv", index_col=0)
+  X_big = pd.read_csv("./X_card.csv", index_col=0)
+  Y_big = pd.read_csv("./Y_card.csv", index_col=0)
 #+end_src
 
 #+RESULTS:
 :results:
 :end:
 
-** create preprocessing pipeline
 #+begin_src jupyter-python
-  comp_features = Xc.columns
-  prop_features = Xp.columns
-  cat_features = Xt.select_dtypes('object').columns
-
-  # define preprocessing
-  fillna = SimpleImputer(strategy="constant", fill_value=0.0)
-  mkratio = Normalizer(norm='l1')
-  mknormal = StandardScaler()
-  mkbound = MinMaxScaler(feature_range=(0,1), clip=False) #not statistical, should work for anything
-
-  comp_transformer = make_pipeline(fillna, mkratio, mkbound)
-  prop_transformer = make_pipeline(fillna, mknormal, mkbound)
-  cat_transformer = ohe(handle_unknown="ignore")
-
-  preprocessor = ColumnTransformer(
-      transformers=[
-          ("comp", comp_transformer, comp_features),
-          ("prop", prop_transformer, prop_features),
-          ("cat", cat_transformer, cat_features),
-      ]
-  )
-#+end_src
-
-#+RESULTS:
-:results:
-:end:
-
-** apply preprocessing to Domain samples
-#+begin_src jupyter-python
-  preprocessor.fit(X)
-#+end_src
-
-#+RESULTS:
-:results:
-#+begin_example
-  ColumnTransformer(transformers=[('comp',
-                                   Pipeline(steps=[('simpleimputer',
-                                                    SimpleImputer(fill_value=0.0,
-                                                                  strategy='constant')),
-                                                   ('normalizer',
-                                                    Normalizer(norm='l1')),
-                                                   ('minmaxscaler',
-                                                    MinMaxScaler())]),
-                                   Index(['('A', 'Cs')', '('A', 'FA')', '('A', 'K')', '('A', 'MA')',
-         '('A', 'Rb')', '('B', 'Ba')', '('B', 'Ca')', '('B', 'Ge')',
-         '('B', 'Pb')', '('B', 'Sn')', '('B', 'Sr')', '('X',...
-         '('X', 'melting_point_K')', '('X', 'density_gpercc')',
-         '('X', 'atomic_weight_u')', '('X', 'electron_affinity_kJpermol')',
-         '('X', 'ionization_energy_kJpermol')',
-         '('X', 'heat_of_fusion_kJpermol')', '('X', 'heat_of_vap_kJpermol')',
-         '('X', 'electronegativity')', '('X', 'at_num')', '('X', 'period')'],
-        dtype='object')),
-                                  ('cat', OneHotEncoder(handle_unknown='ignore'),
-                                   Index(['LoT'], dtype='object'))])
-#+end_example
-:end:
-
-#+begin_src jupyter-python
-  XX = pd.DataFrame(preprocessor.transform(X),
-                   columns=preprocessor.get_feature_names_out(),
-                   index=X.index)
-  XX_big = pd.DataFrame(preprocessor.transform(X_big),
-                   columns=preprocessor.get_feature_names_out(),
-                   index=X_big.index)
-#+end_src
-
-#+RESULTS:
-:results:
-:end:
-
-** apply preprocessing to codomain samples
-no target transformations yet
-#+begin_src jupyter-python
-  # YY = Y
+  XX = pd.read_csv("./X_processed.csv", index_col=0)
+  XX_big = pd.read_csv("./X_card_processed.csv", index_col=0)
 #+end_src
 
 #+RESULTS:
