@@ -11,7 +11,7 @@
 #+select_tags: export
 #+exclude_tags: noexport
 #+creator: Emacs 28.2 (Org mode 9.6.5)
-#+cite_export:
+#+cite_export: biblatex
 #+latex_class: reportchapter
 #+latex_class_options:
 #+latex_header:
