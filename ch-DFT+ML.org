@@ -73,15 +73,7 @@
   
 # Perovskite semiconductors offer opportunities to reduce cost and environmental impact as well as increase the performance of devices ranging from superconductors and computational q-bits to light emitting diodes and solar cells.
 
-** DONE Introduction
-:PROPERTIES:
-:CLASS: unnumbered
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2022-12-21 Wed 16:56]
-:END:
-# Set The Stage: What work is done? How does this connect to it?
-*** DONE Multi-Fidelity Learning 
+** DONE Multi-Fidelity Learning 
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 11:26]
 - State "DONE"       from "TODO"       [2022-09-13 Tue 12:51]
