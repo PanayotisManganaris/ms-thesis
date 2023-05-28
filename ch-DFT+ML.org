@@ -902,7 +902,7 @@ Notably, the Random Forest Regression (RFR) primarily uses the highly correlated
 :results:
 :end:
 
-#+begin_src jupyter-python :post wrap(*this*, "400pt :options inkscapeformat=png, inkscapedpi=300", "label:fig:rpear raw features with (\\(|p|>0.5\\)) against band gap")
+#+begin_src jupyter-python :post wrap(*this*, "400pt :options inkscapeformat=png, inkscapedpi=300", "label:fig:rpear raw features with (\\(|p| > 0.5\\)) against band gap")
   p = px.imshow(sub, color_continuous_scale='RdBu_r', zmin=-1, zmax=1,
                 labels=dict(color="Pearson Coefficient"),
                 y = ytitles, text_auto='.2f',
@@ -912,8 +912,6 @@ Notably, the Random Forest Regression (RFR) primarily uses the highly correlated
   p.update_yaxes(tickangle=-35, )
   p.update_layout(coloraxis=dict(colorbar=dict(len=1, orientation='h', y=0.65)))
   p.update_layout(
-      paper_bgcolor='rgb(255,255,255)',
-      plot_bgcolor='rgb(255,255,255)',
       margin=dict(t=0,b=0,l=0,r=0),
   )
   p.update_layout(
@@ -930,8 +928,8 @@ Notably, the Random Forest Regression (RFR) primarily uses the highly correlated
 :results:
  
 #+attr_latex: :width 400pt :options inkscapeformat=png, inkscapedpi=300
-#+CAPTION: label:fig:rpear raw features with (\(|p|>0.5\)) against band gap
-[[file:./.ob-jupyter/86ea07ec49cfd9a1052cd7c3bf12cf13c3ed9f9b.svg]]
+#+CAPTION: label:fig:rpear raw features with (\(|p| > 0.5\)) against band gap
+[[file:./.ob-jupyter/f93593f90e4b5b8cccd7c1395b6e9977e884e8d9.svg]]
 :end:
 
 # Likewise, with respect to the generality measure conducted earlier, it seems the presence of individual elements is far more predictive of the total band gap than mix status.
