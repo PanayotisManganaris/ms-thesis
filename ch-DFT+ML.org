@@ -729,7 +729,7 @@ These can serve as a high quality, introspective domain for the other architectu
  
 #+attr_latex: :width 300pt
 #+CAPTION: 
-[[file:./.ob-jupyter/1cfbeb7d17e75e535304290461c8be5b27e5146d.svg]]
+[[file:./.ob-jupyter/9bd05e8f67914ef2d5544d9efe0ae73a9a41eedf.svg]]
 :end:
 
 **** gpr
@@ -764,7 +764,7 @@ These can serve as a high quality, introspective domain for the other architectu
  
 #+attr_latex: :width 300pt
 #+CAPTION: 
-[[file:./.ob-jupyter/377183c6393fbd0cf4a9641563bd03c7421bc455.svg]]
+[[file:./.ob-jupyter/2b237a7496c5cdb33ba5bf6e7d064b615795b13b.svg]]
 :end:
 
 *** DONE Best Models on Engineered Domain
@@ -783,7 +783,7 @@ Unfortunately, whatever the gains in training time complexity and extrapolative 
 This was unexpected considering the raw features are by their nature highly correlated and presumed redundant.
 Nevertheless, the RFR model on the higher dimensional, sparser raw features is superior.
 
-#+begin_src jupyter-python :post wrap(*this*, w="450pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:pairplots SIS-based model predictions vs true values at multiple fidelities")
+#+begin_src jupyter-python :post wrap(*this*, w="450pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:sis-pairplots SIS-based model predictions vs true values at multiple fidelities")
   p0 = make_subplots(rows=1, cols=2, shared_yaxes=True)
 
   for trace1, trace2, trace3 in zip(p1.data, p2.data, p3.data):
@@ -843,8 +843,8 @@ Nevertheless, the RFR model on the higher dimensional, sparser raw features is s
 :results:
  
 #+attr_latex: :width 450pt :options inkscapeformat=png, inkscapedpi=300
-#+CAPTION: label:fig:pairplots SIS-based model predictions vs true values at multiple fidelities
-[[file:./.ob-jupyter/2ecd3e9f2764e7415d29b9a5564477a1c896acea.svg]]
+#+CAPTION: label:fig:sis-pairplots SIS-based model predictions vs true values at multiple fidelities
+[[file:./.ob-jupyter/3e69dc16f31bdc9d9941843a5f8a7a3ee3884e63.svg]]
 :end:
 
 ** DONE Discussion
