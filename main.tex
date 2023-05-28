@@ -32,6 +32,25 @@
 
 \documentclass{PurdueThesis}
 
+% use svg to include procedurally generated vector graphics
+\usepackage{svg}
+\svgsetup{%
+  inkscapelatex=false,
+  inkscapeformat=pdf,
+  inkscapedpi=300,
+}
+
+\usepackage{hyperref}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}
+}
+
+
 %%%% \ExplSyntaxOn                         %%%% changed 2021-07-27 by mark
 %%%% \bool_set_true:N \ZZCenterCaptionB    %%%% changed 2021-07-27 by mark
 %%%% \ExplSyntaxOff                        %%%% changed 2021-07-27 by mark
@@ -50,10 +69,10 @@
 % To override the default choices picked by \ConfigureBibliography, change,
 % \ConfigureBibliography
 % to
-    % \ConfigureBibliography
-    \newcommand{\ZZBibProcessor}{BibLaTeX}
-    \usepackage[backend=biber, citestyle=apa, dashed=false, sortcites=true, style=apa]{biblatex}
-    \addbibresource{/home/panos/org/bibliotex/bibliotex.bib}
+% \ConfigureBibliography
+\newcommand{\ZZBibProcessor}{BibLaTeX}
+\usepackage[backend=biber, citestyle=apa, dashed=false, sortcites=true, style=apa]{biblatex}
+\addbibresource{/home/panos/org/bibliotex/bibliotex.bib}
 
 % If you don't want to ignore urldate fields,
 % comment out (put "%" before) the next ten lines.
@@ -222,7 +241,9 @@
 
 % Introductions may precede the first chapters or major divisions of theses.
 % Reference: TM2017, page 31.
-\include{ch-introduction}
+% \include{ch-introduction}
+
+\include{ch-DFT+ML}
 
 %
 % This is only done if you are using BibLaTeX.
@@ -268,7 +289,7 @@
 \appendices
 
   % "About Appendices" appendix.
-  \include{ap-about-appendices}
+  % \include{ap-about-appendices}
 
   % Print the index.
   % The index is optional.

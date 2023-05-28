@@ -1,0 +1,1237 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:("TODO" "DONE" "NEXT") tex:t
+#+options: timestamp:t title:t toc:nil todo:nil |:t
+#+title: ch-DFT+ML
+#+date: <2023-05-10 Wed>
+#+author: Panayotis Manganaris
+#+email: panos.manganaris@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 28.2 (Org mode 9.6.5)
+#+cite_export:
+#+latex_class: reportchapter
+#+latex_class_options:
+#+latex_header:
+#+latex_header_extra:
+#+description:
+#+keywords:
+#+subtitle:
+#+latex_engraved_theme:
+#+latex_compiler: pdflatex
+#+date: \today
+#+PROPERTY: header-args:jupyter-python :session mrg :kernel mrg :pandoc org :async yes
+#+PROPERTY: header-args :results scalar drawer :eval never-export :exports results
+# Intended for ONLY body export
+* COMMENT dependencies
+#+INCLUDE: /home/panos/Documents/manuscripts/DFT+ML+feature_engineering/dependencies.org
+
+* COMMENT load sample and spaces
+#+begin_src jupyter-python
+  Xt = pd.read_csv("./X_t.csv", index_col=0)
+  Xc = pd.read_csv("./X_c.csv", index_col=0)
+  Xp = pd.read_csv("./X_p.csv", index_col=0)
+  X = Xt
+  Y = pd.read_csv("./Y.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  X_big = pd.read_csv("./X_card.csv", index_col=0)
+  Y_big = pd.read_csv("./Y_card.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  XX = pd.read_csv("./X_processed.csv", index_col=0)
+  XX_big = pd.read_csv("./X_card_processed.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+* Multi-fidelity Machine Learning for Perovskite Band Gap Predictions
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
+# Design parameters other than composition were held constant.
+# The composition parameter poses serious challenges to optimization due to the combinatorial scaling experienced in the space as more candidates for each site is introduced.
+  
+# This 14-dimensional vector is a sufficient descriptor of a perovskites.
+# To improve regression, 36 additional predictors derived from linear combinations of compositions and elemental properties obtained from the trusted Mendeleev databases are examined.
+  
+# Other structural parameters, including metastable phases and bond angles are significant, but require different feature encoding strategies.
+  
+# Perovskite semiconductors offer opportunities to reduce cost and environmental impact as well as increase the performance of devices ranging from superconductors and computational q-bits to light emitting diodes and solar cells.
+
+** DONE Introduction
+:PROPERTIES:
+:CLASS: unnumbered
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 16:56]
+:END:
+# Set The Stage: What work is done? How does this connect to it?
+*** DONE Multi-Fidelity Learning 
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 11:26]
+- State "DONE"       from "TODO"       [2022-09-13 Tue 12:51]
+:END:
+The state of the art in materials modeling favors Graph Neural Network (GNN) architectures.
+[cite:@chen-2019-graph-networ;@choudhary-2021-atomis-line;@xie-2018-cryst-graph]
+These deep learning models have sufficient flexibility to capture the continuous variability in relative positions of crystals and molecules.
+They are effective models, but they are difficult to use with physical materials.
+Accurately characterizing structures at a level of atomic granularity cannot be achieved even with state of the art 3D Electron Tomography techniques.
+[cite:@ercius-2015-elect-tomog]
+Yet, characterization of chemical composition is a well established practice, for example using X-ray spectroscopy.
+
+Graph convolutional neural networks can power more accurate structure-target predictions at multiple fidelities [cite:@chen-2020-multi-fidel] by performing Multi-Task Learning (MTL).
+For instance, this multiple-fidelity machine learning technique can infer the relationships between more plentiful PBE GGA data and rarer but more accurate HSE06 data based on a shared set of predicting features.
+This relationship, if sufficiently general, can be used to reliably extrapolate from known points on the PBE co-domain to the unknown HSE co-domain.
+Of course, while this is implemented successfully in neural networks, the concept holds for any model architecture that can simultaneously regress multidimensional targets which do not need to constitute one rectangular data structure.
+
+Additionally, there are alternative approaches for learning from multiple fidelities of data that can be implemented on the domain side.
+This circumvents the requirement for flexibility in encoding the co-domain.
+For instance modeling the multiple outcomes as varying depending on a categorical variable representing the fidelity makes it possible to use a single target regression methods.
+Our problem of accurately modeling low availability, high fidelity targets is approached in this way.
+
+# Semi-supervised learning is a competing set of methods achieving
+# similar outcomes.
+# [cite:@chapelle-2006-semi-super-learn;@lee-2013-pseud-label]
+
+We will employ the domain-side approach where the largest, lowest fidelity component of our dataset consists of density functional theory (DFT) band gap predictions made at the generalized gradient approximation (GGA) Perdew-Burke-Ernzerhof (PBE) level of theory.
+On the other end, the smallest and highest fidelity subset of the sample consists of experimental measurements of physical devices collected from the literature.
+
+** DONE Multiple Fidelity Dataset
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 12:16]
+:END:
+*** DONE Perovskite Band Gaps
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 12:16]
+:END:
+# need to introduce the significance of predicting band gaps more effectively
+
+We aim to accurately predict performance-relevant halide perovskite (HaP) band gaps, which strongly predict photovoltaic performance.
+[cite:@mannodi-kanakkithodi-2019-compr-comput]
+
+Furthermore, using multi-fidelity modeling we aim to predict the experimentally measured band gaps of compounds that have only been simulated to date.
+Our fidelity hierarchy climbs from DFT simulations performed using the basic PBE GGA functional, to results obtained from physical experiments aggregated in literature see table ref:tbl:LoTs.
+[cite:@almora-2020-devic-perfor;@kim-2014-cdses-nanow;@swanson-2017-co-sublim] 
+
+While we acknowledge the advantages of GNNs, we aim to express band gap as functions primarily of the perovskite composition.
+It is known the octahedral arrangement of perovskites is most relevant to their electronic structure, nevertheless, a strong understanding of the influence of chemical composition on performance will continue to be a priority as it is expected to aid in [[Feature Engineering][Feature Engineering]].
+
+#+begin_src jupyter-python :post wraptbl(*this*, c="label:tbl:LoTs Sample counts by density functional represented in dataset")
+  Y.LoT.value_counts().to_frame()
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+CAPTION: label:tbl:LoTs Sample counts by density functional represented in dataset 
+|                 |  LoT |
+|-----------------+------|
+| PBE             |  492 |
+| HSE             |  297 |
+| HSE(SOC)        |  282 |
+| HSE-PBErel(SOC) |  244 |
+| EXP             |   90 |
+|-----------------+------|
+|                 | 1405 |
+#+TBLFM: @7$2=vsum(@I..@II)
+:end:
+
+A detailed analysis of this combined hybrid organic-inorganic and purely inorganic HaP DFT dataset is covered in a prior article by [cite/text:@yang-2022-high-throug] and in [[DFT Details]].
+Naturally, the statistics obtained from each fidelity vary (figure ref:fig:bg_dist).
+This is the primary challenge we will address with the categorically dimensioned multi-fidelity models discussed in [[Methods]].
+
+#+begin_src jupyter-python :post wrap(*this*, c="label:fig:bg_dist Variability in band gaps at each fidelity")
+  p = px.box(Y, y="bg_eV", x="LoT")
+  p.update_yaxes(title="Band Gap [eV]")
+  p.show('svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+#+CAPTION: label:fig:bg_dist Variability in band gaps at each fidelity
+[[file:./.ob-jupyter/e43c69abaab32a55a294c19aa5cdde4a867cdce8.svg]]
+:end:
+
+*** DONE Sampling
+:LOGBOOK:
+- State "DONE"       from              [2022-09-13 Tue 12:51]
+:END:
+The simulations for each level of theory are performed on some number of members to a fixed subset of the total 37785 compositions that can be combinatorially generated in a 2x2x2 perovskite supercell when allowing /at most/ single-site alloying with our 14 constituent candidates for 3 sites (table ref:tbl:site_tbl).
+
+#+caption: label:tbl:site_tbl ABX_3 Chemical Domain
+| /      | <  |    |    |    |    |    |
+| A-site | MA | FA | Cs | Rb | K  |    |
+| B-site | Pb | Sn | Ge | Ba | Sr | Ca |
+| X-site | I  | Br | Cl |    |    |    |
+
+Within this domain space, we try to maintain a balance in the share of samples that represent each one of the "cardinal mixing" categories.
+Additionally, within each mix we try to maintain a reasonable balance of purely inorganic samples versus hybrid organic-inorganic samples.
+See [[Methods]] for details on how these categories were utilized in model development.
+
+This previously reported dataset demonstrates very even coverage of the cardinal mixing domain as shown in figure ref:fig:coverage.
+The clusters in this figure correspond to the alloying scheme of the data points
+# (see figure ref:fig:alloys)
+This sample provides the opportunity to comfortably interpolate the properties of other members of the cardinal mixing domain.
+Concurrently, we test the ability of our models to extrapolate with respect to alloying scheme as well as level of theory.
+It also provides an opportunity to investigate the statistical impact of constituent compounds on perovskite property prediction.
+See [[Discussion]].
+
+#+begin_src jupyter-python
+  projdf = pd.read_csv("./proj_t_rfr_tsne_c.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:coverage Samples overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE")
+  p = px.scatter(
+      projdf.replace(np.NaN, False),
+      facet_col='perplexity', facet_col_wrap=4,
+      x='0', y='1',
+      hover_name="Formula",
+      color='LoT'
+  )
+  p.update_layout(
+      legend_title="Sampled", legend_itemsizing='constant',
+      legend_orientation='h',
+      margin=dict(l=0, r=0, t=0, b=0),
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+
+  p.data[0].name='SIM'
+
+  p.data = (p.data[1], p.data[0], p.data[2])
+
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: label:fig:coverage Samples overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE
+[[file:./.ob-jupyter/d20bd47669e6d6375c8646ad2bc35b817ce61eee.svg]]
+:end:
+
+*** DONE Model Optimization
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 16:56]
+:END:
+# not every scrap of data collected in the experiments was included in the sample
+# standard cleaning and deduping operations need only be mentioned
+
+The rigorous hyper-parameter Optimization (HPO) of any feature engineering and modeling pipeline is a problem discussed extensively in the literature.
+HPO approaches can be broadly separated into exhaustive and efficient optimization strategies.
+[cite:@yang-2020-hyper-optim]
+We use a two-stage procedure for selecting the best model parameters.
+
+The first stage is an exhaustive grid-search over diversely sampled parameter space.
+Each combination of parameters instantiates a model which is then fit to each of a set of stratified training subsets generated by a K=3 K-fold split cross-validation strategy.
+Every fitted model is subsequently tested against the cross-validation test sets and a suite of regression scoring metrics are applied to each member category simultaneously using a custom SciKit-learn score adapter[fn:4].
+The grid search is then narrowed to a high performance quadrant of the search space by the model evaluator based on recommendations made by a simple entropy minimization algorithm[fn:4].
+
+The recommended grid quickly eliminates under-performing settings based on the sample probability of a setting appearing in a set of finalists according to the scoring rankings.
+The selection score is additionally influenced by a weighted sum of the scoring ranks allowing for considerably tuning the selection criterion.
+ For best results, a few different grid spaces should be explored to corroborate eliminations.
+
+After the recommendation is made, the granularity of the grid is increased in the remaining ambiguous parameters and the process is repeated.
+In general, no more than 2 or 3 exhaustive searches are needed over a given set of grids.
+Past this point, continuously variable hyper parameters can be individually optimized by plotting validation curves.
+
+** DONE Methods
+:PROPERTIES:
+:CLASS: unnumbered
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 16:53]
+:END:
+*** DONE DFT Details
+:PROPERTIES:
+:CLASS: unnumbered
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 15:31]
+:END:
+The largest subdivision of 1400 compounds correspond to a series of optoelectronic DFT simulations.
+The simulated experiments are performed on some subset (table ref:tbl:LoTs) of ~500, exclusively pseudo-cubic, \(\ce{ABX_3}\) supercells obtained by geometry optimization of modified structure files [cite:@pilania-2016-machin-learn] originally obtained from the Computational Materials Repository[fn:2].
+Each cell demonstrates an SQS mixed composition at none or one of each of the A, B, or X sites.
+See the coverage of this sample in figure ref:fig:coverage.
+
+Each relaxed structure is made in two ways.
+Once with the PBE GGA functional and once with the HSE06 functional.
+Band gaps are obtained using a static band structure calculation performed at the same and at higher levels of theory.
+
+The chosen functionals each offer strengths and weaknesses.
+PBE is inexpensive but typically underestimates band gaps.
+HSE06 is orders of magnitude more expensive and may fail to converge structure relaxations but tends to be more trustworthy for electronic structure properties.
+HSE06 on PBE relaxation attempts to mitigate the disadvantages of each individually.
+The use of Spin Orbit Coupling helps to better electronic properties simulation in compounds containing Lead.
+# - D3 is performed for improved Van der Waals dispersion forces
+
+*** DONE Featurization of Chemistries
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 15:39]
+:END:
+For \alpha total A-site constituents represented in the whole database, \beta total B-site constituents, and \gamma total X-site constituents, we provide a Python tool[fn:3] which robustly coverts the composition string of each data point into a \(\alpha + \beta + \gamma\) dimensional composition vector.
+In the case of our total dataset description \(\alpha + \beta + \gamma = 14\).
+[cite:@yang-2022-high-throug]
+In a subset of the data, the chemical vector (listing ref:lst:cdf) is produced using cmcl (listing ref:lst:cmcl).
+
+#+CAPTION: label:lst:cmcl An example of the cmcl "ft" feature accessor
+#+begin_src jupyter-python :exports src
+  import cmcl
+  Y = load_codomain_subset()
+  df = Y.Formula.to_frame().ft.comp()
+  df.index = Y.Formula
+  print(df)
+#+end_src
+
+#+begin_export latex
+\begin{listing}[htbp]
+\centering
+\begin{verbatim}
+                    FA   Pb   Sn    I   MA   Br
+Formula                                        
+FAPb_0.7Sn_0.3I_3  1.0  0.7  0.3  3.0  NaN  NaN
+MAPb(I0.9Br0.1)3   NaN  1.0  NaN  2.7  1.0  0.3
+\end{verbatim}
+\caption{\label{lst:cdf} Data frame of composition vectors generated by cmcl}
+\end{listing}
+#+end_export
+
+This is naturally a sparse, relatively high dimensional descriptor.
+With any growth in the composition space it becomes sparser.
+This descriptor has been shown to be effective for interpolating the properties of irregularly mixed large supercells.
+[cite:@mannodi-kanakkithodi-2022-data-driven]
+However, a spare descriptor is generally bad for extrapolative modeling.
+[cite:@ghiringhelli-2015-big-data] 
+
+When extrapolation is the aim, continuously distributed, unique, and linearly independent features are much more reliable.
+[cite:@lux-2020-inter-spars] 
+
+Our attempts to provide a domain with these characteristics results in the following raw feature space.
+
+- 14 sparse composition vectors extracted from chemical formula using =cmcl=[fn:3]
+- 36 dense site-averaged property space computed as a linear combination of composition vectors and measured elemental properties [cite:@mentel-2014]
+- 5 categorical dimensions one-hot-encoding level of theory.
+  - this provides the categorical axis for multi-task learning
+  - see table ref:tbl:LoTs
+
+*** DONE Machine Learning Algorithms and Parameter Optimization
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 16:26]
+:END:
+We train Random Forest Regression (RFR) and Gaussian Process Regression (GPR) models of band gap on the union of predictor features previously discussed.
+The RFR is a flexible nonlinear model, the GPR a principled linear model.
+Shapley Additive Explaination (SHAP) analysis of the models lends insight to the average physical impacts of 1) site-specific alloying and 2) using organic molecules in the Perovskite superstructure.
+ Model development and feature extraction is performed using Python and SciKit-Learn v1.2.
+[cite:@pedregosa-2011-scikit-learn] 
+
+# Our model development will test the hypothesis that formula that fall within one of the four mixing categories or one of the two hybrid-organic/inorganic categories will share some distributed qualities with others in that category.
+
+We are careful to maintain the diversity of mixing types and hybrid-organic/inorganic samples within each fidelity subset.
+We expect this will help to ensure the models learn relationships between fidelities, not differences in alloy scheme or constituency distributions within each fidelity.
+
+Each model architecture is rigorously optimized with regard to both 1) generality over the domains of Perovskite compositions and site-averaged constituent properties and 2) generality over the domain of alloy classifications.
+
+In order to monitor for possible categorical biases effecting regressions, nine metrics are used to evaluate the performance of each model over all alloy types at every stage of the hyper-parameter optimization.
+This is done simultaneously, only models that perform uniformly well on all alloy types are selected.
+
+We expect perovskites of a given alloy class and of a given hybrid-organic/inorganic status will perform significantly differently with respect to a particular application compared to perovskites of a another class or status.
+We attempt to make models that reasonably explain this high entropy mixing diversity by utilizing the cardinal mixing represented in our sample.
+
+We do this by training each model using two test/train splits.
+First, the optimal model parameters are chosen for their performance under a random split.
+A minimum of 3-fold cross-validation is performed for every set of model parameters that is considered.
+# (See [[Learning Curves]]).
+Finally, the optimized model's ability to extrapolate is
+tested by training/testing on splits determined with a groupwise
+K-fol] splitting strategy.
+
+Two separate cross validation schemes are employed at each stage of the design process.
+First, the sample set is shuffled once and split to mitigate the models tendency to fit on sample order, then, stratified K-folds are generated in manner consistent with the types of each sample.
+The regressor is then trained on the subsets of each class.
+Its ability to extrapolate is independently metered on each validation fold consisting of members of the other classes.
+
+Second, the ability for a model trained on samples belonging to one class/status to extrapolate to samples of another class/status is tested as well.
+The samples again are shuffled and split.
+then the training set is separated using a grouping K-fold split strategy.
+
+A final best model is instantiated using the overall best performing parameters.
+These models are finally validated against the test sets originally split off from the sample in both their extrapolative ability and consistency 
+Thiprocedure in demonstrated in an online notebook by [cite/text:@manganaris-2022-mrs-comput] hosted on the Purdue NanoHUB.
+
+*** DONE Feature Engineering
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2022-12-21 Wed 16:51]
+:END:
+There has been success in creating analytical expressions for perovskite properties, particularly lattice parameters.
+[cite:@jiang-2006-predic-lattic] In an attempt to find an analytical predictor for band gap we employ the Sure Independence Screening and Sparsifying Operator (SISSO).
+[cite:@ouyang-2018-sisso] 
+
+SIS[fn:1] is a powerful application of compressed sensing.
+[cite:@ghiringhelli-2017-learn-physic]
+The SIS operator is a potent dimensionality reduction technique.
+It does not perform any mathematical decomposition but instead picks existent dimensions that begin to approximate an orthogonal basis.
+It outperforms CUR decomposition by functioning effectively in extremely high rank vector spaces.
+[cite:@ray-2021-various-dimen;@hamm-2019-cur-decom]
+This is accomplished by posing the decomposition as a compressed sensing problem in the correlation metric space.
+
+It allows the program to effectively find candidates for a linearly independent basis in a vector space of immense size.
+unlike legacy techniques, e.g.
+LASSO, it does not suffer when features are correlated.
+[cite:@tibshirani-1996-regres-shrin;@gauraha-2018-introd-to-lasso]
+
+This allows for it to be used in performing a brute force search of a super-space generated by combinatorial operations on the raw predictor variables.
+
+The Sparsifying Operator finds members of the resulting basis set which correlate with the target co-domain.
+it does this by creating a sparsified linear model, similar again to a LASSO.
+This process produces an analytic model of the target property, which is easy to interpret and can even be constrained for consistent combination of dimension units.
+
+Subsequent applications of the SIS operator to the residuals of this model are a clever interrogation of error yielding more orthogonal basis sets that can be incorporated into the model.
+[cite:@mayo-1998-error-growt]
+
+SISSO is run for our dataset on the same partitioning scheme used by the previous models via an SciKit-learn compliant [cite:@buitinck-2013-api] interface[fn:5] extensively modified from the original Matgenix[fn:6] code.
+Additionally, the algorithm is informed of features units so that it is restricted to meaningful linear combinations.
+SIS features complexity is restricted to a maximum of 3 operations primarily to encourage parsimonious descriptions.
+The available operation set is outlined in table ref:tbl:ops.
+
+#+CAPTION: label:tbl:ops operations for formation of combinatorial super-space
+| Binary         | Unary             |
+|----------------+-------------------|
+| addition       | reciprocation     |
+| subtraction    | power 2           |
+| multiplication | power 3           |
+| division       | natural logarithm |
+|                | exponentiation    |
+|                | root 2            |
+
+** DONE Results
+:PROPERTIES:
+:CLASS: unnumbered
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-05-19 Fri 09:26]
+:END:
+*** DONE COMMENT create subplots
+:LOGBOOK:
+- State "DONE"       from              [2022-12-21 Wed 13:11]
+:END:
+**** rfr
+#+begin_src jupyter-python
+  data = pd.read_csv(os.path.expanduser('~/data/perovskites/rfr_pred.csv'), index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*)
+  x='true'
+  y='pred'
+  p1 = px.scatter(
+      data[data.partition=='test'],
+      x=x, y=y,
+      hover_name="Formula",
+      color="LoT"
+  )
+  xlims = min(data[x]), max(data[y])
+  ylims = min(data[y]), max(data[y])
+  p1.add_scatter(x = [min(xlims+ylims), max(xlims+ylims)],
+                y = [min(xlims+ylims), max(xlims+ylims)],
+                mode='lines', name="parity", marker=dict(color="black"),
+                row='all', col='all')
+  p1.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+#+CAPTION: 
+[[file:./.ob-jupyter/afacec3b693eab0abeba71b7b157548cabf0e90d.svg]]
+:end:
+
+**** gpr
+#+begin_src jupyter-python
+  data = pd.read_csv(os.path.expanduser('~/data/perovskites/gpr_pred.csv'), index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*)
+  x='true'
+  y='pred'
+  p2 = px.scatter(
+      data[data.partition=='test'],
+      x=x, y=y,
+      hover_name="Formula",
+      color="LoT"
+  )
+  xlims = min(data[x]), max(data[y])
+  ylims = min(data[y]), max(data[y])
+  p2.add_scatter(x = [min(xlims+ylims), max(xlims+ylims)],
+                y = [min(xlims+ylims), max(xlims+ylims)],
+                mode='lines', name="parity", marker=dict(color="black"),
+                row='all', col='all')
+  p2.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+#+CAPTION: 
+[[file:./.ob-jupyter/85566ad2104fdd918f8748e90247977ea57f2913.svg]]
+:end:
+
+**** sisso
+#+begin_src jupyter-python
+  data = pd.read_csv(os.path.expanduser('~/data/perovskites/sisso_pred.csv'), index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*)
+  x='true'
+  y='pred'
+  p3 = px.scatter(
+      data[data.partition=='test'],
+      x=x, y=y,
+      hover_name="Formula",
+      color="LoT"
+  )
+  xlims = min(data[x]), max(data[y])
+  ylims = min(data[y]), max(data[y])
+  p3.add_scatter(x = [min(xlims+ylims), max(xlims+ylims)],
+                y = [min(xlims+ylims), max(xlims+ylims)],
+                mode='lines', name="parity", marker=dict(color="black"),
+                row='all', col='all')
+  p3.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+#+CAPTION: 
+[[file:./.ob-jupyter/52b2f8da20b8039dc06e5fc3935c270210c7c9b5.svg]]
+:end:
+
+*** DONE Best Models on Raw Domain
+:LOGBOOK:
+- State "DONE"       from              [2022-12-21 Wed 13:21]
+:END:
+# make sure to create subplots first
+#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:pairplots model predictions vs true values at multiple fidelities")
+  p0 = make_subplots(rows=1, cols=3, shared_yaxes=True)
+
+  for trace1, trace2, trace3 in zip(p1.data, p2.data, p3.data):
+      p0.add_trace(trace1, row=1, col=1) 
+      p0.add_trace(trace2, row=1, col=2)
+      p0.add_trace(trace3, row=1, col=3)
+
+  p0.update_xaxes(tickvals=list(range(8)))
+  p0.update_yaxes(row=1, col=1,
+                  title="RFR Prediction",
+                  title_font_size=24,
+                  tickfont_size=20,
+                  )
+  p0.update_yaxes(row=1, col=2,
+                  title="GPR Prediction", title_standoff=0,
+                  title_font_size=24,
+                  tickfont_size=20,
+                  )
+  p0.update_yaxes(row=1, col=3,
+                  title="SISSO Prediction", title_standoff=0,
+                  title_font_size=24,
+                  tickfont_size=20,
+                  )
+
+  p0.layout.xaxis.scaleanchor="y"
+  p0.layout.xaxis2.scaleanchor="y2"
+  p0.layout.xaxis3.scaleanchor="y3"
+
+  p0.update_traces(showlegend=False, row=1, col=1)
+  p0.update_traces(showlegend=False, row=1, col=2)
+
+  p0.update_xaxes(mirror=True,
+                  constrain='domain', title='DFT Calculation',
+                  title_font_size=24,)
+  p0.update_yaxes(mirror=True)
+
+  p0.update_traces(
+      line=dict(color = 'black', width = 4),
+  )
+  p0.update_traces(
+      marker_line=dict(color = 'black', width = 1),
+      marker_size=6,
+      selector={'marker_symbol':'circle'}
+  )
+
+  p0.update_layout(
+      legend=dict(orientation='h', y=-0.3),
+      margin=dict(t=70, b=0, l=0, r=0),
+      width=800, height=330,
+      title = "Band Gap [eV] (282 test predictions)"
+  )
+
+  p0.add_annotation(x=2.5, y=6, xref='x', yref='y',
+                    text="r2 = 0.99<br>maxerr = 0.80<br>rmse = 0.12<br>", font_size=15,
+                    showarrow=False)
+
+  p0.add_annotation(x=2.5, y=6, xref='x2', yref='y',
+                    text="r2 = 0.98<br>maxerr = 1.28<br>rmse = 0.15<br>", font_size=15,
+                    showarrow=False)
+
+  p0.add_annotation(x=2.5, y=6, xref='x3', yref='y',
+                    text="r2 = 0.88<br>maxerr = 2.17<br>rmse = 0.47<br>", font_size=15,
+                    showarrow=False)
+
+  p0.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: label:fig:pairplots model predictions vs true values at multiple fidelities
+[[file:./.ob-jupyter/dc863520dccc5f4cefbddf3272f3866b5d78ae59.svg]]
+:end:
+
+The optimized models are high performing (Table ref:tbl:LoTscores).
+The RFR hyper-parameters are listed in the appendix (Table ref:tbl:rfrHPO).
+
+The GPR model is tried with multiple kernels.
+Ultimately, the best is a non stationary Matern kernel with \(\nu = \frac{3}{2}\).
+
+*** DONE SISSO Model and SIS Engineered Features
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-01-04 Wed 07:35]
+:END:
+The Sure Independence Screening and Sparsifying Operator (SISSO) is a specific combination of multiple data mining techniques chained together resulting in a symbolically expressed regression model.
+[cite:@ouyang-2018-sisso;@ghiringhelli-2017-learn-physic] 
+
+The best SISSO model for band gap involving 3 SIS features (each composed of up to 4 basic features) has an unremarkable RMSE of 0.476 eV, barely outperforming an OLS regression on 55 dimensions (see Table ref:tbl:LoTscores).
+It is expressed in equation ref:eq:bgexp.
+Notably, while the units of the expression do not match the units of band gap as measured (target units are unknown to the algorithm), they are still energy units.
+This is by design, as the combination of features was restricted so to only allow compatible units to be combined.
+A separate training session without this restriction was attempted, but the resulting model's performance was worse.
+
+#+begin_src jupyter-python
+  def mbox_ammend(string):
+      matchlist = re.findall(r'\b(?!nonumber\b)[a-zA-Z\s]{3,}', string)
+      m = re.search(matchlist[0], string)
+      for substr in matchlist[1:]:
+          string = string[:m.start(0)] + '\mbox{' + m[0] + '}' + string[m.end(0):]
+          pat = re.compile(substr)
+          m = pat.search(string, m.end(0))
+      string = string[:m.start(0)] + '\mbox{' + m[0] + '}' + string[m.end(0):]
+      return string
+
+  def typeset_sisso_model(cpipe):
+      return '+'.join(
+          map(
+              lambda x: x[1:-1], 
+              map(str,zip(cpipe[-1].sisso_out.model.coefficients[0],
+                          map(lambda x: "&" + str(x) + "\nonumber\\", cpipe[-1].sisso_out.model.descriptors)))
+          )
+      ).replace(",", "").replace("_", " ").replace("'", "") + "+" + "".join(
+          map(str, cpipe[-1].sisso_out.model.intercept)
+      )
+#+end_src
+
+#+begin_src jupyter-python
+  cpipe = joblib.load("./Models/sisso_bg.joblib")
+  print(
+      "bg\mbox{ [eV]} = " + mbox_ammend(typeset_sisso_model(cpipe).replace(" kJpermol", ""))
+  )
+#+end_src
+
+\begin{align}
+\label{eq:bgexp}
+bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\nonumber\\+-0.5862929089 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\nonumber\\+1.063684923 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\nonumber\\+4.657097107
+\end{align}
+
+#+CAPTION: label:tbl:LoTscores RMSE of models on raw domain calculated per LoT subset
+| Score Categories  |      GPR |      RFR | Linear OLS |    SISSO | SIS + GPR | SIS + RFR |
+|-------------------+----------+----------+------------+----------+-----------+-----------|
+| rmse              | 0.156214 | 0.124738 |   0.499558 | 0.474754 |  0.251881 |  0.187431 |
+| rmse EXP          | 0.120475 | 0.154448 |   0.307186 | 0.330080 |  0.338949 |  0.235397 |
+| rmse PBE          | 0.128211 | 0.101872 |   0.472430 | 0.395827 |  0.171640 |  0.134529 |
+| rmse HSE          | 0.214920 | 0.152479 |   0.558077 | 0.519706 |  0.305443 |  0.208390 |
+| rmse HSE(SOC)     | 0.156785 | 0.108867 |   0.535087 | 0.572644 |  0.272158 |  0.221007 |
+| rmse HSE-PBE(SOC) | 0.130696 | 0.133027 |   0.466364 | 0.470758 |  0.252624 |  0.189510 |
+
+Computing and combining more than 3 SIS features is not rewarding of the computational expense.
+Residuals are increasingly uncorrelated with the generated SIS features and model accuracy gains do not outstrip complexity.
+However, in the process of creating Equation ref:eq:bgexp, 150 SIS predictor variables were determined and recorded.
+50 primary predictors, 50 first residual predictors, and 50 second residual predictors.
+These can serve as a high quality, introspective domain for the other architectures to fit on.
+
+*** DONE COMMENT create subplots
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2023-04-25 Tue 18:33]
+- State "NEXT"       from "TODO"       [2023-04-25 Tue 14:41]
+:END:
+**** rfr
+#+begin_src jupyter-python
+  data = pd.read_csv(os.path.expanduser('~/data/perovskites/rfr_sis_pred.csv'), index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*)
+  x='true'
+  y='pred'
+  p1 = px.scatter(
+      data[data.partition=='test'],
+      x=x, y=y,
+      hover_name="Formula",
+      color="LoT"
+  )
+  xlims = min(data[x]), max(data[y])
+  ylims = min(data[y]), max(data[y])
+  p1.add_scatter(x = [min(xlims+ylims), max(xlims+ylims)],
+                y = [min(xlims+ylims), max(xlims+ylims)],
+                mode='lines', name="parity", marker=dict(color="black"),
+                row='all', col='all')
+  p1.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+#+CAPTION: 
+[[file:./.ob-jupyter/1cfbeb7d17e75e535304290461c8be5b27e5146d.svg]]
+:end:
+
+**** gpr
+#+begin_src jupyter-python
+  data = pd.read_csv(os.path.expanduser('~/data/perovskites/gpr_sis_pred.csv'), index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*)
+  x='true'
+  y='pred'
+  p2 = px.scatter(
+      data[data.partition=='test'],
+      x=x, y=y,
+      hover_name="Formula",
+      color="LoT"
+  )
+  xlims = min(data[x]), max(data[y])
+  ylims = min(data[y]), max(data[y])
+  p2.add_scatter(x = [min(xlims+ylims), max(xlims+ylims)],
+                y = [min(xlims+ylims), max(xlims+ylims)],
+                mode='lines', name="parity", marker=dict(color="black"),
+                row='all', col='all')
+  p2.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt
+#+CAPTION: 
+[[file:./.ob-jupyter/377183c6393fbd0cf4a9641563bd03c7421bc455.svg]]
+:end:
+
+*** DONE Best Models on Engineered Domain
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2023-04-25 Tue 18:33]
+- State "NEXT"       from "TODO"       [2023-04-25 Tue 14:41]
+:END:
+We set the aim of decreasing \(\mathcal{O}(n^3)\) computational expense of GPR by \approx{}10 times.
+So, we aim to take 30 highly correlated features (slightly more than one half the number used by prior models) from these SIS subspaces.
+We expected this to solve the problems inherent to the raw [[Featurization of Chemistries]].
+
+fitting models to SIS features may leverage the denser and more continuous domain to improve extrapolative predictions.
+Potentially into the high-entropy domain, or simply Theory.
+However using the SIS subspaces in this way compromises on SISSO's explicability and necessitates SHAP analysis.
+Unfortunately, whatever the gains in training time complexity and extrapolative ability, the models underperformed in predicting band gap in the cardinal mixing domain (see Table ref:tbl:LoTscores).
+This was unexpected considering the raw features are by their nature highly correlated and presumed redundant.
+Nevertheless, the RFR model on the higher dimensional, sparser raw features is superior.
+
+#+begin_src jupyter-python :post wrap(*this*, w="450pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:pairplots SIS-based model predictions vs true values at multiple fidelities")
+  p0 = make_subplots(rows=1, cols=2, shared_yaxes=True)
+
+  for trace1, trace2, trace3 in zip(p1.data, p2.data, p3.data):
+      p0.add_trace(trace1, row=1, col=1) 
+      p0.add_trace(trace2, row=1, col=2)
+
+  p0.update_xaxes(tickvals=list(range(8)))
+  p0.update_yaxes(row=1, col=1,
+                  title="RFR Prediction",
+                  title_font_size=24,
+                  tickfont_size=20,
+                  )
+  p0.update_yaxes(row=1, col=2,
+                  title="GPR Prediction", title_standoff=0,
+                  title_font_size=24,
+                  tickfont_size=20,
+                  )
+
+  p0.layout.xaxis.scaleanchor="y"
+  p0.layout.xaxis2.scaleanchor="y2"
+
+  p0.update_traces(showlegend=False, row=1, col=1)
+
+  p0.update_xaxes(mirror=True,
+                  constrain='domain', title='DFT Calculation',
+                  title_font_size=24,)
+  p0.update_yaxes(mirror=True)
+
+  p0.update_traces(
+      line=dict(color = 'black', width = 4),
+  )
+  p0.update_traces(
+      marker_line=dict(color = 'black', width = 1),
+      marker_size=6,
+      selector={'marker_symbol':'circle'}
+  )
+
+  p0.update_layout(
+      margin=dict(t=70, b=0, l=0, r=0),
+      width=650, height=330,
+      title = "Band Gap [eV] (282 test predictions)"
+      # legend= dict(orientation='h', y=-0.3)
+  )
+
+  p0.add_annotation(x=2.5, y=6, xref='x', yref='y',
+                    text="r2 = 0.98<br>maxerr = 1.18<br>rmse = 0.18<br>", font_size=15,
+                    showarrow=False)
+
+  p0.add_annotation(x=2.5, y=6, xref='x2', yref='y',
+                    text="r2 = 0.97<br>maxerr = 1.68<br>rmse = 0.25<br>", font_size=15,
+                    showarrow=False)
+
+  p0.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt :options inkscapeformat=png, inkscapedpi=300
+#+CAPTION: label:fig:pairplots SIS-based model predictions vs true values at multiple fidelities
+[[file:./.ob-jupyter/2ecd3e9f2764e7415d29b9a5564477a1c896acea.svg]]
+:end:
+
+** DONE Discussion
+:PROPERTIES:
+:CLASS: unnumbered
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-05-19 Fri 11:13]
+:END:
+
+*** DONE SHAP Analysis of Domain
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2023-05-19 Fri 08:50]
+- State "NEXT"       from "TODO"       [2023-04-25 Tue 19:10]
+- State "DONE"       from "TODO"       [2022-12-21 Wed 22:20]
+:END:
+SHAP scores are computed automatically for every dimension of every sample in the domain by the python SHAP package[fn:9].
+The sum of the expectation value of the target conditioned on the model features and the  SHAP scores computed for each predictor variable of a sample is the model's  prediction for that sample target.
+[cite:@lundberg-2017-unified-approac]
+For the perovskite band gap the expectation value is 2.836 when conditioned on the raw features and 2.863 when conditioned on the SIS features.
+The raw features' SHAP values are more centered around zero while engineered features are more often scored decisively positive or negative.
+
+Figures ref:fig:rfrSHAP and ref:fig:gprSHAP show the top score distributions.
+In each figure, features are ranked by overall value on the y-axis.
+The x-axis shows the SHAP score for each point.
+The points are shaped in a violin plot to show the distribution of effects the presence of the given feature can have.
+Finally, on the color-axis, feature value specifies whether a particular score is a large or small absolute contributor of the sum to the prediction.
+
+For instance, in figure ref:fig:rfrSHAP, the B-site Electronegativity is often a strongly positive contributor to the RFR prediction.
+However, almost always in this case it is out-contributed by other features, it does not mostly determine the result but it is still valuable.
+On the contrary, when it is a strongly negative contributor it effectively determines the result.
+It is interesting to see how models make use of features in light of basic bi-variate correlations.
+The only features that correlate strongly with band gap are illustrated in figure ref:fig:rpear.
+Notably, the Random Forest Regression (RFR) primarily uses the highly correlated features, while the Gaussian Process Regression (GPR) primarily uses features with lower Pearson correlations.
+
+#+CAPTION: label:fig:rfrSHAP Random Forest Regression Band Gap SHAP Values
+#+attr_latex: :width 450pt
+[[file:~/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/27cc6a3fc4eab6935fcc0988ea4ac382c4eb8147.png]]
+
+#+CAPTION: label:fig:gprSHAP Gaussian Process Regression Band Gap SHAP Values
+#+attr_latex: :width 450pt
+[[file:~/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/31552cf23170d5409f0d7f373221bd1784e2b209.png]]
+
+#+begin_src jupyter-python
+  XY = pd.concat([XX, Y], axis=1).select_dtypes(np.number).fillna(0)
+  pearson = pd.DataFrame(np.corrcoef(XY, rowvar=False),
+                         columns=XY.columns,
+                         index=XY.columns)
+  sub = pearson.iloc[56, 0:55]
+  ytitles = ["Band Gap [eV]"]
+  sub = sub.loc[(sub.abs()>0.5).apply(bool)].to_frame().T
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, "400pt :options inkscapeformat=png, inkscapedpi=300", "label:fig:rpear raw features with (\\(|p|>0.5\\)) against band gap")
+  p = px.imshow(sub, color_continuous_scale='RdBu_r', zmin=-1, zmax=1,
+                labels=dict(color="Pearson Coefficient"),
+                y = ytitles, text_auto='.2f',
+                height=300
+                )
+  p.update_xaxes(tickangle=-35)
+  p.update_yaxes(tickangle=-35, )
+  p.update_layout(coloraxis=dict(colorbar=dict(len=1, orientation='h', y=0.65)))
+  p.update_layout(
+      paper_bgcolor='rgb(255,255,255)',
+      plot_bgcolor='rgb(255,255,255)',
+      margin=dict(t=0,b=0,l=0,r=0),
+  )
+  p.update_layout(
+      xaxis = dict(tickmode='array',
+                   tickvals=list(range(sub.columns.shape[0])),
+                   ticktext=sub.columns.str.slice(6).str.replace("'", "").str.replace("_"," "),
+                   ),# font_size=40,
+      # xaxis = dict(text_font_size=40)
+  )
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 400pt :options inkscapeformat=png, inkscapedpi=300
+#+CAPTION: label:fig:rpear raw features with (\(|p|>0.5\)) against band gap
+[[file:./.ob-jupyter/86ea07ec49cfd9a1052cd7c3bf12cf13c3ed9f9b.svg]]
+:end:
+
+# Likewise, with respect to the generality measure conducted earlier, it seems the presence of individual elements is far more predictive of the total band gap than mix status.
+# This would explain why X-site and A-site alloys are sufficient to predict the band gaps of B-site alloys, despite those groups containing no B-site alloys themselves, they do contain a representative sample of B-site elements.
+
+SHAP scores in principle quantify the contributions of site members and site member properties to the perovskite band gap.
+On a sample-by-sample basis it is possible to say how much of the bandgap is contributed by the presense of a given quantity of, for example, Germanium.
+However a clustering analysis reveals no universal patterns.
+SHAP scores given the raw domain are near zero on average regardless of partitions made by level of theory, alloy scheme, or presence of organic A-site occupants.
+This analysis confirms the difficulty of deducing a rule of thumb for the synthesis of perovskites with desirable properties.
+If anything, figure ref:fig:clusters confirms that the Iodine at the X site tends to slightly increase band gaps.
+
+#+begin_src jupyter-python
+  SV = pd.read_csv("./RFR_t_sv.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:clusters SHAP score distributions reveal effects of individual constituents")
+  p = px.histogram(
+      SV.iloc[:, 1:15].join(
+          Y[['LoT','org','mix']]
+      ).melt(
+          id_vars=['LoT','org','mix']
+      ),
+      x='value',
+      facet_col='variable',
+      facet_col_wrap=4,
+      facet_col_spacing=0.04,
+      nbins=500,
+      )
+  p.update_xaxes(range=[-0.25, 0.25])
+  p.update_yaxes(range=[0, 4])
+  p.for_each_annotation(lambda a: a.update(
+      text = a.text.split("__")[-1].replace("'", "")
+  ))
+  for i,j in zip([1,1,2,2], range(4)):
+      p.update_xaxes(
+          row=i, col=j+1, title="SHAP value",
+          showticklabels=True,
+      )
+
+  for t in p.data:
+      mean = np.mean(t.x)
+      color = 'red'#t.marker.color
+      xa, ya = t.xaxis, t.yaxis
+
+      p.add_shape(
+          go.layout.Shape(
+              type='line', xref=xa, yref=ya,
+              x0=mean, y0=0, x1=mean, y1=4,
+              line=dict(
+                  color=color,
+                  width=2,
+              )
+          ),
+      )
+      p.add_annotation(
+          x=mean+0.05, y=3, xref=xa, yref=ya,
+          text=f"mean<br>{mean:.4f}",
+          showarrow=False,
+          xanchor='left'
+      )
+
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: label:fig:clusters SHAP score distributions reveal effects of individual constituents
+[[file:./.ob-jupyter/df6e096d29860b55fe5610a23627968785eebc23.svg]]
+:end:
+
+*** COMMENT load screening
+#+begin_src jupyter-python
+  screen = pd.read_csv("./screen_rfr.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  projdf = pd.read_csv("./proj_t_rfr_tsne_c.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+*** DONE Predictions and Screening
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-05-19 Fri 11:12]
+:END:
+Using the superior RFR model, we made predictions of the band gap for all 37785 possible compositions demonstrating cardinal mixing within the bounds of a 2x2x2 perovskite super cell.
+That is eight A-sites shared by up to 5 constituents, 8 B-sites shared by up to six constituents, and 24 X-sites shared by up to 3 constituents.
+Given the good coverage achieved by our sample dataset (figure ref:fig:coverage) and according to the scores reported in Table ref:tbl:LoTscores, the RFR model is capable of predicting band gaps at the experimental fidelity with a 0.154448 rmse.
+[cite:@yang-2023-high-throug]
+These predictions were projected on the sample space in Figure ref:fig:pred.
+
+#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:pred Band gap predictions overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE")
+  p = px.scatter(
+      projdf,
+      facet_col='perplexity', facet_col_wrap=4,
+      x='0', y='1',
+      hover_name="Formula",
+      color="bg_eV",
+  )
+  p.update_layout(
+      coloraxis=dict(colorbar=dict(title="band gap [eV]", title_side='top', orientation='h', )),
+      margin=dict(l=0, r=0, t=0, b=20),
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: label:fig:pred Band gap predictions overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE
+[[file:./.ob-jupyter/c2fa740c28da21ebb85c0902aea8c9b9ccbf3952.svg]]
+:end:
+
+We followed a similar high-throughput screening procedure to that laid out in prior works.
+[cite:@yang-2023-high-throug;@mannodi-kanakkithodi-2021-comput-data]
+We selected for band gaps between 1.0 and 2.5 eV as this range is expected to yield the best power conversion efficiency (PCE) in the visible spectrum.
+[cite:@yu-2012-ident-poten;@shockley-1961-detail-balan]
+Perovskite compounds were selected for their predicted stability by cutting on each of three tolerance factors.
+Namely the Goldschmidt's tolerance, the octahedral tolerance, and the tolerance proposed by [cite/text:@bartel-2019-new-toler].
+
+These cuts trimmed the data set from ~40000 points to a subset of 3247 viable candidates.
+These selected candidates were projected onto the domain space in Figure ref:fig:chosen.
+A Frequency analysis revealed the constituent elements of the chosen subset most often occupied either small or large shares of their site.
+Most A-site constituents preferred occupying 1/8^{th} of their site at a rate of about 8%, with Potassium and Rb also preferring full occupancy 10-12% of the time.
+B-site constituents favored pure configurations at a rate of 5-8% but also showed some preference for doping configurations.
+X-site constituents, however showed very strong preference for fully occupying their site 25% of the time.
+See figure ref:fig:freq.
+
+#+begin_src jupyter-python
+  dist = X_big.iloc[:,1:14].replace(
+      0, np.NaN
+  ).reindex(
+      screen.index
+  ).melt().dropna()
+
+  dist[['site', 'Element']] = dist['variable'].str.replace(
+      r"[\(\)']", "", regex=True
+  ).str.split(
+      ",", 1, expand=True
+  )
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  def make_percent(df):
+      df = df.assign(variable = df.variable / df.variable.sum() * 100)
+      return df
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:freq Frequency of mixing fractions of species at the A, B, and X sites across the ~3000 screen compounds")
+  freq = dist.groupby(['value', 'site', 'Element']).count().reset_index().sort_values('site')
+
+  p = make_subplots(cols=freq.site.unique().size, rows=1,
+                    subplot_titles=("A-site", "B-site", "X-site"),
+                    shared_xaxes=True)
+
+  elnum = {'A': 4, 'B': 6, 'X': 3}
+
+  for i, g in enumerate(freq.site.unique()):
+      group = freq[freq.site == g].pipe(make_percent)
+      colors = dict(zip(group['Element'].unique(), px.colors.qualitative.Plotly))
+      traces = []
+      for count, (element, sub) in enumerate(group.groupby('Element')):
+          color_map = colors[element]
+          traces.append(
+              go.Bar(
+                  x=sub['value'], y=sub['variable'], marker=dict(color=color_map),
+                  name=(element if count < elnum[g]-1 else element + '                                                                       '),
+                  legendgroup=g, #legendgrouptitle_text=g+'-site',
+                  width=0.02
+              )
+          )
+      for trace in traces:
+          p.add_trace(trace, col=i+1, row=1)
+
+      p.update_xaxes(
+          title='Share of ' + g + ' Site', title_font_size=24,
+          col=i+1, row=1
+      )
+      p.update_yaxes(title="Element Frequency (%)")
+
+  p.for_each_annotation(lambda a: a.update(font_size=30))
+
+  p.update_layout(
+      legend=dict(
+          bgcolor='rgba(0,0,0,0)',
+          orientation="h",
+          xanchor='center',
+          y=1.0, x=0.62,
+          itemsizing='constant',
+          font_size=20
+      ),
+      width=1500, 
+  )
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: label:fig:freq Frequency of mixing fractions of species at the A, B, and X sites across the ~3000 screen compounds
+[[file:./.ob-jupyter/1efb3d52d06615061a39bb4b1d85bf1336016744.svg]]
+:end:
+
+* Footnotes
+
+[fn:10]https://ai-materials-and-chemistry.gitbook.io/foundry/
+[fn:9]https://github.com/slundberg/shap
+[fn:8]https://github.com/PanayotisManganaris/manuscript--multifidelity-dft-ml.git 
+[fn:7]amannodi@purdue.edu
+[fn:6]https://github.com/Matgenix/pysisso 
+[fn:5]https://github.com/PanayotisManganaris/pysisso
+[fn:4]https://github.com/PanayotisManganaris/yogi 
+[fn:3]https://github.com/PanayotisManganaris/cmcl
+[fn:2]https://cmr.fysik.dtu.dk/ 
+[fn:1]https://github.com/rouyang2017/SISSO 
+
+#+NAME: wrap
+#+begin_src bash :var p="" :var w="300pt" :var c=""
+  echo -ne "$p \n#+attr_latex: :width $w\n#+CAPTION: $c"
+#+end_src
+
+#+NAME: wraptbl
+#+begin_src bash :var p="" :var w="300pt" :var c=""
+  echo -ne "$p \n#+CAPTION: $c "
+#+end_src
+
+#+name: glossary
+| label | term                    | definition                                                                                                                                                                                                                              |
+|-------+-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| cmix  | cardinal mixing         | Describes perovskite alloys where no more than one of the A, B, or X sites is occupied by multiple possible constituents                                                                                                                |
+| prtn  | partition               | Portion of sample data reserved for a purpose in model development                                                                                                                                                                      |
+| cv    | cross-validation        | Method for gathering statistics on the abilities of a model to fit to the parent partition                                                                                                                                              |
+| kfs   | K-fold split            | Data partition divided into K arbitrary groups for use in cross-validation schemes                                                                                                                                                      |
+| gkf   | groupwise K-fold        | Data partition divided into K-folds where each fold corresponds to a category label                                                                                                                                                     |
+| lot   | level of theory         | Refers to the rank of a DFT functional in the hierarchy of phenomenological comprehensiveness. A proxy for accuracy.                                                                                                                 |
+| mp    | Materials Project       | US Government-led multidisciplinary collaboration founded in 2011 as the Materials Genome Initiative.                                                                                                                                   |
+| ml    | machine learning        | a science concerned with algorithms which improve their performance with exposure to new data                                                                                                                                           |
+| ft    | features                | attributes of an observed event or object which might empirically explain the event or object                                                                                                                                           |
+| hp    | hyper-parameter         | a setting that controls how a learning algorithm works                                                                                                                                                                                  |
+| cl    | classical learning      | a paradigm of machine learning that is dependent on expert knowledge to extract quality features from samples in a dataset                                                                                                              |
+| sm    | surrogate model         | a representation which attempts to capture as much of the relationship between a domain and a target property as possible                                                                                                               |
+| dl    | deep learning           | a paradigm of machine learning differing from classical learning in that the features of the input data are themselves learned by the algorithm                                                                                         |
+| ls    | latent space            | a multidimensional abstraction of a problem space. the relationship between coordinates in this space and observation in the real world can be formulated to guarantee the viability of solutions in the abstraction                    |
+| eva   | evolutionary algorithms | a class of nature-inspire algorithms often applied to optimization in high dimensional discontinuous functions                                                                                                                          |
+| agn   | ALIGNN                  | the Atomistic Line Graph Neural Network considers relative positions of atoms in a crystal as well as the relative angles between bonds by creating two related node and edge graphs and convluting them in a staggered manner together |
+| gp    | Gaussian Process        | Any function which returns samples from an underlying multivariate normal distribution                                                                                                                                                  |
+| fair  | FAIR                    | Findable Accessible Interoperable and Reusable Data                                                                                                                                                                                     |
+| mtl   | multi-task learning     | A type of machine learning where an algorithm learns multiple functions simultaneously, while exploiting commonalities and differences between the functions                                                                            |
+| soc   | Spin Orbit Coupling     | An additional term intended to account for the increased relevance of quantum angular momentum to electromagnetic response in heavy atoms                                                                                               |
+
+#+name: acronyms
+| label | abbreviation | full form                                            |
+|-------+--------------+------------------------------------------------------|
+| hap   | HaP          | halide perovskite                                    |
+| vasp  | VASP         | Vienna Ab initio Simulation Package                  |
+| qmml  | QM/ML        | quantum mechanics machine learning                   |
+| slme  | SLME         | spectroscopic limited maximum efficiency             |
+| pce   | PCE          | power conversion efficiency                          |
+| dft   | DFT          | density functional theory                            |
+| gga   | GGA          | generalized gradient approximation                   |
+| pbe   | PBE          | Perdew-Burke-Ernzerhof Functional                    |
+| hse   | HSE06        | Heyd-Scuseria-Ernzerhof Functional                   |
+| ma    | MA           | Methylammonium                                       |
+| fa    | FA           | Formamidinium                                        |
+| pca   | PCA          | principal component analysis                         |
+| tsne  | t-SNE        | t-distributed stochastic neighbor embedding          |
+| umap  | UMAP         | uniform manifold approximation and projection        |
+| gpr   | GPR          | Gaussian Process Regression                          |
+| rfr   | RFR          | Random Forest Regression                             |
+| sisso | SISSO        | Sure Independence Screening and Sparsifying Operator |
+| sqs   | SQS          | special quasi-random structures                      |
+| paw   | PAW          | projector augmented wave                             |
+| nist  | NIST         | National Institute of Standards and Technology       |
+| pes   | PES          | Potential Energy Surface                             |
+| shap  | SHAP         | Shapley Additive Explaination                        |
+| gnn   | GNN          | Graph Neural Networks                                |
+
+
