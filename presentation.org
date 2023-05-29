@@ -1743,9 +1743,34 @@ bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-- Defects paper, GNN paper, *my paper*, Jiaqi's.
-= presentation (DS02 poster), symposium, Nanohub tutorial
-- My github, yogi, cmcl, spyglass, pysisso, etc
+*** Articles                                                :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.66
+:BEAMER_env: block
+:END:
+- Yang, J., Manganaris, P. T., & Mannodi Kanakkithodi, A. K. (2023). A high-throughput computational dataset of halide perovskite alloys. Digital Discovery, http://dx.doi.org/10.1039/d3dd00015j
+- Manganaris, P., Yang, J., & Arun Mannodi Kanakkithodi (2023). Multi-fidelity machine learning pervoskite composition vs band gap. IN PREPARATION.
+- Edlabadkar, R., Yang, J., Rahman, H., Manganaris, P., Korimilli, E. P., & Arun Mannodi-Kanakkithodi (TBD). Driving Halide Perovskite Discovery Using Graph Neural Networks. IN PREPARATION.
+- Gollapalli, P., Manganaris, P., & Arun Mannodi-Kanakkithodi (TBD). Graph neural network predictions for formation energy of native defects in zinc blende semiconductors. IN PREPARATION.
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.33
+:END:
+**** presentations                                               :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- Poster for DS02 symposium MRS fall 2022
+- Talk for Purdue Soft Materials symposium
+- developed MRS spring 2022 tutorial hosted on nanoHUB
+**** Software                                                    :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- https://github.com/PanayotisManganaris/cmcl
+- https://github.com/PanayotisManganaris/yogi
+- https://github.com/PanayotisManganaris/spyglass
+- https://github.com/PanayotisManganaris/pysisso
 
 ** Conclusions                                                     :B_frame:
 :PROPERTIES:
