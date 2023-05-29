@@ -1,0 +1,127 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:t todo:t |:t
+#+title: ch-introduction
+#+date: <2023-05-10 Wed>
+#+author: Panayotis Manganaris
+#+email: panos.manganaris@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 28.2 (Org mode 9.6.5)
+#+cite_export: biblatex
+#+latex_class: reportchapter
+#+latex_class_options:
+#+latex_header:
+#+latex_header_extra:
+#+description:
+#+keywords:
+#+subtitle:
+#+latex_engraved_theme:
+#+latex_compiler: pdflatex
+#+date: \today
+#+PROPERTY: header-args:jupyter-python :session mrg :kernel mrg :pandoc org :async yes
+#+PROPERTY: header-args :results scalar drawer :eval never-export :exports results
+* COMMENT dependencies
+#+INCLUDE: /home/panos/Documents/manuscripts/DFT+ML+feature_engineering/dependencies.org
+
+* COMMENT load sample and spaces
+#+begin_src jupyter-python
+  Xt = pd.read_csv("./X_t.csv", index_col=0)
+  Xc = pd.read_csv("./X_c.csv", index_col=0)
+  Xp = pd.read_csv("./X_p.csv", index_col=0)
+  X = Xt
+  Y = pd.read_csv("./Y.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  X_big = pd.read_csv("./X_card.csv", index_col=0)
+  Y_big = pd.read_csv("./Y_card.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  XX = pd.read_csv("./X_processed.csv", index_col=0)
+  XX_big = pd.read_csv("./X_card_processed.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+* SOFTWARE AND DATA CONTRIBUTIONS
+:PROPERTIES:
+:CUSTOM_ID: contributions
+:END:
+
+** Data Publication
+I published the prepared sample data I used to the Materials Data Facility.
+It is available to download with a simple API call following installation and activation[fn:10] of the relevant packages and applications.
+
+#+begin_export latex
+\begin{ZZlisting}
+  \caption{\label{lst:MDF} How to load the Mannodi Group halide perovskites data set from the Materials Data Facility repository}
+  \begin{CenteredBox}
+    \begin{lstlisting}[language=python]
+# THIS IS PENDING
+f = Foundry(
+    no_local_server=True,
+    no_browser=True,
+    globus=True,
+    index="mdf"
+)
+f.load("foundry_mrg_band_gaps_v1.0", globus=globus)
+res = f.load_data()
+X_mp, y_mp = res['train'][0], res['train'][1]
+    \end{lstlisting}
+  \end{CenteredBox}
+\end{ZZlisting}
+#+end_export
+
+** Software Tools
+Additionally, a few python libraries began development with this work as the authors' attempt to contribute to the larger effort by the materials science community to ease aggregation, sharing, analysis and reporting of large computational datasets.
+
+The =cmcl= library[fn:3] is under early development under tag v0.1.5.
+At this stage, cmcl strives to provide an inquisitive interface to perovskite composition feature computers in the style of the pandas API.
+Listing ref:lst:cmcl demonstrates its use in extracting composition vectors from the formula strings identifying each compound in a dataset.
+
+A library of model evaluation tools to assist with exhaustive grid search is being maintained in the =yogi= repository.[fn:4]
+A grid-search assistant under the =yogi.model_selection.butler= module was used to optimize the hyper-parameters of models reported here.
+See documentation for the various grid-narrowing strategies available.
+
+Matgenix[fn:6] company initially created a SciKit-learn compliant interface to the SISSO algorithm maintained by [cite/text:@ouyang-2018-sisso].
+This code was forked and modified[fn:5] to enable the creation of the SIS domain engineered regressions primarily by creating a custom =Function Transformer= that may be seeded with the subspace information obtained by first training a SISSO regression using the conventional interface.
+This was done with the expectation that the resulting model would be superior for the purposes of this work, but it is generally applicable to any other applications demanding this sort of dimensionality reduction.
+
+** Tutorials
+I developed and published one tutorial on the Purdue nanoHUB for delivery in the Spring 2022 Materials Research Society conference.
+Manganaris, P., Desai, S., & Kanakkithodi, A. (2022). MRS Computational Materials Science Tutorial.
+This tutorial covered a variety of machine learning methods.
+It provides a detailed example of the use of =cmcl= and =yogi= in feature extraction and training multi-fidelity random forest models by score weighting respectively.
+
+* Footnotes
+
+[fn:10]https://ai-materials-and-chemistry.gitbook.io/foundry/
+[fn:6]https://github.com/Matgenix/pysisso 
+[fn:5]https://github.com/PanayotisManganaris/pysisso
+[fn:4]https://github.com/PanayotisManganaris/yogi 
+[fn:3]https://github.com/PanayotisManganaris/cmcl
+
+#+NAME: wrap
+#+begin_src bash :var p="" :var w="300pt" :var c=""
+  echo -ne "$p \n#+attr_latex: :width $w\n#+CAPTION: $c"
+#+end_src
+
+#+NAME: wraptbl
+#+begin_src bash :var p="" :var w="300pt" :var c=""
+  echo -ne "$p \n#+CAPTION: $c "
+#+end_src
