@@ -1,0 +1,52 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:("TODO" "DONE" "NEXT") tex:t
+#+options: timestamp:t title:t toc:nil todo:nil |:t
+#+title: ap-publications
+#+date: <2023-05-10 Wed>
+#+author: Panayotis Manganaris
+#+email: panos.manganaris@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 28.2 (Org mode 9.6.5)
+#+cite_export: biblatex
+#+latex_class: reportchapter
+#+latex_class_options:
+#+latex_header:
+#+latex_header_extra:
+#+description:
+#+keywords:
+#+subtitle:
+#+latex_engraved_theme:
+#+latex_compiler: pdflatex
+#+date: \today
+#+PROPERTY: header-args:jupyter-python :session mrg :kernel mrg :pandoc org :async yes
+#+PROPERTY: header-args :results scalar drawer :eval never-export :exports results
+* PUBLICATIONS
+Yang, J., Manganaris, P. T., & Mannodi Kanakkithodi, A. K. (2023). A high-throughput computational dataset of halide perovskite alloys. Digital Discovery, http://dx.doi.org/10.1039/d3dd00015j
+
+Manganaris, P., Yang, J., & Arun Mannodi Kanakkithodi (2023). Multi-fidelity machine learning pervoskite composition vs band gap. IN PREPARATION.
+
+Edlabadkar, R., Yang, J., Rahman, H., Manganaris, P., Korimilli, E. P., & Arun Mannodi-Kanakkithodi (TBD). Driving Halide Perovskite Discovery Using Graph Neural Networks. IN PREPARATION.
+
+Gollapalli, P., Manganaris, P., & Arun Mannodi-Kanakkithodi (TBD). Graph neural network predictions for formation energy of native defects in zinc blende semiconductors. IN PREPARATION.
+
+* PRESENTATIONS
+Poster for DS02 symposium MRS fall 2022
+
+Talk for Purdue Soft Materials symposium
+
+Developed MRS spring 2022 tutorial hosted on nanoHUB
+
+* Footnotes
+#+NAME: wrap
+#+begin_src bash :var p="" :var w="300pt" :var c=""
+  echo -ne "$p \n#+attr_latex: :width $w\n#+CAPTION: $c"
+#+end_src
+
+#+NAME: wraptbl
+#+begin_src bash :var p="" :var w="300pt" :var c=""
+  echo -ne "$p \n#+CAPTION: $c "
+#+end_src

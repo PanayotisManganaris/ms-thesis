@@ -293,11 +293,11 @@ In a subset of the data, the chemical vector (listing ref:lst:cdf) is produced u
   \caption{\label{lst:cmcl} An example of the cmcl "ft" feature accessor}
   \begin{CenteredBox}
     \begin{lstlisting}[language=python]
-      import cmcl
-      Y = load_codomain_subset()
-      df = Y.Formula.to_frame().ft.comp()
-      df.index = Y.Formula
-      print(df)
+import cmcl
+Y = load_codomain_subset()
+df = Y.Formula.to_frame().ft.comp()
+df.index = Y.Formula
+print(df)
     \end{lstlisting}
   \end{CenteredBox}
 \end{ZZlisting}
