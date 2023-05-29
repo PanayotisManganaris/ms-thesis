@@ -1,7 +1,7 @@
-\chapter*{Multi-fidelity Machine Learning for Perovskite Band Gap Predictions}
-\label{sec:orgcca3cc9}
-\section*{Multi-Fidelity Learning}
-\label{sec:org2b99fe9}
+\chapter{Multi-fidelity Machine Learning for Perovskite Band Gap Predictions}
+\label{sec:org84da4e8}
+\section{Multi-Fidelity Learning}
+\label{sec:orgf6966b4}
 The state of the art in materials modeling favors Graph Neural Network (GNN) architectures.
 \autocite{chen-2019-graph-networ,choudhary-2021-atomis-line,xie-2018-cryst-graph}
 These deep learning models have sufficient flexibility to capture the continuous variability in relative positions of crystals and molecules.
@@ -23,10 +23,10 @@ Our problem of accurately modeling low availability, high fidelity targets is ap
 We will employ the domain-side approach where the largest, lowest fidelity component of our dataset consists of density functional theory (DFT) band gap predictions made at the generalized gradient approximation (GGA) Perdew-Burke-Ernzerhof (PBE) level of theory.
 On the other end, the smallest and highest fidelity subset of the sample consists of experimental measurements of physical devices collected from the literature.
 
-\section*{Multiple Fidelity Dataset}
-\label{sec:org7186356}
-\subsection*{Perovskite Band Gaps}
-\label{sec:org0e392f5}
+\section{Multiple Fidelity Dataset}
+\label{sec:orgc2ad881}
+\subsection{Perovskite Band Gaps}
+\label{sec:org1210311}
 We aim to accurately predict performance-relevant halide perovskite (HaP) band gaps, which strongly predict photovoltaic performance.
 \autocite{mannodi-kanakkithodi-2019-compr-comput}
 
@@ -35,7 +35,7 @@ Our fidelity hierarchy climbs from DFT simulations performed using the basic PBE
 \autocite{almora-2020-devic-perfor,kim-2014-cdses-nanow,swanson-2017-co-sublim} 
 
 While we acknowledge the advantages of GNNs, we aim to express band gap as functions primarily of the perovskite composition.
-It is known the octahedral arrangement of perovskites is most relevant to their electronic structure, nevertheless, a strong understanding of the influence of chemical composition on performance will continue to be a priority as it is expected to aid in \hyperref[sec:orge3f6e66]{Feature Engineering}.
+It is known the octahedral arrangement of perovskites is most relevant to their electronic structure, nevertheless, a strong understanding of the influence of chemical composition on performance will continue to be a priority as it is expected to aid in \hyperref[sec:orgfe2ba05]{Feature Engineering}.
 
  
 \begin{table}[htbp]
@@ -54,9 +54,9 @@ EXP & 90\\[0pt]
 \end{tabular}
 \end{table}
 
-A detailed analysis of this combined hybrid organic-inorganic and purely inorganic HaP DFT dataset is covered in a prior article by \textcite{yang-2022-high-throug} and in \hyperref[sec:orgc3e672b]{DFT Details}.
+A detailed analysis of this combined hybrid organic-inorganic and purely inorganic HaP DFT dataset is covered in a prior article by \textcite{yang-2022-high-throug} and in \ref{sec:orgf936a11}.
 Naturally, the statistics obtained from each fidelity vary (figure \ref{fig:bg_dist}).
-This is the primary challenge we will address with the categorically dimensioned multi-fidelity models discussed in \hyperref[sec:orga249b79]{Methods}.
+This is the primary challenge we will address with the categorically dimensioned multi-fidelity models discussed in \ref{sec:orgc13e663}.
 
  
 \begin{figure}[htbp]
@@ -65,8 +65,8 @@ This is the primary challenge we will address with the categorically dimensioned
 \caption{\label{fig:bg_dist} Variability in band gaps at each fidelity}
 \end{figure}
 
-\subsection*{Sampling}
-\label{sec:orge16184f}
+\subsection{Sampling}
+\label{sec:org68a6af0}
 The simulations for each level of theory are performed on some number of members to a fixed subset of the total 37785 compositions that can be combinatorially generated in a 2x2x2 perovskite supercell when allowing \emph{at most} single-site alloying with our 14 constituent candidates for 3 sites (table \ref{tbl:site_tbl}).
 
 \begin{table}[htbp]
@@ -81,7 +81,7 @@ X-site & I & Br & Cl &  &  & \\[0pt]
 
 Within this domain space, we try to maintain a balance in the share of samples that represent each one of the "cardinal mixing" categories.
 Additionally, within each mix we try to maintain a reasonable balance of purely inorganic samples versus hybrid organic-inorganic samples.
-See \hyperref[sec:orga249b79]{Methods} for details on how these categories were utilized in model development.
+See \ref{sec:orgc13e663} for details on how these categories were utilized in model development.
 
 This previously reported dataset demonstrates very even coverage of the cardinal mixing domain as shown in figure \ref{fig:coverage}.
 The clusters in this figure correspond to the alloying scheme of the data points
@@ -89,7 +89,7 @@ The clusters in this figure correspond to the alloying scheme of the data points
 This sample provides the opportunity to comfortably interpolate the properties of other members of the cardinal mixing domain.
 Concurrently, we test the ability of our models to extrapolate with respect to alloying scheme as well as level of theory.
 It also provides an opportunity to investigate the statistical impact of constituent compounds on perovskite property prediction.
-See \hyperref[sec:orgb3e6292]{Discussion}.
+See \ref{sec:org1afd58f}.
 
  
 \begin{figure}[htbp]
@@ -98,8 +98,8 @@ See \hyperref[sec:orgb3e6292]{Discussion}.
 \caption{\label{fig:coverage} Samples overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE}
 \end{figure}
 
-\subsection*{Model Optimization}
-\label{sec:org68bd78e}
+\subsection{Model Optimization}
+\label{sec:orga69ae0a}
 The rigorous hyper-parameter Optimization (HPO) of any feature engineering and modeling pipeline is a problem discussed extensively in the literature.
 HPO approaches can be broadly separated into exhaustive and efficient optimization strategies.
 \autocite{yang-2020-hyper-optim}
@@ -107,8 +107,8 @@ We use a two-stage procedure for selecting the best model parameters.
 
 The first stage is an exhaustive grid-search over diversely sampled parameter space.
 Each combination of parameters instantiates a model which is then fit to each of a set of stratified training subsets generated by a K=3 K-fold split cross-validation strategy.
-Every fitted model is subsequently tested against the cross-validation test sets and a suite of regression scoring metrics are applied to each member category simultaneously using a custom SciKit-learn score adapter\footnote{\url{https://github.com/PanayotisManganaris/yogi}\label{org20893dc}}.
-The grid search is then narrowed to a high performance quadrant of the search space by the model evaluator based on recommendations made by a simple entropy minimization algorithm\textsuperscript{\ref{org20893dc}}.
+Every fitted model is subsequently tested against the cross-validation test sets and a suite of regression scoring metrics are applied to each member category simultaneously using a custom SciKit-learn score adapter\footnote{\url{https://github.com/PanayotisManganaris/yogi}\label{org4b2ecd4}}.
+The grid search is then narrowed to a high performance quadrant of the search space by the model evaluator based on recommendations made by a simple entropy minimization algorithm\textsuperscript{\ref{org4b2ecd4}}.
 
 The recommended grid quickly eliminates under-performing settings based on the sample probability of a setting appearing in a set of finalists according to the scoring rankings.
 The selection score is additionally influenced by a weighted sum of the scoring ranks allowing for considerably tuning the selection criterion.
@@ -118,10 +118,10 @@ After the recommendation is made, the granularity of the grid is increased in th
 In general, no more than 2 or 3 exhaustive searches are needed over a given set of grids.
 Past this point, continuously variable hyper parameters can be individually optimized by plotting validation curves.
 
-\section*{Methods}
-\label{sec:orga249b79}
-\subsection*{DFT Details}
-\label{sec:orgc3e672b}
+\section{Methods}
+\label{sec:orgc13e663}
+\subsection{DFT Details}
+\label{sec:orgf936a11}
 The largest subdivision of 1400 compounds correspond to a series of optoelectronic DFT simulations.
 The simulated experiments are performed on some subset (table \ref{tbl:LoTs}) of \textasciitilde{}500, exclusively pseudo-cubic, \(\ce{ABX_3}\) supercells obtained by geometry optimization of modified structure files \autocite{pilania-2016-machin-learn} originally obtained from the Computational Materials Repository\footnote{\url{https://cmr.fysik.dtu.dk/}}.
 Each cell demonstrates an SQS mixed composition at none or one of each of the A, B, or X sites.
@@ -137,9 +137,9 @@ HSE06 is orders of magnitude more expensive and may fail to converge structure r
 HSE06 on PBE relaxation attempts to mitigate the disadvantages of each individually.
 The use of Spin Orbit Coupling helps to better electronic properties simulation in compounds containing Lead.
 
-\subsection*{Featurization of Chemistries}
-\label{sec:orgc40720e}
-For \(\alpha\) total A-site constituents represented in the whole database, \(\beta\) total B-site constituents, and \(\gamma\) total X-site constituents, we provide a Python tool\footnote{\url{https://github.com/PanayotisManganaris/cmcl}\label{orge540f96}} which robustly coverts the composition string of each data point into a \(\alpha + \beta + \gamma\) dimensional composition vector.
+\subsection{Featurization of Chemistries}
+\label{sec:org648bc86}
+For \(\alpha\) total A-site constituents represented in the whole database, \(\beta\) total B-site constituents, and \(\gamma\) total X-site constituents, we provide a Python tool\footnote{\url{https://github.com/PanayotisManganaris/cmcl}\label{orgf794d03}} which robustly coverts the composition string of each data point into a \(\alpha + \beta + \gamma\) dimensional composition vector.
 In the case of our total dataset description \(\alpha + \beta + \gamma = 14\).
 \autocite{yang-2022-high-throug}
 In a subset of the data, the chemical vector (listing \ref{lst:cdf}) is produced using cmcl (listing \ref{lst:cmcl}).
@@ -182,7 +182,7 @@ When extrapolation is the aim, continuously distributed, unique, and linearly in
 Our attempts to provide a domain with these characteristics results in the following raw feature space.
 
 \begin{itemize}
-\item 14 sparse composition vectors extracted from chemical formula using \texttt{cmcl}\textsuperscript{\ref{orge540f96}}
+\item 14 sparse composition vectors extracted from chemical formula using \texttt{cmcl}\textsuperscript{\ref{orgf794d03}}
 \item 36 dense site-averaged property space computed as a linear combination of composition vectors and measured elemental properties \autocite{mentel-2014}
 \item 5 categorical dimensions one-hot-encoding level of theory.
 \begin{itemize}
@@ -191,8 +191,8 @@ Our attempts to provide a domain with these characteristics results in the follo
 \end{itemize}
 \end{itemize}
 
-\subsection*{Machine Learning Algorithms and Parameter Optimization}
-\label{sec:orgec736a8}
+\subsection{Machine Learning Algorithms and Parameter Optimization}
+\label{sec:org0545395}
 We train Random Forest Regression (RFR) and Gaussian Process Regression (GPR) models of band gap on the union of predictor features previously discussed.
 The RFR is a flexible nonlinear model, the GPR a principled linear model.
 Shapley Additive Explaination (SHAP) analysis of the models lends insight to the average physical impacts of 1) site-specific alloying and 2) using organic molecules in the Perovskite superstructure.
@@ -231,8 +231,8 @@ A final best model is instantiated using the overall best performing parameters.
 These models are finally validated against the test sets originally split off from the sample in both their extrapolative ability and consistency 
 Thiprocedure in demonstrated in an online notebook by \textcite{manganaris-2022-mrs-comput} hosted on the Purdue NanoHUB.
 
-\subsection*{Feature Engineering}
-\label{sec:orge3f6e66}
+\subsection{Feature Engineering}
+\label{sec:orgfe2ba05}
 There has been success in creating analytical expressions for perovskite properties, particularly lattice parameters.
 \autocite{jiang-2006-predic-lattic} In an attempt to find an analytical predictor for band gap we employ the Sure Independence Screening and Sparsifying Operator (SISSO).
 \autocite{ouyang-2018-sisso} 
@@ -279,10 +279,10 @@ division & natural logarithm\\[0pt]
 \end{tabular}
 \end{table}
 
-\section*{Results}
-\label{sec:org356dc64}
-\subsection*{Best Models on Raw Domain}
-\label{sec:orgb8c35dc}
+\section{Results}
+\label{sec:org279cff0}
+\subsection{Best Models on Raw Domain}
+\label{sec:orgfb8a927}
  
 \begin{figure}[htbp]
 \centering
@@ -296,8 +296,8 @@ The RFR hyper-parameters are listed in the appendix (Table \ref{tbl:rfrHPO}).
 The GPR model is tried with multiple kernels.
 Ultimately, the best is a non stationary Matern kernel with \(\nu = \frac{3}{2}\).
 
-\subsection*{SISSO Model and SIS Engineered Features}
-\label{sec:org52c8eb8}
+\subsection{SISSO Model and SIS Engineered Features}
+\label{sec:org9ab4321}
 The Sure Independence Screening and Sparsifying Operator (SISSO) is a specific combination of multiple data mining techniques chained together resulting in a symbolically expressed regression model.
 \autocite{ouyang-2018-sisso,ghiringhelli-2017-learn-physic} 
 
@@ -333,11 +333,11 @@ However, in the process of creating Equation \ref{eq:bgexp}, 150 SIS predictor v
 50 primary predictors, 50 first residual predictors, and 50 second residual predictors.
 These can serve as a high quality, introspective domain for the other architectures to fit on.
 
-\subsection*{Best Models on Engineered Domain}
-\label{sec:org5ed71bb}
+\subsection{Best Models on Engineered Domain}
+\label{sec:orge77c22b}
 We set the aim of decreasing \(\mathcal{O}(n^3)\) computational expense of GPR by \(\approx\)10 times.
 So, we aim to take 30 highly correlated features (slightly more than one half the number used by prior models) from these SIS subspaces.
-We expected this to solve the problems inherent to the raw \hyperref[sec:orgc40720e]{Featurization of Chemistries}.
+We expected this to solve the problems inherent to the raw \ref{sec:org648bc86}.
 
 fitting models to SIS features may leverage the denser and more continuous domain to improve extrapolative predictions.
 Potentially into the high-entropy domain, or simply Theory.
@@ -353,10 +353,10 @@ Nevertheless, the RFR model on the higher dimensional, sparser raw features is s
 \caption{\label{fig:sis-pairplots} SIS-based model predictions vs true values at multiple fidelities}
 \end{figure}
 
-\section*{Discussion}
-\label{sec:orgb3e6292}
-\subsection*{SHAP Analysis of Domain}
-\label{sec:org161b4a9}
+\section{Discussion}
+\label{sec:org1afd58f}
+\subsection{SHAP Analysis of Domain}
+\label{sec:orge41e51e}
 SHAP scores are computed automatically for every dimension of every sample in the domain by the python SHAP package\footnote{\url{https://github.com/slundberg/shap}}.
 The sum of the expectation value of the target conditioned on the model features and the  SHAP scores computed for each predictor variable of a sample is the model's  prediction for that sample target.
 \autocite{lundberg-2017-unified-approac}
@@ -409,8 +409,8 @@ If anything, figure \ref{fig:clusters} confirms that the Iodine at the X site te
 \caption{\label{fig:clusters} SHAP score distributions reveal effects of individual constituents}
 \end{figure}
 
-\subsection*{Predictions and Screening}
-\label{sec:org38c0202}
+\subsection{Predictions and Screening}
+\label{sec:org072b20b}
 Using the superior RFR model, we made predictions of the band gap for all 37785 possible compositions demonstrating cardinal mixing within the bounds of a 2x2x2 perovskite super cell.
 That is eight A-sites shared by up to 5 constituents, 8 B-sites shared by up to six constituents, and 24 X-sites shared by up to 3 constituents.
 Given the good coverage achieved by our sample dataset (figure \ref{fig:coverage}) and according to the scores reported in Table \ref{tbl:LoTscores}, the RFR model is capable of predicting band gaps at the experimental fidelity with a 0.154448 rmse.
