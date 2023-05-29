@@ -1,0 +1,344 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:("TODO" "DONE" "NEXT") tex:t
+#+options: timestamp:t title:t toc:nil todo:nil |:t
+#+title: ap-additional-figs
+#+date: <2023-05-10 Wed>
+#+author: Panayotis Manganaris
+#+email: panos.manganaris@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 28.2 (Org mode 9.6.5)
+#+cite_export: biblatex
+#+latex_class: reportchapter
+#+latex_class_options:
+#+latex_header:
+#+latex_header_extra:
+#+description:
+#+keywords:
+#+subtitle:
+#+latex_engraved_theme:
+#+latex_compiler: pdflatex
+#+date: \today
+#+PROPERTY: header-args:jupyter-python :session mrg :kernel mrg :pandoc org :async yes
+#+PROPERTY: header-args :results scalar drawer :eval never-export :exports results
+* COMMENT dependencies
+#+INCLUDE: /home/panos/Documents/manuscripts/DFT+ML+feature_engineering/dependencies.org
+
+* COMMENT load sample and spaces
+#+begin_src jupyter-python
+  Xt = pd.read_csv("./X_t.csv", index_col=0)
+  Xc = pd.read_csv("./X_c.csv", index_col=0)
+  Xp = pd.read_csv("./X_p.csv", index_col=0)
+  X = Xt
+  Y = pd.read_csv("./Y.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  X_big = pd.read_csv("./X_card.csv", index_col=0)
+  Y_big = pd.read_csv("./Y_card.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  XX = pd.read_csv("./X_processed.csv", index_col=0)
+  XX_big = pd.read_csv("./X_card_processed.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+* ADDITIONAL FIGURES
+:PROPERTIES:
+:CUSTOM_ID: additional figures
+:END:
+** TODO Learning Curves
+Cross-validation within the training set is the only way of checking the generality of models during the grid search.
+Identifying the validation split size is necessary to obtain an understanding of how much data is needed to train a model that can generalize.
+
+Learning curves are computed for each scorer.
+Notice that the error metrics are negated for consistency with the R^2 and ev scores; the greater the number, the better the model performs.
+
+More data offers better chances.
+However, the smaller the split, the longer and more expensive the loop training becomes, e.g.
+10-fold splits makes for 10 sample scores at each partition size.
+Meaning, 90% of the training set is used for actual training and the remaining 10% is used for validation and this is repeated 10 times.
+
+Shuffling is performed prior to generating each fold.
+The shuffle is seeded with a deterministic random state to ensure scores are comparable across partition size 
+
+** Feature Distributions
+#+begin_src jupyter-python
+  XXc = XX.iloc[:, 0:14].assign(mix=Y.mix).assign(org=Y.org)
+  XXcm = pd.melt(
+      XXc, id_vars=["mix", "org"]
+  ).replace(0, np.NaN).dropna() #drop zeros
+  XXcm = XXcm.rename({"value":"proportion"}, axis=1)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Normalized Distribution of A-site Constituents")
+  p = px.histogram(XXcm[XXcm.variable.str.contains("'A',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
+                   barmode='overlay')
+  p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
+  p.update_xaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_yaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_layout(legend=dict(
+      itemsizing='constant',
+      orientation='h',
+      y=-0.2
+  ))
+  p.update_xaxes(row=2,col=3,
+                 showticklabels=True,
+                 title="proportion")
+  p.show(renderer="svg")
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: Normalized Distribution of A-site Constituents
+[[file:./.ob-jupyter/f724dca219c63ad7eaee9862431820dfe50fee59.svg]]
+:end:
+
+#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Normalized Distribution of B-site Constituents")
+  p = px.histogram(XXcm[XXcm.variable.str.contains("'B',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
+                   barmode='overlay')
+  p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
+  p.update_xaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_yaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_layout(legend=dict(
+      itemsizing='constant',
+      orientation='h',
+      y=-0.2
+  ))
+  p.show(renderer="svg")
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: Normalized Distribution of B-site Constituents
+[[file:./.ob-jupyter/a9b04c2294b41e26ac120135615a3356cf9d5bc1.svg]]
+:end:
+
+#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Normalized Distribution of X-site Constituents")
+  p = px.histogram(XXcm[XXcm.variable.str.contains("'X',")], x="proportion", facet_col='variable', facet_col_wrap=7, color="mix",
+                   #category_orders={'variable':["Ba", "Ge", "Cl", "Br", "I", "Sn", "Pb", "Cs", "FA", "MA", "Sr", "Ca", "Rb", "K"]}
+                   barmode='overlay', height=300)
+  p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
+  p.update_xaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_yaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_layout(legend=dict(
+      itemsizing='constant',
+      orientation='h',
+      y=-0.4
+  ))
+  p.show(renderer="svg")
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: Normalized Distribution of X-site Constituents
+[[file:./.ob-jupyter/bc4f79d7b43f705748b87f8b8bcc5111a778bed2.svg]]
+:end:
+
+# Generate by relational database 3-way join with composition vectors as weights
+
+#+begin_src jupyter-python
+  XXp = XX.iloc[:, 14:-5].assign(mix=Y.mix).assign(org=Y.org)
+  XXpm = pd.melt(
+      XXp, id_vars=["mix", "org"]
+  ).replace(0, np.NaN).dropna() #drop zeros
+  XXpm = XXpm.rename({"value":"proportion"}, axis=1)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Distributions of Mean A-Site Properties")
+  p = px.histogram(XXpm[XXpm.variable.str.contains("'A',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
+                   barmode='overlay')
+  p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
+  p.update_xaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_yaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_layout(legend=dict(
+      itemsizing='constant',
+      orientation='h',
+      y=-0.2
+  ))
+  p.show(renderer="svg")
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: Distributions of Mean A-Site Properties
+[[file:./.ob-jupyter/67142da5b3dcf51d03af83b5fe37bd3a4672b176.svg]]
+:end:
+
+#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Distributions of Mean B-Site Properties")
+  p = px.histogram(XXpm[XXpm.variable.str.contains("'B',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
+                   barmode='overlay')
+  p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
+  p.update_xaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_yaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_layout(legend=dict(
+      itemsizing='constant',
+      orientation='h',
+      y=-0.2
+  ))
+  p.show(renderer="svg")
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: Distributions of Mean B-Site Properties
+[[file:./.ob-jupyter/3b53272412facd812fa6c52483d898ab67c2c602.svg]]
+:end:
+
+#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Distributions of Mean X-Site Properties")
+  p = px.histogram(XXpm[XXpm.variable.str.contains("'X',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
+                   barmode='overlay')
+  p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
+  p.update_xaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_yaxes(showline=True, linewidth=2, linecolor='black', ticks='outside', showgrid=False)
+  p.update_layout(legend=dict(
+      itemsizing='constant',
+      orientation='h',
+      y=-0.2
+  ))
+  p.show(renderer="svg")
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: Distributions of Mean X-Site Properties
+[[file:./.ob-jupyter/1473d3cf1b8588ff107fa23f1a91440e2716ebbd.svg]]
+:end:
+
+** DONE GPR SHAP analysis
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-05-28 Sun 17:07]
+:END:
+
+#+CAPTION: label:fig:gprSHAP Gaussian Process Regression Band Gap SHAP Values
+#+attr_latex: :width 450pt
+[[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/31552cf23170d5409f0d7f373221bd1784e2b209.png]]
+
+** SIS+RFR SHAP analysis
+
+#+CAPTION: label:fig:rfrSHAPe Random Forest Regression Band Gap on SIS domain SHAP Values
+#+attr_latex: :width 450pt
+[[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/d0b6ba16e4913fe81324e8170b2b5b241c1053c8.png]]
+
+** SIS+GPR SHAP analysis
+
+#+CAPTION: label:fig:gprSHAPe Gaussian Process Regression Band Gap on SIS domain SHAP Values
+#+CAPTION:
+#+attr_latex: :width 450pt
+[[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/718541cd89c707a3acb068057f8bf25626eefd61.png]]
+
+** Known Clustering in t-SNE Projections
+#+begin_src jupyter-python
+  projdf = pd.read_csv("./proj_t_rfr_tsne_c.csv")
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  screen = pd.read_csv("./screen_rfr.csv")
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:alloys Projection of sample space via t-SNE overlaid with labels indicating site of mixing")
+  p = px.scatter(
+      projdf.replace(np.NaN, False),
+      facet_col='perplexity', facet_col_wrap=4,
+      x='0', y='1',
+      hover_name="Formula",
+      color='mix'
+  )
+  p.update_layout(
+      legend_title="Alloying Site", legend_itemsizing='constant',
+      legend_orientation='h',
+      margin=dict(l=0, r=0, t=0, b=0),
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: label:fig:alloys Projection of sample space via t-SNE overlaid with labels indicating site of mixing
+[[file:./.ob-jupyter/0b728e519df7ec4be07158baa922f385bcac7076.svg]]
+:end:
+
+#+begin_src jupyter-python :post  wrap(*this*, w="450pt", c="label:fig:chosen Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset")
+  p = px.scatter(
+      projdf,
+      facet_col='perplexity', facet_col_wrap=4,
+      x='0', y='1',
+      hover_name="Formula",
+      color=(projdf.index.isin(screen.index)),
+  )
+  p.update_layout(
+      legend_title="chosen", legend_itemsizing='constant',
+      legend_orientation='h',
+      margin=dict(l=0, r=0, t=0, b=0),
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 450pt
+#+CAPTION: label:fig:chosen Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset
+[[file:./.ob-jupyter/c2d304e546a074ce9370ae449d18c778716a2de4.svg]]
+:end:
+
+* Footnotes
+#+NAME: wrap
+#+begin_src bash :var p="" :var w="300pt" :var c=""
+  echo -ne "$p \n#+attr_latex: :width $w\n#+CAPTION: $c"
+#+end_src
+
+#+NAME: wraptbl
+#+begin_src bash :var p="" :var w="300pt" :var c=""
+  echo -ne "$p \n#+CAPTION: $c "
+#+end_src

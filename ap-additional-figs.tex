@@ -1,0 +1,103 @@
+\chapter*{ADDITIONAL FIGURES}
+\label{sec:org46e8685}
+\section*{Learning Curves}
+\label{sec:orgcb8f5b4}
+Cross-validation within the training set is the only way of checking the generality of models during the grid search.
+Identifying the validation split size is necessary to obtain an understanding of how much data is needed to train a model that can generalize.
+
+Learning curves are computed for each scorer.
+Notice that the error metrics are negated for consistency with the R\textsuperscript{2} and ev scores; the greater the number, the better the model performs.
+
+More data offers better chances.
+However, the smaller the split, the longer and more expensive the loop training becomes, e.g.
+10-fold splits makes for 10 sample scores at each partition size.
+Meaning, 90\% of the training set is used for actual training and the remaining 10\% is used for validation and this is repeated 10 times.
+
+Shuffling is performed prior to generating each fold.
+The shuffle is seeded with a deterministic random state to ensure scores are comparable across partition size 
+
+\section*{Feature Distributions}
+\label{sec:org23eca9b}
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/f724dca219c63ad7eaee9862431820dfe50fee59}
+\caption{Normalized Distribution of A-site Constituents}
+\end{figure}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/a9b04c2294b41e26ac120135615a3356cf9d5bc1}
+\caption{Normalized Distribution of B-site Constituents}
+\end{figure}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/bc4f79d7b43f705748b87f8b8bcc5111a778bed2}
+\caption{Normalized Distribution of X-site Constituents}
+\end{figure}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/67142da5b3dcf51d03af83b5fe37bd3a4672b176}
+\caption{Distributions of Mean A-Site Properties}
+\end{figure}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/3b53272412facd812fa6c52483d898ab67c2c602}
+\caption{Distributions of Mean B-Site Properties}
+\end{figure}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/1473d3cf1b8588ff107fa23f1a91440e2716ebbd}
+\caption{Distributions of Mean X-Site Properties}
+\end{figure}
+
+\section*{GPR SHAP analysis}
+\label{sec:org3e59bec}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=450pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/31552cf23170d5409f0d7f373221bd1784e2b209.png}
+\caption{\label{fig:gprSHAP} Gaussian Process Regression Band Gap SHAP Values}
+\end{figure}
+
+\section*{SIS+RFR SHAP analysis}
+\label{sec:org1d16891}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=450pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/d0b6ba16e4913fe81324e8170b2b5b241c1053c8.png}
+\caption{\label{fig:rfrSHAPe} Random Forest Regression Band Gap on SIS domain SHAP Values}
+\end{figure}
+
+\section*{SIS+GPR SHAP analysis}
+\label{sec:orgec3eee2}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=450pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/718541cd89c707a3acb068057f8bf25626eefd61.png}
+\caption{\label{fig:gprSHAPe} Gaussian Process Regression Band Gap on SIS domain SHAP Values}
+\end{figure}
+
+\section*{Known Clustering in t-SNE Projections}
+\label{sec:orgb40c09b}
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/0b728e519df7ec4be07158baa922f385bcac7076}
+\caption{\label{fig:alloys} Projection of sample space via t-SNE overlaid with labels indicating site of mixing}
+\end{figure}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/c2d304e546a074ce9370ae449d18c778716a2de4}
+\caption{\label{fig:chosen} Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset}
+\end{figure}
