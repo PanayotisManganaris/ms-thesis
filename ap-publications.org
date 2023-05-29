@@ -32,7 +32,7 @@
 \nocite{gollapalli-2023-graph-neural}
 \nocite{edlabadkar-2023-drivin-halid}
 
-\printbibliography[category=myarticles]
+\printbibliography[heading=none,category=myarticles]
 #+end_export
 
 # Yang, J., Manganaris, P. T., & Mannodi Kanakkithodi, A. K. (2023). A high-throughput computational dataset of halide perovskite alloys. Digital Discovery, http://dx.doi.org/10.1039/d3dd00015j
