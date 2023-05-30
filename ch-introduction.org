@@ -2,7 +2,7 @@
 #+options: author:t broken-links:nil c:nil creator:nil
 #+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:("TODO" "DONE" "NEXT") tex:t
-#+options: timestamp:t title:t toc:t todo:t |:t
+#+options: timestamp:t title:t toc:t todo:nil |:t
 #+title: ch-introduction
 #+date: <2023-05-10 Wed>
 #+author: Panayotis Manganaris
@@ -150,7 +150,7 @@ The majority of work presented in this dissertation has been previously publishe
 :results:
 :end:
 
-#+begin_src jupyter-python :post wrap(*this*, w="350pt", c="label:fig:nrel Rapid rise in cummulative maximum of HaP PCEs")
+#+begin_src jupyter-python :post wrap(*this*, w="400pt", c="label:fig:nrel Rapid rise in cummulative maximum of HaP PCEs")
   color_map = {
       ('Crystalline Si Cells', 'Single crystal (non-concentrator)'): px.colors.qualitative.Plotly[0],
       ('Emerging PV', 'Perovskite cells'): px.colors.qualitative.Plotly[1],
@@ -190,9 +190,9 @@ The majority of work presented in this dissertation has been previously publishe
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 350pt
+#+attr_latex: :width 400pt
 #+CAPTION: label:fig:nrel Rapid rise in cummulative maximum of HaP PCEs
-[[file:./.ob-jupyter/f1bd7aa56a617cb3ef7ce678a9d45172a2916343.svg]]
+[[file:./.ob-jupyter/f34ddd159d9c661cb7098eb9bfd43dcfa5ab8286.svg]]
 :end:
 
 ** Design Goals and Challenges in Perovskite PV Absorbers
@@ -242,7 +242,7 @@ Such DFT-ML models, once rigorously trained and tested, are deployed for high-th
 | B-site | Pb | Sn | Ge | Ba | Sr | Ca |
 | X-site | I  | Br | Cl |    |    |    |
 
-#+begin_src jupyter-python :post wrap(*this*, w="150pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:domainstats The cardinal mixing sample space contains equal fractions of each element")
+#+begin_src jupyter-python :post wrap(*this*, w="300pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:domainstats The cardinal mixing sample space contains equal fractions of each element")
   p = px.sunburst(XX_big.iloc[:,1:14].replace(0,np.NaN)
                     .join(Y_big[['mix']])
                     .groupby(['mix'])
@@ -263,12 +263,12 @@ Such DFT-ML models, once rigorously trained and tested, are deployed for high-th
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 150pt :options inkscapeformat=png, inkscapedpi=300
-#+CAPTION: The cardinal mixing sample space contains equal fractions of each element
-[[file:./.ob-jupyter/9e0366470dfde761b88596ec0201cfdd3b190f95.svg]]
+#+attr_latex: :width 300pt :options inkscapeformat=png, inkscapedpi=300
+#+CAPTION: label:fig:domainstats The cardinal mixing sample space contains equal fractions of each element
+[[file:./.ob-jupyter/f9792d3af3f9ce7059179c1b22753c8b3cb1bda1.svg]]
 :end:
 
-#+begin_src jupyter-python :post wrap(*this*, w="150pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:domainmix The cardinal mixing sample space contains mostly B-site mixed compounds")
+#+begin_src jupyter-python :post wrap(*this*, w="300pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:domainmix The cardinal mixing sample space contains mostly B-site mixed compounds")
     p = px.sunburst(Y_big, path=['mix'])
     p.update_layout(
         margin=dict(l=0, r=0, t=0, b=0),
@@ -284,9 +284,9 @@ Such DFT-ML models, once rigorously trained and tested, are deployed for high-th
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 150pt :options inkscapeformat=png, inkscapedpi=300
+#+attr_latex: :width 300pt :options inkscapeformat=png, inkscapedpi=300
 #+CAPTION: label:fig:domainmix The cardinal mixing sample space contains mostly B-site mixed compounds
-[[file:./.ob-jupyter/a91a51588adf9751defe3ea10ecce816979590c2.svg]]
+[[file:./.ob-jupyter/6d8213fd925e7d9147f906367db306da59ce8ca1.svg]]
 :end:
 
 ** DONE Multiple Fidelity Dataset
@@ -389,7 +389,7 @@ see figure ref:fig:slme.
 Also, notice that even in just the sample dataset, there are candidates with potential to overtake the state of the art absorbers reported by NREL in figure ref:fig:nrel.
 This is propitious for the screening I conduct on the 40000 point sample space.
 
-#+begin_src jupyter-python :post wrap(*this*, w="500pt", c="label:fig:slme PBE SLME of sample compares to experimental PCE and cleanly demarcates competitive range of band gaps")
+#+begin_src jupyter-python :post wrap(*this*, w="400pt", c="label:fig:slme PBE SLME of sample compares to experimental PCE and cleanly demarcates competitive range of band gaps")
   p0 = make_subplots(rows=2, cols=1, shared_yaxes=True)
 
   p1 = px.scatter(
@@ -450,9 +450,9 @@ This is propitious for the screening I conduct on the 40000 point sample space.
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 500pt
+#+attr_latex: :width 400pt
 #+CAPTION: label:fig:slme PBE SLME of sample compares to experimental PCE and cleanly demarcates competitive range of band gaps
-[[file:./.ob-jupyter/60f8cf0b348fa5343e2e4248196e31cfd76edac0.svg]]
+[[file:./.ob-jupyter/1111b77f7e7ed1fa50791a404ec9652e766a082b.svg]]
 :end:
 
 ** Improving Property Predictions using HSE06 and Spin-Orbit Coupling
