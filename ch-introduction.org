@@ -131,7 +131,7 @@ Their B-site cations may be divalent elements, and the A-site is occupied by lar
 The most commonly studied hybrid organic-inorganic HaPs, \(\ce{MAPbI3}\) and \(\ce{FAPbI3}\), have demonstrated large power conversion efficiency (PCE) values between 20% and 25% when used as absorbers in single- or multi-junction solar cells.
 [cite:@cui-2019-planar-p;@jeong-2020-stabl-perov]
 This is a five-fold improvement over the efficiencies of the same compositions first reported in 2009 and demonstrates the most attractive feature of HaPs, their unique tunability.
-A theoretical cubic perovskite structure is considered stable if the ionic radii of A, B, and X-site species satisfy the well-known tolerance (\(t\)) and octahedral (\o\) factors.
+A theoretical cubic perovskite structure is considered stable if the ionic radii of A, B, and X-site species satisfy the well-known tolerance (\(t\)) and octahedral (\(o\)) factors.
 [cite:@bartel-2019-new-toler]
 Even accounting for stability constraints, the chemical space of perovskites experiences combinatorial scaling with the number of candidate elements which could be incorporated at each site.
 This poses a multidimensional optimization problem for which determining the optimal atomic fractions for a particular performance target requires data-driven acceleration.
