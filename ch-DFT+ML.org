@@ -261,6 +261,7 @@ SIS+correlation analysis is a form of orthogonalization
 # #+attr_latex: :width 250
 # [[file:Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png]]
 
+** TODO partitioning categorical data 
 ** DONE Model Optimization
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 16:56]
@@ -391,7 +392,7 @@ then the training set is separated using a grouping K-fold split strategy.
 
 A final best model is instantiated using the overall best performing parameters.
 These models are finally validated against the test sets originally split off from the sample in both their extrapolative ability and consistency 
-Thiprocedure in demonstrated in an online notebook by [cite/text:@manganaris-2022-mrs-comput] hosted on the Purdue NanoHUB.
+This procedure in demonstrated in an online notebook by [cite/text:@manganaris-2022-mrs-comput] hosted on the Purdue nanoHUB.
 
 *** DONE Feature Engineering
 :LOGBOOK:
