@@ -81,7 +81,7 @@ This vector is a sufficient descriptor of a perovskite and has served decent pre
 To improve regression I examine an addition 36 additional predictors derived from linear combinations of compositions and elemental properties obtained from the trusted Mendeleev databases.
 [cite:@mentel-2014]
 
-** DONE COMMENT Multi-Fidelity Learning 
+** TODO COMMENT Multi-Fidelity Learning 
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 11:26]
 - State "DONE"       from "TODO"       [2022-09-13 Tue 12:51]
@@ -111,7 +111,7 @@ Our problem of accurately modeling low availability, high fidelity targets is ap
 We will employ the domain-side approach where the largest, lowest fidelity component of our dataset consists of density functional theory (DFT) band gap predictions made at the generalized gradient approximation (GGA) Perdew-Burke-Ernzerhof (PBE) level of theory.
 On the other end, the smallest and highest fidelity subset of the sample consists of experimental measurements of physical devices collected from the literature.
 
-** DONE COMMENT Random Forest Regression (RFR)
+** TODO COMMENT Random Forest Regression (RFR)
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -119,18 +119,10 @@ On the other end, the smallest and highest fidelity subset of the sample consist
 - State "DONE"       from              [2023-05-24 Wed 04:27]
 :END:
 
-*** col
-:PROPERTIES:
-:BEAMER_col: 0.6
-:END:
-#+DOWNLOADED: screenshot @ 2023-05-23 20:23:36
-#+attr_latex: :width 260
-[[file:Computational_Methods_In_Materials_Science/2023-05-23_20-23-36_screenshot.png]]
+# #+DOWNLOADED: screenshot @ 2023-05-23 20:23:36
+# #+attr_latex: :width 260
+# [[file:Computational_Methods_In_Materials_Science/2023-05-23_20-23-36_screenshot.png]]
 
-*** col
-:PROPERTIES:
-:BEAMER_col: 0.4
-:END:
 Decision Tree algorithm memorizes an algorithmic path to the target
 - trees capture interactions between features
 - trees are flexible and may be highly biased to data
@@ -138,7 +130,7 @@ The forest of random trees averages many paths
 - forest explains variance in data
 - forest reduces the variance of error
 
-** DONE COMMENT Gaussian Process Regression (GPR)
+** TODO COMMENT Gaussian Process Regression (GPR)
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -146,36 +138,24 @@ The forest of random trees averages many paths
 - State "DONE"       from              [2023-05-24 Wed 04:27]
 :END:
 
-*** col
-:PROPERTIES:
-:BEAMER_col: 0.6
-:END:
+
 Informally, GPRs "remember" the training examples and judge unlabeled
 data by its similarity to that aggregate memory.
-**** Kernel Method
-:PROPERTIES:
-:BEAMER_env: block
-:END:
+
+Kernel method
 the similarity function \(k(x, x')\)
 - defines a "universe" of functions
 - defines a density of functions prior to any data
 - works for any two quantifiably similar \(x\)
   - vectors, text, graphs, etc.
 
-**** Drawbacks
-:PROPERTIES:
-:BEAMER_env: block
-:END:
 - \(\mathcal{O}(N^3)\) training time complexity
 - kernels require engineering to accommodate prior expectations
 - break down in sparse spaces/high-dimensional spaces
 
-*** col
-:PROPERTIES:
-:BEAMER_col: 0.4
-:END:
-# down arrow through bayes rule??
-**** COMMENT functions illustration
+Other structural parameters, including metastable phases and bond angles are significant, but require different feature encoding strategies.
+
+*** COMMENT functions illustration
 #+begin_src jupyter-python
     from sklearn.gaussian_process import kernels as K
     from sklearn.gaussian_process import GaussianProcessRegressor
@@ -207,7 +187,7 @@ the similarity function \(k(x, x')\)
 :results:
 :end:
 
-**** Sample Prior Functions
+*** Sample Prior Functions
 :PROPERTIES:
 :BEAMER_env: block
 :END:
@@ -231,7 +211,7 @@ the similarity function \(k(x, x')\)
 [[file:./.ob-jupyter/ec4d60a2109843449bb674d71a67240d13c1611a.svg]]
 :end:
 
-**** Sample Posteriors
+*** Sample Posteriors
 :PROPERTIES:
 :BEAMER_env: block
 :END:
@@ -268,34 +248,18 @@ the similarity function \(k(x, x')\)
 [[file:./.ob-jupyter/eeae18f97963b2846566f847fcd1a8bb5dd88175.svg]]
 :end:
 
-** DONE COMMENT Sure-Independence Screening and Sparsifying Operator (SISSO)
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-:LOGBOOK:
-- State "DONE"       from              [2023-05-24 Wed 05:08]
-:END:
-# add a figure showing a sisso expression from literature
-*** col
-:PROPERTIES:
-:BEAMER_col: 0.4
-:END:
+** TODO COMMENT Sure-Independence Screening and Sparsifying Operator (SISSO)
+
 generalizes "Greedy Pursuit" algorithms
 - Orthogonal Matching Pursuit
 - Basis Pursuit (aka LASSO)
 
 SIS+correlation analysis is a form of orthogonalization
 
-*** col
-:PROPERTIES:
-:BEAMER_col: 0.6
-:END:
-#+DOWNLOADED: screenshot @ 2022-12-20 09:09:33
-#+attr_latex: :width 250
-[[file:Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png]]
-Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-physic]
-
-
+# #+DOWNLOADED: screenshot @ 2022-12-20 09:09:33
+# #+CAPTION: Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-physic]
+# #+attr_latex: :width 250
+# [[file:Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png]]
 
 ** DONE Model Optimization
 :LOGBOOK:
