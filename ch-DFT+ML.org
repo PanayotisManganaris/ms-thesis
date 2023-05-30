@@ -66,7 +66,7 @@
 :results:
 :end:
 
-* Multi-fidelity Machine Learning for Perovskite Band Gap Predictions
+* MULTI-FIDELITY MACHINE LEARNING FOR PEROVSKITE BAND GAP PREDICTIONS
 
 The fidelity hierarchy in the sample climbs from DFT simulations performed using the basic PBE GGA functional, to results obtained from physical experiments aggregated in literature.
 [cite:@almora-2020-devic-perfor;@kim-2014-cdses-nanow;@swanson-2017-co-sublim]
