@@ -67,20 +67,21 @@
 :end:
 
 * Multi-fidelity Machine Learning for Perovskite Band Gap Predictions
-Our fidelity hierarchy climbs from DFT simulations performed using the basic PBE GGA functional, to results obtained from physical experiments aggregated in literature see table ref:tbl:LoTs.
+
+The fidelity hierarchy in the sample climbs from DFT simulations performed using the basic PBE GGA functional, to results obtained from physical experiments aggregated in literature.
 [cite:@almora-2020-devic-perfor;@kim-2014-cdses-nanow;@swanson-2017-co-sublim]
+Low fidelity data makes up the majority of the sample and serves as the foundation for interpolation.
+However, it does not accuracy reproduce the experimental measurements.
+My work leverages the data covered in chapters 1 and 2 to predict the band gap of arbitrary perovskite compositions at experimental actuary with little anticipated error.
 
-# Design parameters other than composition were held constant.
-# The composition parameter poses serious challenges to optimization due to the combinatorial scaling experienced in the space as more candidates for each site is introduced.
-  
-# This 14-dimensional vector is a sufficient descriptor of a perovskites.
-# To improve regression, 36 additional predictors derived from linear combinations of compositions and elemental properties obtained from the trusted Mendeleev databases are examined.
-  
-# Other structural parameters, including metastable phases and bond angles are significant, but require different feature encoding strategies.
-  
-# Perovskite semiconductors offer opportunities to reduce cost and environmental impact as well as increase the performance of devices ranging from superconductors and computational q-bits to light emitting diodes and solar cells.
+To do this, a set of interpretable descriptors of each perovskite are used.
+This takes the form of a 14-dimensional vector containing the atomic fractions of each of the 14 constituent species within the specified perovskite formula.
+This vector is a sufficient descriptor of a perovskite and has served decent predictions.
+[cite:@mannodi-kanakkithodi-2022-data-driven]
+To improve regression I examine an addition 36 additional predictors derived from linear combinations of compositions and elemental properties obtained from the trusted Mendeleev databases.
+[cite:@mentel-2014]
 
-** DONE Multi-Fidelity Learning 
+** DONE COMMENT Multi-Fidelity Learning 
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 11:26]
 - State "DONE"       from "TODO"       [2022-09-13 Tue 12:51]
