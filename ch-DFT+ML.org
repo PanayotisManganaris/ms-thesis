@@ -689,14 +689,9 @@ A separate training session without this restriction was attempted, but the resu
   )
 #+end_src
 
-#+RESULTS:
-:results:
-: bg\si{\electronvolt} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\nonumber\\+-0.5862929089 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\nonumber\\+1.063684923 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\nonumber\\+4.657097107
-:end:
-
 \begin{align}
 \label{eq:bgexp}
-bg\si{\electronvolt} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})-\\&(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\nonumber\\+-0.5862929089 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\nonumber\\+1.063684923 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\nonumber\\+4.657097107
+bg\si{\electronvolt} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})-\nonumber\\&(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\nonumber\\+-0.5862929089 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\nonumber\\+1.063684923 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\nonumber\\+4.657097107
 \end{align}
 
 #+CAPTION: label:tbl:LoTscores RMSE of models on raw domain calculated per LoT subset
