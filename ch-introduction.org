@@ -329,7 +329,7 @@ Octahedral Factor
 Bartel Tolerance
 
 \[
-4 \gtrapprox b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
+4 \stackrel{>}{\sim} b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
 \]
 
 * DENSITY FUNCTIONAL THEORY SIMULATION
