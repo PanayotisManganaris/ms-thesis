@@ -121,6 +121,7 @@
 * INTRODUCTION
 
 Perovskites have historically been materials of great interest for a variety of optoelectronic applications with special interest in the past ten years (see figure ref:fig:nrel) in their potential as photovoltaic absorbers.
+As absorbers for solar cells, they offer opportunities to reduce cost and environmental impact as well as increase performance.
 [cite:@ansari-2018-front-oppor;@yin-2015-halid-perov;@manser-2016-intrig-optoel;@brenner-2016-hybrid-organ]
 A cubic phase perovskite unit cell with general formula \(\ce{ABX3}\) contains two cations A and B at the corners and body center, and an anion X at each of the face centers.
 The symbolic 3D perovskite structure is a network of \(\ce{BX6}\) octahedra robustly held together by large A-site cations.
