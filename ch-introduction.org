@@ -602,6 +602,7 @@ Starting from these pure perovskite structures systematic mixing was performed a
 Figure ref:fig:lot_mix_org shows the shares of different types of mixing in our sample.
 Again, for simplicity, only cardinal mixing is considered in this study: that is, mixing is not performed at multiple A/B/X-sites simultaneously.
 The sample contains a reasonable balance of points representing each one of the cardinal mixing categories.
+This will help to ensure the ML algorithms learn relationships between fidelities, not differences in mix site or constituency distributions within each fidelity.
 Additionally, within each mix both purely inorganic samples and hybrid organic-inorganic samples were represented equally.
 # See [[Methods]] for details on how these categories were utilized in model development.
 See the coverage of this sample in figure ref:fig:coverage.
