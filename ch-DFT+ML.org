@@ -256,29 +256,6 @@ Past this point, continuously variable hyper parameters can be individually opti
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 16:53]
 :END:
-*** DONE DFT Details
-:PROPERTIES:
-:CLASS: unnumbered
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2022-12-21 Wed 15:31]
-:END:
-The largest subdivision of 1400 compounds correspond to a series of optoelectronic DFT simulations.
-The simulated experiments are performed on some subset (table ref:tbl:LoTs) of ~500, exclusively pseudo-cubic, \(\ce{ABX_3}\) supercells obtained by geometry optimization of modified structure files [cite:@pilania-2016-machin-learn] originally obtained from the Computational Materials Repository[fn:2].
-Each cell demonstrates an SQS mixed composition at none or one of each of the A, B, or X sites.
-See the coverage of this sample in figure ref:fig:coverage.
-
-Each relaxed structure is made in two ways.
-Once with the PBE GGA functional and once with the HSE06 functional.
-Band gaps are obtained using a static band structure calculation performed at the same and at higher levels of theory.
-
-The chosen functionals each offer strengths and weaknesses.
-PBE is inexpensive but typically underestimates band gaps.
-HSE06 is orders of magnitude more expensive and may fail to converge structure relaxations but tends to be more trustworthy for electronic structure properties.
-HSE06 on PBE relaxation attempts to mitigate the disadvantages of each individually.
-The use of Spin Orbit Coupling helps to better electronic properties simulation in compounds containing Lead.
-# - D3 is performed for improved Van der Waals dispersion forces
-
 *** DONE Featurization of Chemistries
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 15:39]

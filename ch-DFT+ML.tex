@@ -23,83 +23,8 @@ Our problem of accurately modeling low availability, high fidelity targets is ap
 We will employ the domain-side approach where the largest, lowest fidelity component of our dataset consists of density functional theory (DFT) band gap predictions made at the generalized gradient approximation (GGA) Perdew-Burke-Ernzerhof (PBE) level of theory.
 On the other end, the smallest and highest fidelity subset of the sample consists of experimental measurements of physical devices collected from the literature.
 
-\section{Multiple Fidelity Dataset}
-\label{sec:orgc2ad881}
-\subsection{Perovskite Band Gaps}
-\label{sec:org1210311}
-We aim to accurately predict performance-relevant halide perovskite (HaP) band gaps, which strongly predict photovoltaic performance.
-\autocite{mannodi-kanakkithodi-2019-compr-comput}
-
-Furthermore, using multi-fidelity modeling we aim to predict the experimentally measured band gaps of compounds that have only been simulated to date.
-Our fidelity hierarchy climbs from DFT simulations performed using the basic PBE GGA functional, to results obtained from physical experiments aggregated in literature see table \ref{tbl:LoTs}.
-\autocite{almora-2020-devic-perfor,kim-2014-cdses-nanow,swanson-2017-co-sublim} 
-
-While we acknowledge the advantages of GNNs, we aim to express band gap as functions primarily of the perovskite composition.
-It is known the octahedral arrangement of perovskites is most relevant to their electronic structure, nevertheless, a strong understanding of the influence of chemical composition on performance will continue to be a priority as it is expected to aid in \hyperref[sec:orgfe2ba05]{Feature Engineering}.
-
- 
-\begin{table}[htbp]
-\caption{\label{tbl:LoTs} Sample counts by density functional represented in dataset}
-\centering
-\begin{tabular}{lr}
- & LoT\\[0pt]
-\hline
-PBE & 492\\[0pt]
-HSE & 297\\[0pt]
-HSE(SOC) & 282\\[0pt]
-HSE-PBErel(SOC) & 244\\[0pt]
-EXP & 90\\[0pt]
-\hline
- & 1405\\[0pt]
-\end{tabular}
-\end{table}
-
-A detailed analysis of this combined hybrid organic-inorganic and purely inorganic HaP DFT dataset is covered in a prior article by \textcite{yang-2022-high-throug} and in \ref{sec:orgf936a11}.
-Naturally, the statistics obtained from each fidelity vary (figure \ref{fig:bg_dist}).
-This is the primary challenge we will address with the categorically dimensioned multi-fidelity models discussed in \ref{sec:orgc13e663}.
-
- 
-\begin{figure}[htbp]
-\centering
-\includesvg[width=300pt]{./.ob-jupyter/e43c69abaab32a55a294c19aa5cdde4a867cdce8}
-\caption{\label{fig:bg_dist} Variability in band gaps at each fidelity}
-\end{figure}
-
-\subsection{Sampling}
-\label{sec:org68a6af0}
-The simulations for each level of theory are performed on some number of members to a fixed subset of the total 37785 compositions that can be combinatorially generated in a 2x2x2 perovskite supercell when allowing \emph{at most} single-site alloying with our 14 constituent candidates for 3 sites (table \ref{tbl:site_tbl}).
-
-\begin{table}[htbp]
-\caption{\label{tbl:site_tbl} ABX\textsubscript{3} Chemical Domain}
-\centering
-\begin{tabular}{l|llllll}
-A-site & MA & FA & Cs & Rb & K & \\[0pt]
-B-site & Pb & Sn & Ge & Ba & Sr & Ca\\[0pt]
-X-site & I & Br & Cl &  &  & \\[0pt]
-\end{tabular}
-\end{table}
-
-Within this domain space, we try to maintain a balance in the share of samples that represent each one of the "cardinal mixing" categories.
-Additionally, within each mix we try to maintain a reasonable balance of purely inorganic samples versus hybrid organic-inorganic samples.
-See \ref{sec:orgc13e663} for details on how these categories were utilized in model development.
-
-This previously reported dataset demonstrates very even coverage of the cardinal mixing domain as shown in figure \ref{fig:coverage}.
-The clusters in this figure correspond to the alloying scheme of the data points
-
-This sample provides the opportunity to comfortably interpolate the properties of other members of the cardinal mixing domain.
-Concurrently, we test the ability of our models to extrapolate with respect to alloying scheme as well as level of theory.
-It also provides an opportunity to investigate the statistical impact of constituent compounds on perovskite property prediction.
-See \ref{sec:org1afd58f}.
-
- 
-\begin{figure}[htbp]
-\centering
-\includesvg[width=450pt]{./.ob-jupyter/d20bd47669e6d6375c8646ad2bc35b817ce61eee}
-\caption{\label{fig:coverage} Samples overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE}
-\end{figure}
-
-\subsection{Model Optimization}
-\label{sec:orga69ae0a}
+\section{Model Optimization}
+\label{sec:orgcab398a}
 The rigorous hyper-parameter Optimization (HPO) of any feature engineering and modeling pipeline is a problem discussed extensively in the literature.
 HPO approaches can be broadly separated into exhaustive and efficient optimization strategies.
 \autocite{yang-2020-hyper-optim}
@@ -119,27 +44,10 @@ In general, no more than 2 or 3 exhaustive searches are needed over a given set 
 Past this point, continuously variable hyper parameters can be individually optimized by plotting validation curves.
 
 \section{Methods}
-\label{sec:orgc13e663}
-\subsection{DFT Details}
-\label{sec:orgf936a11}
-The largest subdivision of 1400 compounds correspond to a series of optoelectronic DFT simulations.
-The simulated experiments are performed on some subset (table \ref{tbl:LoTs}) of \textasciitilde{}500, exclusively pseudo-cubic, \(\ce{ABX_3}\) supercells obtained by geometry optimization of modified structure files \autocite{pilania-2016-machin-learn} originally obtained from the Computational Materials Repository\footnote{\url{https://cmr.fysik.dtu.dk/}}.
-Each cell demonstrates an SQS mixed composition at none or one of each of the A, B, or X sites.
-See the coverage of this sample in figure \ref{fig:coverage}.
-
-Each relaxed structure is made in two ways.
-Once with the PBE GGA functional and once with the HSE06 functional.
-Band gaps are obtained using a static band structure calculation performed at the same and at higher levels of theory.
-
-The chosen functionals each offer strengths and weaknesses.
-PBE is inexpensive but typically underestimates band gaps.
-HSE06 is orders of magnitude more expensive and may fail to converge structure relaxations but tends to be more trustworthy for electronic structure properties.
-HSE06 on PBE relaxation attempts to mitigate the disadvantages of each individually.
-The use of Spin Orbit Coupling helps to better electronic properties simulation in compounds containing Lead.
-
+\label{sec:org8bd74d8}
 \subsection{Featurization of Chemistries}
-\label{sec:org648bc86}
-For \(\alpha\) total A-site constituents represented in the whole database, \(\beta\) total B-site constituents, and \(\gamma\) total X-site constituents, we provide a Python tool\footnote{\url{https://github.com/PanayotisManganaris/cmcl}\label{orgf794d03}} which robustly coverts the composition string of each data point into a \(\alpha + \beta + \gamma\) dimensional composition vector.
+\label{sec:org8e9e424}
+For \(\alpha\) total A-site constituents represented in the whole database, \(\beta\) total B-site constituents, and \(\gamma\) total X-site constituents, we provide a Python tool\footnote{\url{https://github.com/PanayotisManganaris/cmcl}\label{orge32076a}} which robustly coverts the composition string of each data point into a \(\alpha + \beta + \gamma\) dimensional composition vector.
 In the case of our total dataset description \(\alpha + \beta + \gamma = 14\).
 \autocite{yang-2022-high-throug}
 In a subset of the data, the chemical vector (listing \ref{lst:cdf}) is produced using cmcl (listing \ref{lst:cmcl}).
