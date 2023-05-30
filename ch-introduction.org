@@ -266,7 +266,7 @@ Such DFT-ML models, once rigorously trained and tested, are deployed for high-th
  
 #+attr_latex: :width 300pt :options inkscapeformat=png, inkscapedpi=300
 #+CAPTION: label:fig:domainstats The cardinal mixing sample space contains equal fractions of each element
-[[file:./.ob-jupyter/f9792d3af3f9ce7059179c1b22753c8b3cb1bda1.svg]]
+[[file:./.ob-jupyter/835ba724468229103da0fd534aadf2acc7bb610c.svg]]
 :end:
 
 #+begin_src jupyter-python :post wrap(*this*, w="300pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:domainmix The cardinal mixing sample space contains mostly B-site mixed compounds")
@@ -287,7 +287,7 @@ Such DFT-ML models, once rigorously trained and tested, are deployed for high-th
  
 #+attr_latex: :width 300pt :options inkscapeformat=png, inkscapedpi=300
 #+CAPTION: label:fig:domainmix The cardinal mixing sample space contains mostly B-site mixed compounds
-[[file:./.ob-jupyter/6d8213fd925e7d9147f906367db306da59ce8ca1.svg]]
+[[file:./.ob-jupyter/0bbc378a94d8d28c62164dcab2e9d09dd39af3fd.svg]]
 :end:
 
 ** DONE Multiple Fidelity Dataset
