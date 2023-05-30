@@ -1046,10 +1046,9 @@ If anything, figure ref:fig:clusters confirms that the Iodine at the X site tend
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2023-05-19 Fri 11:12]
 :END:
-Using the superior RFR model, we made predictions of the band gap for all 37785 possible compositions demonstrating cardinal mixing within the bounds of a 2x2x2 perovskite super cell.
+Using the superior RFR model, I predict the band gap for all 37785 possible compositions demonstrating cardinal mixing within the bounds of a 2x2x2 perovskite super cell.
 That is eight A-sites shared by up to 5 constituents, 8 B-sites shared by up to six constituents, and 24 X-sites shared by up to 3 constituents.
-Given the good coverage achieved by our sample dataset (figure ref:fig:coverage) and according to the scores reported in Table ref:tbl:LoTscores, the RFR model is capable of predicting band gaps at the experimental fidelity with a 0.154448 rmse.
-[cite:@yang-2023-high-throug]
+Given the good coverage achieved by our sample dataset (figure ref:fig:coverage) and according to the scores reported in Table ref:tbl:LoTscores, the RFR model is capable of predicting band gaps at the experimental fidelity with a 0.15 RMSE.
 These predictions were projected on the sample space in Figure ref:fig:pred.
 
 #+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:pred Band gap predictions overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE")
@@ -1077,20 +1076,52 @@ These predictions were projected on the sample space in Figure ref:fig:pred.
 [[file:./.ob-jupyter/c2fa740c28da21ebb85c0902aea8c9b9ccbf3952.svg]]
 :end:
 
-We followed a similar high-throughput screening procedure to that laid out in prior works.
+I followed a similar high-throughput screening procedure to that laid out in prior works, except this covered a large space of purely hypothetical compounds.
 [cite:@yang-2023-high-throug;@mannodi-kanakkithodi-2021-comput-data]
-We selected for band gaps between 1.0 and 2.5 eV as this range is expected to yield the best power conversion efficiency (PCE) in the visible spectrum.
+See figure ref:fig:screenops.
+Band gaps between 1 and 2 \unit{\electronvolt} were selected as this range is expected to yield the best power conversion efficiency (PCE) in the visible spectrum.
 [cite:@yu-2012-ident-poten;@shockley-1961-detail-balan]
-Perovskite compounds were selected for their predicted stability by cutting on each of three tolerance factors.
-Namely the Goldschmidt's tolerance, the octahedral tolerance, and the tolerance proposed by [cite/text:@bartel-2019-new-toler].
+Perovskite compounds were selected for their predicted stability by cutting on each of three tolerance factors previously established in chapter 1.
+The constituent ratios of the chosen compositions in figure ref:fig:chosenstats may be juxtaposed with figure ref:fig:domainstats.
 
-These cuts trimmed the data set from ~40000 points to a subset of 3247 viable candidates.
-These selected candidates were projected onto the domain space in Figure ref:fig:chosen.
+#+attr_latex: :width 250
+#+CAPTION: label:fig:screenops Summary of screening operations used to identify candidate compounds
+[[file:screening_ops.png]]
+
+#+begin_src jupyter-python :post wrap(*this*, w="300pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:chosenstats The compounds selected from the cardinal mixing sample space contain varying fractions of each element")
+  p = px.sunburst(XX_big.iloc[screen.index,1:14].replace(0,np.NaN)
+                    .join(Y_big[['mix']])
+                    .groupby(['mix'])
+                    .sum().reset_index().melt(id_vars=['mix']),
+                  path=['variable'], values='value')
+  p.update_traces(insidetextorientation='horizontal',
+                  textinfo="label+percent parent")
+
+  p.update_layout(
+      margin=dict(l=0, r=0, t=0, b=0),
+      font_size=30
+  )
+  llist = p.data[0].labels
+  p.data[0].labels = [re.sub("comp__|['\(\),)]", "", l) for l in llist]
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 300pt :options inkscapeformat=png, inkscapedpi=300
+#+CAPTION: label:fig:chosenstats The compounds selected from the cardinal mixing sample space contain varying fractions of each element
+[[file:./.ob-jupyter/aa9e831e252cb3559416e458c47f5cce2ca96a82.svg]]
+:end:
+
+These cuts trimmed the 37785 points by 97% to a subset of only 1251 viable candidates.
+These selected candidates were projected onto the t-SNE embedding space in Figure ref:fig:chosen.
 A Frequency analysis revealed the constituent elements of the chosen subset most often occupied either small or large shares of their site.
 Most A-site constituents preferred occupying 1/8^{th} of their site at a rate of about 8%, with Potassium and Rb also preferring full occupancy 10-12% of the time.
 B-site constituents favored pure configurations at a rate of 5-8% but also showed some preference for doping configurations.
 X-site constituents, however showed very strong preference for fully occupying their site 25% of the time.
 See figure ref:fig:freq.
+The strong preference for pure sites simply reflects that this sample space contained compositions mixed at no more than one site simultaneously.
 
 #+begin_src jupyter-python
   dist = X_big.iloc[:,1:14].replace(
