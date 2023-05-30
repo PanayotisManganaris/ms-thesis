@@ -27,6 +27,13 @@
 # Intended for ONLY body export
 * COMMENT dependencies
 #+INCLUDE: /home/panos/Documents/manuscripts/DFT+ML+feature_engineering/dependencies.org
+#+begin_src jupyter-python
+  sys.path.append(os.path.expanduser("~/src/pysisso"))
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
 
 * COMMENT load sample and spaces
 #+begin_src jupyter-python
@@ -705,27 +712,36 @@ A separate training session without this restriction was attempted, but the resu
       )
 #+end_src
 
+#+RESULTS:
+:results:
+:end:
+
 #+begin_src jupyter-python
   cpipe = joblib.load("./Models/sisso_bg.joblib")
   print(
-      "bg\mbox{ [eV]} = " + mbox_ammend(typeset_sisso_model(cpipe).replace(" kJpermol", ""))
+      "bg\si{\electronvolt} = " + mbox_ammend(typeset_sisso_model(cpipe).replace(" kJpermol", ""))
   )
 #+end_src
 
+#+RESULTS:
+:results:
+: bg\si{\electronvolt} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\nonumber\\+-0.5862929089 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\nonumber\\+1.063684923 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\nonumber\\+4.657097107
+:end:
+
 \begin{align}
 \label{eq:bgexp}
-bg\mbox{ [eV]} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\nonumber\\+-0.5862929089 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\nonumber\\+1.063684923 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\nonumber\\+4.657097107
+bg\si{\electronvolt} = 1.752393064 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})-\\&(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\nonumber\\+-0.5862929089 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\nonumber\\+1.063684923 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\nonumber\\+4.657097107
 \end{align}
 
 #+CAPTION: label:tbl:LoTscores RMSE of models on raw domain calculated per LoT subset
-| Score Categories  |      GPR |      RFR | Linear OLS |    SISSO | SIS + GPR | SIS + RFR |
-|-------------------+----------+----------+------------+----------+-----------+-----------|
-| rmse              | 0.156214 | 0.124738 |   0.499558 | 0.474754 |  0.251881 |  0.187431 |
-| rmse EXP          | 0.120475 | 0.154448 |   0.307186 | 0.330080 |  0.338949 |  0.235397 |
-| rmse PBE          | 0.128211 | 0.101872 |   0.472430 | 0.395827 |  0.171640 |  0.134529 |
-| rmse HSE          | 0.214920 | 0.152479 |   0.558077 | 0.519706 |  0.305443 |  0.208390 |
-| rmse HSE(SOC)     | 0.156785 | 0.108867 |   0.535087 | 0.572644 |  0.272158 |  0.221007 |
-| rmse HSE-PBE(SOC) | 0.130696 | 0.133027 |   0.466364 | 0.470758 |  0.252624 |  0.189510 |
+| rmse scores  |      GPR |      RFR | Linear OLS |    SISSO | SIS + GPR | SIS + RFR |
+|--------------+----------+----------+------------+----------+-----------+-----------|
+| total        | 0.156214 | 0.124738 |   0.499558 | 0.474754 |  0.251881 |  0.187431 |
+| EXP          | 0.120475 | 0.154448 |   0.307186 | 0.330080 |  0.338949 |  0.235397 |
+| PBE          | 0.128211 | 0.101872 |   0.472430 | 0.395827 |  0.171640 |  0.134529 |
+| HSE          | 0.214920 | 0.152479 |   0.558077 | 0.519706 |  0.305443 |  0.208390 |
+| HSE(SOC)     | 0.156785 | 0.108867 |   0.535087 | 0.572644 |  0.272158 |  0.221007 |
+| HSE-PBE(SOC) | 0.130696 | 0.133027 |   0.466364 | 0.470758 |  0.252624 |  0.189510 |
 
 Computing and combining more than 3 SIS features is not rewarding of the computational expense.
 Residuals are increasingly uncorrelated with the generated SIS features and model accuracy gains do not outstrip complexity.
