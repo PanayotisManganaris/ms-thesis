@@ -60,9 +60,9 @@
 :end:
 
 * Multi-fidelity Machine Learning for Perovskite Band Gap Predictions
-:PROPERTIES:
-:CUSTOM_ID: introduction
-:END:
+Our fidelity hierarchy climbs from DFT simulations performed using the basic PBE GGA functional, to results obtained from physical experiments aggregated in literature see table ref:tbl:LoTs.
+[cite:@almora-2020-devic-perfor;@kim-2014-cdses-nanow;@swanson-2017-co-sublim]
+
 # Design parameters other than composition were held constant.
 # The composition parameter poses serious challenges to optimization due to the combinatorial scaling experienced in the space as more candidates for each site is introduced.
   
@@ -1198,6 +1198,8 @@ See figure ref:fig:freq.
 #+CAPTION: label:fig:freq Frequency of mixing fractions of species at the A, B, and X sites across the ~3000 screen compounds
 [[file:./.ob-jupyter/1efb3d52d06615061a39bb4b1d85bf1336016744.svg]]
 :end:
+
+* CONCLUSIONS
 
 * Footnotes
 
