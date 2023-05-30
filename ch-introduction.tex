@@ -1,0 +1,299 @@
+\chapter{INTRODUCTION}
+\label{sec:org51ca8a8}
+
+Perovskites have historically been materials of great interest for a variety of optoelectronic applications with special interest in the past ten years (see figure \ref{fig:nrel}) in their potential as photovoltaic absorbers.
+\autocite{ansari-2018-front-oppor,yin-2015-halid-perov,manser-2016-intrig-optoel,brenner-2016-hybrid-organ}
+A cubic phase perovskite unit cell with general formula \(\ce{ABX3}\) contains two cations A and B at the corners and body center, and an anion X at each of the face centers.
+The symbolic 3D perovskite structure is a network of \(\ce{BX6}\) octahedra robustly held together by large A-site cations.
+This unique structure means that perovskite properties are highly tunable by changing the size and number of A/B/X species, by manipulating relative octahedral arrangements, and by creating non-cubic and metastable phases.
+Halide perovskites (HaP), as opposed to the oxide perovskites that have been well researched over the past century are so characterized because their X-site anions are halogens.
+Their B-site cations may be divalent elements, and the A-site is occupied by large monovalent cations that are either inorganic elements or organic molecules.
+
+The most commonly studied hybrid organic-inorganic HaPs, \(\ce{MAPbI3}\) and \(\ce{FAPbI3}\), have demonstrated large power conversion efficiency (PCE) values between 20\% and 25\% when used as absorbers in single- or multi-junction solar cells.
+\autocite{cui-2019-planar-p,jeong-2020-stabl-perov}
+This is a five-fold improvement over the efficiencies of the same compositions first reported in 2009 and demonstrates the most attractive feature of HaPs, their unique tunability.
+A theoretical cubic perovskite structure is considered stable if the ionic radii of A, B, and X-site species satisfy the well-known tolerance (\(t\)) and octahedral (\o$\backslash$) factors.
+\autocite{bartel-2019-new-toler}
+Even accounting for stability constraints, the chemical space of perovskites experiences combinatorial scaling with the number of candidate elements which could be incorporated at each site.
+This poses a multidimensional optimization problem for which determining the optimal atomic fractions for a particular performance target requires data-driven acceleration.
+My research focused on the development and application of these design methods in the composition space of halide perovskites.
+The majority of work presented in this dissertation has been previously published or will be submitted for publication (See \hyperref{CONTRIBUTIONS}).
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=350pt]{./.ob-jupyter/f1bd7aa56a617cb3ef7ce678a9d45172a2916343}
+\caption{\label{fig:nrel} Rapid rise in cummulative maximum of HaP PCEs}
+\end{figure}
+
+\section{Design Goals and Challenges in Perovskite PV Absorbers}
+\label{sec:org07ac9ae}
+Perovskite properties may be tuned in various ways.
+The introduction of dopants and defects \autocite{kim-2020-upper-limit,dahliah-2021-high-throug} and the mutation of their cubic structure \autocite{kar-2018-comput-screen,kim-2017-hybrid-organ} are each promising areas of design.
+However, the work presented here focuses specifically on the identification of a reasonable number of candidate compositions for future laboratory trials.
+The most promising HaP compositions for PV absorption explored to date usually contain a mix of MA, FA, and Cs at the A-site, primarily Pb at the B-site with minor fractions of other divalent cations such as Sn and Ge, and I or Br at the X-site often with little Cl.
+Discovery of novel HaP compositions with attractive properties is on the rise as researchers expand the search into more complex alloys, novel A-site organic molecules, and substitutes for Pb at the B-site from Group IV, Group II, or transition elements.
+\autocite{zhu-2019-struc-elect,banerjee-2019-rashb-trigg,ding-2019-cesium-decreas,greenland-2020-correl-phase}
+Mixing at A site has been shown to improve formability \autocite{zhang-2019-perov-photov}, while B site and X site mixing can tune and optimize band gaps and optical absorption.
+The allure of A/B/X-site mixing, even the creation of high entropy perovskite alloys, is in the promise to obtain dramatically different properties than those of pure compositions.
+Perovskite properties have demonstrated highly nonlinear responses to changes in composition.
+It is hoped that exploiting this could lead to possibly eliminating toxic lead, reducing degradation under light exposure, and even improving resistance to adverse environmental conditions while also targeting specific optoelectronic performance markers.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=250pt]{hybrid-HaP.png}
+\caption{\(2\times{}2\times{}2\) \(\alpha\)-phase supercell with Methylammonium at the A-site}
+\end{figure}
+
+The chemical design space of HaPs is intractably large to effectively screen by physical laboratory methods.
+The halide perovskite chemical space covered by this dataset was based on fourteen species commonly appearing in study of these materials.
+The five constituents making up the A-site occupants include three inorganic and two organic cations, namely \(\ce{CH3NH3+}\) Methylammonium (MA) and \(\ce{CH(NH2)2+}\) Formamidinium (FA).
+\autocite{yan-2016-defec-physic,dimesso-2016-inves-formam}
+Six divalent metals represent the possible B-site occupants and three halogen anions make up the possible X-site occupants.
+See table \ref{tbl:site_tbl}.
+The total number of distinct compositions possible in a \(2\times{}2\times{}2\) supercell is over 207 million.
+Of these compositions, 37695 contain mixing at only one site and ninety are pure having no mixing at any site.
+I refer to the combination of these subsets as the "cardinal mixing set" and it equally represents each of the constituent species of interest.
+See figures \ref{fig:domainstats} and \ref{fig:domainmix}.
+
+First principles density functional theory (DFT) simulations have been systematically performed to study the optoelectronic properties of HaPs as a function of structure, composition, and defects.
+Recently, DFT simulations have been reliably used to predict structural information, band gaps, optical absorption spectra, and defect formation energies of a variety of HaPs with reasonable accuracy.
+\autocite{mannodi-kanakkithodi-2022-data-driven,yin-2015-halid-perov}
+An examination of the HaP-related computational literature reveals that there have been numerous medium (\textasciitilde{}10\textsuperscript{2} data points) to large (\textasciitilde{}10\textsuperscript{3} or more data points) DFT datasets reported for HaPs.
+\autocite{castelli-2014-bandg-calcul,park-2019-explor-new,kar-2018-comput-screen,pu-2021-screen-perov}
+These have been successfully screened to identify promising materials with desired stability and formability as well as PV-suitable band gaps, among other properties.
+
+A clear limitation of High-Throughput (HT) DFT driven screening is the computational expense of applying a suitably advanced level of theory across a very large number of materials.
+This problem is typically addressed by coupling DFT computations with machine learning (ML) techniques.
+Within the area of perovskites, there are many examples in the literature where DFT datasets and suitable atomic/structural/compositional descriptors have been used to train a variety ML-based predictive and classification models, leading to accelerated prediction of lattice constants, formation energies, band gaps, and other important properties.
+\autocite{park-2019-explor-new,stanley-2020-machin-learn,lee-2021-discov-lead}
+Such DFT-ML models, once rigorously trained and tested, are deployed for high-throughput screening across massive sample spaces of unknown perovskites.
+\autocite{yang-2022-high-throug}
+
+\begin{table}[htbp]
+\caption{\label{tbl:site_tbl} \(\ce{ABX3}\) candidate species per site}
+\centering
+\begin{tabular}{l|llllll}
+A-site & MA & FA & Cs & Rb & K & \\[0pt]
+B-site & Pb & Sn & Ge & Ba & Sr & Ca\\[0pt]
+X-site & I & Br & Cl &  &  & \\[0pt]
+\end{tabular}
+\end{table}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[inkscapeformat=png, inkscapedpi=300,width=150pt]{./.ob-jupyter/9e0366470dfde761b88596ec0201cfdd3b190f95}
+\caption{The cardinal mixing sample space contains equal fractions of each element}
+\end{figure}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[inkscapeformat=png, inkscapedpi=300,width=150pt]{./.ob-jupyter/a91a51588adf9751defe3ea10ecce816979590c2}
+\caption{\label{fig:domainmix} The cardinal mixing sample space contains mostly B-site mixed compounds}
+\end{figure}
+
+\section{{\bfseries\sffamily DONE} Multiple Fidelity Dataset}
+\label{sec:org8b386c6}
+For my work I used a large DFT dataset collected over the past three years by my advisor and fellow student Jiaqi Yang.
+This dataset consists of approximately 1300 calculations based on approximately 500 chemically distinct, pseudo-cubic, halide perovskite alloys reported in the Mannodi research group's prior work.
+\autocite{mannodi-kanakkithodi-2022-data-driven,yang-2023-high-throug}
+There are more calculations than there are distinct compositions because each composition is simulated multiple times.
+Also, it is supplemented by an additional \textasciitilde{}100 points of data aggregated from reputable sources by \textcite{almora-2020-devic-perfor}.
+In total it contends as one of the largest first principles halide perovskite datasets and represents years of work.
+The relatively large size of this dataset samples the space of all possible single-site mixed compositions with good coverage.
+This enables the training of interpolative models in the HaP composition space promising lower and less frequent error than if lesser coverage were used.
+In this dataset, all perovskite structures are cubic or pseudo-cubic, which aids my focus on investigating effects of composition and alloying on photovoltaic performance.
+
+\chapter{DENSITY FUNCTIONAL THEORY SIMULATION}
+\label{sec:org8785608}
+All DFT computations were performed using vasp version 6.2 employing projector-augmented-wave (PAW) pseudo-potentials.
+\autocite{kresse-1996-effic-iterat,kresse-1993-ab-initio,kresse-1996-effic-ab,kresse-1999-from-ultras,kresse-1994-norm-conser}
+Multiple levels of theory (LoT) were used in most computations.
+Each simulation was conducted on the same set of compositions allowing \emph{at most} single-site mixing of our 14 constituent candidates for 3 sites (table \ref{tbl:site_tbl}).
+Each HaP composition is simulated in a \(2\times{}2\times{}2\) supercell, which allows A and B-site mixing to be performed in discrete 1/8\textsuperscript{th} fractions of the total site occupancy, and X-site mixing in 1/24\textsuperscript{th} fractions, though for simplicity, we restrict X-site mixing to fractions of 3x/24.
+For simulating mixed perovskites, the special quasi-random structures (SQS) method was applied to build periodic structures that make the first nearest-neighbor shells as similar to the target random alloy as possible.
+\autocite{jiang-2016-special-quasir}
+The final tally of successfully converged calculations is listed in table \ref{tbl:LoTs}.
+The Perdew-Burke-Ernzerhof (PBE) functional within the generalized gradient approximation (GGA) as well as the hybrid Heyd-Scuseria-Ernzerhof functional with parameters (\(\alpha=0.25\)) and (\(\omega=0.2\)) (HSE06) are used for exchange-correlation energy.
+\autocite{perdew-1996-gener-gradien,heyd-2003-hybrid-funct}
+The energy cutoff for the plane-wave basis is set to 500 eV.
+For all PBE geometry optimization calculations, the Brillouin zone was sampled using a \(6\times{}6\times{}6\) Monkhorst-Pack mesh for unit cells and a \(3\times{}3\times{}3\) for supercells.
+Using the PBE optimized structure as input, the electronic band structure is calculated along high-symmetry k-points to obtain accurate band gaps, and the optical absorption spectrum is further calculated using the LOPTICS tag, setting the number of energy bands to 1000 for each structure.
+\autocite{hinuma-2016-band-struc,ganose-2018-sumo}
+For HSE calculations, geometry optimization was performed using only the Gamma point, and subsequent computations used a reduced \(2\times{}2\times{}2\) Monkhorst-Pack mesh.
+The force convergence threshold is set to be -0.05 eV/Å.
+Spin-orbit coupling (SOC) is also applied to two flavors of HSE computations using the LORBIT tag and the non-collinear magnetic version of VASP 6.2.
+\autocite{steiner-2016-calcul-magnet}
+Optical absorption spectra from different HSE functionals were obtained by using the difference between the respective PBE and HSE band gap, and shifting the PBE-computed spectrum.
+
+ 
+\begin{table}[htbp]
+\caption{\label{tbl:LoTs} Sample counts by density functional represented in dataset}
+\centering
+\begin{tabular}{lr}
+ & LoT\\[0pt]
+\hline
+PBE & 492\\[0pt]
+HSE & 297\\[0pt]
+HSE(SOC) & 282\\[0pt]
+HSE-PBErel(SOC) & 244\\[0pt]
+EXP & 90\\[0pt]
+\hline
+ & 1405\\[0pt]
+\end{tabular}
+\end{table}
+
+\section{DFT Computed Band Gaps}
+\label{sec:org3bbc3e0}
+Four types of electronic band gaps were computed by my advisor and group members using a \(2\times{}2\times{}2\) Monkhorst-Pack mesh.
+These four measures E\textsubscript{gap}\textsuperscript{PBE}, E\textsubscript{gap}\textsuperscript{HSE}, E\textsubscript{gap}\textsuperscript{HSE(SOC)}, and E\textsubscript{gap}\textsuperscript{HSE-PBErel(SOC)} populate the multiple fidelity dataset I model.
+I aim to accurately predict performance-relevant halide perovskite (HaP) band gaps, which strongly predict photovoltaic performance.
+\autocite{mannodi-kanakkithodi-2019-compr-comput}
+Furthermore, using multi-fidelity modeling, I aim to predict the experimentally measured band gaps of entirely hypothetical compounds, either only ever simulated or not tested at all.
+This is motivated by a relationship known to exist between the absorption spectra/PCE of the simulated compounds and their band gaps.
+
+\section{Spectroscopic Limited Maximum Efficiency (SLME)}
+\label{sec:org8150052}
+Introduced by \textcite{yu-2012-ident-poten}, the SLME is a convenient metric for evaluating a semiconductor's suitability for single junction photovoltaic (PV) absorption.
+In this work, SLME is calculated considering a 5\units{\micro\meter} sample thickness for every perovskite using equations \ref{eq:absorption_alpha}, \ref{eq:slme_int}, and \ref{eq:slme_sum}, combining the original SL3ME.py code from \textcite{yu-2012-ident-poten} with our DFT computed absorption spectra and band gaps.
+
+\[
+\label{eq:absorption_alpha}
+a(E)=1-e^{-2\alpha(E)L}
+\]
+
+Here, \(\alpha(E)\) is the DFT computed optical absorption coefficient
+as a function of incident photon energy and \(L\) is the thickness of
+the absorber.
+
+\[
+\label{eq:slme_int}
+J=e\int_{0}^{\infty} a(E)I_{sun}(E)dE - J_{0}(1-e^{\frac{eV}{kT}})
+\]
+
+\[
+\label{eq:slme_sum}
+\eta = \frac{P_{m}}{P_{in}}=\frac{max(J \times V)}{P_{in}}
+\]
+
+To calculate SLME efficiency the current density \(J\), the light spectrum intensity of sunlight \(I_{sun}\), and the power \(P\) are all that is needed.
+Using the DFT computed optical absorption spectrum as well as the magnitude and type (direct or indirect) of band gap as input, SLME is directly calculated using an open-source package.
+\autocite{williams-2022-sl3me}
+This calculation is performed using all four functionals and compliments the PCE measurements at the experimental fidelity.
+SLME accounts for more energetic processes than the Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing for a range of performant bandgaps to be identified according to level of theory\autocite[p.1]{yu-2012-ident-poten}
+Experimental data\autocite{almora-2020-devic-perfor} broadly agrees with PBE simulation, so the range of 1 to 2 \units{\electronvolts}.
+see figure \ref{fig:slme}.
+Also, notice that even in just the sample dataset, there are candidates with potential to overtake the state of the art absorbers reported by NREL in figure \ref{fig:nrel}.
+This is propitious for the screening I conduct on the 40000 point sample space.
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=500pt]{./.ob-jupyter/60f8cf0b348fa5343e2e4248196e31cfd76edac0}
+\caption{\label{fig:slme} PBE SLME of sample compares to experimental PCE and cleanly demarcates competitive range of band gaps}
+\end{figure}
+
+\section{Improving Property Predictions using HSE06 and Spin-Orbit Coupling}
+\label{sec:org0006bfa}
+For a set of selected HaP compositions, while PBE-optimized lattice constants match well with experiments, PBE band gaps are underestimated, and HSE-PBE-SOC band gaps match better with measured values.
+GGA-PBE computations reliably compute relaxed structures of both hybrid and purely inorganic HaPs.
+However, advanced levels of theory such as the HSE06 functional with and without the inclusion of spin orbit coupling (SOC) to account for the relativistic effects of heavy atoms such as Pb, are of paramount importance when it comes to simulating electronic and optical properties.
+
+The data set I used contains a series of \textasciitilde{}300 expensive HSE calculations across the 500 sampled compositions.
+These are intended to yield insight into the effects of full geometry optimization at hybrid levels of theory to those of PBE-optimized structures.
+Also, the effect of incorporating SOC in the calculation was examined.
+In review, the sample of 500 band gaps available for training predictors was supplemented by 299 calculations conducted entirely at the HSE level of theory.
+Furthermore, an additional 282 calculations were performed with HSE in addition to SOC, and 244 calculations were performed by running HSE(SOC) electronic structure calculations on PBE-relaxed structures.
+
+The range of band gaps sampled by each simulation method are similar and are characterized by similar variance.
+the descriptive statistics of each greatly exceeds those of the experimental subset (see figure \ref{fig:bg_dist}).
+Nevertheless, the latter undoubtedly represented the smallest error from truth.
+The types of mixing per level of theory are apportioned as in figure
+This is the primary challenge I address with the multi-fidelity models discussed in \hyperref{Multi-fidelity Machine Learning for Perovskite Band Gap Predictions}.
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=300pt]{./.ob-jupyter/68775ba7ee8917dc6b42530cc8c59f2ed31c967d}
+\caption{\label{fig:bg_dist} Variability in sampled band gaps at each fidelity}
+\end{figure}
+
+It is important to have a notion of which simulation is most accurate to the experimental measurements.
+Figure \ref{fig:expqual} compares the band gaps obtained for a small subset of elements at all five levels of theory.
+Theoretically, each functional may be more accurate for certain types of compositions.
+For instance, organic-inorganic perovskites might benefit from greater account of Van der Waals forces and Pb-based compounds benefit from the use of spin orbit coupling as opposed to Pb-free compounds.
+Note, phase information was not always available for certain experimental data points collected from the literature, and the inclusion of non-cubic phases in the tables may affect the evaluation of the functionals' accuracy.
+Also, experimental data is tightly concentrated on the narrow range of performant band gaps likely due to selection bias.
+
+The analysis is summarized in table \ref{tbl:expquant}.
+HSE band gaps are heavily overestimated, but may be brought down by the addition of the SOC term.
+Overall, HSE-PBErel(SOC) is the best approach for simulating band gaps with respect to computational cost and time.
+PBE RMSE is not significantly different from the HSE-PBErel(SOC) RMSE.
+This is due to the accidental accuracy of semi-local functionals without SOC for hybrid organic-inorganic perovskites.
+\autocite{mannodi-kanakkithodi-2019-compr-comput,mannodi-kanakkithodi-2022-data-driven}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/b548f05eedf813d912341cbb35f2f5b1865b4383}
+\caption{\label{fig:expqual} Effect of level of theory on band gap measurement}
+\end{figure}
+
+ 
+\begin{table}[htbp]
+\caption{\label{tbl:expquant} RMSE values of band gaps computed from different functionals compared with experimental (Exp) values}
+\centering
+\begin{tabular}{lr}
+ & RMSE vs EXP\\[0pt]
+\hline
+PBE & 0.55\\[0pt]
+HSE & 0.87\\[0pt]
+HSE(SOC) & 0.61\\[0pt]
+HSE-PBErel(SOC) & 0.44\\[0pt]
+\end{tabular}
+\end{table}
+
+\section{Sampling the Halide Perovskite Chemical Space}
+\label{sec:org26d1cf1}
+Pure (non-alloyed) possibilities are exhaustively sampled using \(5*6*3 = 90\) compounds.
+Starting from these pure perovskite structures systematic mixing was performed at the A, B, and X sites.
+Figure \ref{fig:lot_mix_org} shows the shares of different types of mixing in our sample.
+Again, for simplicity, only cardinal mixing is considered in this study: that is, mixing is not performed at multiple A/B/X-sites simultaneously.
+The sample contains a reasonable balance of points representing each one of the cardinal mixing categories.
+Additionally, within each mix both purely inorganic samples and hybrid organic-inorganic samples were represented equally.
+
+See the coverage of this sample in figure \ref{fig:coverage}.
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[inkscapeformat=png, inkscapedpi=300,width=450pt]{./.ob-jupyter/201e8a95043e8f43d649342b896cab0dfa4ef32e}
+\caption{\label{fig:lot_mix_org} Share by count of total data apportioned from each experimental subcategory}
+\end{figure}
+
+Most importantly, this sample gives very even coverage of the cardinal mixing domain as shown in figure \ref{fig:coverage}.
+The clusters in this figure are determined using the t-distributed stochastic neighbor embedding (t-SNE) method.
+This is a nonparametric dimensionality reduction intended for visualizing statistically relevant clusters in a high dimensional dataset in only two or three dimensions.
+In this case, the clusters correspond to the mix site of the member data points.
+
+This sample provides the opportunity to comfortably interpolate the properties of other members of the cardinal mixing domain.
+
+See \hyperref{Discussion}.
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=450pt]{./.ob-jupyter/d20bd47669e6d6375c8646ad2bc35b817ce61eee}
+\caption{\label{fig:coverage} Samples overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE}
+\end{figure}
+
+Novel halide perovskites with improved stability and optoelectronic properties can be designed via composition engineering at cation and/or anion sites.
+Data-driven methods, especially involving high-throughput first principles computations and subsequent analysis based on unique materials descriptors, are key to achieving this goal.
+I accessed a dataset consisting of -- among other characteristic properties -- simulated band gaps of a representative sample of halide perovskites (HaP).
+The effects of mixing at different sites is described by the explicit fraction of a site occupied by a specific atomic or molecular species.
+Also, a set of abstract features obtained as the weighted averages of these species' bulk physical properties is used to bolster the feature space.
+
+Our multi-objective, multi-fidelity, computational halide perovskite alloy dataset is one of the most comprehensive to date.
+It is publicly available in the hopes further physical and engineering insights can be extracted by the broader research community.
