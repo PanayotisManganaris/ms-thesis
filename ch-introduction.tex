@@ -1,5 +1,5 @@
 \chapter{INTRODUCTION}
-\label{sec:org209088a}
+\label{sec:org079a8c3}
 
 Perovskites have historically been materials of great interest for a variety of optoelectronic applications with special interest in the past ten years (see figure \ref{fig:nrel}) in their potential as photovoltaic absorbers.
 \autocite{ansari-2018-front-oppor,yin-2015-halid-perov,manser-2016-intrig-optoel,brenner-2016-hybrid-organ}
@@ -27,7 +27,7 @@ The majority of work presented in this dissertation has been previously publishe
 \end{figure}
 
 \section{Design Goals and Challenges in Perovskite PV Absorbers}
-\label{sec:orgaa1b704}
+\label{sec:org5330980}
 Perovskite properties may be tuned in various ways.
 The introduction of dopants and defects \autocite{kim-2020-upper-limit,dahliah-2021-high-throug} and the mutation of their cubic structure \autocite{kar-2018-comput-screen,kim-2017-hybrid-organ} are each promising areas of design.
 However, the work presented here focuses specifically on the identification of a reasonable number of candidate compositions for future laboratory trials.
@@ -95,7 +95,7 @@ X-site & I & Br & Cl &  &  & \\[0pt]
 \end{figure}
 
 \section{{\bfseries\sffamily DONE} Multiple Fidelity Dataset}
-\label{sec:org4f6678f}
+\label{sec:org573250d}
 For my work I used a large DFT dataset collected over the past three years by my advisor and fellow student Jiaqi Yang.
 This dataset consists of approximately 1300 calculations based on approximately 500 chemically distinct, pseudo-cubic, halide perovskite alloys reported in the Mannodi research group's prior work.
 \autocite{mannodi-kanakkithodi-2022-data-driven,yang-2023-high-throug}
@@ -107,7 +107,7 @@ This enables the training of interpolative models in the HaP composition space p
 In this dataset, all perovskite structures are cubic or pseudo-cubic, which aids my focus on investigating effects of composition and alloying on photovoltaic performance.
 
 \chapter{DENSITY FUNCTIONAL THEORY SIMULATION}
-\label{sec:org58ce3c6}
+\label{sec:orgf1c39c7}
 All DFT computations were performed using vasp version 6.2 employing projector-augmented-wave (PAW) pseudo-potentials.
 \autocite{kresse-1996-effic-iterat,kresse-1993-ab-initio,kresse-1996-effic-ab,kresse-1999-from-ultras,kresse-1994-norm-conser}
 Multiple levels of theory (LoT) were used in most computations.
@@ -146,7 +146,7 @@ EXP & 90\\[0pt]
 \end{table}
 
 \section{DFT Computed Band Gaps}
-\label{sec:orga2ee04d}
+\label{sec:org6649af6}
 Four types of electronic band gaps were computed by my advisor and group members using a \(2\times{}2\times{}2\) Monkhorst-Pack mesh.
 These four measures E\textsubscript{gap}\textsuperscript{PBE}, E\textsubscript{gap}\textsuperscript{HSE}, E\textsubscript{gap}\textsuperscript{HSE(SOC)}, and E\textsubscript{gap}\textsuperscript{HSE-PBErel(SOC)} populate the multiple fidelity dataset I model.
 I aim to accurately predict performance-relevant halide perovskite (HaP) band gaps, which strongly predict photovoltaic performance.
@@ -155,9 +155,9 @@ Furthermore, using multi-fidelity modeling, I aim to predict the experimentally 
 This is motivated by a relationship known to exist between the absorption spectra/PCE of the simulated compounds and their band gaps.
 
 \section{Spectroscopic Limited Maximum Efficiency (SLME)}
-\label{sec:org67ed269}
+\label{sec:org53a31e0}
 Introduced by \textcite{yu-2012-ident-poten}, the SLME is a convenient metric for evaluating a semiconductor's suitability for single junction photovoltaic (PV) absorption.
-In this work, SLME is calculated considering a 5\units{\micro\meter} sample thickness for every perovskite using equations \ref{eq:absorption_alpha}, \ref{eq:slme_int}, and \ref{eq:slme_sum}, combining the original SL3ME.py code from \textcite{yu-2012-ident-poten} with our DFT computed absorption spectra and band gaps.
+In this work, SLME is calculated considering a 5\unit{\micro\meter} sample thickness for every perovskite using equations \ref{eq:absorption_alpha}, \ref{eq:slme_int}, and \ref{eq:slme_sum}, combining the original SL3ME.py code from \textcite{yu-2012-ident-poten} with our DFT computed absorption spectra and band gaps.
 
 \[
 \label{eq:absorption_alpha}
@@ -182,8 +182,8 @@ To calculate SLME efficiency the current density \(J\), the light spectrum inten
 Using the DFT computed optical absorption spectrum as well as the magnitude and type (direct or indirect) of band gap as input, SLME is directly calculated using an open-source package.
 \autocite{williams-2022-sl3me}
 This calculation is performed using all four functionals and compliments the PCE measurements at the experimental fidelity.
-SLME accounts for more energetic processes than the Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing for a range of performant bandgaps to be identified according to level of theory\autocite[p.1]{yu-2012-ident-poten}
-Experimental data\autocite{almora-2020-devic-perfor} broadly agrees with PBE simulation, so the range of 1 to 2 \units{\electronvolts}.
+SLME accounts for more energetic processes than the Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing for a range of performant band gaps to be identified according to level of theory\autocite[p.1]{yu-2012-ident-poten}
+Experimental data\autocite{almora-2020-devic-perfor} broadly agrees with PBE simulation, so the range of 1 to 2 \unit{\electronvolt}.
 see figure \ref{fig:slme}.
 Also, notice that even in just the sample dataset, there are candidates with potential to overtake the state of the art absorbers reported by NREL in figure \ref{fig:nrel}.
 This is propitious for the screening I conduct on the 40000 point sample space.
@@ -196,7 +196,7 @@ This is propitious for the screening I conduct on the 40000 point sample space.
 \end{figure}
 
 \section{Improving Property Predictions using HSE06 and Spin-Orbit Coupling}
-\label{sec:org148bdb8}
+\label{sec:org25585eb}
 For a set of selected HaP compositions, while PBE-optimized lattice constants match well with experiments, PBE band gaps are underestimated, and HSE-PBE-SOC band gaps match better with measured values.
 GGA-PBE computations reliably compute relaxed structures of both hybrid and purely inorganic HaPs.
 However, advanced levels of theory such as the HSE06 functional with and without the inclusion of spin orbit coupling (SOC) to account for the relativistic effects of heavy atoms such as Pb, are of paramount importance when it comes to simulating electronic and optical properties.
@@ -256,7 +256,7 @@ HSE-PBErel(SOC) & 0.44\\[0pt]
 \end{table}
 
 \section{Sampling the Halide Perovskite Chemical Space}
-\label{sec:org83623b5}
+\label{sec:org302e522}
 Pure (non-alloyed) possibilities are exhaustively sampled using \(5*6*3 = 90\) compounds.
 Starting from these pure perovskite structures systematic mixing was performed at the A, B, and X sites.
 Figure \ref{fig:lot_mix_org} shows the shares of different types of mixing in our sample.

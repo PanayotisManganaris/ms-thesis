@@ -358,7 +358,7 @@ This is motivated by a relationship known to exist between the absorption spectr
 
 ** Spectroscopic Limited Maximum Efficiency (SLME)
 Introduced by [cite/text:@yu-2012-ident-poten], the SLME is a convenient metric for evaluating a semiconductor's suitability for single junction photovoltaic (PV) absorption.
-In this work, SLME is calculated considering a 5\units{\micro\meter} sample thickness for every perovskite using equations ref:eq:absorption_alpha, ref:eq:slme_int, and ref:eq:slme_sum, combining the original SL3ME.py code from [cite/text:@yu-2012-ident-poten] with our DFT computed absorption spectra and band gaps.
+In this work, SLME is calculated considering a 5\unit{\micro\meter} sample thickness for every perovskite using equations ref:eq:absorption_alpha, ref:eq:slme_int, and ref:eq:slme_sum, combining the original SL3ME.py code from [cite/text:@yu-2012-ident-poten] with our DFT computed absorption spectra and band gaps.
 
 \[
 \label{eq:absorption_alpha}
@@ -383,8 +383,8 @@ To calculate SLME efficiency the current density \(J\), the light spectrum inten
 Using the DFT computed optical absorption spectrum as well as the magnitude and type (direct or indirect) of band gap as input, SLME is directly calculated using an open-source package.
 [cite:@williams-2022-sl3me]
 This calculation is performed using all four functionals and compliments the PCE measurements at the experimental fidelity.
-SLME accounts for more energetic processes than the Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing for a range of performant bandgaps to be identified according to level of theory[cite:@yu-2012-ident-poten p.1]
-Experimental data[cite:@almora-2020-devic-perfor] broadly agrees with PBE simulation, so the range of 1 to 2 \units{\electronvolts}.
+SLME accounts for more energetic processes than the Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing for a range of performant band gaps to be identified according to level of theory[cite:@yu-2012-ident-poten p.1]
+Experimental data[cite:@almora-2020-devic-perfor] broadly agrees with PBE simulation, so the range of 1 to 2 \unit{\electronvolt}.
 see figure ref:fig:slme.
 Also, notice that even in just the sample dataset, there are candidates with potential to overtake the state of the art absorbers reported by NREL in figure ref:fig:nrel.
 This is propitious for the screening I conduct on the 40000 point sample space.
