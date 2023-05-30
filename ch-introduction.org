@@ -305,6 +305,33 @@ The relatively large size of this dataset samples the space of all possible sing
 This enables the training of interpolative models in the HaP composition space promising lower and less frequent error than if lesser coverage were used.
 In this dataset, all perovskite structures are cubic or pseudo-cubic, which aids my focus on investigating effects of composition and alloying on photovoltaic performance.
 
+** DONE Perovskite Formability
+In order to simplify the search for viable candidates, some standard empirical rating of perovskite formability are employed.
+It has been observed that the A-site member must be much larger than its counterpart at the B-site for a Perovskite to be stable.
+B-site elements are usually large (e.g. Pb, Sn) in Halide Perovskites, which incidentally motivates the use of organic cations at A.
+[cite:@kieslich-2015-exten-toler]
+Various tolerance factors have been designed to describe this constraint.
+The following definitions approximate \alpha phase stability
+[cite:@yin-2015-halid-perov;@bartel-2019-new-toler]
+
+Goldschmidt tolerance
+
+\[
+1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+\]
+
+Octahedral Factor
+
+\[
+0.67 \approx o=\frac{r_B}{r_X}
+\]
+
+Bartel Tolerance
+
+\[
+4 \gtrapprox b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
+\]
+
 * DENSITY FUNCTIONAL THEORY SIMULATION
 All DFT computations were performed using vasp version 6.2 employing projector-augmented-wave (PAW) pseudo-potentials.
 [cite:@kresse-1996-effic-iterat;@kresse-1993-ab-initio;@kresse-1996-effic-ab;@kresse-1999-from-ultras;@kresse-1994-norm-conser]
@@ -658,51 +685,6 @@ Our multi-objective, multi-fidelity, computational halide perovskite alloy datas
 It is publicly available in the hopes further physical and engineering insights can be extracted by the broader research community.
 
 # we compare the various PBE and HSE calculated lattice constant and band gap values with corresponding experimental results collected from [cite/text:@tao-2019-absol-energ] and [cite/text:@almora-2020-devic-perfor].
-
-** DONE COMMENT Perovskite Formability
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2023-05-25 Thu 16:16]
-:END:
-- A must be much larger than B for Perovskite formation
-- Various tolerance factors have been designed to describe this constraint
-- B usually large (e.g. Pb, Sn) in Halide Perovskites
-- A accommodates amines with large effective ionic radii[cite:@kieslich-2015-exten-toler]
-
-The following definitions approximate \alpha phase stability
-[cite:@yin-2015-halid-perov;@bartel-2019-new-toler]
-*** Goldschmidt Tolerance
-:PROPERTIES:
-:BEAMER_env: block
-:BEAMER_col: 0.33
-:END:
-
-\[
-1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
-\]
-
-*** Octahedral Factor
-:PROPERTIES:
-:BEAMER_env: block
-:BEAMER_col: 0.33
-:END:
-
-\[
-0.67 \approx o=\frac{r_B}{r_X}
-\]
-
-*** Bartel Tolerance
-:PROPERTIES:
-:BEAMER_env: block
-:BEAMER_col: 0.33
-:END:
-
-\[
-4 \gtrapprox b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
-\]
-
 
 * Footnotes
 
