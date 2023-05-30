@@ -508,7 +508,7 @@ Also, experimental data is tightly concentrated on the narrow range of performan
 The analysis is summarized in table ref:tbl:expquant.
 HSE band gaps are heavily overestimated, but may be brought down by the addition of the SOC term.
 Overall, HSE-PBErel(SOC) is the best approach for simulating band gaps with respect to computational cost and time.
-PBE RMSE is not significantly different from the HSE-PBErel(SOC) RMSE.
+PBE root mean square error (RMSE) is not significantly different from the HSE-PBErel(SOC) RMSE.
 This is due to the accidental accuracy of semi-local functionals without SOC for hybrid organic-inorganic perovskites.
 [cite:@mannodi-kanakkithodi-2019-compr-comput;@mannodi-kanakkithodi-2022-data-driven]
 
