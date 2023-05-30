@@ -1208,6 +1208,83 @@ The strong preference for pure sites simply reflects that this sample space cont
 :end:
 
 * CONCLUSIONS
+A set of promising hypothetical compositions is identified by this work.
+Of the 1251 compositions selected 640 are purely inorganic, and 611 are hybrid-organic/inorganic.
+Table ref:tbl:mixscreen shows how the set subdivides by mixing.
+Only 40 of the original expertly designed sample pass the screening, the rest are untested to my knowledge.
+This shows that there is still much opportunity for discovery in this area and much to be learned about this chemistry.
+Notably, 834 contain no lead. A random sample of 30 such compounds is listed in table ref:tbl:pbfree.
+Also, no compounds containing Potassium pass the screening.
+
+This was achieved with a very simple regression model.
+My assessment suggests it is operating as any random forest would.
+It is simply learning a complex algorithm which can be followed to closely approximate band gaps of a variety of distinct descriptors conditioned on the desired prediction fidelity.
+Its superior performance is due to its improved flexibility in accounting for outliers.
+However, the Gaussian Process Regression is a very close second.
+The GPR's ability to theoretically deal with more complex descriptors makes for an appealing next step.
+Further improving on the feature engineering and examining what can be learned about the relationship between structure and band gap might begin here.
+
+#+begin_src jupyter-python :post wraptbl(c="label:tbl:mixscreen Number of selected data points with given mixing site")
+  s = screen.mix.value_counts()
+  s.name = "count"
+  s.to_frame()
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+CAPTION: label:tbl:mixscreen Number of selected data points with given mixing site 
+|      | count |
+|------+-------|
+| A    | 605   |
+| B    | 388   |
+| X    | 256   |
+| pure | 2     |
+:end:
+
+#+begin_src jupyter-python :post wraptbl(c="label:tbl:pbfree Thirty hypothetical lead-free formulae and their predicted band gaps")
+  randdf = screen[~screen.Formula.str.contains(r"Pb", regex=False)][["Formula", "bg_eV"]].sample(30)
+  randdf = randdf.rename(columns={"bg_eV":"band gap [eV]"})
+  randdf
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+CAPTION: label:tbl:pbfree Thirty hypothetical lead-free formulae and their predicted band gaps 
+|       | Formula                                          | band gap [eV] |
+|-------+--------------------------------------------------+---------------|
+| 1472  | Rb1.000Ge1.000Cl0.583I0.417                      | 1.610555      |
+| 13457 | K1.000Ge0.125Sn0.500Sr0.375Br1.000               | 1.588236      |
+| 14729 | K1.000Ca0.250Ge0.625Sn0.125Cl1.000               | 1.906317      |
+| 19075 | FA0.250K0.250MA0.375Rb0.125Sn1.000Cl1.000        | 1.951812      |
+| 20006 | FA0.625MA0.375Ba1.000Br1.000                     | 1.751004      |
+| 17947 | K1.000Ba1.000Br0.250Cl0.083I0.667                | 1.927655      |
+| 13792 | K1.000Ge0.875Sr0.125Cl1.000                      | 1.361000      |
+| 15452 | K1.000Ba0.125Sn0.625Sr0.250I1.000                | 1.864185      |
+| 14714 | K1.000Ca0.250Ge0.500Sn0.250Cl1.000               | 1.992692      |
+| 5862  | MA0.500Rb0.500Ba1.000I1.000                      | 1.809483      |
+| 19050 | FA0.250K0.250MA0.125Rb0.375Ba1.000I1.000         | 1.788057      |
+| 19109 | FA0.250K0.375Rb0.375Sr1.000Br1.000               | 1.714627      |
+| 18606 | FA0.125K0.500Rb0.375Sn1.000I1.000                | 1.962433      |
+| 19148 | FA0.250K0.375MA0.250Rb0.125Sn1.000Br1.000        | 1.815876      |
+| 2891  | Rb1.000Ca1.000Br0.208Cl0.250I0.542               | 1.705446      |
+| 26843 | Cs0.125FA0.125MA0.750Ba1.000Br1.000              | 1.950356      |
+| 31393 | Cs0.625Rb0.375Ca1.000Cl1.000                     | 1.878681      |
+| 29328 | Cs0.250FA0.250K0.375Rb0.125Sr1.000I1.000         | 1.955184      |
+| 19898 | FA0.500K0.375Rb0.125Ba1.000Br1.000               | 1.727611      |
+| 2297  | Rb1.000Ca0.250Ge0.250Sn0.250Sr0.250Cl1.000       | 1.803151      |
+| 3092  | Rb1.000Ca1.000Br0.958I0.042                      | 1.691322      |
+| 28989 | Cs0.250FA0.125K0.250MA0.375Sn1.000I1.000         | 1.744348      |
+| 13004 | K1.000Sn1.000Br0.875Cl0.042I0.083                | 1.709227      |
+| 19180 | FA0.250K0.500Rb0.250Sr1.000Cl1.000               | 1.971389      |
+| 533   | Rb1.000Sn1.000Br0.333Cl0.625I0.042               | 1.788413      |
+| 3056  | Rb1.000Ca1.000Br0.667Cl0.250I0.083               | 1.706197      |
+| 19076 | FA0.250K0.250MA0.375Rb0.125Sn1.000Br1.000        | 1.938144      |
+| 18566 | FA0.125K0.375MA0.250Rb0.250Ba1.000Br1.000        | 1.805977      |
+| 5396  | Rb1.000Ba0.625Ca0.250Sn0.125I1.000               | 1.737319      |
+| 26921 | Cs0.125FA0.125K0.125MA0.500Rb0.125Sn1.000Br1.000 | 1.893728      |
+:end:
 
 * Footnotes
 
