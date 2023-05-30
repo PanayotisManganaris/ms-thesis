@@ -1076,7 +1076,7 @@ Band gaps between 1 and 2 \unit{\electronvolt} were selected as this range is ex
 Perovskite compounds were selected for their predicted stability by cutting on each of three tolerance factors previously established in chapter 1.
 The constituent ratios of the chosen compositions in figure ref:fig:chosenstats may be juxtaposed with figure ref:fig:domainstats.
 
-#+attr_latex: :width 250
+#+attr_latex: :width 250pt
 #+CAPTION: label:fig:screenops Summary of screening operations used to identify candidate compounds
 [[file:screening_ops.png]]
 
