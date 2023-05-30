@@ -103,128 +103,193 @@ Our problem of accurately modeling low availability, high fidelity targets is ap
 We will employ the domain-side approach where the largest, lowest fidelity component of our dataset consists of density functional theory (DFT) band gap predictions made at the generalized gradient approximation (GGA) Perdew-Burke-Ernzerhof (PBE) level of theory.
 On the other end, the smallest and highest fidelity subset of the sample consists of experimental measurements of physical devices collected from the literature.
 
-** DONE Multiple Fidelity Dataset
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2022-12-21 Wed 12:16]
+** DONE COMMENT Random Forest Regression (RFR)
+:PROPERTIES:
+:BEAMER_env: frame
 :END:
-*** DONE Perovskite Band Gaps
 :LOGBOOK:
-- State "DONE"       from "TODO"       [2022-12-21 Wed 12:16]
+- State "DONE"       from              [2023-05-24 Wed 04:27]
 :END:
-# need to introduce the significance of predicting band gaps more effectively
 
-We aim to accurately predict performance-relevant halide perovskite (HaP) band gaps, which strongly predict photovoltaic performance.
-[cite:@mannodi-kanakkithodi-2019-compr-comput]
+*** col
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+#+DOWNLOADED: screenshot @ 2023-05-23 20:23:36
+#+attr_latex: :width 260
+[[file:Computational_Methods_In_Materials_Science/2023-05-23_20-23-36_screenshot.png]]
 
-Furthermore, using multi-fidelity modeling we aim to predict the experimentally measured band gaps of compounds that have only been simulated to date.
-Our fidelity hierarchy climbs from DFT simulations performed using the basic PBE GGA functional, to results obtained from physical experiments aggregated in literature see table ref:tbl:LoTs.
-[cite:@almora-2020-devic-perfor;@kim-2014-cdses-nanow;@swanson-2017-co-sublim] 
+*** col
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+Decision Tree algorithm memorizes an algorithmic path to the target
+- trees capture interactions between features
+- trees are flexible and may be highly biased to data
+The forest of random trees averages many paths
+- forest explains variance in data
+- forest reduces the variance of error
 
-While we acknowledge the advantages of GNNs, we aim to express band gap as functions primarily of the perovskite composition.
-It is known the octahedral arrangement of perovskites is most relevant to their electronic structure, nevertheless, a strong understanding of the influence of chemical composition on performance will continue to be a priority as it is expected to aid in [[Feature Engineering][Feature Engineering]].
+** DONE COMMENT Gaussian Process Regression (GPR)
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-24 Wed 04:27]
+:END:
 
-#+begin_src jupyter-python :post wraptbl(*this*, c="label:tbl:LoTs Sample counts by density functional represented in dataset")
-  Y.LoT.value_counts().to_frame()
+*** col
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+Informally, GPRs "remember" the training examples and judge unlabeled
+data by its similarity to that aggregate memory.
+**** Kernel Method
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+the similarity function \(k(x, x')\)
+- defines a "universe" of functions
+- defines a density of functions prior to any data
+- works for any two quantifiably similar \(x\)
+  - vectors, text, graphs, etc.
+
+**** Drawbacks
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- \(\mathcal{O}(N^3)\) training time complexity
+- kernels require engineering to accommodate prior expectations
+- break down in sparse spaces/high-dimensional spaces
+
+*** col
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+# down arrow through bayes rule??
+**** COMMENT functions illustration
+#+begin_src jupyter-python
+    from sklearn.gaussian_process import kernels as K
+    from sklearn.gaussian_process import GaussianProcessRegressor
+    kerns = [
+        K.DotProduct(),      
+        1.0 * K.RBF(length_scale=1.0, length_scale_bounds=(1e-1, 10.0))
+    ]
 #+end_src
 
 #+RESULTS:
 :results:
- 
-#+CAPTION: label:tbl:LoTs Sample counts by density functional represented in dataset 
-|                 |  LoT |
-|-----------------+------|
-| PBE             |  492 |
-| HSE             |  297 |
-| HSE(SOC)        |  282 |
-| HSE-PBErel(SOC) |  244 |
-| EXP             |   90 |
-|-----------------+------|
-|                 | 1405 |
-#+TBLFM: @7$2=vsum(@I..@II)
 :end:
-
-A detailed analysis of this combined hybrid organic-inorganic and purely inorganic HaP DFT dataset is covered in a prior article by [cite/text:@yang-2022-high-throug] and in [[DFT Details]].
-Naturally, the statistics obtained from each fidelity vary (figure ref:fig:bg_dist).
-This is the primary challenge we will address with the categorically dimensioned multi-fidelity models discussed in [[Methods]].
-
-#+begin_src jupyter-python :post wrap(*this*, c="label:fig:bg_dist Variability in band gaps at each fidelity")
-  p = px.box(Y, y="bg_eV", x="LoT")
-  p.update_yaxes(title="Band Gap [eV]")
-  p.show('svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 300pt
-#+CAPTION: label:fig:bg_dist Variability in band gaps at each fidelity
-[[file:./.ob-jupyter/e43c69abaab32a55a294c19aa5cdde4a867cdce8.svg]]
-:end:
-
-*** DONE Sampling
-:LOGBOOK:
-- State "DONE"       from              [2022-09-13 Tue 12:51]
-:END:
-The simulations for each level of theory are performed on some number of members to a fixed subset of the total 37785 compositions that can be combinatorially generated in a 2x2x2 perovskite supercell when allowing /at most/ single-site alloying with our 14 constituent candidates for 3 sites (table ref:tbl:site_tbl).
-
-#+caption: label:tbl:site_tbl ABX_3 Chemical Domain
-| /      | <  |    |    |    |    |    |
-| A-site | MA | FA | Cs | Rb | K  |    |
-| B-site | Pb | Sn | Ge | Ba | Sr | Ca |
-| X-site | I  | Br | Cl |    |    |    |
-
-Within this domain space, we try to maintain a balance in the share of samples that represent each one of the "cardinal mixing" categories.
-Additionally, within each mix we try to maintain a reasonable balance of purely inorganic samples versus hybrid organic-inorganic samples.
-See [[Methods]] for details on how these categories were utilized in model development.
-
-This previously reported dataset demonstrates very even coverage of the cardinal mixing domain as shown in figure ref:fig:coverage.
-The clusters in this figure correspond to the alloying scheme of the data points
-# (see figure ref:fig:alloys)
-This sample provides the opportunity to comfortably interpolate the properties of other members of the cardinal mixing domain.
-Concurrently, we test the ability of our models to extrapolate with respect to alloying scheme as well as level of theory.
-It also provides an opportunity to investigate the statistical impact of constituent compounds on perovskite property prediction.
-See [[Discussion]].
 
 #+begin_src jupyter-python
-  projdf = pd.read_csv("./proj_t_rfr_tsne_c.csv", index_col=0)
+  def plot_density_samples(gpr_model, n_sample):
+      x = np.linspace(0, 5, 100)
+      x = x.reshape(-1, 1)
+      y_mean, y_std = gpr_model.predict(x, return_std=True)
+      y = gpr_model.sample_y(x, n_sample)
+      df = pd.DataFrame(np.c_[x, y]).set_index(0)
+      p = px.line(df)
+      p.add_scatter(x=x.reshape(-1), y=y_mean,
+                    mode='lines', line_width=5,
+                    line_color='black', name='ridge')
+      return p
 #+end_src
 
 #+RESULTS:
 :results:
 :end:
 
-#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:coverage Samples overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE")
-  p = px.scatter(
-      projdf.replace(np.NaN, False),
-      facet_col='perplexity', facet_col_wrap=4,
-      x='0', y='1',
-      hover_name="Formula",
-      color='LoT'
-  )
-  p.update_layout(
-      legend_title="Sampled", legend_itemsizing='constant',
-      legend_orientation='h',
-      margin=dict(l=0, r=0, t=0, b=0),
-  )
-  p.update_yaxes(matches=None, visible=False)
-  p.update_xaxes(matches=None, visible=False)
+**** Sample Prior Functions
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="170pt")
+  gpr = GaussianProcessRegressor(kernel=kerns[1], random_state=None)
 
-  p.data[0].name='SIM'
-
-  p.data = (p.data[1], p.data[0], p.data[2])
-
+  p = plot_density_samples(gpr, 5)
+  p.update_layout(showlegend=False,
+                  margin=dict(l=0, r=0, t=0, b=0),
+                  width=400, height=150)
+  p.update_xaxes(title="", tickfont_size=20)
+  p.update_yaxes(title="", tickfont_size=20)
   p.show(renderer='svg')
 #+end_src
 
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt
-#+CAPTION: label:fig:coverage Samples overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE
-[[file:./.ob-jupyter/d20bd47669e6d6375c8646ad2bc35b817ce61eee.svg]]
+#+attr_latex: :width 170pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/ec4d60a2109843449bb674d71a67240d13c1611a.svg]]
 :end:
 
-*** DONE Model Optimization
+**** Sample Posteriors
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+#+begin_src jupyter-python
+  rng = np.random.RandomState(4)
+  x_train = rng.uniform(0, 5, 10).reshape(-1, 1)
+  y_train = np.sin((x_train[:, 0] - 2.5) ** 2)
+  n_samples = 1
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="170pt")
+  gpr.fit(x_train, y_train)
+
+  p = plot_density_samples(gpr, 5)
+  p.update_layout(showlegend=False,
+                  margin=dict(l=0, r=0, t=0, b=0),
+                  width=400, height=150)
+  p.update_xaxes(title="", tickfont_size=20, range=(0,5))
+  p.update_yaxes(title="", tickfont_size=20)
+
+  p.add_scatter(x=x_train.reshape(-1), y=y_train, mode="markers", marker_color='red', marker_size=10)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 170pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/eeae18f97963b2846566f847fcd1a8bb5dd88175.svg]]
+:end:
+
+** DONE COMMENT Sure-Independence Screening and Sparsifying Operator (SISSO)
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-24 Wed 05:08]
+:END:
+# add a figure showing a sisso expression from literature
+*** col
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+generalizes "Greedy Pursuit" algorithms
+- Orthogonal Matching Pursuit
+- Basis Pursuit (aka LASSO)
+
+SIS+correlation analysis is a form of orthogonalization
+
+*** col
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+#+DOWNLOADED: screenshot @ 2022-12-20 09:09:33
+#+attr_latex: :width 250
+[[file:Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png]]
+Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-physic]
+
+
+
+** DONE Model Optimization
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 16:56]
 :END:
