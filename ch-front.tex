@@ -183,7 +183,8 @@
   My research focused on data-driven identification of \(\ce{ABX3}\) Halide perovskite compositions for optimum photovoltaic absorption in solar cells.
   I trained machine learning models on previously reported datasets of halide perovskite band gaps based on first principles computations performed at different fidelities.
   Using these, I identified mixtures of candidate constituents at the A, B or X sites of the perovskite supercell which leveraged how mixed perovskite band gaps deviate from the linear interpolations predicted by Vegard's law of mixing to obtain a selection of stable perovskites with band gaps in the ideal range of 1 to 2 eV for visible light spectrum absorption.
-  These models predict the perovskite band gap using the composition and inherent elemental properties as descriptors.  Eventually enabling accurate prediction and screening of the much larger chemical space from which the data samples were drawn.
+  These models predict the perovskite band gap using the composition and inherent elemental properties as descriptors.
+  This enables accurate, high fidelity prediction and screening of the much larger chemical space from which the data samples were drawn.
 
   I utilized a recently published density functional theory (DFT) dataset of more than 1300 perovskite band gaps from four different levels of theory, added to an experimental perovskite band gap dataset of \textasciitilde{}100 points, to train random forest regression (RFR), Gaussian process regression (GPR), and Sure Independence Screening and Sparsifying Operator (SISSO) regression models, with data fidelity added as one-hot encoded features.
   I found that RFR yields the best model with a band gap root mean square error of 0.12 eV on the total dataset and 0.15 eV on the experimental points.
