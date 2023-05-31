@@ -151,7 +151,7 @@ The majority of work presented in this dissertation has been previously publishe
 :results:
 :end:
 
-#+begin_src jupyter-python :post wrap(*this*, w="400pt", c="label:fig:nrel Rapid rise in cummulative maximum of HaP PCEs")
+#+begin_src jupyter-python :post wrap(*this*, w="400pt", c="label:fig:nrel Rapid rise in cumulative maximum of HaP PCEs")
   color_map = {
       ('Crystalline Si Cells', 'Single crystal (non-concentrator)'): px.colors.qualitative.Plotly[0],
       ('Emerging PV', 'Perovskite cells'): px.colors.qualitative.Plotly[1],
@@ -192,7 +192,7 @@ The majority of work presented in this dissertation has been previously publishe
 :results:
  
 #+attr_latex: :width 400pt
-#+CAPTION: label:fig:nrel Rapid rise in cummulative maximum of HaP PCEs
+#+CAPTION: label:fig:nrel Rapid rise in cumulative maximum of HaP PCEs
 [[file:./.ob-jupyter/f34ddd159d9c661cb7098eb9bfd43dcfa5ab8286.svg]]
 :end:
 
