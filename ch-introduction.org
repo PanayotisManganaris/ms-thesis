@@ -135,9 +135,9 @@ This is a five-fold improvement over the efficiencies of the same compositions f
 A theoretical cubic perovskite structure is considered stable if the ionic radii of A, B, and X-site species satisfy the well-known tolerance (\(t\)) and octahedral (\(o\)) factors.
 [cite:@bartel-2019-new-toler]
 Even accounting for stability constraints, the chemical space of perovskites experiences combinatorial scaling with the number of candidate elements which could be incorporated at each site.
-This poses a multidimensional optimization problem for which determining the optimal atomic fractions for a particular performance target requires data-driven acceleration.
-My research focused on the development and application of these design methods in the composition space of halide perovskites.
 The majority of work presented in this dissertation has been previously published or will be submitted for publication (See CONTRIBUTIONS).
+This poses a multidimensional optimization problem for which determining the optimal atomic fractions for a particular performance target requires acceleration.
+My research focused on accelerating this search through the development and application of data-driven design methods in the composition space of halide perovskites.
 
 #+begin_src jupyter-python
   history = pd.read_csv('~/data/perovskites/NREL-pvcell-efficiency.csv', index_col=0)
