@@ -290,7 +290,7 @@ Such DFT-ML models, once rigorously trained and tested, are deployed for high-th
 [[file:./.ob-jupyter/0bbc378a94d8d28c62164dcab2e9d09dd39af3fd.svg]]
 :end:
 
-** DONE Multiple Fidelity Dataset
+** DONE Multi-fidelity Dataset
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 12:16]
 :END:
