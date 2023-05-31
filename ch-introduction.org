@@ -199,7 +199,7 @@ and [cite/full:@manganaris-2022-mrs-comput].
 [[file:./.ob-jupyter/f34ddd159d9c661cb7098eb9bfd43dcfa5ab8286.svg]]
 :end:
 
-** Design Goals and Challenges in Perovskite PV Absorbers
+** Design Goals in Perovskite Absorbers
 Perovskite properties may be tuned in various ways.
 The introduction of dopants and defects [cite:@kim-2020-upper-limit;@dahliah-2021-high-throug] and the mutation of their cubic structure [cite:@kar-2018-comput-screen;@kim-2017-hybrid-organ] are each promising areas of design.
 However, the work presented here focuses specifically on the identification of a reasonable number of candidate compositions for future laboratory trials.
@@ -301,7 +301,7 @@ Such DFT-ML models, once rigorously trained and tested, are deployed for high-th
 For my work I used a large DFT dataset collected over the past three years by my advisor and fellow student Jiaqi Yang.
 This dataset consists of approximately 1300 calculations based on approximately 500 chemically distinct, pseudo-cubic, halide perovskite alloys reported in the Mannodi research group's prior work.
 [cite:@mannodi-kanakkithodi-2022-data-driven;@yang-2023-high-throug]
-There are more calculations than there are distinct compositions because each composition is simulated multiple times.
+There are more calculations than there are distinct compositions because each composition is simulated multiple times to obtain results of varying fidelity.
 Also, it is supplemented by an additional ~100 points of data aggregated from reputable sources by [cite/text:@almora-2020-devic-perfor].
 In total it contends as one of the largest first principles halide perovskite datasets and represents years of work.
 The relatively large size of this dataset samples the space of all possible single-site mixed compositions with good coverage.
