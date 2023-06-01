@@ -421,7 +421,8 @@ To calculate SLME efficiency the current density \(J\), the light spectrum inten
 Using the DFT computed optical absorption spectrum as well as the magnitude and type (direct or indirect) of band gap as input, SLME is directly calculated using an open-source package.
 [cite:@williams-2022-sl3me]
 This calculation is performed using all four functionals and compliments the PCE measurements at the experimental fidelity.
-SLME accounts for more energetic processes than the Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing for a range of performant band gaps to be identified according to level of theory[cite:@yu-2012-ident-poten p.1]
+SLME accounts for more energetic processes than the Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing for a range of performant band gaps to be identified according to level of theory.
+[cite:@yu-2012-ident-poten p.1]
 Experimental data[cite:@almora-2020-devic-perfor] broadly agrees with PBE simulation, so the range of 1 to 2 \unit{\electronvolt}.
 see figure ref:fig:slme.
 Also, notice that even in just the sample dataset, there are candidates with potential to overtake the state of the art absorbers reported by NREL in figure ref:fig:nrel.
