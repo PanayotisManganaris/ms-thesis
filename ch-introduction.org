@@ -206,7 +206,9 @@ However, the work presented here focuses specifically on the identification of a
 The most promising HaP compositions for PV absorption explored to date usually contain a mix of MA, FA, and Cs at the A-site, primarily Pb at the B-site with minor fractions of other divalent cations such as Sn and Ge, and I or Br at the X-site often with little Cl.
 Discovery of novel HaP compositions with attractive properties is on the rise as researchers expand the search into more complex alloys, novel A-site organic molecules, and substitutes for Pb at the B-site from Group IV, Group II, or transition elements.
 [cite:@zhu-2019-struc-elect;@banerjee-2019-rashb-trigg;@ding-2019-cesium-decreas;@greenland-2020-correl-phase]
-Mixing at A site has been shown to improve formability [cite:@zhang-2019-perov-photov], while B site and X site mixing can tune and optimize band gaps and optical absorption.
+Mixing at the A-site has been shown to improve formability [cite:@zhang-2019-perov-photov], while B-site and X-site mixing can tune and optimize band gap and therefore the maximum optical wavelength absorbable by the semiconductor.
+Band gap is the energy required to promote an electron from the valence band to the conduction band.
+Absorption of visible light from the plentiful green to red portion of the spectrum, by the simple relation \(E_{bg} = E_\gamma = \frac{hc}{\lambda}\), corresponds to band gaps of 1-2 \unit{\electronvolt}.
 The allure of A/B/X-site mixing, even the creation of high entropy perovskite alloys, is in the promise to obtain dramatically different properties than those of pure compositions.
 Perovskite properties have demonstrated highly nonlinear responses to changes in composition.
 It is hoped that exploiting this could lead to possibly eliminating toxic lead, reducing degradation under light exposure, and even improving resistance to adverse environmental conditions while also targeting specific optoelectronic performance markers.
@@ -297,7 +299,6 @@ Such DFT-ML models, once rigorously trained and tested, are deployed for high-th
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 12:16]
 :END:
-
 For my work I used a large DFT dataset collected over the past three years by my advisor and fellow student Jiaqi Yang.
 This dataset consists of approximately 1300 calculations based on approximately 500 chemically distinct, pseudo-cubic, halide perovskite alloys reported in the Mannodi research group's prior work.
 [cite:@mannodi-kanakkithodi-2022-data-driven;@yang-2023-high-throug]
@@ -311,6 +312,9 @@ This enables the training of interpolative models in the HaP composition space p
 In this dataset, all perovskite structures are cubic or pseudo-cubic, which aids my focus on investigating effects of composition and alloying on photovoltaic performance.
 
 ** DONE Perovskite Formability
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-01 Thu 13:42]
+:END:
 In order to simplify the search for viable candidates, some standard empirical rating of perovskite formability are employed.
 It has been observed that the A-site member must be much larger than its counterpart at the B-site for a Perovskite to be stable.
 B-site elements are usually large (e.g. Pb, Sn) in Halide Perovskites, which incidentally motivates the use of organic cations at A.
