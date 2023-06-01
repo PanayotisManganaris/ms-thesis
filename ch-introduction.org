@@ -697,14 +697,9 @@ See Discussion.
 [[file:./.ob-jupyter/d20bd47669e6d6375c8646ad2bc35b817ce61eee.svg]]
 :end:
 
-Novel halide perovskites with improved stability and optoelectronic properties can be designed via composition engineering at cation and/or anion sites.
-Data-driven methods, especially involving high-throughput first principles computations and subsequent analysis based on unique materials descriptors, are key to achieving this goal.
-I accessed a dataset consisting of -- among other characteristic properties -- simulated band gaps of a representative sample of halide perovskites (HaP).
-The effects of mixing at different sites is described by the explicit fraction of a site occupied by a specific atomic or molecular species.
-Also, a set of abstract features obtained as the weighted averages of these species' bulk physical properties is used to bolster the feature space.
-
-Our multi-objective, multi-fidelity, computational halide perovskite alloy dataset is one of the most comprehensive to date.
+Our multi-fidelity computational halide perovskite alloy dataset generated with the methods described here is one of the most comprehensive to date.
 It is publicly available in the hopes further physical and engineering insights can be extracted by the broader research community.
+It serves as the foundation for the modeling work presented in the following chapter.
 
 # we compare the various PBE and HSE calculated lattice constant and band gap values with corresponding experimental results collected from [cite/text:@tao-2019-absol-energ] and [cite/text:@almora-2020-devic-perfor].
 
