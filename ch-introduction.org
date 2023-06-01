@@ -303,7 +303,9 @@ This dataset consists of approximately 1300 calculations based on approximately 
 [cite:@mannodi-kanakkithodi-2022-data-driven;@yang-2023-high-throug]
 There are more calculations than there are distinct compositions because each composition is simulated multiple times to obtain results of varying fidelity.
 Also, it is supplemented by an additional ~100 points of data aggregated from reputable sources by [cite/text:@almora-2020-devic-perfor].
-In total it contends as one of the largest first principles halide perovskite datasets and represents years of work.
+In total it is one of the largest first principles cubic halide perovskite datasets and represents years of work.
+It provided an excellent foundation for my work.
+# It has featured in HT-DFT processing tutorials presented at multiple Materials Research Society (MRS) meetings for the benefit of hundreds of researchers.
 The relatively large size of this dataset samples the space of all possible single-site mixed compositions with good coverage.
 This enables the training of interpolative models in the HaP composition space promising lower and less frequent error than if lesser coverage were used.
 In this dataset, all perovskite structures are cubic or pseudo-cubic, which aids my focus on investigating effects of composition and alloying on photovoltaic performance.
@@ -313,7 +315,7 @@ In order to simplify the search for viable candidates, some standard empirical r
 It has been observed that the A-site member must be much larger than its counterpart at the B-site for a Perovskite to be stable.
 B-site elements are usually large (e.g. Pb, Sn) in Halide Perovskites, which incidentally motivates the use of organic cations at A.
 [cite:@kieslich-2015-exten-toler]
-Various tolerance factors have been designed to describe this constraint.
+Various tolerance factors have been proposed in the literature to describe this constraint.
 The following definitions approximate \alpha phase stability
 [cite:@yin-2015-halid-perov;@bartel-2019-new-toler]
 
