@@ -316,26 +316,31 @@ It has been observed that the A-site member must be much larger than its counter
 B-site elements are usually large (e.g. Pb, Sn) in Halide Perovskites, which incidentally motivates the use of organic cations at A.
 [cite:@kieslich-2015-exten-toler]
 Various tolerance factors have been proposed in the literature to describe this constraint.
-The following definitions approximate \alpha phase stability
+Each tolerance factor is expressed as a function of the ionic radii of the species at each site \(r_A\), \(r_B\), and \(r_X\).
+The Goldschmidt tolerance is defined as expression \ref{eq:t}.
+[cite:@yin-2015-halid-perov]
+The octahedral Factor is defined as the simple ratio \ref{eq:o}.
+A recent tolerance factor proposed by [cite/text:@bartel-2019-new-toler] is defined as expression \ref{eq:b}.
+
+\begin{equation}
+\label{eq:t}
+t = \frac{r_A+r_X}{\sqrt{2}*(r_B+r_X)}
+\end{equation}
+
+\begin{equation}
+\label{eq:o}
+o=\frac{r_B}{r_X}
+\end{equation}
+
+\begin{equation}
+\label{eq:b}
+b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{\ln(\frac{r_A}{r_B})} \right]
+\end{equation}
+
+The approximate definitions \(t \approx 1\), \(o \approx 0.67\), and \(b \underset{\sim}{<} 4\) quantify perovskite \alpha{}-phase stability.
 [cite:@yin-2015-halid-perov;@bartel-2019-new-toler]
-
-Goldschmidt tolerance
-
-\[
-1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
-\]
-
-Octahedral Factor
-
-\[
-0.67 \approx o=\frac{r_B}{r_X}
-\]
-
-Bartel Tolerance
-
-\[
-4 \stackrel{>}{\sim} b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
-\]
+These criterion are useful for efficiently evaluating if a proposed perovskite can be formed.
+This is useful when screening candidate compositions at the conclusion of this work.
 
 * DENSITY FUNCTIONAL THEORY SIMULATION
 All DFT computations were performed using vasp version 6.2 employing projector-augmented-wave (PAW) pseudo-potentials.
