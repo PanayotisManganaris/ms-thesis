@@ -410,24 +410,24 @@ This is motivated by a relationship known to exist between the absorption spectr
 Introduced by [cite/text:@yu-2012-ident-poten], the SLME is a convenient metric for evaluating a semiconductor's suitability for single junction photovoltaic (PV) absorption.
 In this work, SLME was calculated considering a 5\unit{\micro\meter} sample thickness for every perovskite using equations ref:eq:absorption_alpha, ref:eq:slme_int, and ref:eq:slme_sum, combining the original SL3ME.py code from [cite/text:@yu-2012-ident-poten] with our DFT computed absorption spectra and band gaps.
 
-\[
+\begin{equation}
 \label{eq:absorption_alpha}
 a(E)=1-e^{-2\alpha(E)L}
-\]
+\end{equation}
 
 Here, \(\alpha(E)\) is the DFT computed optical absorption coefficient
 as a function of incident photon energy and \(L\) is the thickness of
 the absorber.
 
-\[
+\begin{equation}
 \label{eq:slme_int}
 J=e\int_{0}^{\infty} a(E)I_{sun}(E)dE - J_{0}(1-e^{\frac{eV}{kT}})
-\]
+\end{equation}
 
-\[
+\begin{equation}
 \label{eq:slme_sum}
-\eta = \frac{P_{m}}{P_{in}}=\frac{max(J \times V)}{P_{in}}
-\]
+\eta = \frac{P_{m}}{P_{in}}=\frac{\max(J \times V)}{P_{in}}
+\end{equation}
 
 To calculate SLME efficiency the current density \(J\), the light spectrum intensity of sunlight \(I_{sun}\), and the power \(P\) are all that is needed.
 Using the DFT computed optical absorption spectrum as well as the magnitude and type (direct or indirect) of band gap as input, SLME is directly calculated using an open-source package.
