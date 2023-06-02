@@ -349,7 +349,7 @@ When extrapolation is the aim, continuously distributed, unique, and linearly in
 Our attempts to provide a domain with these characteristics results in the following raw feature space.
 
 - 14 sparse composition vectors extracted from chemical formula using =cmcl=[fn:3]
-- 36 dense site-averaged property space computed as a linear combination of composition vectors and measured elemental properties [cite:@mentel-2014]
+- 36 dense site-averaged property vectors computed as a linear combination of composition vectors and measured elemental properties [cite:@mentel-2014]
 - 5 categorical dimensions one-hot-encoding level of theory.
   - this provides the categorical axis for multi-task learning
   - see table ref:tbl:LoTs
@@ -634,11 +634,11 @@ The available operation set is outlined in table ref:tbl:ops.
 [[file:./.ob-jupyter/dc863520dccc5f4cefbddf3272f3866b5d78ae59.svg]]
 :end:
 
-The optimized models are high performing (Table ref:tbl:LoTscores).
+The optimized models were the high performing (Table ref:tbl:LoTscores).
 The RFR hyper-parameters are listed in the appendix (Table ref:tbl:rfrHPO).
 
-The GPR model is tried with multiple kernels.
-Ultimately, the best is a non stationary Matern kernel with \(\nu = \frac{3}{2}\).
+The GPR model was tried with multiple kernels.
+Ultimately, the best was a non stationary Matern kernel with \(\nu = \frac{3}{2}\).
 
 *** DONE SISSO Model and SIS Engineered Features
 :LOGBOOK:
