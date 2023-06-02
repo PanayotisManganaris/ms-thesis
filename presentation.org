@@ -1551,7 +1551,11 @@ bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 [cite:@lundberg-2017-unified-approac]
+
+#+attr_latex: :width 400
+[[file:SHAP-crop.png]]
 
 ** SHAP Analyze RFR                                                :B_frame:
 :PROPERTIES:
