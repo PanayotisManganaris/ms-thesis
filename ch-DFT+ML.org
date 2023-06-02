@@ -477,7 +477,7 @@ The available operation set is outlined in table ref:tbl:ops.
  
 #+attr_latex: :width 300pt
 #+CAPTION: 
-[[file:./.ob-jupyter/afacec3b693eab0abeba71b7b157548cabf0e90d.svg]]
+[[file:./.ob-jupyter/a906bd083ffb28108985b0f92462f9e647fb61ac.svg]]
 :end:
 
 **** gpr
@@ -512,7 +512,7 @@ The available operation set is outlined in table ref:tbl:ops.
  
 #+attr_latex: :width 300pt
 #+CAPTION: 
-[[file:./.ob-jupyter/85566ad2104fdd918f8748e90247977ea57f2913.svg]]
+[[file:./.ob-jupyter/3c9c5181f014f21b19616f66f427d89e3e8b7c56.svg]]
 :end:
 
 **** sisso
@@ -547,7 +547,7 @@ The available operation set is outlined in table ref:tbl:ops.
  
 #+attr_latex: :width 300pt
 #+CAPTION: 
-[[file:./.ob-jupyter/52b2f8da20b8039dc06e5fc3935c270210c7c9b5.svg]]
+[[file:./.ob-jupyter/5a513955767af532b6fba8ca0c676aebdc9e63bb.svg]]
 :end:
 
 *** DONE Best Models on Raw Domain
@@ -588,8 +588,9 @@ The available operation set is outlined in table ref:tbl:ops.
   p0.update_traces(showlegend=False, row=1, col=2)
 
   p0.update_xaxes(mirror=True,
-                  constrain='domain', title='DFT Calculation',
-                  title_font_size=24,)
+                  constrain='domain', title='True Measurement',
+                  title_font_size=24,
+                  tickfont_size=20,)
   p0.update_yaxes(mirror=True)
 
   p0.update_traces(
@@ -602,9 +603,9 @@ The available operation set is outlined in table ref:tbl:ops.
   )
 
   p0.update_layout(
-      legend=dict(orientation='h', y=-0.3),
+      legend=dict(orientation='h', y=-0.4, itemsizing='constant'),
       margin=dict(t=70, b=0, l=0, r=0),
-      width=800, height=330,
+      width=700, height=360,
       title = "Band Gap [eV] (282 test predictions)"
   )
 
@@ -628,7 +629,7 @@ The available operation set is outlined in table ref:tbl:ops.
  
 #+attr_latex: :width 450pt
 #+CAPTION: label:fig:pairplots model predictions vs true values at multiple fidelities
-[[file:./.ob-jupyter/dc863520dccc5f4cefbddf3272f3866b5d78ae59.svg]]
+[[file:./.ob-jupyter/1a3fd80c6a22dbce291d740dbb832e523b9d11eb.svg]]
 :end:
 
 The optimized models were the high performing (Table ref:tbl:LoTscores).
@@ -742,7 +743,7 @@ These can serve as a high quality, introspective domain for the other architectu
  
 #+attr_latex: :width 300pt
 #+CAPTION: 
-[[file:./.ob-jupyter/9bd05e8f67914ef2d5544d9efe0ae73a9a41eedf.svg]]
+[[file:./.ob-jupyter/2c6e16e0b3ffe6185e085c502cd6a12e91ce982a.svg]]
 :end:
 
 **** gpr
@@ -777,7 +778,7 @@ These can serve as a high quality, introspective domain for the other architectu
  
 #+attr_latex: :width 300pt
 #+CAPTION: 
-[[file:./.ob-jupyter/2b237a7496c5cdb33ba5bf6e7d064b615795b13b.svg]]
+[[file:./.ob-jupyter/171d8c4dcb9a82035e0aefc58ff9aae084505aab.svg]]
 :end:
 
 *** DONE Best Models on Engineered Domain
@@ -796,7 +797,7 @@ Unfortunately, whatever the gains in training time complexity and extrapolative 
 This was unexpected considering the raw features are by their nature highly correlated and presumed redundant.
 Nevertheless, the RFR model on the higher dimensional, sparser raw features is superior.
 
-#+begin_src jupyter-python :post wrap(*this*, w="450pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:sis-pairplots SIS-based model predictions vs true values at multiple fidelities")
+#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:sis-pairplots SIS-based model predictions vs true values at multiple fidelities")
   p0 = make_subplots(rows=1, cols=2, shared_yaxes=True)
 
   for trace1, trace2, trace3 in zip(p1.data, p2.data, p3.data):
@@ -821,8 +822,9 @@ Nevertheless, the RFR model on the higher dimensional, sparser raw features is s
   p0.update_traces(showlegend=False, row=1, col=1)
 
   p0.update_xaxes(mirror=True,
-                  constrain='domain', title='DFT Calculation',
-                  title_font_size=24,)
+                  constrain='domain', title='True Measurement',
+                  title_font_size=24,
+                  tickfont_size=20,)
   p0.update_yaxes(mirror=True)
 
   p0.update_traces(
@@ -835,10 +837,11 @@ Nevertheless, the RFR model on the higher dimensional, sparser raw features is s
   )
 
   p0.update_layout(
+      legend=dict(# orientation='h', y=-0.35
+                  itemsizing='constant'),
       margin=dict(t=70, b=0, l=0, r=0),
-      width=650, height=330,
+      width=660, height=330,
       title = "Band Gap [eV] (282 test predictions)"
-      # legend= dict(orientation='h', y=-0.3)
   )
 
   p0.add_annotation(x=2.5, y=6, xref='x', yref='y',
@@ -855,9 +858,9 @@ Nevertheless, the RFR model on the higher dimensional, sparser raw features is s
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt :options inkscapeformat=png, inkscapedpi=300
+#+attr_latex: :width 450pt
 #+CAPTION: label:fig:sis-pairplots SIS-based model predictions vs true values at multiple fidelities
-[[file:./.ob-jupyter/3e69dc16f31bdc9d9941843a5f8a7a3ee3884e63.svg]]
+[[file:./.ob-jupyter/383e3b86e9b2d36279558672c6ca56306fae9032.svg]]
 :end:
 
 ** DONE Discussion
