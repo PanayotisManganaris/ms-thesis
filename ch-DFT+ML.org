@@ -291,14 +291,7 @@ After the recommendation is made, the granularity of the grid is increased in th
 In general, no more than 2 or 3 exhaustive searches are needed over a given set of grids.
 Past this point, continuously variable hyper parameters can be individually optimized by plotting validation curves.
 
-** DONE Methods
-:PROPERTIES:
-:CLASS: unnumbered
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2022-12-21 Wed 16:53]
-:END:
-*** DONE Featurization of Chemistries
+** DONE Featurization of Chemistries
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 15:39]
 :END:
@@ -354,7 +347,7 @@ Our attempts to provide a domain with these characteristics results in the follo
   - this provides the categorical axis for multi-task learning
   - see table ref:tbl:LoTs
 
-*** NEXT Machine Learning Algorithms and Parameter Optimization
+** NEXT Machine Learning Algorithms and Parameter Optimization
 :LOGBOOK:
 - State "NEXT"       from "DONE"       [2023-05-30 Tue 12:32]
 - State "DONE"       from "TODO"       [2022-12-21 Wed 16:26]
@@ -392,7 +385,7 @@ A final best model is instantiated using the overall best performing parameters.
 These models are finally validated against the test sets originally split off from the sample in both their extrapolative ability and consistency 
 This procedure in demonstrated in an online notebook by [cite/text:@manganaris-2022-mrs-comput] hosted on the Purdue nanoHUB.
 
-*** DONE Feature Engineering
+** DONE Feature Engineering
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 16:51]
 :END:
@@ -437,6 +430,10 @@ The available operation set is outlined in table ref:tbl:ops.
 |                | exponentiation    |
 |                | root 2            |
 
+** TODO Methods
+- section cutting
+- partitioning scheme
+- add testing and evaluation of models
 ** DONE Results
 :PROPERTIES:
 :CLASS: unnumbered
