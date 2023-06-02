@@ -353,19 +353,21 @@ Results and a discussion of their significance is given in chapter 4.
 Finally, in chapter 5 I present the open-source tools developed for this work and made available to the broader materials science community.
 
 * DENSITY FUNCTIONAL THEORY SIMULATION
-All DFT computations were performed using vasp version 6.2 employing projector-augmented-wave (PAW) pseudo-potentials.
-[cite:@kresse-1996-effic-iterat;@kresse-1993-ab-initio;@kresse-1996-effic-ab;@kresse-1999-from-ultras;@kresse-1994-norm-conser]
+All DFT computations were performed using VASP version 6.2
+[cite:@kresse-1996-effic-iterat;@kresse-1993-ab-initio]
+employing projector-augmented-wave (PAW) pseudo-potentials.
+[cite:@kresse-1996-effic-ab;@kresse-1999-from-ultras;@kresse-1994-norm-conser]
 Multiple levels of theory (LoT) were used in most computations.
 Each simulation was conducted on the same set of compositions allowing /at most/ single-site mixing of our 14 constituent candidates for 3 sites (table ref:tbl:site_tbl).
-Each HaP composition is simulated in a \(2\times{}2\times{}2\) supercell, which allows A and B-site mixing to be performed in discrete 1/8^{th} fractions of the total site occupancy, and X-site mixing in 1/24^{th} fractions, though for simplicity, we restrict X-site mixing to fractions of 3x/24.
-For simulating mixed perovskites, the special quasi-random structures (SQS) method was applied to build periodic structures that make the first nearest-neighbor shells as similar to the target random alloy as possible.
+Each HaP composition was simulated in a \(2\times{}2\times{}2\) supercell, which allowed A and B-site mixing to be performed in discrete 1/8^{th} fractions of the total site occupancy, and X-site mixing in 1/24^{th} fractions, though for simplicity, we restricted X-site mixing to fractions of 3/24.
+For simulating mixed perovskites, the special quasi-random structures (SQS) method was applied to build periodic structures that made the first nearest-neighbor shells as similar to the target random alloy as possible.
 [cite:@jiang-2016-special-quasir]
 The final tally of successfully converged calculations is listed in table ref:tbl:LoTs.
 The Perdew-Burke-Ernzerhof (PBE) functional within the generalized gradient approximation (GGA) as well as the hybrid Heyd-Scuseria-Ernzerhof functional with parameters (\(\alpha=0.25\)) and (\(\omega=0.2\)) (HSE06) are used for exchange-correlation energy.
 [cite:@perdew-1996-gener-gradien;@heyd-2003-hybrid-funct]
-The energy cutoff for the plane-wave basis is set to 500 eV.
+The energy cutoff for the plane-wave basis was set to 500 \unit{\electronvolt}.
 For all PBE geometry optimization calculations, the Brillouin zone was sampled using a \(6\times{}6\times{}6\) Monkhorst-Pack mesh for unit cells and a \(3\times{}3\times{}3\) for supercells.
-Using the PBE optimized structure as input, the electronic band structure is calculated along high-symmetry k-points to obtain accurate band gaps, and the optical absorption spectrum is further calculated using the LOPTICS tag, setting the number of energy bands to 1000 for each structure.
+Using the PBE optimized structure as input, the electronic band structure was calculated along high-symmetry k-points to obtain accurate band gaps, and the optical absorption spectrum is further calculated using the LOPTICS tag, setting the number of energy bands to 1000 for each structure.
 [cite:@hinuma-2016-band-struc;@ganose-2018-sumo]
 For HSE calculations, geometry optimization was performed using only the Gamma point, and subsequent computations used a reduced \(2\times{}2\times{}2\) Monkhorst-Pack mesh.
 The force convergence threshold is set to be -0.05 eV/Å.
@@ -398,15 +400,15 @@ Optical absorption spectra from different HSE functionals were obtained by using
 
 ** DFT Computed Band Gaps
 Four types of electronic band gaps were computed by my advisor and group members using a \(2\times{}2\times{}2\) Monkhorst-Pack mesh.
-These four measures E_{gap}^{PBE}, E_{gap}^{HSE}, E_{gap}^{HSE(SOC)}, and E_{gap}^{HSE-PBErel(SOC)} populate the multiple fidelity dataset I model.
-I aim to accurately predict performance-relevant halide perovskite (HaP) band gaps, which strongly predict photovoltaic performance.
+These four measures E_{gap}^{PBE}, E_{gap}^{HSE}, E_{gap}^{HSE(SOC)}, and E_{gap}^{HSE-PBErel(SOC)} populated the multi-fidelity dataset I used for my work.
+I aimed to accurately predict performance-relevant halide perovskite (HaP) band gaps, which strongly predict photovoltaic performance.
 [cite:@mannodi-kanakkithodi-2019-compr-comput]
 Furthermore, using multi-fidelity modeling, I aim to predict the experimentally measured band gaps of entirely hypothetical compounds, either only ever simulated or not tested at all.
 This is motivated by a relationship known to exist between the absorption spectra/PCE of the simulated compounds and their band gaps.
 
 ** Spectroscopic Limited Maximum Efficiency (SLME)
 Introduced by [cite/text:@yu-2012-ident-poten], the SLME is a convenient metric for evaluating a semiconductor's suitability for single junction photovoltaic (PV) absorption.
-In this work, SLME is calculated considering a 5\unit{\micro\meter} sample thickness for every perovskite using equations ref:eq:absorption_alpha, ref:eq:slme_int, and ref:eq:slme_sum, combining the original SL3ME.py code from [cite/text:@yu-2012-ident-poten] with our DFT computed absorption spectra and band gaps.
+In this work, SLME was calculated considering a 5\unit{\micro\meter} sample thickness for every perovskite using equations ref:eq:absorption_alpha, ref:eq:slme_int, and ref:eq:slme_sum, combining the original SL3ME.py code from [cite/text:@yu-2012-ident-poten] with our DFT computed absorption spectra and band gaps.
 
 \[
 \label{eq:absorption_alpha}
@@ -430,13 +432,12 @@ J=e\int_{0}^{\infty} a(E)I_{sun}(E)dE - J_{0}(1-e^{\frac{eV}{kT}})
 To calculate SLME efficiency the current density \(J\), the light spectrum intensity of sunlight \(I_{sun}\), and the power \(P\) are all that is needed.
 Using the DFT computed optical absorption spectrum as well as the magnitude and type (direct or indirect) of band gap as input, SLME is directly calculated using an open-source package.
 [cite:@williams-2022-sl3me]
-This calculation is performed using all four functionals and compliments the PCE measurements at the experimental fidelity.
+This calculation was performed using all four functionals and compliments the PCE measurements at the experimental fidelity.
 SLME accounts for more energetic processes than the Shockley-Queisser criterion (\(bg \approx 1.3\)) allowing for a range of performant band gaps to be identified according to level of theory.
 [cite:@yu-2012-ident-poten p.1]
-Experimental data[cite:@almora-2020-devic-perfor] broadly agrees with PBE simulation, so the range of 1 to 2 \unit{\electronvolt}.
-see figure ref:fig:slme.
-Also, notice that even in just the sample dataset, there are candidates with potential to overtake the state of the art absorbers reported by NREL in figure ref:fig:nrel.
-This is propitious for the screening I conduct on the 40000 point sample space.
+Experimental data [cite:@almora-2020-devic-perfor] broadly agrees with PBE simulation, so the range of 1 to 2 \unit{\electronvolt} was justified (see figure ref:fig:slme).
+Also, notice that even in just the sample dataset, there were candidates with potential to overtake the state of the art absorbers reported by NREL in figure ref:fig:nrel.
+This is propitious for the screening I conducted on the 40000 point sample space.
 
 #+begin_src jupyter-python :post wrap(*this*, w="400pt", c="label:fig:slme PBE SLME of sample compares to experimental PCE and cleanly demarcates competitive range of band gaps")
   p0 = make_subplots(rows=2, cols=1, shared_yaxes=True)
@@ -520,10 +521,10 @@ In review, the sample of 500 band gaps available for training predictors was sup
 Furthermore, an additional 282 calculations were performed with HSE in addition to SOC, and 244 calculations were performed by running HSE(SOC) electronic structure calculations on PBE-relaxed structures.
 
 The range of band gaps sampled by each simulation method are similar and are characterized by similar variance.
-the descriptive statistics of each greatly exceeds those of the experimental subset (see figure ref:fig:bg_dist).
+The descriptive statistics of each greatly exceeded those of the experimental subset (see figure ref:fig:bg_dist).
 Nevertheless, the latter undoubtedly represented the smallest error from truth.
-The types of mixing per level of theory are apportioned as in figure
-This is the primary challenge I address with the multi-fidelity models discussed in chapter 3.
+The types of mixing per level of theory were apportioned as in figure ref:fig:lot_mix_org.
+This is the primary challenge I addressed with the multi-fidelity models discussed in chapter 3.
 
 #+begin_src jupyter-python :post wrap(*this*, w="300pt", c="label:fig:bg_dist Variability in sampled band gaps at each fidelity")
   p = px.box(Y, y="bg_eV", x="LoT")
@@ -618,12 +619,12 @@ This is due to the accidental accuracy of semi-local functionals without SOC for
 :end:
 
 ** Sampling the Halide Perovskite Chemical Space
-Pure (non-alloyed) possibilities are exhaustively sampled using \(5*6*3 = 90\) compounds.
+Pure (non-alloyed) possibilities were exhaustively sampled using \(5*6*3 = 90\) compounds.
 Starting from these pure perovskite structures systematic mixing was performed at the A, B, and X sites.
 Figure ref:fig:lot_mix_org shows the shares of different types of mixing in our sample.
-Again, for simplicity, only cardinal mixing is considered in this study: that is, mixing is not performed at multiple A/B/X-sites simultaneously.
+Again, for simplicity, only cardinal mixing was considered in this study: that is, mixing is not performed at multiple A/B/X-sites simultaneously.
 The sample contains a reasonable balance of points representing each one of the cardinal mixing categories.
-This will help to ensure the ML algorithms learn relationships between fidelities, not differences in mix site or constituency distributions within each fidelity.
+This helped to ensure the ML algorithms learn relationships between fidelities, not differences in mix site or constituency distributions within each fidelity.
 Additionally, within each mix both purely inorganic samples and hybrid organic-inorganic samples were represented equally.
 # See [[Methods]] for details on how these categories were utilized in model development.
 See the coverage of this sample in figure ref:fig:coverage.
@@ -648,8 +649,8 @@ See the coverage of this sample in figure ref:fig:coverage.
 [[file:./.ob-jupyter/201e8a95043e8f43d649342b896cab0dfa4ef32e.svg]]
 :end:
 
-Most importantly, this sample gives very even coverage of the cardinal mixing domain as shown in figure ref:fig:coverage.
-The clusters in this figure are determined using the t-distributed stochastic neighbor embedding (t-SNE) method.
+Most importantly, this sample gave even coverage of the cardinal mixing domain as shown in figure ref:fig:coverage.
+The clusters in this figure were determined using the t-distributed stochastic neighbor embedding (t-SNE) method.
 This is a nonparametric dimensionality reduction intended for visualizing statistically relevant clusters in a high dimensional dataset in only two or three dimensions.
 In this case, the clusters correspond to the mix site of the member data points.
 # (see figure ref:fig:alloys)
