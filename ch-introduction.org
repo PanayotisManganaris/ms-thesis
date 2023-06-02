@@ -400,11 +400,14 @@ Optical absorption spectra from different HSE functionals were obtained by using
 
 ** DFT Computed Band Gaps
 Four types of electronic band gaps were computed by my advisor and group members using a \(2\times{}2\times{}2\) Monkhorst-Pack mesh.
-These four measures E_{gap}^{PBE}, E_{gap}^{HSE}, E_{gap}^{HSE(SOC)}, and E_{gap}^{HSE-PBErel(SOC)} populated the multi-fidelity dataset I used for my work.
-I aimed to accurately predict performance-relevant halide perovskite (HaP) band gaps, which strongly predict photovoltaic performance.
+These four measures E_{bg}^{PBE}, E_{bg}^{HSE}, E_{bg}^{HSE(SOC)}, and E_{bg}^{HSE-PBErel(SOC)} populated the multi-fidelity dataset I used for my work.
+I aimed to accurately predict the band gaps of entirely hypothetical HaP compounds at the experimental fidelity using multi-fidelity models. 
+This is motivated by the fact that the absorption spectrum of a perovskite determines its performance in a photovoltaic.
 [cite:@mannodi-kanakkithodi-2019-compr-comput]
-Furthermore, using multi-fidelity modeling, I aim to predict the experimentally measured band gaps of entirely hypothetical compounds, either only ever simulated or not tested at all.
-This is motivated by a relationship known to exist between the absorption spectra/PCE of the simulated compounds and their band gaps.
+A well defined relationship therefore exists between the efficiency of a perovskite absorber and its true band gap.
+[cite:@yu-2012-ident-poten]
+Experimental Band gaps thus strongly predict photovoltaic performance, and analysis of this relation informs the screening criterion.
+My work served to accelerate the design of high-performing photovoltaic devices by enabling more accurate rapid identification of candidate perovskites with desirable band gap properties.
 
 ** Spectroscopic Limited Maximum Efficiency (SLME)
 Introduced by [cite/text:@yu-2012-ident-poten], the SLME is a convenient metric for evaluating a semiconductor's suitability for single junction photovoltaic (PV) absorption.
