@@ -66,6 +66,7 @@
 \nocite{manganaris-2023-multi-fidel}
 \nocite{gollapalli-2023-graph-neural}
 \nocite{edlabadkar-2023-drivin-halid}
+\nocite{yang-2023-discov-novel}
 
 \printbibliography[heading=none,category=myarticles]
 #+end_export
