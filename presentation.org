@@ -1630,24 +1630,83 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+*** COMMENT load screening
+#+begin_src jupyter-python
+  screen = pd.read_csv("./screen_rfr.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.3
 :END:
 #+attr_latex: :width 120
 [[file:screening_ops.png]]
+
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.7
 :END:
-#+DOWNLOADED: screenshot @ 2023-05-19 13:20:09
-#+attr_latex: :width 260
-[[file:Results/2023-05-19_13-20-09_screenshot.png]]
+#+begin_src jupyter-python
+  randdf = screen[~screen.Formula.str.contains(r"Pb", regex=False)][["Formula", "bg_eV"]].sample(10)
+  randdf = randdf.rename(columns={"bg_eV":"band gap [eV]"})
+  randdf
+#+end_src
+
+#+RESULTS:
+:results:
+\scriptsize
+|       | Formula                                   | band gap [eV] |
+|-------+-------------------------------------------+---------------|
+| 18743 | FA0.125K0.750Rb0.125Ca1.000Br1.000        | 1.855247      |
+| 12770 | K1.000Sn1.000Br0.125Cl0.417I0.458         | 1.579396      |
+| 31435 | Cs0.625MA0.375Sr1.000Cl1.000              | 1.914944      |
+| 18623 | FA0.125K0.500MA0.125Rb0.250Sr1.000Br1.000 | 1.646356      |
+| 19146 | FA0.250K0.375MA0.250Rb0.125Sn1.000I1.000  | 1.480291      |
+| 2909  | Rb1.000Ca1.000Br0.250Cl0.167I0.583        | 1.701664      |
+| 13745 | K1.000Ge0.625Sr0.375Br1.000               | 1.705146      |
+| 30268 | Cs0.375FA0.125K0.125MA0.375Sn1.000Cl1.000 | 1.756766      |
+| 1505  | Rb1.000Ge1.000Br0.042Cl0.917I0.042        | 1.900707      |
+| 31436 | Cs0.625MA0.375Sr1.000Br1.000              | 1.971531      |
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="260pt")
+  p = px.scatter(
+      projdf,
+      # facet_col='perplexity', facet_col_wrap=4,
+      x='0', y='1',
+      hover_name="Formula",
+      color=(projdf.index.isin(screen.index)),
+  )
+  p.update_layout(
+      legend_title="chosen", legend_itemsizing='constant',
+      legend_orientation='h', legend_bgcolor="rgba(1,1,1,0)",
+      legend_y=0.1,
+      margin=dict(l=0, r=0, t=0, b=0),
+      width=400, height=200
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 260pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/7cb1db25e8abcd61f04db209014e3d80f3c0241a.svg]]
+:end:
 
 ** Screened Constituent Frequencies                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+
+# Also show how it looks in the data sample in the begining
 
 #+DOWNLOADED: screenshot @ 2023-05-19 13:07:38
 #+attr_latex: :width 400
@@ -1672,27 +1731,75 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :END:
 - strongly prefer full occupation
 
-** Interpretation                                                  :B_frame:
+** Interpreting t-SNE clusters                                     :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+
+# fix blue/green on projector
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
 
-#+DOWNLOADED: screenshot @ 2023-05-19 13:21:13
-#+attr_latex: :width 200
-[[file:Results/2023-05-19_13-21-13_screenshot.png]]
+#+begin_src jupyter-python :post wrap(*this*, w="200pt")
+  p = px.scatter(
+      projdf,
+      x='0', y='1',
+      hover_name="Formula",
+      color='mix',
+  )
+  p.update_layout(
+      legend_title="chosen", legend_itemsizing='constant',
+      legend_orientation='h', legend_bgcolor="rgba(1,1,1,0)",
+      legend_y=0.05,
+      margin=dict(l=0, r=0, t=0, b=0),
+      width=400, height=400
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 200pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/c7002c894b6ade243f089aabdefcb2c2b4d07a89.svg]]
+:end:
 
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
 
-#+DOWNLOADED: screenshot @ 2023-05-19 13:20:09
-#+attr_latex: :width 200
-[[file:Results/2023-05-19_13-20-09_screenshot.png]]
+#+begin_src jupyter-python :post wrap(*this*, w="200pt")
+  p = px.scatter(
+      projdf,
+      x='0', y='1',
+      hover_name="Formula",
+      color='org',
+  )
+  p.update_layout(
+      legend_title="chosen", legend_itemsizing='constant',
+      legend_orientation='h', legend_bgcolor="rgba(1,1,1,0)",
+      legend_y=0.05,
+      margin=dict(l=0, r=0, t=0, b=0),
+      width=400, height=400
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 200pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/bd7813d2d1d9cd1108cdd457bd977e8fd1a6aa99.svg]]
+:end:
 
 * COMMENT CGCNN
 ** CGCNN Introduction                                              :B_frame:
