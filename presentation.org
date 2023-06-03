@@ -1099,14 +1099,25 @@ Inform screening criterion reported by these results[cite:@yang-2023-high-throug
 :END:
 *** COMMENT compute pearson
 #+begin_src jupyter-python
-  bgdf = pd.concat(
-      [Y.bg_eV[Y.LoT == 'PBE'].reset_index(drop=True),
-       Y.bg_eV[Y.LoT == 'HSE'].reset_index(drop=True),
-       Y.bg_eV[Y.LoT == 'HSE(SOC)'].reset_index(drop=True),
-       Y.bg_eV[Y.LoT == 'HSE-PBErel(SOC)'].reset_index(drop=True),
-       Y.bg_eV[Y.LoT == 'EXP'].reset_index(drop=True)],
-      axis=1)
-  bgdf.columns=['PBE bg', 'HSE bg', 'HSE(SOC) bg', 'HSE-PBErel(SOC) bg', 'EXP']
+  lot_compared = Y.groupby(
+      "Formula", as_index=False
+  ).apply(
+      lambda df: df[["Formula", "bg_eV", "LoT"]].set_index(["Formula", "LoT"]).unstack("LoT")
+  )
+  lot_compared.index = lot_compared.index.droplevel(0)
+  lot_compared.columns = lot_compared.columns.droplevel(0)
+  lot_compared = lot_compared.reset_index()
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  formX = pd.concat([Y.Formula, XX], axis=1)# .reindex(index=lot_compared.index)
+  df = pd.merge(left=lot_compared, right=formX, how='left', on='Formula').set_index(
+      [c for c in formX.columns if not c in formX.select_dtypes(np.number).columns]
+  )
 #+end_src
 
 #+RESULTS:
@@ -1114,10 +1125,9 @@ Inform screening criterion reported by these results[cite:@yang-2023-high-throug
 :end:
   
 #+begin_src jupyter-python
-  wdf = pd.concat([bgdf, XX], axis=1).select_dtypes(np.number).fillna(0)
-  pearson = pd.DataFrame(np.corrcoef(wdf, rowvar=False),
-                         columns=wdf.columns,
-                         index=wdf.columns)
+  pearson = pd.DataFrame(np.corrcoef(df.fillna(0), rowvar=False),
+                         columns=df.columns,
+                         index=df.columns)
 #+end_src
 
 #+RESULTS:
@@ -1133,23 +1143,25 @@ Inform screening criterion reported by these results[cite:@yang-2023-high-throug
   sub = pearson.iloc[0:5, 5:17]
   p = px.imshow(sub, color_continuous_scale='RdBu_r', zmin=-1, zmax=1,
                 labels=dict(color="Pearson Coefficient"),
-                # y = ytitles,
-                # height=300
+                # text_auto='.2f'
                 )
-  p.update_xaxes(tickangle=-35, tickfont_size = 30)
-  p.update_yaxes(tickangle=-35, tickfont_size = 30)
-  p.update_layout(coloraxis=dict(colorbar=dict(len=1, orientation='h', y=0.8)))
+  p.update_xaxes(tickangle=-35, tickfont_size = 30,
+                 tickmode='array',
+                 tickvals=list(range(sub.columns.shape[0])),
+                 ticktext=sub.columns.str.slice(6).str.replace("'", "").str.replace("_"," ")
+                 )
+  p.update_yaxes(tickangle=-35, tickfont_size = 30,
+                 tickmode = 'array',
+                 tickvals=list(range(sub.index.shape[0])),
+                 ticktext=[l + " bg" for l in sub.index.to_list()]
+                 )
   p.update_layout(
+      coloraxis=dict(colorbar=dict(len=1, orientation='h', y=0.8)),
+      margin=dict(t=0,b=0,l=0,r=0),
+      font_size=20,
       # paper_bgcolor='rgba(255,255,255,0)',
       # plot_bgcolor='rgba(255,255,255,0)',
-      margin=dict(t=0,b=0,l=0,r=0),
-      font_size=20
   )
-  p.update_layout(
-      xaxis = dict(tickmode='array',
-                   tickvals=list(range(sub.columns.shape[0])),
-                   ticktext=sub.columns.str.slice(6).str.replace("'", "").str.replace("_"," ")
-  ))
   p.show(renderer='svg')
 #+end_src
 
@@ -1157,7 +1169,7 @@ Inform screening criterion reported by these results[cite:@yang-2023-high-throug
 :results:
  
 #+attr_latex: :width 170pt
-[[file:./.ob-jupyter/da7cd23fd96270d3ac27a2e5a2ec43022527f56a.svg]]
+[[file:./.ob-jupyter/ca72ee259641cdd0bcbb7685d0bd737c8163e268.svg]]
 :end:
 
 *** Parsing compositions using =cmcl=                       :B_block:BMCOL:
@@ -1277,47 +1289,54 @@ compute by averaging elemental properties obtained from Mendeleev database
 [cite:@mentel-2014]
 by atomic weight of constituent in compount
 
-** TODO Bivariate Analysis of Functional Effects                   :B_frame:
+** DONE Correlating Band Gap with 36 Dimensional Property vector   :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2023-06-03 Sat 12:47]
+- State "NEXT"       from "TODO"       [2023-05-26 Fri 18:08]
 :END:
 # #+DOWNLOADED: screenshot @ 2023-05-19 12:18:44
 # #+attr_latex: :width 380
 # [[file:Data/2023-05-19_12-18-44_screenshot.png]]
 
-#+begin_src jupyter-python :post wrap(*this*, "400pt")
+# \vspace{-1cm}
+band gap at higher levels of theory correlate with composition differently[cite:@yang-2023-high-throug]
+
+#+begin_src jupyter-python :post wrap(*this*, "390pt")
   sub = pearson.iloc[0:5, 19:55]
   p = px.imshow(sub, color_continuous_scale='RdBu_r', zmin=-1, zmax=1,
                 labels=dict(color="Pearson Coefficient"),
-                height=400, width=900, aspect=1.5,
-                text_auto='.2f'
+                height=400, width=1000, aspect='auto',
+                # text_auto='.2f'
                 )
-  p.update_xaxes(tickangle=-35, tickfont_size = 15)
-  p.update_yaxes(tickangle=-35, tickfont_size = 15)
+  p.update_xaxes(tickangle=-40, # tickfont_size = 30,
+                 tickmode='array',
+                 tickvals=list(range(sub.columns.shape[0])),
+                 ticktext=sub.columns.str.slice(6).str.replace("'", "").str.replace("_"," ")
+                 )
+  p.update_yaxes(tickangle=-40, # tickfont_size = 30,
+                 tickmode = 'array',
+                 tickvals=list(range(sub.index.shape[0])),
+                 ticktext=[l + " bg" for l in sub.index.to_list()]
+                 )
   p.update_layout(coloraxis=dict(colorbar=dict(len=1, orientation='h', y=1)))
   p.update_layout(
-      # paper_bgcolor='rgba(255,255,255,0)',
-      # plot_bgcolor='rgba(255,255,255,0)',
       margin=dict(t=0,b=0,l=0,r=0),
       font_size=20
+      # paper_bgcolor='rgba(255,255,255,0)',
+      # plot_bgcolor='rgba(255,255,255,0)',
   )
-  p.update_layout(
-      xaxis = dict(tickmode='array',
-                   tickvals=list(range(sub.columns.shape[0])),
-                   ticktext=sub.columns.str.slice(6).str.replace("'", "").str.replace("_"," ")
-  ))
   p.show(renderer='svg')
 #+end_src
 
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 400pt
-[[file:./.ob-jupyter/5f33f326b391e633e7fa8e1d2594fc7176d8ceaf.svg]]
+#+attr_latex: :width 390pt
+[[file:./.ob-jupyter/4aff497f1c6138caa314121c64efb73b46e75d71.svg]]
 :end:
-
-band gap at higher levels of theory correlate with composition differently[cite:@yang-2023-high-throug]
-
 
 * NEXT Multi-Fidelity Learning
 :LOGBOOK:
