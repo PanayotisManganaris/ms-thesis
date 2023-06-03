@@ -972,7 +972,7 @@ SLME accounts for more energetic processes than Shockley-Queisser
 criterion (\(bg \approx 1.3\)) allowing selection on range of bandgaps
 determined according to level of theory[cite:@yu-2012-ident-poten p.1]
 
-** DONE Absorbance Relates to Power Conversion in Our Data         :B_frame:
+** DONE Absorbance Relates to Efficiency via Band Gap in Our Data  :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -1041,7 +1041,7 @@ determined according to level of theory[cite:@yu-2012-ident-poten p.1]
 :results:
  
 #+attr_latex: :width 370pt
-[[file:./.ob-jupyter/3d9a2ab16919627b5827851152eba8c5c9d8f494.svg]]
+[[file:./.ob-jupyter/64174f234626288aaaca8eb9d0ba24f1cfdbe000.svg]]
 :end:
 
 Inform screening criterion reported by these results[cite:@yang-2023-high-throug] 
