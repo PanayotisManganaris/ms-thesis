@@ -561,10 +561,14 @@ Professor Arun and Jiaqi have generated some of the largest pervoskite DFT datab
 [cite:@yang-2023-high-throug;@pablo-2019-new-front]
 
 sampling variation in composition, structure mutation, phase, etc
-** Collecting Data is Hard                                         :B_frame:
+** DONE Collecting Data is Hard                                    :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-03 Sat 08:37]
+:END:
+
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.7
@@ -587,17 +591,6 @@ accumulating the HaP dataset took years
 :PROPERTIES:
 :BEAMER_col: 0.3
 :END:
-#+begin_src jupyter-python
-  Y = pd.read_csv(
-      "~/Documents/manuscripts/DFT+ML+feature_engineering/Y.csv",
-      index_col=0
-  )
-#+end_src
-
-#+RESULTS:
-:results:
-:end:
-
 #+begin_src jupyter-python :post wrap(*this*, w="120pt")
     p = px.box(Y, y="bg_eV", x="LoT",
                width=400, height=700)
@@ -613,9 +606,8 @@ accumulating the HaP dataset took years
  
 #+attr_latex: :width 120pt
 #+attr_org: :width 640
-[[file:./.ob-jupyter/55e458fa81a19544b854f8eb0141c77a857bf06b.svg]]
+[[file:./.ob-jupyter/3822d7499fa7752e34ad5c4f42ca00509c26cbc3.svg]]
 :end:
-
 
 ** COMMENT Attractive Properties of Perovskites                            :B_frame:
 :PROPERTIES:
