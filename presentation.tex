@@ -571,21 +571,31 @@ the similarity function \(k(x, x')\)
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org0fd7a91}]{Sure-Independence Screening and Sparsifying Operator (SISSO)}
+\begin{frame}[label={sec:org615d3e8}]{Sure-Independence Screening and Sparsifying Operator (SISSO)}
+Resulting in parsimonious models, e.g. for fatigue strength\autocite{he-2021-learn-inter}
 \begin{columns}
-\begin{column}{0.4\columnwidth}
-generalizes "Greedy Pursuit" algorithms
+\begin{column}{0.45\columnwidth}
 \begin{itemize}
-\item Orthogonal Matching Pursuit
-\item Basis Pursuit (aka LASSO)
+\item SIS operates on input features creating space of engineered features
+\item SO creates sparse model
+\begin{itemize}
+\item rank engineered features by explanatory power
+\item pose linear combination from best features
+\item solve for coefficients
+\end{itemize}
 \end{itemize}
 
-SIS+correlation analysis is a form of orthogonalization
+\begin{align*}
+FS = 50.58 &\sqrt{\mbox{Diffusion T} \times (\ce{Cr} + \ce{Ni})}\\
+ + 2.24 \ce{C} &|\mbox{Tempering T}\\
+ - &|\mbox{Diffusion T} - \mbox{Through-Harden T}||\\
+ + 158.71
+\end{align*}
 \end{column}
 
-\begin{column}{0.6\columnwidth}
+\begin{column}{0.55\columnwidth}
 \begin{center}
-\includegraphics[width=250]{Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png}
+\includegraphics[width=200]{Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png}
 \end{center}
 Notice SIS re-iterations explain the residual\autocite{ghiringhelli-2017-learn-physic}
 \end{column}

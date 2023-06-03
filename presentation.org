@@ -901,22 +901,31 @@ the similarity function \(k(x, x')\)
 - State "DONE"       from              [2023-05-24 Wed 05:08]
 :END:
 
+Resulting in parsimonious models, e.g. for fatigue strength[cite:@he-2021-learn-inter]
 *** col                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.4
+:BEAMER_col: 0.45
 :END:
-generalizes "Greedy Pursuit" algorithms
-- Orthogonal Matching Pursuit
-- Basis Pursuit (aka LASSO)
 
-SIS+correlation analysis is a form of orthogonalization
+- SIS operates on input features creating space of engineered features
+- SO creates sparse model
+  - rank engineered features by explanatory power
+  - pose linear combination from best features
+  - solve for coefficients
+
+\begin{align*}
+FS = 50.58 &\sqrt{\mbox{Diffusion T} \times (\ce{Cr} + \ce{Ni})}\\
+ + 2.24 \ce{C} &|\mbox{Tempering T}\\
+ - &|\mbox{Diffusion T} - \mbox{Through-Harden T}||\\
+ + 158.71
+\end{align*}
 
 *** col                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.6
+:BEAMER_col: 0.55
 :END:
 #+DOWNLOADED: screenshot @ 2022-12-20 09:09:33
-#+attr_latex: :width 250
+#+attr_latex: :width 200
 [[file:Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png]]
 Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-physic]
 
