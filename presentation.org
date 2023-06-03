@@ -454,15 +454,27 @@ The following definitions approximate \alpha phase stability
 4 \gtrapprox b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
 \]
 
-** TODO My Thesis Research Overview                                :B_frame:
-# make the chemical space clear (table)
-# use DFT + ML to discover attractive candidates
-# make two slides out of this -- show deficiencies
-# show what mixing at A B X means!!
+** DONE My Thesis Research Overview                                :B_frame:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-03 Sat 14:10]
+:END:
+the work we did in [cite/title:@yang-2023-high-throug]
+- created the multi-fidelity dataset covering the chemical domain
+- decided the screening criterion used to judge viability of compositions
 
-# combinatorial growth of composition space with
-# 1. size of supercell
-# 2. constituent options
+#+caption: \(\ce{ABX3}\) Site Candidates
+| /      | <  |    |    |    |    |    |
+| A-site | MA | FA | Cs | Rb | K  |    |
+| B-site | Pb | Sn | Ge | Ba | Sr | Ca |
+| X-site | I  | Br | Cl |    |    |    |
+
+The work I did in [cite/title:@manganaris-2023-multi-fidel]
+- methods for predicting band gaps at experimental fidelity
+  - open-source tools developed for this work
+  - made available to the broader materials science community
+- use predictions + screening to search sample space for promising compounds
+
+# show what mixing at A B X means!!
 
 ** DONE Design Goals in *14-Dimensional* Composition Space         :B_frame:
 :PROPERTIES:
