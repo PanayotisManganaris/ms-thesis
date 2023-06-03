@@ -145,7 +145,7 @@
 :PROPERTIES:
 :BEAMER_col: 0.3
 :END:
-#+attr_latex: :width 100
+#+attr_latex: :width 90
 [[file:thin-film-PV.png]]
 #+attr_latex: :width 90
 [[file:Si-HaP-tandem-PV.png]]
@@ -156,7 +156,7 @@
 :PROPERTIES:
 :BEAMER_col: 0.7
 :END:
-***** Band Gap Effects on Absorption Spectrum                   :B_block:
+***** Band Gap (bg) Effects on Absorption Spectrum              :B_block:
 :PROPERTIES:
 :BEAMER_env: block
 :END:
@@ -233,7 +233,7 @@ E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
 - 2013 : \(\ce{MAPbX_3}\) found to transport holes+electrons
   [cite:@saliba-2014-influen-therm]
 
-HaP PVs become competitive in 2013
+# HaP PVs become competitive in 2013
 ** NEXT Rapid Rise of Perovskite Photovoltaics                     :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -408,7 +408,7 @@ Perovskite Solar Absorber Layer[fn:1]
 #+attr_latex: :width 140
 [[file:hybrid-HaP.png]]
 
-\center{}2x2x2 \alpha-phase supercell 
+\center{}2x2x2 \alpha-phase supercell\break *with MA at A-site*
 
 ** DONE Perovskite Formability                                     :B_frame:
 :PROPERTIES:
