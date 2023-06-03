@@ -511,7 +511,7 @@ environmental impact
 :results:
  
 #+attr_latex: :width 150pt :options inkscapeformat=png, inkscapedpi=300
-[[file:./.ob-jupyter/e5dedf8aa3764c0a663c1bbbd2d70eef512cfa96.svg]]
+[[file:./.ob-jupyter/7b552d6e27bb59ea631cff90bf7278de09b04ca3.svg]]
 :end:
 
 *** col                                                             :BMCOL:
@@ -539,7 +539,7 @@ environmental impact
 :results:
  
 #+attr_latex: :width 150pt :options inkscapeformat=png, inkscapedpi=300
-[[file:./.ob-jupyter/3ed5c0e44a1db77d1bd67911c688251d563c2ef0.svg]]
+[[file:./.ob-jupyter/4a7937400ef9f31b84cb014534685b0ec1de85c5.svg]]
 :end:
 
 **** Search for Improved Compounds                               :B_block:
