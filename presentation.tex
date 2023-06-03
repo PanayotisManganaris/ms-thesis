@@ -824,26 +824,46 @@ band gap at higher levels of theory correlate with composition differently\autoc
 \end{itemize}
 \end{block}
 \end{frame}
-
-\begin{frame}[label={sec:org919bdb9}]{Multi-Fidelity Model Development Workflow}
+\begin{frame}[label={sec:org9857e7c},fragile]{Tuning Multi-Fidelity Model Performance by Selecting Hyper-parameters}
+ \begin{columns}
+\begin{column}{0.7\columnwidth}
 \begin{center}
-\includegraphics[width=300]{/home/panos/Pictures/flowcharts/ML_pipe.png}
+\includegraphics[width=280]{ML_pipe_annot.png}
 \end{center}
+\end{column}
 
-Weightable Machine Learning pipeline implemented in Python using Yogi\footnote{\tiny{}\url{https://github.com/PanayotisManganaris/yogi}\label{org790dce2}}
-\autocite{manganaris-2022-mrs-comput}
+\begin{column}{0.3\columnwidth}
+\begin{block}{scores employed}
+HP scoring via \texttt{Yogi} tools and SciKit-Learn\autocite{manganaris-2022-mrs-comput}.
+\begin{itemize}
+\item (\(R^2\))
+\item explained variance score
+\item maximum error score
+\item RMSE
+\begin{itemize}
+\item all data points
+\item EXP
+\item PBE
+\item HSE
+\item HSE(SOC)
+\item HSE-PBErel(SOC)
+\end{itemize}
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
 \section{Models}
-\label{sec:orge1ffd8a}
-\begin{frame}[label={sec:org5b333cf}]{Model Training}
+\label{sec:orgca71437}
+\begin{frame}[label={sec:orgc6e3615}]{Model Training Methods}
 \begin{itemize}
 \item I made a split
 \item after rigorous HPO\autocite{manganaris-2022-mrs-comput}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org25c885c}]{Test 282 Band Gap Predictions}
+\begin{frame}[label={sec:org8cf809e}]{Test 282 Band Gap Predictions}
  
 \begin{center}
 \includesvg[width=400pt]{./.ob-jupyter/3133b81a112f13e387878a1d018b864f057d9f03}

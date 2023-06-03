@@ -1548,15 +1548,33 @@ band gap at higher levels of theory correlate with composition differently[cite:
 
 
 
-** Multi-Fidelity Model Development Workflow                       :B_frame:
+** Tuning Multi-Fidelity Model Performance by Selecting Hyper-parameters :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-#+attr_latex: :width 300
-[[file:~/Pictures/flowcharts/ML_pipe.png]]
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
+#+attr_latex: :width 280
+[[file:ML_pipe_annot.png]]
 
-Weightable Machine Learning pipeline implemented in Python using Yogi[fn:3]
-[cite:@manganaris-2022-mrs-comput]
+*** scores employed                                         :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:BEAMER_env: block
+:END:
+HP scoring via =Yogi= tools and SciKit-Learn[cite:@manganaris-2022-mrs-comput].
+- (\(R^2\))
+- explained variance score
+- maximum error score
+- RMSE
+  - all data points
+  - EXP
+  - PBE
+  - HSE
+  - HSE(SOC)
+  - HSE-PBErel(SOC)
 
 * Models
 # SLME improves on SQ to give us performant range of band gaps
