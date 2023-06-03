@@ -1186,6 +1186,15 @@ MAPb(I0.9Br0.1)3   NaN  1.0  NaN  2.7  1.0  0.3
 :PROPERTIES:
 :BEAMER_env: block
 :END:
+*** COMMENT load projection
+#+begin_src jupyter-python
+  projdf = pd.read_csv("./proj_t_rfr_tsne_c.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.4
@@ -1199,9 +1208,37 @@ MAPb(I0.9Br0.1)3   NaN  1.0  NaN  2.7  1.0  0.3
 :PROPERTIES:
 :BEAMER_col: 0.6
 :END:
-#+DOWNLOADED: screenshot @ 2023-05-19 13:44:52
-#+attr_latex: :widh 200
-[[file:Data/2023-05-19_13-44-52_screenshot.png]]
+#+begin_src jupyter-python :post wrap(*this*, w="200pt")
+  p = px.scatter(
+      projdf.replace(np.NaN, False),
+      facet_col='perplexity', facet_col_wrap=4,
+      x='0', y='1',
+      hover_name="Formula",
+      color='LoT'
+  )
+  p.update_layout(
+      legend_title="Sampled", legend_itemsizing='constant',
+      legend_orientation='h', legend_y=0.05,
+      margin=dict(l=0, r=0, t=0, b=0),
+      width=400, height=400
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+
+  p.data[0].name='SIM'
+
+  p.data = (p.data[1], p.data[0], p.data[2])
+
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 200pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/af817dadfec86424566f849862ac137f443e9223.svg]]
+:end:
 
 ** Constituent Properties                                          :B_frame:
 :PROPERTIES:
@@ -1622,9 +1659,32 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :PROPERTIES:
 :BEAMER_col: 0.6
 :END:
-#+DOWNLOADED: screenshot @ 2023-05-19 13:23:47
-#+attr_latex: :width 200
-[[file:Results/2023-05-19_13-23-47_screenshot.png]]
+#+begin_src jupyter-python :post wrap(*this*, w="200pt")
+  p = px.scatter(
+      projdf,
+      x='0', y='1',
+      hover_name="Formula",
+      color="bg_eV",
+  )
+  p.update_layout(
+      coloraxis=dict(colorbar=dict(
+          title="band gap [eV]",
+          title_side='right',
+      )),
+      margin=dict(l=0, r=0, t=0, b=0),
+      width=500, height=400
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 200pt
+[[file:./.ob-jupyter/787ace24d92492507b8e898ff8b26e0c00b39084.svg]]
+:end:
 
 ** Screening Yields                                                :B_frame:
 :PROPERTIES:
