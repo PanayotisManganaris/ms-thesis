@@ -1207,18 +1207,26 @@ The strong preference for pure sites simply reflects that this sample space cont
 
 * CONCLUSIONS
 A set of promising hypothetical compositions is identified by this work.
-Of the 1251 compositions selected 640 are purely inorganic, and 611 are hybrid-organic/inorganic.
+I identified a set of 1251 promising perovskite compositions with desirable band gaps for Photovoltaic applications using a novel data-driven approach.
+Of the selected compositions 640 are purely inorganic, and 611 are hybrid-organic/inorganic.
 Table ref:tbl:mixscreen shows how the set subdivides by mixing.
 Only 40 of the original expertly designed sample pass the screening, the rest are untested to my knowledge.
 This shows that there is still much opportunity for discovery in this area and much to be learned about this chemistry.
 Notably, 834 contain no lead. A random sample of 30 such compounds is listed in table ref:tbl:pbfree.
 Also, no compounds containing Potassium pass the screening.
 
-This was achieved with a very simple regression model.
-My assessment suggests it is operating as any random forest would.
-It is simply learning a complex algorithm which can be followed to closely approximate band gaps of a variety of distinct descriptors conditioned on the desired prediction fidelity.
-Its superior performance is due to its improved flexibility in accounting for outliers.
-However, the Gaussian Process Regression is a very close second.
+I evaluated a variety of machine learning techniques and implemented simple but effective models for estimating band gap for perovskites from multi-fidelity data.
+On held-out test data, this random forest model achieved nearly an RMSE error of 0.12 on the whole dataset and 0.15 on the experimental subset.
+# This compared favorably to prior element property based models of band gap reported by [cite/text:@pilania-2016-machin-learn] for double perovskites.
+# The models trained here used more that three times the descriptors of prior models and had access to much more data.
+I found RFR models performed best in this setting, and believe this is because the architecture is an ensemble model so it reduces the variance of error by design.
+Additionally, the decision trees that make up the frost each capture relevant feature interactions as corroborated by Pearson correlations.
+Each tree also flexibly learns complex nonlinear relationships between feature interactions and band gap.
+So it may be data hungry but is generally better about accommodating outliers
+The RFR properties that helped it perform best in this setting are not domain-specific and therefore are likely to apply to other material properties and for other types of compounds
+
+In summary, I experimented with training multiple models to differentiate and treat appropriately observations with different fidelities and demonstrated good results with the RFR in particular.
+The Gaussian Process Regression is a very close second.
 The GPR's ability to theoretically deal with more complex descriptors makes for an appealing next step.
 Further improving on the feature engineering and examining what can be learned about the relationship between structure and band gap might begin here.
 
