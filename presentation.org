@@ -1743,7 +1743,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 - make predictions on whole sample domain
 - Screen for viable candidate compositions
 
-** TODO publications presentations and other contributions         :B_frame:
+** TODO Publications Presentations and Other Contributions         :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -1752,10 +1752,12 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :BEAMER_col: 0.66
 :BEAMER_env: block
 :END:
+\footnotesize
 - Yang, J., Manganaris, P. T., & Mannodi Kanakkithodi, A. K. (2023). A high-throughput computational dataset of halide perovskite alloys. Digital Discovery, http://dx.doi.org/10.1039/d3dd00015j
 - Manganaris, P., Yang, J., & Arun Mannodi Kanakkithodi (2023). Multi-fidelity machine learning pervoskite composition vs band gap. IN PREPARATION.
 - Edlabadkar, R., Yang, J., Rahman, H., Manganaris, P., Korimilli, E. P., & Arun Mannodi-Kanakkithodi (TBD). Driving Halide Perovskite Discovery Using Graph Neural Networks. IN PREPARATION.
 - Gollapalli, P., Manganaris, P., & Arun Mannodi-Kanakkithodi (TBD). Graph neural network predictions for formation energy of native defects in zinc blende semiconductors. IN PREPARATION.
+- Yang, J., Manganaris, P., & Arun Mannodi-Kanakkithodi (TBD). Discovering novel halide perovskite alloys using multi-fidelity machine learning and genetic algorithm. IN PREPARATION.
 *** col                                                             :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.33
@@ -1764,6 +1766,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :PROPERTIES:
 :BEAMER_env: block
 :END:
+\footnotesize
 - Poster for DS02 symposium MRS fall 2022
 - Talk for Purdue Soft Materials symposium
 - developed MRS spring 2022 tutorial hosted on nanoHUB
@@ -1771,10 +1774,12 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :PROPERTIES:
 :BEAMER_env: block
 :END:
-- https://github.com/PanayotisManganaris/cmcl
-- https://github.com/PanayotisManganaris/yogi
-- https://github.com/PanayotisManganaris/spyglass
-- https://github.com/PanayotisManganaris/pysisso
+\footnotesize
+https://github.com/PanayotisManganaris/
+- =cmcl=
+- =yogi=
+- =spyglass=
+- =pysisso=
 
 ** Conclusions                                                     :B_frame:
 :PROPERTIES:
