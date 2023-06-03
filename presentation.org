@@ -1604,13 +1604,35 @@ HP scoring via =Yogi= tools and SciKit-Learn[cite:@manganaris-2022-mrs-comput].
 # - accounts for additional energetic processes
 # - dipole-allowed, dipole-forbidden, indirect band gap
 # focus on EXP rmse -- I have the ability!
-** Model Training                                                  :B_frame:
+** Model Training Method                                           :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
 # show test/train split and scoring flowchart
-- I made a split
-- after rigorous HPO[cite:@manganaris-2022-mrs-comput]
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+1. partition dataset by 80/20 train/test split
+   - hold out 282 test set
+   - proceed to following steps with 1123 train set
+2. instantiate estimator pipeline with default parameters
+3. Set up K-folds validation strategy
+   1. Generate learning curves with 10-fold validation
+   2. Determine adequate size of validation set (the knee)
+   3. the K accordingly
+4. Perform grid search Hyper-Parameter Optimization (HPO)
+   - score on validation set
+   - assess scores wholistically to determine best parameters
+
+*** RFR Learning Curves                                     :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:BEAMER_env: block
+:END:
+
+#+attr_latex: :width 190pt
+[[file:~/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/4b5d77be3d415aa5e9faadb59147a7c2f560e136.svg]]
 
 ** COMMENT make subplots
 *** rfr

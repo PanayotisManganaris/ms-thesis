@@ -875,15 +875,42 @@ HP scoring via \texttt{Yogi} tools and SciKit-Learn\autocite{manganaris-2022-mrs
 \end{frame}
 
 \section{Models}
-\label{sec:orgca71437}
-\begin{frame}[label={sec:orgc6e3615}]{Model Training Methods}
+\label{sec:org2ebedb6}
+\begin{frame}[label={sec:org7ea9233}]{Model Training Method}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{enumerate}
+\item partition dataset by 80/20 train/test split
 \begin{itemize}
-\item I made a split
-\item after rigorous HPO\autocite{manganaris-2022-mrs-comput}
+\item hold out 282 test set
+\item proceed to following steps with 1123 train set
 \end{itemize}
+\item instantiate estimator pipeline with default parameters
+\item Set up K-folds validation strategy
+\begin{enumerate}
+\item Generate learning curves with 10-fold validation
+\item Determine adequate size of validation set (the knee)
+\item the K accordingly
+\end{enumerate}
+\item Perform grid search Hyper-Parameter Optimization (HPO)
+\begin{itemize}
+\item score on validation set
+\item assess scores wholistically to determine best parameters
+\end{itemize}
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+\begin{block}{RFR Learning Curves}
+\begin{center}
+\includesvg[width=190pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/4b5d77be3d415aa5e9faadb59147a7c2f560e136}
+\end{center}
+\end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org8cf809e}]{Test 282 Band Gap Predictions}
+\begin{frame}[label={sec:orga1480bd}]{Test 282 Band Gap Predictions}
  
 \begin{center}
 \includesvg[width=400pt]{./.ob-jupyter/3133b81a112f13e387878a1d018b864f057d9f03}
