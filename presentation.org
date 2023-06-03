@@ -2121,7 +2121,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :BEAMER_col: 0.3
 :END:
 - prefer occupying small fraction mixing in most constituents
-- \(\ce{K}\) and \(\ce{Rb}\) also prefer full occupancy. No \(\ce{Cs}\)!
+- \(\ce{K}\) and \(\ce{Rb}\) also prefer full occupancy.
 
 *** B-site                                                          :BMCOL:
 :PROPERTIES:
