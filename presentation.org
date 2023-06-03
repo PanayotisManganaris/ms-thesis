@@ -912,199 +912,6 @@ predict anything/make decisions[cite:@pablo-2019-new-front]
 via ongoing inverse design work
 [cite:@yang-2023-discov-novel]
 
-** DONE Random Forest Regression (RFR)                             :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-:LOGBOOK:
-- State "DONE"       from              [2023-05-24 Wed 04:27]
-:END:
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.6
-:END:
-#+DOWNLOADED: screenshot @ 2023-05-23 20:23:36
-#+attr_latex: :width 260
-[[file:Computational_Methods_In_Materials_Science/2023-05-23_20-23-36_screenshot.png]]
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.4
-:END:
-Decision Tree algorithm memorizes an algorithmic path to the target
-- trees capture interactions between features
-- trees are flexible and may be highly biased to data
-The forest of random trees averages many paths
-- forest explains variance in data
-- forest reduces the variance of error
-
-** DONE Gaussian Process Regression (GPR)                          :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-:LOGBOOK:
-- State "DONE"       from              [2023-05-24 Wed 04:27]
-:END:
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.6
-:END:
-Informally, GPRs "remember" the training examples and judge unlabeled
-data by its similarity to that aggregate memory.
-**** Kernel Method                                               :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-the similarity function \(k(x, x')\)
-- defines a "universe" of functions
-- defines a density of functions prior to any data
-- works for any two quantifiably similar \(x\)
-  - vectors, text, graphs, etc.
-
-**** Drawbacks                                                   :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-- \(\mathcal{O}(N^3)\) training time complexity
-- kernels require engineering to accommodate prior expectations
-- break down in sparse spaces/high-dimensional spaces
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.4
-:END:
-# down arrow through bayes rule??
-**** COMMENT functions illustration
-#+begin_src jupyter-python
-    from sklearn.gaussian_process import kernels as K
-    from sklearn.gaussian_process import GaussianProcessRegressor
-    kerns = [
-        K.DotProduct(),      
-        1.0 * K.RBF(length_scale=1.0, length_scale_bounds=(1e-1, 10.0))
-    ]
-#+end_src
-
-#+RESULTS:
-:results:
-:end:
-
-#+begin_src jupyter-python
-  def plot_density_samples(gpr_model, n_sample):
-      x = np.linspace(0, 5, 100)
-      x = x.reshape(-1, 1)
-      y_mean, y_std = gpr_model.predict(x, return_std=True)
-      y = gpr_model.sample_y(x, n_sample)
-      df = pd.DataFrame(np.c_[x, y]).set_index(0)
-      p = px.line(df)
-      p.add_scatter(x=x.reshape(-1), y=y_mean,
-                    mode='lines', line_width=5,
-                    line_color='black', name='ridge')
-      return p
-#+end_src
-
-#+RESULTS:
-:results:
-:end:
-
-**** Sample Prior Functions                                      :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-#+begin_src jupyter-python :post wrap(*this*, w="170pt")
-  gpr = GaussianProcessRegressor(kernel=kerns[1], random_state=None)
-
-  p = plot_density_samples(gpr, 5)
-  p.update_layout(showlegend=False,
-                  margin=dict(l=0, r=0, t=0, b=0),
-                  width=400, height=150)
-  p.update_xaxes(title="", tickfont_size=20)
-  p.update_yaxes(title="", tickfont_size=20)
-  p.show(renderer='svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 170pt
-#+attr_org: :width 640
-[[file:./.ob-jupyter/ec4d60a2109843449bb674d71a67240d13c1611a.svg]]
-:end:
-
-**** Sample Posteriors                                           :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-#+begin_src jupyter-python
-  rng = np.random.RandomState(4)
-  x_train = rng.uniform(0, 5, 10).reshape(-1, 1)
-  y_train = np.sin((x_train[:, 0] - 2.5) ** 2)
-  n_samples = 1
-#+end_src
-
-#+RESULTS:
-:results:
-:end:
-
-#+begin_src jupyter-python :post wrap(*this*, w="170pt")
-  gpr.fit(x_train, y_train)
-
-  p = plot_density_samples(gpr, 5)
-  p.update_layout(showlegend=False,
-                  margin=dict(l=0, r=0, t=0, b=0),
-                  width=400, height=150)
-  p.update_xaxes(title="", tickfont_size=20, range=(0,5))
-  p.update_yaxes(title="", tickfont_size=20)
-
-  p.add_scatter(x=x_train.reshape(-1), y=y_train, mode="markers", marker_color='red', marker_size=10)
-  p.show(renderer='svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 170pt
-#+attr_org: :width 640
-[[file:./.ob-jupyter/eeae18f97963b2846566f847fcd1a8bb5dd88175.svg]]
-:end:
-
-** DONE Sure-Independence Screening and Sparsifying Operator (SISSO) :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-:LOGBOOK:
-- State "DONE"       from              [2023-05-24 Wed 05:08]
-:END:
-
-Resulting in parsimonious models, e.g. for fatigue strength[cite:@he-2021-learn-inter]
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.45
-:END:
-
-- SIS operates on input features creating space of engineered features
-- SO creates sparse model
-  - rank engineered features by explanatory power
-  - pose linear combination from best features
-  - solve for coefficients
-
-\begin{align*}
-FS = 50.58 &\sqrt{\mbox{Diffusion T} \times (\ce{Cr} + \ce{Ni})}\\
- + 2.24 \ce{C} &|\mbox{Tempering T}\\
- - &|\mbox{Diffusion T} - \mbox{Through-Harden T}||\\
- + 158.71
-\end{align*}
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.55
-:END:
-#+DOWNLOADED: screenshot @ 2022-12-20 09:09:33
-#+attr_latex: :width 200
-[[file:Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png]]
-Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-physic]
-
 ** COMMENT Motives for Alternative Features                                :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -1537,7 +1344,7 @@ band gap at higher levels of theory correlate with composition differently[cite:
 [[file:./.ob-jupyter/4aff497f1c6138caa314121c64efb73b46e75d71.svg]]
 :end:
 
-* NEXT Multi-Fidelity Learning
+* Multi-Fidelity Learning
 :LOGBOOK:
 - State "NEXT"       from              [2023-05-24 Wed 11:51]
 :END:
@@ -1569,7 +1376,229 @@ band gap at higher levels of theory correlate with composition differently[cite:
 - [-] sequential learning/delta learning
 - [-] co-Kriging
 
+# Try Delta learning and Co-Kriging in SI
+** COMMENT draft
+The challenge: how to best utilize multiple measurements of the
+quantity of interest at different fidelities for the same composition
 
+Where \hat{y}_i is a measurement of the unknown true quantity of
+interest y_i for a composition X_i, and \epsilon_i is a random
+variable for an error term with a probability distribution that
+depends on the fidelity of the measurement,
+
+for example: \epsilon_i \sim N(0,\sigma_i^2), with \sigma_i^2 known
+for each of the various fidelities in the data, or
+
+only known as a categorical level, or unknown and to be estimated from
+the data and any prior knowledge about its distribution,
+
+along with all the other parameters of a model f(X_i) for y_i.
+
+Contrast: with single-fidelity data, \epsion_i=\epsilon, a random
+variable with a fixed distribution for all measurements
+
+Motivation and intuition:
+
+There is useful information even in low fidelity measurements.  Throw
+away nothing.  Help the modeling place more weight on high-fidelity
+measurements, less on low-fidelity measurements.  Give the model
+additional representational capacity to account for systematic biases
+tied to the different fidelities,for the error term, but also the
+relationships between y_i and the features of the composition in the
+model f(X_i)
+
+** DONE Random Forest Regression (RFR)                             :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-24 Wed 04:27]
+:END:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+#+DOWNLOADED: screenshot @ 2023-05-23 20:23:36
+#+attr_latex: :width 260
+[[file:Computational_Methods_In_Materials_Science/2023-05-23_20-23-36_screenshot.png]]
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+Decision Tree algorithm memorizes an algorithmic path to the target
+- trees capture interactions between features
+- trees are flexible and may be highly biased to data
+The forest of random trees averages many paths
+- forest explains variance in data
+- forest reduces the variance of error
+
+** DONE Gaussian Process Regression (GPR)                          :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-24 Wed 04:27]
+:END:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+Informally, GPRs "remember" the training examples and judge unlabeled
+data by its similarity to that aggregate memory.
+**** Kernel Method                                               :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+the similarity function \(k(x, x')\)
+- defines a "universe" of functions
+- defines a density of functions prior to any data
+- works for any two quantifiably similar \(x\)
+  - vectors, text, graphs, etc.
+
+**** Drawbacks                                                   :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- \(\mathcal{O}(N^3)\) training time complexity
+- kernels require engineering to accommodate prior expectations
+- break down in sparse spaces/high-dimensional spaces
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+# down arrow through bayes rule??
+**** COMMENT functions illustration
+#+begin_src jupyter-python
+    from sklearn.gaussian_process import kernels as K
+    from sklearn.gaussian_process import GaussianProcessRegressor
+    kerns = [
+        K.DotProduct(),      
+        1.0 * K.RBF(length_scale=1.0, length_scale_bounds=(1e-1, 10.0))
+    ]
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  def plot_density_samples(gpr_model, n_sample):
+      x = np.linspace(0, 5, 100)
+      x = x.reshape(-1, 1)
+      y_mean, y_std = gpr_model.predict(x, return_std=True)
+      y = gpr_model.sample_y(x, n_sample)
+      df = pd.DataFrame(np.c_[x, y]).set_index(0)
+      p = px.line(df)
+      p.add_scatter(x=x.reshape(-1), y=y_mean,
+                    mode='lines', line_width=5,
+                    line_color='black', name='ridge')
+      return p
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+**** Sample Prior Functions                                      :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="170pt")
+  gpr = GaussianProcessRegressor(kernel=kerns[1], random_state=None)
+
+  p = plot_density_samples(gpr, 5)
+  p.update_layout(showlegend=False,
+                  margin=dict(l=0, r=0, t=0, b=0),
+                  width=400, height=150)
+  p.update_xaxes(title="", tickfont_size=20)
+  p.update_yaxes(title="", tickfont_size=20)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 170pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/ec4d60a2109843449bb674d71a67240d13c1611a.svg]]
+:end:
+
+**** Sample Posteriors                                           :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+#+begin_src jupyter-python
+  rng = np.random.RandomState(4)
+  x_train = rng.uniform(0, 5, 10).reshape(-1, 1)
+  y_train = np.sin((x_train[:, 0] - 2.5) ** 2)
+  n_samples = 1
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="170pt")
+  gpr.fit(x_train, y_train)
+
+  p = plot_density_samples(gpr, 5)
+  p.update_layout(showlegend=False,
+                  margin=dict(l=0, r=0, t=0, b=0),
+                  width=400, height=150)
+  p.update_xaxes(title="", tickfont_size=20, range=(0,5))
+  p.update_yaxes(title="", tickfont_size=20)
+
+  p.add_scatter(x=x_train.reshape(-1), y=y_train, mode="markers", marker_color='red', marker_size=10)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 170pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/eeae18f97963b2846566f847fcd1a8bb5dd88175.svg]]
+:end:
+
+** DONE Sure-Independence Screening and Sparsifying Operator (SISSO) :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-24 Wed 05:08]
+:END:
+
+Resulting in parsimonious models, e.g. for fatigue strength[cite:@he-2021-learn-inter]
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.45
+:END:
+
+- SIS operates on input features creating space of engineered features
+- SO creates sparse model
+  - rank engineered features by explanatory power
+  - pose linear combination from best features
+  - solve for coefficients
+
+\begin{align*}
+FS = 50.58 &\sqrt{\mbox{Diffusion T} \times (\ce{Cr} + \ce{Ni})}\\
+ + 2.24 \ce{C} &|\mbox{Tempering T}\\
+ - &|\mbox{Diffusion T} - \mbox{Through-Harden T}||\\
+ + 158.71
+\end{align*}
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.55
+:END:
+#+DOWNLOADED: screenshot @ 2022-12-20 09:09:33
+#+attr_latex: :width 200
+[[file:Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png]]
+Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-physic]
 
 ** Tuning Multi-Fidelity Model Performance by Selecting Hyper-parameters :B_frame:
 :PROPERTIES:
