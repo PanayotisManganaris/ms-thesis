@@ -934,7 +934,7 @@ Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-phys
 Literature provides examples of known performant ligands:
 - Methylammonium (Cationic Methylamine)
   [cite:@yan-2016-defec-physic]
-- Formamidium (Cationic Formamidine)
+- Formamidinium (Cationic Formamidine)
   [cite:@dimesso-2016-inves-formam]
 - Guanidinium (Cationic Guanidine)
   [cite:@zhang-2019-perov-photov]
