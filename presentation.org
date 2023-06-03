@@ -978,22 +978,26 @@ Literature provides examples of known performant ligands:
 :end:
 
 #+begin_src jupyter-python :post wrap(*this*, w="400pt")
-  df = lot_compared.reset_index().melt(id_vars="Formula")
-  p = px.scatter(df, y="value", x="Formula", color="LoT")
-  p.update_yaxes(title="Band Gap [eV]")
-  p.update_xaxes(title="", tickangle=-30)
-  p.update_layout(width = 600, height = 300,
-                  margin=dict(t=0,b=0,l=0,r=0),
-                  legend=dict(orientation='h', y=-0.4,
-                              itemsizing='constant'))
-  p.show(renderer='svg')
+   df = lot_compared.reset_index().melt(id_vars="Formula")
+   p = px.scatter(df, y="value", x="Formula", color="LoT")
+   p.update_yaxes(title="Band Gap [eV]")
+   p.update_xaxes(title="", tickangle=-30)
+   p.update_layout(width = 600, height = 300,
+                   margin=dict(t=0,b=0,l=0,r=0),
+                   legend=dict(orientation='h', y=-0.4,
+                               itemsizing='constant'))
+   p.add_annotation(x=3, y=3.3, xref='x', yref='y',
+                    text="RMSE v. EXP<br>PBE = 0.55<br>HSE = 0.87<br>HSE(SOC) = 0.61<br>HSE-PBErel(SOC) = 0.44",
+                    font_size=15,
+                    showarrow=False)
+   p.show(renderer='svg')
 #+end_src
 
 #+RESULTS:
 :results:
  
 #+attr_latex: :width 400pt
-[[file:./.ob-jupyter/4ecfa96dc3cdd73e1d71bf7da44719c59d6757e6.svg]]
+[[file:./.ob-jupyter/618bfd7f0900f6415f0a4a0a8c242c95ccd16e7e.svg]]
 :end:
 
 ** TODO Spectroscopic Limited Maximum Efficiency (SLME)            :B_frame:
