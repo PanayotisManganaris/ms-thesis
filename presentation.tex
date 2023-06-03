@@ -950,14 +950,18 @@ rmse HSE-PBE(SOC) & 0.13 & 0.13 & 0.47\\[0pt]
 
 \begin{column}{0.5\columnwidth}
 \begin{itemize}
-\item partitioned scores obtained from Yogi\textsuperscript{\ref{org790dce2}}
-\item 
+\item partitioned scores obtained from final HPO iteration
+\item EXP rmse was more heavily weighted for parameter selection
+\begin{itemize}
+\item GPR actually outperforms RFR in EXP subset
+\item RFR shows better extrapolative ability
+\end{itemize}
 \end{itemize}
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org39e97fb}]{SISSO Expression}
+\begin{frame}[label={sec:orge2f157b}]{SISSO Expression}
 \begin{align*}
 bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
                        &-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\\

@@ -1836,7 +1836,7 @@ Best GPR utilizes non-stationary Matern kernel with \(\nu=3\slash{}2\)
 :END:
 Best SISSO model using only 11 features outperforms OLS on 55 features
 
-** Compare RMSE at different positions                             :B_frame:
+** Compare RMSE of different subsets                               :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -1858,8 +1858,10 @@ Best SISSO model using only 11 features outperforms OLS on 55 features
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-- partitioned scores obtained from Yogi[fn:3] 
-- 
+- partitioned scores obtained from final HPO iteration
+- EXP rmse was more heavily weighted for parameter selection
+  - GPR actually outperforms RFR in EXP subset
+  - RFR shows better extrapolative ability
   
 ** SISSO Expression                                                :B_frame:
 :PROPERTIES:
