@@ -13,7 +13,7 @@
 \usepackage{capt-of}
 \usepackage{hyperref}
 \usepackage{ptm}
-
+\usepackage{braket}
 %\setbeamertemplate{caption}[numbered]
 \beamertemplatenavigationsymbolsempty
 %
@@ -456,15 +456,46 @@ accumulating the HaP dataset took years
 \end{frame}
 
 \section{Computational Methods In Materials Science}
-\label{sec:org7008347}
-\begin{frame}[label={sec:org4dd654c}]{Density Functional Theory (DFT)}
-Very impractical to explore combinatorial search space with laboratory experiments
-
-VASP \emph{in silico} simulation gives more direct, more systematic, less accurate sampling
+\label{sec:orge97c00c}
+\begin{frame}[label={sec:org4ddbbcd}]{Density Functional Theory (DFT)}
+\begin{itemize}
+\item Higher levels of theory (LoT) approximations of \(\hat{U}(n)\) account for more physics.
+\item VASP is used to perform these calculations at the appropriate LoT.
 \autocite{kresse-1996-effic-iterat,kresse-1996-effic-ab}
+\end{itemize}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+Recast \(3n\)-D Schrödinger equation as \(n\) \(3\)-D Kohn-Sham equations
+\[
+\left(-\frac{\hbar^2}{2m}\nabla+\hat{V}_s\right)\psi(r_k) = \epsilon_k\psi(r_k)
+\]
+
+Solutions yield the local electron densities
+\[
+n(r) = \sum_{i=1}^n|\psi_i(r)|^2
+\]
+
+which can be used to minimize \(E(n)\).
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+Express potential energy due to the nuclei using density \(n(r)\)
+given at \(r_k\) by marginalizing the wave function over all \(r_{\neg k}\)
+
+\[
+\hat{V}(n) = \int \hat{V}_{nuc}(r_k)n(r_k)d^3r
+\].
+
+So only electron-electron interaction term \(\hat{U}(n)\) requires approximation
+
+\[
+E = \bra{\psi}\hat{H}\ket{\psi} \implies E(n) &= \hat{T}(n) + \hat{U}(n) + \hat{V}(n)
+\]
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org63400d4}]{DFT Calculation of Perovskite Band Gaps}
+\begin{frame}[label={sec:org7376547}]{DFT Calculation of Perovskite Band Gaps}
 \begin{center}
 \includegraphics[width=.9\linewidth]{Computational_Methods_In_Materials_Science/2023-05-24_05-33-49_screenshot.png}
 \end{center}

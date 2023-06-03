@@ -14,7 +14,7 @@
 #+bibliography: local-bib.bib
 #+latex_class: beamer
 #+latex_class_options: [10pt, aspectratio=169, presentation]
-#+latex_header:
+#+latex_header:\usepackage{braket}
 #+latex_header_extra:\institute[Mannodi Group]{\large{}
 #+latex_header_extra:\inst{1} Purdue Materials Engineering\\Advisor Arun Mannodi-Kanakkithodi
 #+latex_header_extra:}
@@ -680,23 +680,64 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 # bandgaps are unpredictably deviating away from Vegard's law.
 # mention ongoing work on inverse design lead by Arun
 
-** Density Functional Theory (DFT)                                 :B_frame:
+** DONE Density Functional Theory (DFT)                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-Very impractical to explore combinatorial search space with laboratory experiments
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-03 Sat 13:44]
+:END:
 
-VASP /in silico/ simulation gives more direct, more systematic, less accurate sampling
-[cite:@kresse-1996-effic-iterat;@kresse-1996-effic-ab]
+- Higher levels of theory (LoT) approximations of \(\hat{U}(n)\) account for more physics.
+- VASP is used to perform these calculations at the appropriate LoT.
+  [cite:@kresse-1996-effic-iterat;@kresse-1996-effic-ab]
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+Recast \(3n\)-D Schrödinger equation as \(n\) \(3\)-D Kohn-Sham equations
+\[
+\left(-\frac{\hbar^2}{2m}\nabla+\hat{V}_s\right)\psi(r_k) = \epsilon_k\psi(r_k)
+\]
 
-** DFT Calculation of Perovskite Band Gaps                         :B_frame:
+Solutions yield the local electron densities
+\[
+n(r) = \sum_{i=1}^n|\psi_i(r)|^2
+\]
+
+which can be used to minimize \(E(n)\).
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+# Minimization converges to ground state configuration by Hohenberg-Kohn theorem.
+
+# \[
+# n(r_k) = \int \prod_{i=1}^{k-1}d^3r_i\prod_{i=k+1}^{n}d^3r_i|\psi(r_k, \{r_i\})|^2
+# \]
+
+Express potential energy due to the nuclei using density \(n(r)\)
+given at \(r_k\) by marginalizing the wave function over all \(r_{\neg k}\)
+
+\[
+\hat{V}(n) = \int \hat{V}_{nuc}(r_k)n(r_k)d^3r
+\].
+
+So only electron-electron interaction term \(\hat{U}(n)\) requires approximation
+
+\[
+E = \bra{\psi}\hat{H}\ket{\psi} \implies E(n) &= \hat{T}(n) + \hat{U}(n) + \hat{V}(n)
+\]
+
+** DFT Calculation of Perovskite Band Gaps in Literature           :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
 #+DOWNLOADED: screenshot @ 2023-05-24 05:33:49
 [[file:Computational_Methods_In_Materials_Science/2023-05-24_05-33-49_screenshot.png]]
 
-HSE06 improve band gap predictions compared to PBE[cite:@chan-2010-effic-band]
+HSE06 improves band gap predictions compared to PBE[cite:@chan-2010-effic-band]
 
 ** Machine Learning for Property Prediction                        :B_frame:
 :PROPERTIES:
