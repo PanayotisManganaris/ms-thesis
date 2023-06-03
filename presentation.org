@@ -420,7 +420,7 @@ Perovskite Solar Absorber Layer[fn:1]
 - A must be much larger than B for Perovskite formation
 - Various tolerance factors have been designed to describe this constraint
 - B usually large (e.g. Pb, Sn) in Halide Perovskites
-- A accommodates amines with large effective ionic radii[cite:@kieslich-2015-exten-toler]
+- A accommodates *molecules* with large effective ionic radii[cite:@kieslich-2015-exten-toler]
 
 The following definitions approximate \alpha phase stability
 [cite:@yin-2015-halid-perov;@bartel-2019-new-toler]
