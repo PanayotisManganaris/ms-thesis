@@ -1185,13 +1185,36 @@ Literature provides examples of known performant ligands:
 [[file:./.ob-jupyter/618bfd7f0900f6415f0a4a0a8c242c95ccd16e7e.svg]]
 :end:
 
-** TODO Spectroscopic Limited Maximum Efficiency (SLME)            :B_frame:
+** DONE Spectroscopic Limited Maximum Efficiency (SLME)            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-03 Sat 17:00]
 :END:
 SLME accounts for more energetic processes than Shockley-Queisser
 criterion (\(bg \approx 1.3\)) allowing selection on range of bandgaps
 determined according to level of theory[cite:@yu-2012-ident-poten p.1]
+
+\[
+a(E)=1-e^{-2\alpha(E)L}
+\]
+
+Here, \(\alpha(E)\) is the DFT computed optical absorption coefficient
+as a function of incident photon energy and \(L\) is the thickness of
+the absorber.
+
+\[
+J=e\int_{0}^{\infty} a(E)I_{sun}(E)dE - J_{0}(1-e^{\frac{eV}{kT}})
+\]
+
+\[
+\eta = \frac{P_{m}}{P_{in}}=\frac{\max(J \times V)}{P_{in}}
+\]
+
+To calculate SLME efficiency the current density \(J\), the light
+spectrum intensity of sunlight \(I_{sun}\), and the power \(P\) are
+all that is needed.
 
 ** DONE Absorbance Relates to Efficiency via Band Gap in Our Data  :B_frame:
 :PROPERTIES:
