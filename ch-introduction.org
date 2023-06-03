@@ -353,6 +353,59 @@ Results and a discussion of their significance is given in chapter 4.
 Finally, in chapter 5 I present the open-source tools developed for this work and made available to the broader materials science community.
 
 * DENSITY FUNCTIONAL THEORY SIMULATION
+All material properties are fundamentally a function of the motion of electrons and atomic nuclei.
+These fundamental building blocks of matter can be modeled as point particles in a many bodied system governed by an equation of motion.
+Due to the quantum nature of these particles, position and momentum are defined in terms of a complex-valued wave function that describes the probability of finding a particle at a point in space.
+Therefore, the equation of motion is the Schrödinger equation eqref:eq:scheq, the solution of which yields the energy of a single configuration of particles.
+For electronic and optical properties, the electron configuration is most significant, allowing for some simplification by using the Born-Oppenheimer approximation (BOA).
+
+\begin{equation}
+\label{eq:scheq}
+\imath\hbar\frac{\partial}{\partial t}\Psi(R_{3N}, r_{3n}, t) = \mathcal{H}(R_{3N}, r_{3n}, P_{3N}, p_{3n})\Psi(R_{3N}, r_{3n}, t) \stackrel{BOA}{\implies} \hat{H}\psi(r_{3n}) = E\psi(r_{3n})
+\end{equation}
+
+The solution to the Schrödinger equation is unfortunately intractable for even tens of electrons due to the huge expense of integrating the \(3n\) dimensional electron wave function \(\psi(r_{3n})\).
+Density functional theory is the leading method for tractably computing the energy of many electron interactions in quantum systems.
+DFT is founded on the Hohenberg Kohn relation proving an electron configuration fully determines the potential energy due to the nuclear configuration.
+To illustrate, the electron density at a position is the expectation value of the position of all electrons not at that position.
+This density emerges when computing the expectation value of the potential energy of a single electron \(r_k\)
+
+\begin{equation}
+\label{eq:V_ext}
+\braket{\psi|\hat{V}_{nuc}(r_k)|\psi} = \int \di^3r_k \hat{V}_{nuc}(r_k)\int \Pi_{i=1}^{k-1}\di^3r_i\Pi_{i=k+1}^{n}\di^3r_i|\psi({r_i})|^2 = \int \hat{V}_{nuc}(r_k)n(r_k)\di^3r = \hat{V}(n)
+\end{equation}
+
+# This proof is extended to show that every electron configuration corresponds to a unique wave function.
+due to the nuclei.
+This expression is reversible, showing that for a given density there must be a unique \(\psi(n(r))\) expressed as a functional of the density.
+With the establishment of this density functional, any property of interest may be found entirely in terms of the density.
+The major benefit of this re-framing is that the density functional lives in 3-D space, whereas the wave function lives in 3n-D space.
+By circumventing the wave function, the many-electron problem solving for the configurational energy
+
+\begin{equation}
+\label{eq:funco}
+E = \braket{\psi|\hat{H}|\psi} = \braket{\psi(n)|\hat{T}(n) + \hat{U}(n) + \hat{V}(n)|\psi(n)} \implies E(n) = \hat{T}(n) + \hat{U}(n) + \hat{V}(n)
+\end{equation}
+
+can be effectively cast to a sum of single-electron problems with theoretically no compromise on accuracy.
+Minimizing \(E(n(r))\) yields the ground state energy and ground state electron configuration.
+The electron-electron interaction \(\hat{U}(n(r))\) lacks a perfect solution and requires approximation.
+The system potential energy \(\hat{V}(n(r))\), as discussed, is uniquely defined in 3D space by the nuclei in the system.
+The kinetic energy operator \(\hat{T}(n(r))\) in combination with the system energy is used to derive the Kohn-Sham equations eqref:eq:kseq.
+
+\begin{equation}
+\label{eq:kseq}
+\left(-\frac{\hbar^2}{2m}\nabla+\hat{V}_s\right)\psi(r_k) = \epsilon_k\psi(r_k)
+\end{equation}
+
+The solution for these single particle wave functions yield the electron density \(n(r) = \sum_{i=1}^n|\psi_i(r)|^2\) necessary to solve eqref:eq:funco.
+The single-particle potential \(\hat{V}_s\) is the sum of the system energy, the electron-electron Coulomb repulsion, and the so called "exchange correlation."
+This latter functional is what makes a solution for \(\hat{U}\) so elusive.
+The more physics accounted for in the approximations used for exchange correlation, the better the accuracy but the greater the cost.
+So these approximations are ranked by "level of theory."
+My work is necessary because perfect simulations do not exist due to the conceptual difficulty in efficiently modeling the exchange correlation.
+For the remained of this chapter I present how DFT was used to create the multi-fidelity dataset that enabled my work.
+
 All DFT computations were performed using VASP version 6.2
 [cite:@kresse-1996-effic-iterat;@kresse-1993-ab-initio]
 employing projector-augmented-wave (PAW) pseudo-potentials.
