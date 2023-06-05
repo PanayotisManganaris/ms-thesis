@@ -1220,9 +1220,11 @@ MAPb(I0.9Br0.1)3   NaN  1.0  NaN  2.7  1.0  0.3
 :BEAMER_col: 0.4
 :END:
 - t-SNE projection projects 14D composition vectors to 2D
-- subset of domain has been previously sampled and is available to
-  our research group
+- forms clusters of similar points
+- ~500 compositions sampled by our research group
   [cite:@yang-2023-high-throug]
+- ~90 compositions sampled in the literature
+  [cite:@almora-2020-devic-perfor]
 
 *** col                                                             :BMCOL:
 :PROPERTIES:
