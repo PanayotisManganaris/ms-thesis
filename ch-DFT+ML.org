@@ -1071,7 +1071,7 @@ These predictions were projected on the sample space in Figure ref:fig:pred.
  
 #+attr_latex: :width 450pt
 #+CAPTION: label:fig:pred Band gap predictions overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE
-[[file:./.ob-jupyter/c2fa740c28da21ebb85c0902aea8c9b9ccbf3952.svg]]
+[[file:./.ob-jupyter/2a6257e7d00092bdcc8f561301ee50cdbb7b8975.svg]]
 :end:
 
 I followed a similar high-throughput screening procedure to that laid out in prior works, except this covered a large space of purely hypothetical compounds.
@@ -1122,7 +1122,7 @@ See figure ref:fig:freq.
 The strong preference for pure sites simply reflects that this sample space contained compositions mixed at no more than one site simultaneously.
 
 #+begin_src jupyter-python
-  dist = X_big.iloc[:,1:14].replace(
+  dist = X_big.iloc[:,0:14].replace(
       0, np.NaN
   ).reindex(
       screen.index
@@ -1149,14 +1149,14 @@ The strong preference for pure sites simply reflects that this sample space cont
 :results:
 :end:
 
-#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:freq Frequency of mixing fractions of species at the A, B, and X sites across the ~3000 screen compounds")
+#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:freq Frequency of mixing fractions of species at the A, B, and X sites across the ~1200 screen compounds")
   freq = dist.groupby(['value', 'site', 'Element']).count().reset_index().sort_values('site')
 
   p = make_subplots(cols=freq.site.unique().size, rows=1,
                     subplot_titles=("A-site", "B-site", "X-site"),
-                    shared_xaxes=True)
+                    shared_xaxes=True,)
 
-  elnum = {'A': 4, 'B': 6, 'X': 3}
+  elnum = {'A': 5, 'B': 6, 'X': 3}
 
   for i, g in enumerate(freq.site.unique()):
       group = freq[freq.site == g].pipe(make_percent)
@@ -1176,10 +1176,18 @@ The strong preference for pure sites simply reflects that this sample space cont
           p.add_trace(trace, col=i+1, row=1)
 
       p.update_xaxes(
-          title='Share of ' + g + ' Site', title_font_size=24,
+          title='Share of ' + g + ' Site',
+          title_font_size=30,
+          tickfont_size=24,
+          tickmode='array',
+          tickvals=np.linspace(0,1,9),
+          ticktext=[f'{f.as_integer_ratio()[0]}/{f.as_integer_ratio()[1]}' for f in np.linspace(0,1,9)],
           col=i+1, row=1
       )
-      p.update_yaxes(title="Element Frequency (%)")
+      p.update_yaxes(title="Element Frequency (%)",
+                     title_font_size=30,
+                     tickfont_size=24,
+                     title_standoff=0)
 
   p.for_each_annotation(lambda a: a.update(font_size=30))
 
@@ -1201,8 +1209,8 @@ The strong preference for pure sites simply reflects that this sample space cont
 :results:
  
 #+attr_latex: :width 450pt
-#+CAPTION: label:fig:freq Frequency of mixing fractions of species at the A, B, and X sites across the ~3000 screen compounds
-[[file:./.ob-jupyter/1efb3d52d06615061a39bb4b1d85bf1336016744.svg]]
+#+CAPTION: label:fig:freq Frequency of mixing fractions of species at the A, B, and X sites across the ~1200 screen compounds
+[[file:./.ob-jupyter/09b87051881c9559cbbc102bf3a024c6ebea0f57.svg]]
 :end:
 
 * CONCLUSIONS

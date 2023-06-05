@@ -567,7 +567,7 @@ will be examined for solutions to these deficiencies using
 
 ** COMMENT compute distributions
 #+begin_src jupyter-python
-  dist = XX.iloc[:,1:14].replace(
+  dist = XX.loc[~X.LoT.isin(['EXP'])].iloc[:, 0:14].replace(
       0, np.NaN
   ).melt().dropna()
 
@@ -630,14 +630,16 @@ will be examined for solutions to these deficiencies using
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-#+begin_src jupyter-python :post wrap(*this*, w="180pt")
+#+begin_src jupyter-python :post wrap(*this*, w="190pt")
   freq = dist.groupby(['value', 'site', 'Element']).count().reset_index().sort_values('site')
 
   p = make_subplots(cols=2, rows=2,
                     subplot_titles=("A-site", None, "B-site", "X-site"),
-                    shared_xaxes=True)
+                    shared_xaxes=True,
+                    y_title="Element Frequency (%)",
+                    vertical_spacing=0.15)
 
-  elnum = {'A': 4, 'B': 6, 'X': 3}
+  elnum = {'A': 5, 'B': 6, 'X': 3}
   rowdict = {0:1, 1:2, 2:2}
   coldict = {0:1, 1:1, 2:2}
 
@@ -652,7 +654,7 @@ will be examined for solutions to these deficiencies using
                   x=sub['value'], y=sub['variable'], marker=dict(color=color_map),
                   name=element,
                   legendgroup=g, legendgrouptitle_text=g[-1]+'-site',
-                  width=0.02
+                  width=0.02, offsetgroup=count
               )
           )
       for trace in traces:
@@ -667,9 +669,7 @@ will be examined for solutions to these deficiencies using
           ticktext=[f'{f.as_integer_ratio()[0]}/{f.as_integer_ratio()[1]}' for f in np.linspace(0,1,9)],
           col=coldict[i], row=rowdict[i]
       )
-      p.update_yaxes(col=1, row=rowdict[i],
-                     title="Element Frequency (%)",
-                     title_font_size=30,
+      p.update_yaxes(col=coldict[i], row=rowdict[i],
                      tickfont_size=24,)
 
 
@@ -680,10 +680,12 @@ will be examined for solutions to these deficiencies using
           bgcolor='rgba(0,0,0,0)',
           orientation="h",
           xanchor='center',
-          y=1.0, x=0.78,
+          y=1.0, x=0.77,
           itemsizing='constant',
           font_size=20
       ),
+
+      margin=dict(t=40,b=0,l=70,r=0),
       width=600, height=700
   )
   p.show(renderer='svg')
@@ -692,8 +694,8 @@ will be examined for solutions to these deficiencies using
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 180pt
-[[file:./.ob-jupyter/4c75465e116d1d35a66facd2e8dcaa658286c373.svg]]
+#+attr_latex: :width 190pt
+[[file:./.ob-jupyter/95b93277e9406ce0d36f9f13562ea1f865cc5ead.svg]]
 :end:
 
 ** DONE Collecting Data is Hard                                    :B_frame:
@@ -1219,7 +1221,7 @@ MAPb(I0.9Br0.1)3   NaN  1.0  NaN  2.7  1.0  0.3
 :END:
 - t-SNE projection projects 14D composition vectors to 2D
 - subset of domain has been previously sampled and is available to
-  Mannodi reaserch group
+  our research group
   [cite:@yang-2023-high-throug]
 
 *** col                                                             :BMCOL:
@@ -2052,7 +2054,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 
 ** COMMENT compute distributions
 #+begin_src jupyter-python
-  dist = X_big.iloc[:,1:14].replace(
+  dist = X_big.iloc[:,0:14].replace(
       0, np.NaN
   ).reindex(
       screen.index
@@ -2090,7 +2092,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
                     subplot_titles=("A-site", "B-site", "X-site"),
                     shared_xaxes=True)
 
-  elnum = {'A': 4, 'B': 6, 'X': 3}
+  elnum = {'A': 5, 'B': 6, 'X': 3}
 
   for i, g in enumerate(freq.site.unique()):
       group = freq[freq.site == g].pipe(make_percent)
@@ -2120,7 +2122,8 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
       )
       p.update_yaxes(title="Element Frequency (%)",
                      title_font_size=30,
-                     tickfont_size=24,)
+                     tickfont_size=24,
+                     title_standoff=0)
 
   p.for_each_annotation(lambda a: a.update(font_size=30))
 
@@ -2142,7 +2145,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :results:
  
 #+attr_latex: :width 400pt
-[[file:./.ob-jupyter/3c8a6786b8ef573188204a1b3d68064ee64a3381.svg]]
+[[file:./.ob-jupyter/6319952505071b95f6f19f67c253faafb5f46d15.svg]]
 :end:
 
 *** A-site                                                          :BMCOL:
