@@ -329,7 +329,7 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
  
 #+attr_latex: :width 450pt
 #+CAPTION: label:fig:chosen Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset
-[[file:./.ob-jupyter/c2d304e546a074ce9370ae449d18c778716a2de4.svg]]
+[[file:./.ob-jupyter/ff853be8186a432d26c0eb4b6565ffab8b056ad5.svg]]
 :end:
 
 * Footnotes
