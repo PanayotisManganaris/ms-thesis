@@ -430,10 +430,34 @@ The available operation set is outlined in table ref:tbl:ops.
 |                | exponentiation    |
 |                | root 2            |
 
-** TODO Methods
-- section cutting
-- partitioning scheme
-- add testing and evaluation of models
+** DONE Methods
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-05 Mon 21:55]
+:END:
+Model training proceeded only after partitioning the dataset using an 80/20 train-test split.
+The split was made in a stratified manner, ensuring both partitions contained a proportionate fraction of samples from each fidelity subset.
+The test set of 282 points was held out for evaluation.
+The training used the remaining 1123 data points.
+In order to specify the learning algorithm best at predicting the experimental fidelity from simulated data, a thorough grid-search of each algorithm's hyper-parameters was performed.
+First an estimator pipeline was constructed as in figure ref:fig:pipe.
+Any sparse vectors were made dense and NaNs were filled with zeros by a =SimpleImputer=.
+The feature vectors were subject to l1 normalization so that the compound's stoichiometry converted to ratios.
+The estimator at the end was instantiated with default parameters and later had optimal settings injected.
+
+To find these settings, I opted for a \(K\)-folds validation strategy first necessitating an optimal value for \(K\) be found.
+This was done empirically, first by generating learning curves with \(K=10\) for each estimator.
+The knee on these plots indicates the minimum number of samples needed to train effectively on average.
+The size of one fold would be the size of the validation set, with the remaining folds used in training.
+So, I doubled the number of samples at the knee, subtracted it from the size of the total training partition and used the result to determine the size of one fold.
+This method resulted in setting \(K = 3\) for GPR training and \(K = 4\) for RFR training.
+
+Finally I performed hyper-parameter optimization by exhaustive grid search using methods discussed in section [[Model Optimization]].
+
+#+DOWNLOADED: screenshot @ 2023-06-05 14:20:21
+#+attr_caption: :width 300pt
+#+CAPTION: label:fig:pipe SciKit-Learn pipeline terminating in a default random forest estimator
+[[file:MACHINE_LEARNING_MODELS_OF_PEROVSKITE_BAND_GAP/2023-06-05_14-20-21_screenshot.png]]
+
 ** DONE Results
 :PROPERTIES:
 :CLASS: unnumbered
