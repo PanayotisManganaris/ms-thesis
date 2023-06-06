@@ -292,7 +292,7 @@ Such DFT-ML models, once rigorously trained and tested, are deployed for high-th
  
 #+attr_latex: :width 300pt :options inkscapeformat=png, inkscapedpi=300
 #+CAPTION: label:fig:domainmix The cardinal mixing sample space contains mostly B-site mixed compounds
-[[file:./.ob-jupyter/0bbc378a94d8d28c62164dcab2e9d09dd39af3fd.svg]]
+[[file:./.ob-jupyter/9f2a6b3e88bd87edad16a8293ec22e2f0ce74780.svg]]
 :end:
 
 ** DONE Multi-fidelity Dataset
@@ -751,7 +751,7 @@ See Discussion.
  
 #+attr_latex: :width 450pt
 #+CAPTION: label:fig:coverage Samples overlaid on cardinal mixing chemical domain projected from fourteen to two dimensions via t-SNE
-[[file:./.ob-jupyter/d20bd47669e6d6375c8646ad2bc35b817ce61eee.svg]]
+[[file:./.ob-jupyter/8fb481208df6e81245038b7eaa4a261669d515f5.svg]]
 :end:
 
 Our multi-fidelity computational halide perovskite alloy dataset generated with the methods described here is one of the most comprehensive to date.
