@@ -59,6 +59,10 @@
 :end:
 
 * PUBLICATIONS
+:PROPERTIES:
+:CUSTOM_ID: publications
+:END:
+
 #+begin_export latex
 
 \nocite{manganaris-2022-mrs-comput}

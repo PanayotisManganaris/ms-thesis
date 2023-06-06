@@ -353,6 +353,10 @@ Results and a discussion of their significance is given in chapter 4.
 Finally, in chapter 5 I present the open-source tools developed for this work and made available to the broader materials science community.
 
 * DENSITY FUNCTIONAL THEORY SIMULATION
+:PROPERTIES:
+:CUSTOM_ID: DFT-SIM
+:END:
+
 All material properties are fundamentally a function of the motion of electrons and atomic nuclei.
 These fundamental building blocks of matter can be modeled as point particles in a many bodied system governed by an equation of motion.
 Due to the quantum nature of these particles, position and momentum are defined in terms of a complex-valued wave function that describes the probability of finding a particle at a point in space.

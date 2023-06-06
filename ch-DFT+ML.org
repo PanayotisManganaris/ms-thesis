@@ -67,6 +67,9 @@
 :end:
 
 * MACHINE LEARNING MODELS OF PEROVSKITE BAND GAP
+:PROPERTIES:
+:CUSTOM_ID: ML-bg
+:END:
 
 Novel halide perovskites with improved stability and optoelectronic properties can be designed via composition engineering at cation and/or anion sites.
 Data-driven methods, especially involving high-throughput first principles computations and subsequent ML modeling using unique material descriptors, are key to achieving this goal.
@@ -1238,6 +1241,10 @@ The strong preference for pure sites simply reflects that this sample space cont
 :end:
 
 * CONCLUSIONS
+:PROPERTIES:
+:CUSTOM_ID: conclusions
+:END:
+
 A set of promising hypothetical compositions is identified by this work.
 I identified a set of 1251 promising perovskite compositions with desirable band gaps for Photovoltaic applications using a novel data-driven approach.
 Of the selected compositions 640 are purely inorganic, and 611 are hybrid-organic/inorganic.
