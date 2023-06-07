@@ -1137,20 +1137,20 @@ the largest cubic HaP computational database.[cite:@yang-2023-high-throug]
 *** 14 Dimensional Chemical Vector                          :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_env: block
-:BEAMER_col: 0.4
+:BEAMER_col: 0.45
 :END:
-#+begin_src jupyter-python :post wrap(*this*, "170pt")
-  sub = pearson.iloc[0:5, 5:17]
+#+begin_src jupyter-python :post wrap(*this*, "195pt")
+  sub = pearson.iloc[0:5, 5:19]
   p = px.imshow(sub, color_continuous_scale='RdBu_r', zmin=-1, zmax=1,
                 labels=dict(color="Pearson Coefficient"),
                 # text_auto='.2f'
                 )
-  p.update_xaxes(tickangle=-35, tickfont_size = 30,
+  p.update_xaxes(tickangle=-40, tickfont_size = 30,
                  tickmode='array',
                  tickvals=list(range(sub.columns.shape[0])),
                  ticktext=sub.columns.str.slice(6).str.replace("'", "").str.replace("_"," ")
                  )
-  p.update_yaxes(tickangle=-35, tickfont_size = 30,
+  p.update_yaxes(tickangle=-40, tickfont_size = 30,
                  tickmode = 'array',
                  tickvals=list(range(sub.index.shape[0])),
                  ticktext=[l + " bg" for l in sub.index.to_list()]
@@ -1168,14 +1168,14 @@ the largest cubic HaP computational database.[cite:@yang-2023-high-throug]
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 170pt
-[[file:./.ob-jupyter/ca72ee259641cdd0bcbb7685d0bd737c8163e268.svg]]
+#+attr_latex: :width 195pt
+[[file:./.ob-jupyter/9243bcb2031c7328e1ba637cc61904eaacaec02d.svg]]
 :end:
 
 *** Parsing compositions using =cmcl=                       :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_env: block
-:BEAMER_col: 0.6
+:BEAMER_col: 0.55
 :END:
 #+begin_src jupyter-python :exports src
   import cmcl
