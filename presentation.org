@@ -121,7 +121,7 @@
 :results:
 :end:
 
-* Background
+* Devices and Perovskites Background
 # Introduce PVs
 # - the band gap controls the lowest energy photon that can be absorbed
 # - perovskites demonstrate good transport
@@ -234,11 +234,12 @@ E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
   [cite:@saliba-2014-influen-therm]
 
 # HaP PVs become competitive in 2013
-** NEXT Rapid Rise of Perovskite Photovoltaics                     :B_frame:
+** DONE Rapid Rise of Perovskite Photovoltaics                     :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
 :LOGBOOK:
+- State "DONE"       from "NEXT"       [2023-06-07 Wed 11:15]
 - State "NEXT"       from              [2023-05-22 Mon 17:08]
 :END:
 *** col                                                             :BMCOL:
@@ -559,7 +560,7 @@ environmental impact
 :BEAMER_env: block
 :END:
 
-*37,785* out of *207+ Million* compounds possible in a 2x2x2 supercell
+*37,785* out of *207+ million* compounds possible in a 2x2x2 supercell
 will be examined for solutions to these deficiencies using
 - high-throughput density functional theory
 - data collected from literature
@@ -604,7 +605,7 @@ will be examined for solutions to these deficiencies using
 :BEAMER_col: 0.5
 :END:
 - 500 unique compositions
-- 5 different levels of theory
+- 5 measurement fidelities
 - 1300 simulated band gaps
 - 90 experimentally measured band gaps
   
@@ -887,7 +888,6 @@ HSE06 improves band gap predictions compared to PBE[cite:@chan-2010-effic-band]
 #+DOWNLOADED: screenshot @ 2023-05-24 04:42:21
 #+attr_latex: :width 300
 [[file:Computational_Methods_In_Materials_Science/2023-05-24_04-42-21_screenshot.png]]
-
 
 *** Applications                                            :B_block:BMCOL:
 :PROPERTIES:
@@ -1360,7 +1360,7 @@ band gap at higher levels of theory correlate with composition differently[cite:
 # show uncertainties in GPR posterior over 5 plots
 # Bootstrapping is
 # show tables -- table showing effect of single-fideltiy training, effect of comp or prop exclusive
-** Multi-fidelity Machine Learning                                 :B_frame:
+** TODO Learning from Multi-fidelity dataset                       :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
