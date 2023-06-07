@@ -822,35 +822,27 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-*** Approaching DFT Simulation                                    :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
 Vienna /ab initio/ Simulation Program (VASP)[cite:@kresse-1996-effic-iterat] computes
 1. ground state atomic structure of perovskite
 2. energy levels and occupation of crystal structure's orbitals
 
-*** Find Ground State                                             :B_block:
+*** Find Ground State Energy using Levels of Theory (LoT)         :B_block:
 :PROPERTIES:
 :BEAMER_env: block
 :END:
 
 \[
-E(n) &= \hat{T}(n) + \hat{U}(n) + \hat{V}(n)
+\min_n(E(n)) = \min_n(\hat{T}(n) + \hat{U}(n) + \hat{V}(n))
 \]
 
-\(U(n)\) approximations account for varying levels of quantum theory 
+\(\hat{U}(n)\) approximations account for varying levels of quantum theory 
+
+- Perdew-Burke-Erzenhof (PBE) :: modern Generalized Gradient Approximation
+- Heyd-Scuzeria-Erzenhof (HSE) :: hybrid GGA and Hartree-Folk Theory
+- HSE with Spin Orbit Coupling :: corrects for electronic effect of heavy elements (e.g. \(\ce{Pb}\))
+- HSE(SOC) on PBE relaxed structure :: compromise, using PBE only for structure relaxation
 
 Spin Orbit Coupling (SOC) Accounts for relativistic effects near heavy nuclei
-
-*** Levels of Theory (LoT) used                                   :B_block:
-:PROPERTIES:
-:BEAMER_env: block
-:END:
-- Perdew-Burke-Erzenhof (PBE) :: Generalized Gradient Approximation
-- Heyd-Scuzeria-Erzenhof (HSE) :: Hybrid GGA and Hartree-Folk Theory
-- HSE(SOC) :: Hybrid GGA and Hartree-Folk Theory + corrections for \(\ce{Pb}\) etc.
-- HSE(SOC) on PBE relaxed structure :: compromise, using HSE(SOC) only for electronic
 
 ** DFT Calculation of Perovskite Band Gaps in Literature           :B_frame:
 :PROPERTIES:
@@ -1343,10 +1335,13 @@ band gap at higher levels of theory correlate with composition differently[cite:
 # - oversampling is an alternative
 # show uncertainties in GPR posterior over 5 plots
 # Bootstrapping is
-# show tables -- table showing effect of single-fideltiy training, effect of comp or prop exclusive
-** TODO Learning from Multi-fidelity dataset                       :B_frame:
+# show tables -- table showing effect of single-fidelity training, effect of comp or prop exclusive
+** DONE Learning from Multi-fidelity dataset                       :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-07 Wed 14:51]
 :END:
 
 *** Training Strategy                                             :B_block:
@@ -1359,13 +1354,13 @@ band gap at higher levels of theory correlate with composition differently[cite:
 - [-] co-Kriging
 # Try Delta learning and Co-Kriging in SI
 
-*** One-Hot Encoding                                              :B_block:
+*** One-Hot Encoding Levels of Theory                             :B_block:
 :PROPERTIES:
 :BEAMER_env: block
 :END:
 **** col                                                           :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.2
+:BEAMER_col: 0.3
 :END:
 
 #+begin_src jupyter-python
@@ -1375,6 +1370,7 @@ band gap at higher levels of theory correlate with composition differently[cite:
 
 #+RESULTS:
 :results:
+\scriptsize
 | index | LoT             |
 |-------+-----------------|
 |  1373 | HSE-PBErel(SOC) |
@@ -1391,7 +1387,7 @@ band gap at higher levels of theory correlate with composition differently[cite:
 
 **** col                                                           :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.8
+:BEAMER_col: 0.7
 :END:
 
 #+begin_src jupyter-python
@@ -1400,18 +1396,19 @@ band gap at higher levels of theory correlate with composition differently[cite:
 
 #+RESULTS:
 :results:
-| index | cat__LoT_EXP | cat__LoT_HSE | cat__LoT_HSE(SOC) | cat__LoT_HSE-PBErel(SOC) | cat__LoT_PBE |
-|-------+--------------+--------------+-------------------+--------------------------+--------------|
-|  1373 |            0 |            0 |                 0 |                        1 |            0 |
-|  1420 |            0 |            0 |                 0 |                        1 |            0 |
-|   887 |            1 |            0 |                 0 |                        0 |            0 |
-|  1361 |            0 |            0 |                 0 |                        1 |            0 |
-|   541 |            0 |            1 |                 0 |                        0 |            0 |
-|   388 |            0 |            0 |                 0 |                        0 |            1 |
-|  1252 |            0 |            0 |                 0 |                        1 |            0 |
-|    89 |            0 |            0 |                 0 |                        0 |            1 |
-|   297 |            0 |            0 |                 0 |                        0 |            1 |
-|   546 |            0 |            1 |                 0 |                        0 |            0 |
+\scriptsize
+| index | EXP | HSE | HSE(SOC) | HSE-PBErel(SOC) | PBE |
+|-------+-----+-----+----------+-----------------+-----|
+|  1373 |   0 |   0 |        0 |               1 |   0 |
+|  1420 |   0 |   0 |        0 |               1 |   0 |
+|   887 |   1 |   0 |        0 |               0 |   0 |
+|  1361 |   0 |   0 |        0 |               1 |   0 |
+|   541 |   0 |   1 |        0 |               0 |   0 |
+|   388 |   0 |   0 |        0 |               0 |   1 |
+|  1252 |   0 |   0 |        0 |               1 |   0 |
+|    89 |   0 |   0 |        0 |               0 |   1 |
+|   297 |   0 |   0 |        0 |               0 |   1 |
+|   546 |   0 |   1 |        0 |               0 |   0 |
 :end:
 
 ** COMMENT draft
@@ -1659,7 +1656,7 @@ HP scoring via =Yogi= tools and SciKit-Learn[cite:@manganaris-2022-mrs-comput].
   - HSE(SOC)
   - HSE-PBErel(SOC)
 
-* Models
+* Model Training and Testing
 # SLME improves on SQ to give us performant range of band gaps
 # - accounts for additional energetic processes
 # - dipole-allowed, dipole-forbidden, indirect band gap

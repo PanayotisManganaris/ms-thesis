@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 13:49
+% Created 2023-06-07 Wed 14:36
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -470,31 +470,27 @@ the largest cubic HaP computational database.\autocite{yang-2023-high-throug}
 \section{Computational Methods In Materials Science}
 \label{sec:org0c138b5}
 \begin{frame}[label={sec:org1ee19d0}]{Density Functional Theory and Simulation Fidelities}
-\begin{block}{Approaching DFT Simulation}
 Vienna \emph{ab initio} Simulation Program (VASP)\autocite{kresse-1996-effic-iterat} computes
 \begin{enumerate}
 \item ground state atomic structure of perovskite
 \item energy levels and occupation of crystal structure's orbitals
 \end{enumerate}
-\end{block}
 
-\begin{block}{Find Ground State}
+\begin{block}{Find Ground State Energy using Levels of Theory (LoT)}
 \[
-E(n) &= \hat{T}(n) + \hat{U}(n) + \hat{V}(n)
+\min_n(E(n)) = \min_n(\hat{T}(n) + \hat{U}(n) + \hat{V}(n))
 \]
 
-\(U(n)\) approximations account for varying levels of quantum theory 
+\(\hat{U}(n)\) approximations account for varying levels of quantum theory 
+
+\begin{description}
+\item[{Perdew-Burke-Erzenhof (PBE)}] modern Generalized Gradient Approximation
+\item[{Heyd-Scuzeria-Erzenhof (HSE)}] hybrid GGA and Hartree-Folk Theory
+\item[{HSE with Spin Orbit Coupling}] corrects for electronic effect of heavy elements (e.g. \(\ce{Pb}\))
+\item[{HSE(SOC) on PBE relaxed structure}] compromise, using PBE only for structure relaxation
+\end{description}
 
 Spin Orbit Coupling (SOC) Accounts for relativistic effects near heavy nuclei
-\end{block}
-
-\begin{block}{Levels of Theory (LoT) used}
-\begin{description}
-\item[{Perdew-Burke-Erzenhof (PBE)}] Generalized Gradient Approximation
-\item[{Heyd-Scuzeria-Erzenhof (HSE)}] Hybrid GGA and Hartree-Folk Theory
-\item[{HSE(SOC)}] Hybrid GGA and Hartree-Folk Theory + corrections for \(\ce{Pb}\) etc.
-\item[{HSE(SOC) on PBE relaxed structure}] compromise, using HSE(SOC) only for electronic
-\end{description}
 \end{block}
 \end{frame}
 
@@ -695,9 +691,10 @@ band gap at higher levels of theory correlate with composition differently\autoc
 \end{itemize}
 \end{block}
 
-\begin{block}{One-Hot Encoding}
+\begin{block}{One-Hot Encoding Levels of Theory}
 \begin{columns}
-\begin{column}{0.2\columnwidth}
+\begin{column}{0.3\columnwidth}
+\scriptsize
 \begin{center}
 \begin{tabular}{rl}
 index & LoT\\[0pt]
@@ -716,10 +713,11 @@ index & LoT\\[0pt]
 \end{center}
 \end{column}
 
-\begin{column}{0.8\columnwidth}
+\begin{column}{0.7\columnwidth}
+\scriptsize
 \begin{center}
 \begin{tabular}{rrrrrr}
-index & cat\_\textsubscript{LoT}\textsubscript{EXP} & cat\_\textsubscript{LoT}\textsubscript{HSE} & cat\_\textsubscript{LoT}\textsubscript{HSE}(SOC) & cat\_\textsubscript{LoT}\textsubscript{HSE}-PBErel(SOC) & cat\_\textsubscript{LoT}\textsubscript{PBE}\\[0pt]
+index & EXP & HSE & HSE(SOC) & HSE-PBErel(SOC) & PBE\\[0pt]
 \hline
 1373 & 0 & 0 & 0 & 1 & 0\\[0pt]
 1420 & 0 & 0 & 0 & 1 & 0\\[0pt]
@@ -866,7 +864,7 @@ HP scoring via \texttt{Yogi} tools and SciKit-Learn\autocite{manganaris-2022-mrs
 \end{columns}
 \end{frame}
 
-\section{Models}
+\section{Model Training and Testing}
 \label{sec:org8e1df55}
 \begin{frame}[label={sec:org2f549a8}]{Model Training Method}
 \begin{columns}
