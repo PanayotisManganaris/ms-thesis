@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 14:49
+% Created 2023-06-07 Wed 18:33
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -27,20 +27,35 @@
 \usepackage{siunitx}[=v2]%% version 2 workaround first-frame artifact
 %
 \usepackage[%
-%citestyle=authoryear-icomp,
-%bibstyle=authoryear-icomp,
-style=authortitle-tcomp,
-%style=verbose,
+citestyle=authoryear-icomp,
+bibstyle=verbose,
+ibidpage=true,
+maxcitenames=3,
+maxbibnames=99,
 autocite=footnote,
 hyperref=true,
 backref=true,
-maxcitenames=3,
-url=true,
 backend=biber,
 natbib=true,
 ]{biblatex}
 \addbibresource{/home/panos/Documents/masters/local-bib.bib}
 \addbibresource{~/org/bibliotex/bibliotex.bib}
+%
+\renewbibmacro*{cite}{%
+\iffieldundef{shorthand}
+{\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+{\usebibmacro{cite:label}%
+\setunit{\printdelim{nonameyeardelim}}}
+{\printnames{labelname}%
+\setunit{\printdelim{nameyeardelim}}}%
+\usebibmacro{cite:labeldate+extradate}%
+\setunit{\addcomma\space}%
+\usebibmacro{journal}
+\setunit{\addcomma\space}%
+\printfield{note}}
+{\usebibmacro{cite:shorthand}}}
+% make footnotes smaller
+\renewcommand{\footnotesize}{\fontfamily{phv}\selectfont\scriptsize}
 %
 \usepackage{svg}
 \svgsetup{%
@@ -254,7 +269,8 @@ E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
 
 \begin{column}{0.4\columnwidth}
 \begin{itemize}
-\item Cumulative maximum efficiency of PVs tested by accredited laboratories\autocite{research-2023-best-resear}
+\item Cumulative maximum efficiency of PVs tested by accredited laboratories
+\autocite{research-2023-best-resear}
 \item Perovskite+Si tandem monolithic cells second only to two-junction \(\ce{GaAs}\)
 \item Other rising applications
 \begin{itemize}
@@ -967,7 +983,7 @@ rmse HSE-PBE(SOC) & 0.13 & 0.13 & 0.47\\[0pt]
 \begin{align*}
 bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
                        &-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\\
-               +-0.586 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\\
+                -0.586 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\\
                 +1.064 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\\
                 +4.657
 \end{align*}

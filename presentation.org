@@ -315,7 +315,8 @@ E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
 :PROPERTIES:
 :BEAMER_col: 0.4
 :END:
-- Cumulative maximum efficiency of PVs tested by accredited laboratories[cite:@research-2023-best-resear]
+- Cumulative maximum efficiency of PVs tested by accredited laboratories
+  [cite:@research-2023-best-resear]
 - Perovskite+Si tandem monolithic cells second only to two-junction \(\ce{GaAs}\)
 - Other rising applications
   - LEDs and photodiodes
@@ -1940,15 +1941,10 @@ Best SISSO model using only 11 features outperforms OLS on 55 features
 \begin{align*}
 bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
                        &-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\\
-               +-0.586 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\\
+                -0.586 &((B;Sn-\mbox{HSE})+(\mbox{PBE}-X;\mbox{electronegativity}))\\
                 +1.064 &((A;\mbox{electronegativity}-B;Ca)*(B;\mbox{heat of vap}-X;\mbox{electron affinity}))\\
                 +4.657
 \end{align*}
-
-** COMMENT Interpreting Models                                             :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
 
 ** Shapely Additive Explanation (SHAP)                             :B_frame:
 :PROPERTIES:
