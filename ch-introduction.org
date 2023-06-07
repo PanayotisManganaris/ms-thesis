@@ -343,14 +343,14 @@ b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{\ln(\frac{r_A}{r_B})} \right
 
 The approximate definitions \(t \approx 1\), \(o \approx 0.67\), and \(b \underset{\sim}{<} 4\) quantify perovskite \alpha{}-phase stability.
 [cite:@yin-2015-halid-perov;@bartel-2019-new-toler]
-These criterion are useful for efficiently evaluating if a proposed perovskite can be formed.
-This is useful when screening candidate compositions at the conclusion of this work.
+These criteria are useful for efficiently evaluating if a proposed perovskite can be formed.
+They supplemented the cuts on band gap we developed for identifying high-performing Perovskite absorbers.
 
 ** Thesis Overview
-In chapter 2 I review the work we did in [cite/title:@yang-2023-high-throug] to create the multi-fidelity dataset.
-I then detail the methods I used for predicting band gaps and the results I obtained in chapter 3.
-Results and a discussion of their significance is given in chapter 4.
-Finally, in chapter 5 I present the open-source tools developed for this work and made available to the broader materials science community.
+In chapter \ref{sec:org44ac04c}, I review the work we did in [cite/title:@yang-2023-high-throug][cite:@yang-2023-high-throug] to create a multi-fidelity dataset of perovskite band gaps.
+I then detail the methods I used for predicting band gaps and the models I obtained in chapter \ref{sec:org37dcca4}.
+Results and a discussion of their significance is given in chapter \ref{sec:orgbfd2f81}.
+Finally, in chapter \ref{sec:orga3ae64f}, I present the open-source tools I developed for this work and made available to the broader materials science community.
 
 * DENSITY FUNCTIONAL THEORY SIMULATION
 :PROPERTIES:
