@@ -1,5 +1,5 @@
 \chapter*{ADDITIONAL FIGURES}
-\label{sec:org6b04a78}
+\label{sec:orgc89a13e}
 \section*{Learning Curves}
 \label{sec:orga7ccdab}
 Cross-validation within the training set is the only way of checking the generality of models during the grid search.
@@ -101,3 +101,33 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 \includesvg[width=450pt]{./.ob-jupyter/ff853be8186a432d26c0eb4b6565ffab8b056ad5}
 \caption{\label{fig:chosen} Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset}
 \end{figure}
+
+\section*{Hyper-parameters of Best Random Forest Estimator}
+\label{sec:org6b04a78}
+
+\begin{table}[htbp]
+\caption{\label{tbl:rfrHPO} Select hyper-parameters from exhaustive search of 31104 models}
+\centering
+\begin{tabular}{ll}
+ & Selected Space\\[0pt]
+\hline
+\texttt{normalizer\_\_norm} & \texttt{['l2']}\\[0pt]
+\texttt{bootstrap} & \texttt{[True]}\\[0pt]
+\texttt{ccp\_alpha} & \texttt{[0.0]}\\[0pt]
+\texttt{criterion} & \texttt{['poisson']}\\[0pt]
+\texttt{max\_depth} & \texttt{[30]}\\[0pt]
+\texttt{max\_features} & \texttt{[1.0]}\\[0pt]
+\texttt{max\_leaf\_nodes} & \texttt{[745]}\\[0pt]
+\texttt{max\_samples} & \texttt{[0.9]}\\[0pt]
+\texttt{min\_impurity\_decrease} & \texttt{[0.0]}\\[0pt]
+\texttt{min\_samples\_leaf} & \texttt{[1]}\\[0pt]
+\texttt{min\_samples\_split} & \texttt{[2]}\\[0pt]
+\texttt{min\_weight\_fraction\_leaf} & \texttt{[0.0]}\\[0pt]
+\texttt{n\_estimators} & \texttt{[130]}\\[0pt]
+\texttt{n\_jobs} & \texttt{[4]}\\[0pt]
+\texttt{oob\_score} & \texttt{[True]}\\[0pt]
+\texttt{random\_state} & \texttt{[None]}\\[0pt]
+\texttt{verbose} & \texttt{[0]}\\[0pt]
+\texttt{warm\_start} & \texttt{[False]}\\[0pt]
+\end{tabular}
+\end{table}
