@@ -713,10 +713,7 @@ Most importantly, this sample gave even coverage of the cardinal mixing domain a
 The clusters in this figure were determined using the t-distributed stochastic neighbor embedding (t-SNE) method.
 This is a nonparametric dimensionality reduction intended for visualizing statistically relevant clusters in a high dimensional dataset in only two or three dimensions.
 In this case, the clusters correspond to the mix site of the member data points.
-# (see figure ref:fig:alloys)
 This sample provides the opportunity to comfortably interpolate the properties of other members of the cardinal mixing domain.
-# Concurrently, we test the ability of our models to extrapolate with respect to alloying scheme as well as level of theory.
-# It also provides an opportunity to investigate the statistical impact of constituent compounds on perovskite property prediction.
 See Discussion.
 
 #+begin_src jupyter-python
