@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 13:38
+% Created 2023-06-07 Wed 13:49
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -686,8 +686,6 @@ band gap at higher levels of theory correlate with composition differently\autoc
 \section{Multi-Fidelity Learning}
 \label{sec:orgacc14e3}
 \begin{frame}[label={sec:org4baaeb2}]{Learning from Multi-fidelity dataset}
-\begin{columns}
-\begin{column}{0.5\columnwidth}
 \begin{block}{Training Strategy}
 \begin{itemize}
 \item[{$\square$}] oversampling
@@ -696,13 +694,49 @@ band gap at higher levels of theory correlate with composition differently\autoc
 \item[{$\boxminus$}] co-Kriging
 \end{itemize}
 \end{block}
+
+\begin{block}{One-Hot Encoding}
+\begin{columns}
+\begin{column}{0.2\columnwidth}
+\begin{center}
+\begin{tabular}{rl}
+index & LoT\\[0pt]
+\hline
+1373 & HSE-PBErel(SOC)\\[0pt]
+1420 & HSE-PBErel(SOC)\\[0pt]
+887 & EXP\\[0pt]
+1361 & HSE-PBErel(SOC)\\[0pt]
+541 & HSE\\[0pt]
+388 & PBE\\[0pt]
+1252 & HSE-PBErel(SOC)\\[0pt]
+89 & PBE\\[0pt]
+297 & PBE\\[0pt]
+546 & HSE\\[0pt]
+\end{tabular}
+\end{center}
 \end{column}
 
-\begin{column}{0.5\columnwidth}
+\begin{column}{0.8\columnwidth}
+\begin{center}
+\begin{tabular}{rrrrrr}
+index & cat\_\textsubscript{LoT}\textsubscript{EXP} & cat\_\textsubscript{LoT}\textsubscript{HSE} & cat\_\textsubscript{LoT}\textsubscript{HSE}(SOC) & cat\_\textsubscript{LoT}\textsubscript{HSE}-PBErel(SOC) & cat\_\textsubscript{LoT}\textsubscript{PBE}\\[0pt]
+\hline
+1373 & 0 & 0 & 0 & 1 & 0\\[0pt]
+1420 & 0 & 0 & 0 & 1 & 0\\[0pt]
+887 & 1 & 0 & 0 & 0 & 0\\[0pt]
+1361 & 0 & 0 & 0 & 1 & 0\\[0pt]
+541 & 0 & 1 & 0 & 0 & 0\\[0pt]
+388 & 0 & 0 & 0 & 0 & 1\\[0pt]
+1252 & 0 & 0 & 0 & 1 & 0\\[0pt]
+89 & 0 & 0 & 0 & 0 & 1\\[0pt]
+297 & 0 & 0 & 0 & 0 & 1\\[0pt]
+546 & 0 & 1 & 0 & 0 & 0\\[0pt]
+\end{tabular}
+\end{center}
 \end{column}
 \end{columns}
+\end{block}
 \end{frame}
-
 
 \begin{frame}[label={sec:org8dceefc}]{Random Forest Regression (RFR)}
 \begin{columns}

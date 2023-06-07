@@ -1349,10 +1349,9 @@ band gap at higher levels of theory correlate with composition differently[cite:
 :BEAMER_env: frame
 :END:
 
-*** Training Strategy                                       :B_block:BMCOL:
+*** Training Strategy                                             :B_block:
 :PROPERTIES:
 :BEAMER_env: block
-:BEAMER_col: 0.5
 :END:
 - [ ] oversampling
 - [X] weight scores on higher fidelities to reward target accuracy
@@ -1360,11 +1359,60 @@ band gap at higher levels of theory correlate with composition differently[cite:
 - [-] co-Kriging
 # Try Delta learning and Co-Kriging in SI
 
-*** col                                                             :BMCOL:
+*** One-Hot Encoding                                              :B_block:
 :PROPERTIES:
-:BEAMER_col: 0.5
+:BEAMER_env: block
+:END:
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.2
 :END:
 
+#+begin_src jupyter-python
+  samp = X.LoT.sample(10).reset_index()
+  samp
+#+end_src
+
+#+RESULTS:
+:results:
+| index | LoT             |
+|-------+-----------------|
+|  1373 | HSE-PBErel(SOC) |
+|  1420 | HSE-PBErel(SOC) |
+|   887 | EXP             |
+|  1361 | HSE-PBErel(SOC) |
+|   541 | HSE             |
+|   388 | PBE             |
+|  1252 | HSE-PBErel(SOC) |
+|    89 | PBE             |
+|   297 | PBE             |
+|   546 | HSE             |
+:end:
+
+**** col                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.8
+:END:
+
+#+begin_src jupyter-python
+  pd.merge(left=samp, right=XX.iloc[:, -5:].reset_index(), on='index', how='left')
+#+end_src
+
+#+RESULTS:
+:results:
+| index | cat__LoT_EXP | cat__LoT_HSE | cat__LoT_HSE(SOC) | cat__LoT_HSE-PBErel(SOC) | cat__LoT_PBE |
+|-------+--------------+--------------+-------------------+--------------------------+--------------|
+|  1373 |            0 |            0 |                 0 |                        1 |            0 |
+|  1420 |            0 |            0 |                 0 |                        1 |            0 |
+|   887 |            1 |            0 |                 0 |                        0 |            0 |
+|  1361 |            0 |            0 |                 0 |                        1 |            0 |
+|   541 |            0 |            1 |                 0 |                        0 |            0 |
+|   388 |            0 |            0 |                 0 |                        0 |            1 |
+|  1252 |            0 |            0 |                 0 |                        1 |            0 |
+|    89 |            0 |            0 |                 0 |                        0 |            1 |
+|   297 |            0 |            0 |                 0 |                        0 |            1 |
+|   546 |            0 |            1 |                 0 |                        0 |            0 |
+:end:
 
 ** COMMENT draft
 The challenge: how to best utilize multiple measurements of the
