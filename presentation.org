@@ -804,15 +804,18 @@ HSE06 improves band gap predictions compared to PBE[cite:@chan-2010-effic-band]
 #+attr_latex: :width 300
 [[file:Computational_Methods_In_Materials_Science/2023-05-24_04-42-21_screenshot.png]]
 
-*** Applications                                            :B_block:BMCOL:
+*** Applications in Materials Science                       :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.3
 :BEAMER_env: block
 :END:
-predict anything/make decisions[cite:@pablo-2019-new-front]
-- interatomic force fields
+Algorithms improving with exposure to data.
+[cite:@pablo-2019-new-front]
+
+Given enough data
 - predict properties
-- classify observations
+- classify materials broadly
+- predict interatomic force fields without solving physics equations
 
 ** DONE Data Driven Framework for Perovskite Discovery             :B_frame:
 :PROPERTIES:
