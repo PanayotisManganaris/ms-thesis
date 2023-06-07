@@ -818,15 +818,39 @@ Generalizes to LA_{m-1}B_{m}X_{3m+1} perovskite with m>1
 # bandgaps are unpredictably deviating away from Vegard's law.
 # mention ongoing work on inverse design lead by Arun
 
-** DFT Functionals Effect Band Structure Calculation in HaPs       :B_frame:
+** Density Functional Theory and Simulation Fidelities             :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-- D3
-- SOC
-- PBE semi-local vs HSE hybrid
-  - (effects on electronic structure)
-  - computational heft
+*** Approaching DFT Simulation                                    :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+Vienna /ab initio/ Simulation Program (VASP)[cite:@kresse-1996-effic-iterat] computes
+1. ground state atomic structure of perovskite
+2. energy levels and occupation of crystal structure's orbitals
+
+*** Find Ground State                                             :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+
+\[
+E(n) &= \hat{T}(n) + \hat{U}(n) + \hat{V}(n)
+\]
+
+\(U(n)\) approximations account for varying levels of quantum theory 
+
+Spin Orbit Coupling (SOC) Accounts for relativistic effects near heavy nuclei
+
+*** Levels of Theory (LoT) used                                   :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- Perdew-Burke-Erzenhof (PBE) :: Generalized Gradient Approximation
+- Heyd-Scuzeria-Erzenhof (HSE) :: Hybrid GGA and Hartree-Folk Theory
+- HSE(SOC) :: Hybrid GGA and Hartree-Folk Theory + corrections for \(\ce{Pb}\) etc.
+- HSE(SOC) on PBE relaxed structure :: compromise, using HSE(SOC) only for electronic
 
 ** DFT Calculation of Perovskite Band Gaps in Literature           :B_frame:
 :PROPERTIES:
@@ -899,7 +923,7 @@ Literature provides examples of known performant ligands:
 - Butylammonium (Cationic Butylamine)
   [cite:@hong-2021-layer-edge]
 
-* Data
+* Perovskites Band Gaps Data and Descriptors  
 # model bg because 
 # - bg models are more generally useful than SLME
 # - SLME is more expensive to compute

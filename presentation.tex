@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 12:41
+% Created 2023-06-07 Wed 13:38
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -469,16 +469,33 @@ the largest cubic HaP computational database.\autocite{yang-2023-high-throug}
 
 \section{Computational Methods In Materials Science}
 \label{sec:org0c138b5}
-\begin{frame}[label={sec:org1ee19d0}]{DFT Functionals Effect Band Structure Calculation in HaPs}
-\begin{itemize}
-\item D3
-\item SOC
-\item PBE semi-local vs HSE hybrid
-\begin{itemize}
-\item (effects on electronic structure)
-\item computational heft
-\end{itemize}
-\end{itemize}
+\begin{frame}[label={sec:org1ee19d0}]{Density Functional Theory and Simulation Fidelities}
+\begin{block}{Approaching DFT Simulation}
+Vienna \emph{ab initio} Simulation Program (VASP)\autocite{kresse-1996-effic-iterat} computes
+\begin{enumerate}
+\item ground state atomic structure of perovskite
+\item energy levels and occupation of crystal structure's orbitals
+\end{enumerate}
+\end{block}
+
+\begin{block}{Find Ground State}
+\[
+E(n) &= \hat{T}(n) + \hat{U}(n) + \hat{V}(n)
+\]
+
+\(U(n)\) approximations account for varying levels of quantum theory 
+
+Spin Orbit Coupling (SOC) Accounts for relativistic effects near heavy nuclei
+\end{block}
+
+\begin{block}{Levels of Theory (LoT) used}
+\begin{description}
+\item[{Perdew-Burke-Erzenhof (PBE)}] Generalized Gradient Approximation
+\item[{Heyd-Scuzeria-Erzenhof (HSE)}] Hybrid GGA and Hartree-Folk Theory
+\item[{HSE(SOC)}] Hybrid GGA and Hartree-Folk Theory + corrections for \(\ce{Pb}\) etc.
+\item[{HSE(SOC) on PBE relaxed structure}] compromise, using HSE(SOC) only for electronic
+\end{description}
+\end{block}
 \end{frame}
 
 \begin{frame}[label={sec:orgebb9776}]{DFT Calculation of Perovskite Band Gaps in Literature}
@@ -520,7 +537,7 @@ via ongoing inverse design work
 \autocite{yang-2023-discov-novel}
 \end{frame}
 
-\section{Data}
+\section{Perovskites Band Gaps Data and Descriptors}
 \label{sec:org8595ee1}
 \begin{frame}[label={sec:orgbf08fa9}]{Effect of DFT Functionals on Our Perovskites Data}
  
