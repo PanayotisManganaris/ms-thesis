@@ -211,8 +211,8 @@ Finally I performed hyper-parameter optimization by exhaustive grid search using
 \end{figure}
 
 Following hyperparameter optimization, the random forest model was the best performing compared to the gaussian process and SISSO regressions.
-It boasts an RMSE error on the total dataset of only 0.12 \unit{\electronvolts}.
-This combined with its RMSE error of 0.15 \unit{\electronvolts} on the experimental fidelity subset promises this model can make quality predictions of the band gap at the experimental fidelity.
+It boasts an RMSE error on the total dataset of only 0.12 \unit{\electronvolt}.
+This combined with its RMSE error of 0.15 \unit{\electronvolt} on the experimental fidelity subset promises this model can make quality predictions of the band gap at the experimental fidelity.
 See table \ref{tbl:LoTscores}.
 This error compares favorably with the best models currently ranked by the Materials Project's MatBench standard\autocite{dunn-2020-bench-mater}.
 My models use the stoichiometry of the compositions while the MatBench models require atomic structures in addition to stoichiometric information.
@@ -264,7 +264,7 @@ We set the aim of decreasing \(\mathcal{O}(n^3)\) computational expense of GPR b
 So, we aim to take 30 highly correlated features (slightly more than one half the number used by prior models) from these SIS subspaces.
 We expected this to solve the problems inherent to the raw \ref{sec:orgd1d9e75}.
 
-fitting models to SIS features may leverage the denser and more continuous domain to improve extrapolative predictions.
+Fitting models to SIS features may leverage the denser and more continuous domain to improve extrapolative predictions.
 Potentially into the high-entropy domain, or simply Theory.
 However using the SIS subspaces in this way compromises on SISSO's explicability and necessitates SHAP analysis.
 Unfortunately, whatever the gains in training time complexity and extrapolative ability, the models underperformed in predicting band gap in the cardinal mixing domain (see Table \ref{tbl:LoTscores}).
@@ -393,21 +393,21 @@ Of the selected compositions 640 are purely inorganic, and 611 are hybrid-organi
 Table \ref{tbl:mixscreen} shows how the set subdivides by mixing.
 Only 40 of the original expertly designed sample pass the screening, the rest are untested to my knowledge.
 This shows that there is still much opportunity for discovery in this area and much to be learned about this chemistry.
-Notably, 834 contain no lead. A random sample of 30 such compounds is listed in table \ref{tbl:pbfree}.
-Also, no compounds containing Potassium pass the screening.
+Notably, 834 contain no lead.
+The 30 most stable lead-free compounds identified with band-gap in the 1-2 \unit{\electronvolt} range are listed in table \ref{tbl:pbfree}.
 
 I evaluated a variety of machine learning techniques and implemented simple but effective models for estimating band gap for perovskites from multi-fidelity data.
-On held-out test data, this random forest model achieved nearly an RMSE error of 0.12 on the whole dataset and 0.15 on the experimental subset.
+On held-out test data, a random forest model achieved nearly an RMSE error of 0.12 on the whole dataset and 0.15 on the experimental subset.
 
 I found RFR models performed best in this setting, and believe this is because the architecture is an ensemble model so it reduces the variance of error by design.
-Additionally, the decision trees that make up the frost each capture relevant feature interactions as corroborated by Pearson correlations.
-Each tree also flexibly learns complex nonlinear relationships between feature interactions and band gap.
-So it may be data hungry but is generally better about accommodating outliers
-The RFR properties that helped it perform best in this setting are not domain-specific and therefore are likely to apply to other material properties and for other types of compounds
+Additionally, the decision trees that make up the forest best identify and capture relevant feature interactions as corroborated by Pearson correlations.
+Trees also flexibly represent complex nonlinear relationships between feature interactions and band gap.
+RFR models may be data hungry but are generally better about accommodating outliers.
+The RFR properties that helped it perform best in this setting are not domain-specific and therefore are likely to apply to other material properties and for other types of compounds.
 
 In summary, I experimented with training multiple models to differentiate and treat appropriately observations with different fidelities and demonstrated good results with the RFR in particular.
-The Gaussian Process Regression is a very close second.
-The GPR's ability to theoretically deal with more complex descriptors makes for an appealing next step.
+The Gaussian Process Regression was a very close second.
+The GPR’s ability to theoretically deal with more complex descriptors deserves further study to realize its full potential.
 Further improving on the feature engineering and examining what can be learned about the relationship between structure and band gap might begin here.
 
  
@@ -431,35 +431,35 @@ pure & 2\\[0pt]
 \begin{tabular}{rlr}
  & Formula & band gap [eV]\\[0pt]
 \hline
-1472 & Rb1.000Ge1.000Cl0.583I0.417 & 1.610555\\[0pt]
-13457 & K1.000Ge0.125Sn0.500Sr0.375Br1.000 & 1.588236\\[0pt]
-14729 & K1.000Ca0.250Ge0.625Sn0.125Cl1.000 & 1.906317\\[0pt]
-19075 & FA0.250K0.250MA0.375Rb0.125Sn1.000Cl1.000 & 1.951812\\[0pt]
-20006 & FA0.625MA0.375Ba1.000Br1.000 & 1.751004\\[0pt]
-17947 & K1.000Ba1.000Br0.250Cl0.083I0.667 & 1.927655\\[0pt]
-13792 & K1.000Ge0.875Sr0.125Cl1.000 & 1.361000\\[0pt]
-15452 & K1.000Ba0.125Sn0.625Sr0.250I1.000 & 1.864185\\[0pt]
-14714 & K1.000Ca0.250Ge0.500Sn0.250Cl1.000 & 1.992692\\[0pt]
-5862 & MA0.500Rb0.500Ba1.000I1.000 & 1.809483\\[0pt]
-19050 & FA0.250K0.250MA0.125Rb0.375Ba1.000I1.000 & 1.788057\\[0pt]
-19109 & FA0.250K0.375Rb0.375Sr1.000Br1.000 & 1.714627\\[0pt]
-18606 & FA0.125K0.500Rb0.375Sn1.000I1.000 & 1.962433\\[0pt]
-19148 & FA0.250K0.375MA0.250Rb0.125Sn1.000Br1.000 & 1.815876\\[0pt]
-2891 & Rb1.000Ca1.000Br0.208Cl0.250I0.542 & 1.705446\\[0pt]
-26843 & Cs0.125FA0.125MA0.750Ba1.000Br1.000 & 1.950356\\[0pt]
-31393 & Cs0.625Rb0.375Ca1.000Cl1.000 & 1.878681\\[0pt]
-29328 & Cs0.250FA0.250K0.375Rb0.125Sr1.000I1.000 & 1.955184\\[0pt]
-19898 & FA0.500K0.375Rb0.125Ba1.000Br1.000 & 1.727611\\[0pt]
-2297 & Rb1.000Ca0.250Ge0.250Sn0.250Sr0.250Cl1.000 & 1.803151\\[0pt]
-3092 & Rb1.000Ca1.000Br0.958I0.042 & 1.691322\\[0pt]
-28989 & Cs0.250FA0.125K0.250MA0.375Sn1.000I1.000 & 1.744348\\[0pt]
-13004 & K1.000Sn1.000Br0.875Cl0.042I0.083 & 1.709227\\[0pt]
-19180 & FA0.250K0.500Rb0.250Sr1.000Cl1.000 & 1.971389\\[0pt]
-533 & Rb1.000Sn1.000Br0.333Cl0.625I0.042 & 1.788413\\[0pt]
-3056 & Rb1.000Ca1.000Br0.667Cl0.250I0.083 & 1.706197\\[0pt]
+19290 & FA0.375Rb0.625Sn1.000I1.000 & 1.989659\\[0pt]
+19309 & FA0.375MA0.125Rb0.500Sn1.000Cl1.000 & 1.992248\\[0pt]
+19310 & FA0.375MA0.125Rb0.500Sn1.000Br1.000 & 1.958562\\[0pt]
+19306 & FA0.375MA0.125Rb0.500Sr1.000Cl1.000 & 1.955198\\[0pt]
+19308 & FA0.375MA0.125Rb0.500Sn1.000I1.000 & 1.707025\\[0pt]
+19307 & FA0.375MA0.125Rb0.500Sr1.000Br1.000 & 1.964779\\[0pt]
+19304 & FA0.375Rb0.625Ba1.000Br1.000 & 1.930256\\[0pt]
+19303 & FA0.375Rb0.625Ba1.000Cl1.000 & 1.890918\\[0pt]
+19305 & FA0.375MA0.125Rb0.500Sr1.000I1.000 & 1.747629\\[0pt]
+19302 & FA0.375Rb0.625Ba1.000I1.000 & 1.682235\\[0pt]
 19076 & FA0.250K0.250MA0.375Rb0.125Sn1.000Br1.000 & 1.938144\\[0pt]
-18566 & FA0.125K0.375MA0.250Rb0.250Ba1.000Br1.000 & 1.805977\\[0pt]
-5396 & Rb1.000Ba0.625Ca0.250Sn0.125I1.000 & 1.737319\\[0pt]
-26921 & Cs0.125FA0.125K0.125MA0.500Rb0.125Sn1.000Br1.000 & 1.893728\\[0pt]
+19301 & FA0.375Rb0.625Ca1.000Br1.000 & 1.699071\\[0pt]
+19300 & FA0.375Rb0.625Ca1.000Cl1.000 & 1.726041\\[0pt]
+19324 & FA0.375MA0.250Rb0.375Sr1.000Cl1.000 & 1.720595\\[0pt]
+19008 & FA0.250K0.125MA0.625Ge1.000I1.000 & 1.934910\\[0pt]
+19056 & FA0.250K0.250MA0.250Rb0.250Sn1.000I1.000 & 1.847481\\[0pt]
+19004 & FA0.250K0.125MA0.625Sn1.000Br1.000 & 1.770689\\[0pt]
+19032 & FA0.250K0.250Rb0.500Ba1.000I1.000 & 1.954950\\[0pt]
+19073 & FA0.250K0.250MA0.375Rb0.125Sr1.000Br1.000 & 1.943368\\[0pt]
+19094 & FA0.250K0.250MA0.500Sn1.000Br1.000 & 1.877570\\[0pt]
+19049 & FA0.250K0.250MA0.125Rb0.375Ca1.000Br1.000 & 1.859116\\[0pt]
+19003 & FA0.250K0.125MA0.625Sn1.000Cl1.000 & 1.753922\\[0pt]
+19074 & FA0.250K0.250MA0.375Rb0.125Sn1.000I1.000 & 1.689273\\[0pt]
+19002 & FA0.250K0.125MA0.625Sn1.000I1.000 & 1.469472\\[0pt]
+19053 & FA0.250K0.250MA0.250Rb0.250Sr1.000I1.000 & 1.880665\\[0pt]
+19075 & FA0.250K0.250MA0.375Rb0.125Sn1.000Cl1.000 & 1.951812\\[0pt]
+19070 & FA0.250K0.250MA0.250Rb0.250Ba1.000Br1.000 & 1.868159\\[0pt]
+19093 & FA0.250K0.250MA0.500Sn1.000Cl1.000 & 1.865380\\[0pt]
+19001 & FA0.250K0.125MA0.625Sr1.000Br1.000 & 1.712991\\[0pt]
+19091 & FA0.250K0.250MA0.500Sr1.000Br1.000 & 1.893968\\[0pt]
 \end{tabular}
 \end{table}
