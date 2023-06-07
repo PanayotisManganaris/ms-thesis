@@ -83,9 +83,12 @@
 
 # Gollapalli, P., Manganaris, P., & Arun Mannodi-Kanakkithodi (TBD). Graph neural network predictions for formation energy of native defects in zinc blende semiconductors. IN PREPARATION.
 
-- Poster for DS02 symposium MRS fall 2022
+- Poster for DS02 symposium at MRS Boston Fall 2022
+  [cite/title:@2022-novel-halid][cite:@2022-novel-halid]
 - Talk for Purdue Soft Materials symposium
-- Developed MRS spring 2022 tutorial hosted on nanoHUB[cite:@manganaris-2022-mrs-comput]
+  [cite/title:@2022-machin-learn][cite:@2022-machin-learn]
+- Developed notebooks for MRS Honolulu Spring 2022 tutorial hosted on nanoHUB
+  [cite/title:@2022-ds00-tutor][cite:@manganaris-2022-mrs-comput]
 
 * SOFTWARE AND DATA CONTRIBUTIONS
 :PROPERTIES:
