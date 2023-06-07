@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 14:36
+% Created 2023-06-07 Wed 14:49
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -322,7 +322,11 @@ The following definitions approximate \(\alpha\) phase stability
 \begin{column}{0.33\columnwidth}
 \begin{block}{Goldschmidt Tolerance}
 \[
-1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+\]
+
+\[
+0.813 < t < 1.107
 \]
 \end{block}
 \end{column}
@@ -330,7 +334,11 @@ The following definitions approximate \(\alpha\) phase stability
 \begin{column}{0.33\columnwidth}
 \begin{block}{Octahedral Factor}
 \[
-0.67 \approx o=\frac{r_B}{r_X}
+o=\frac{r_B}{r_X}
+\]
+
+\[
+0.442 < o < 0.895
 \]
 \end{block}
 \end{column}
@@ -338,7 +346,11 @@ The following definitions approximate \(\alpha\) phase stability
 \begin{column}{0.33\columnwidth}
 \begin{block}{Bartel Tolerance}
 \[
-4 \gtrapprox b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
+\tau = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
+\]
+
+\[
+\tau < 4.18
 \]
 \end{block}
 \end{column}
@@ -346,7 +358,7 @@ The following definitions approximate \(\alpha\) phase stability
 \end{frame}
 
 \begin{frame}[label={sec:orgb696d80}]{My Thesis Research Overview}
-the work we did in \citetitle{yang-2023-high-throug}\autocite{yang-2023-high-throug}
+The work we did in \citetitle{yang-2023-high-throug}\autocite{yang-2023-high-throug}
 \begin{itemize}
 \item created the multi-fidelity dataset covering the chemical domain
 \item decided the screening criterion used to judge viability of compositions

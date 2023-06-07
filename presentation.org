@@ -432,7 +432,11 @@ The following definitions approximate \alpha phase stability
 :END:
 
 \[
-1 \approx t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+t = \frac{R_A+R_X}{\sqrt{2}*(R_B+R_X)}
+\]
+
+\[
+0.813 < t < 1.107
 \]
 
 *** Octahedral Factor                                       :B_block:BMCOL:
@@ -442,7 +446,11 @@ The following definitions approximate \alpha phase stability
 :END:
 
 \[
-0.67 \approx o=\frac{r_B}{r_X}
+o=\frac{r_B}{r_X}
+\]
+
+\[
+0.442 < o < 0.895
 \]
 
 *** Bartel Tolerance                                        :B_block:BMCOL:
@@ -452,14 +460,18 @@ The following definitions approximate \alpha phase stability
 :END:
 
 \[
-4 \gtrapprox b = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
+\tau = \frac{r_X}{r_B}-\left[ 1-\frac{\frac{r_A}{r_B}}{ln(\frac{r_A}{r_B})} \right]
+\]
+
+\[
+\tau < 4.18
 \]
 
 ** DONE My Thesis Research Overview                                :B_frame:
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2023-06-03 Sat 14:10]
 :END:
-the work we did in [cite/title:@yang-2023-high-throug][cite:@yang-2023-high-throug]
+The work we did in [cite/title:@yang-2023-high-throug][cite:@yang-2023-high-throug]
 - created the multi-fidelity dataset covering the chemical domain
 - decided the screening criterion used to judge viability of compositions
 
