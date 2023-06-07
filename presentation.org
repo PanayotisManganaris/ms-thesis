@@ -483,7 +483,7 @@ determined according to level of theory[cite:@yu-2012-ident-poten p.1]
 a(E)=1-e^{-2\alpha(E)L}
 \]
 
-Here, \(\alpha(E)\) is the DFT computed optical absorption coefficient
+Here, \(\alpha(E)\) is the simulated optical absorption coefficient
 as a function of incident photon energy and \(L\) is the thickness of
 the absorber.
 
