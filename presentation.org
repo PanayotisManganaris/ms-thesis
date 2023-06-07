@@ -1669,14 +1669,17 @@ HP scoring via =Yogi= tools and SciKit-Learn[cite:@manganaris-2022-mrs-comput].
   - HSE(SOC)
   - HSE-PBErel(SOC)
 
-* Model Training and Testing
+* Model Training, Testing, and Interpretation
 # SLME improves on SQ to give us performant range of band gaps
 # - accounts for additional energetic processes
 # - dipole-allowed, dipole-forbidden, indirect band gap
 # focus on EXP rmse -- I have the ability!
-** Model Training Method                                           :B_frame:
+** NEXT Model Training Method                                      :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "NEXT"       from "TODO"       [2023-06-07 Wed 14:52]
 :END:
 # show test/train split and scoring flowchart
 *** col                                                             :BMCOL:
@@ -1906,7 +1909,7 @@ Best GPR utilizes non-stationary Matern kernel with \(\nu=3\slash{}2\)
 :END:
 Best SISSO model using only 11 features outperforms OLS on 55 features
 
-** Compare RMSE of different subsets                               :B_frame:
+** Evaluating Models for Use in Screening                          :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -1924,14 +1927,18 @@ Best SISSO model using only 11 features outperforms OLS on 55 features
 | rmse HSE(SOC)     | 0.15 | 0.10 |  0.57 |
 | rmse HSE-PBE(SOC) | 0.13 | 0.13 |  0.47 |
 
-*** col                                                             :BMCOL:
+*** Choosing a Model                                        :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
+:BEAMER_env: block
 :END:
-- partitioned scores obtained from final HPO iteration
-- EXP rmse was more heavily weighted for parameter selection
-  - GPR actually outperforms RFR in EXP subset
-  - RFR shows better extrapolative ability
+- RMSE per fidelity subset at final HPO iteration
+- EXP RMSE motivated parameter selection
+- EXP RMSE is important
+- However, total RMSE is critical indicator of extrapolative ability
+
+GPR outperforms RFR in EXP subset, but RFR shows better extrapolative
+ability. RFR is best.
   
 ** SISSO Expression                                                :B_frame:
 :PROPERTIES:

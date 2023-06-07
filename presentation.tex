@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 19:08
+% Created 2023-06-07 Wed 19:16
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -892,7 +892,7 @@ HP scoring via \texttt{Yogi} tools and SciKit-Learn\autocite{manganaris-2022-mrs
 \end{columns}
 \end{frame}
 
-\section{Model Training and Testing}
+\section{Model Training, Testing, and Interpretation}
 \label{sec:org8e1df55}
 \begin{frame}[label={sec:org2f549a8}]{Model Training Method}
 \begin{columns}
@@ -949,7 +949,7 @@ Best SISSO model using only 11 features outperforms OLS on 55 features
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgfdc5018}]{Compare RMSE of different subsets}
+\begin{frame}[label={sec:orgfdc5018}]{Evaluating Models for Use in Screening}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{center}
@@ -967,14 +967,17 @@ rmse HSE-PBE(SOC) & 0.13 & 0.13 & 0.47\\[0pt]
 \end{column}
 
 \begin{column}{0.5\columnwidth}
+\begin{block}{Choosing a Model}
 \begin{itemize}
-\item partitioned scores obtained from final HPO iteration
-\item EXP rmse was more heavily weighted for parameter selection
-\begin{itemize}
-\item GPR actually outperforms RFR in EXP subset
-\item RFR shows better extrapolative ability
+\item RMSE per fidelity subset at final HPO iteration
+\item EXP RMSE motivated parameter selection
+\item EXP RMSE is important
+\item However, total RMSE is critical indicator of extrapolative ability
 \end{itemize}
-\end{itemize}
+
+GPR outperforms RFR in EXP subset, but RFR shows better extrapolative
+ability. RFR is best.
+\end{block}
 \end{column}
 \end{columns}
 \end{frame}
