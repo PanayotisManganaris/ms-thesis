@@ -1976,9 +1976,11 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :BEAMER_col: 0.4
 :END:
 
-- Make predictions on domain set using RFR best model
-- Visualize predictions on t-SNE clustering
-- desired range \(bg \in [1, 2]\) eV
+- Make predictions on sample space using RFR
+- Predict at experimental data fidelity (LoT = EXP)
+- Predictions have expected error of 0.15 eV
+- Visualize predictions on t-SNE projection
+- No obvious clustering of \(bg \in [1, 2]\,\si{\electronvolt}\)
 
 *** col                                                             :BMCOL:
 :PROPERTIES:

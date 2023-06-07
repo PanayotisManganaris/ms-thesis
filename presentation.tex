@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 19:00
+% Created 2023-06-07 Wed 19:08
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -1010,9 +1010,11 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \begin{columns}
 \begin{column}{0.4\columnwidth}
 \begin{itemize}
-\item Make predictions on domain set using RFR best model
-\item Visualize predictions on t-SNE clustering
-\item desired range \(bg \in [1, 2]\) eV
+\item Make predictions on sample space using RFR
+\item Predict at experimental data fidelity (LoT = EXP)
+\item Predictions have expected error of 0.15 eV
+\item Visualize predictions on t-SNE projection
+\item No obvious clustering of \(bg \in [1, 2]\,\si{\electronvolt}\)
 \end{itemize}
 \end{column}
 
