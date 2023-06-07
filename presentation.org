@@ -2202,76 +2202,6 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :END:
 - strongly prefer full occupation
 
-** Interpreting t-SNE clusters                                     :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-# fix blue/green on projector
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-
-#+begin_src jupyter-python :post wrap(*this*, w="200pt")
-  p = px.scatter(
-      projdf,
-      x='0', y='1',
-      hover_name="Formula",
-      color='mix',
-  )
-  p.update_layout(
-      legend_title="chosen", legend_itemsizing='constant',
-      legend_orientation='h', legend_bgcolor="rgba(1,1,1,0)",
-      legend_y=0.05,
-      margin=dict(l=0, r=0, t=0, b=0),
-      width=400, height=400
-  )
-  p.update_yaxes(matches=None, visible=False)
-  p.update_xaxes(matches=None, visible=False)
-  p.show(renderer='svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 200pt
-#+attr_org: :width 640
-[[file:./.ob-jupyter/c7002c894b6ade243f089aabdefcb2c2b4d07a89.svg]]
-:end:
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-
-#+begin_src jupyter-python :post wrap(*this*, w="200pt")
-  p = px.scatter(
-      projdf,
-      x='0', y='1',
-      hover_name="Formula",
-      color='org',
-  )
-  p.update_layout(
-      legend_title="chosen", legend_itemsizing='constant',
-      legend_orientation='h', legend_bgcolor="rgba(1,1,1,0)",
-      legend_y=0.05,
-      margin=dict(l=0, r=0, t=0, b=0),
-      width=400, height=400
-  )
-  p.update_yaxes(matches=None, visible=False)
-  p.update_xaxes(matches=None, visible=False)
-  p.show(renderer='svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 200pt
-#+attr_org: :width 640
-[[file:./.ob-jupyter/bd7813d2d1d9cd1108cdd457bd977e8fd1a6aa99.svg]]
-:end:
-
 * COMMENT CGCNN
 ** CGCNN Introduction                                              :B_frame:
 :PROPERTIES:
@@ -2472,6 +2402,76 @@ RCAC Bell Computing Cluster
 :BEAMER_env: appendix
 :END:
 # add tbl comparing MatBench to Mine
+** Interpreting t-SNE clusters                                     :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+# fix blue/green on projector
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+
+#+begin_src jupyter-python :post wrap(*this*, w="200pt")
+  p = px.scatter(
+      projdf,
+      x='0', y='1',
+      hover_name="Formula",
+      color='mix',
+  )
+  p.update_layout(
+      legend_title="chosen", legend_itemsizing='constant',
+      legend_orientation='h', legend_bgcolor="rgba(1,1,1,0)",
+      legend_y=0.05,
+      margin=dict(l=0, r=0, t=0, b=0),
+      width=400, height=400
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 200pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/c7002c894b6ade243f089aabdefcb2c2b4d07a89.svg]]
+:end:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+
+#+begin_src jupyter-python :post wrap(*this*, w="200pt")
+  p = px.scatter(
+      projdf,
+      x='0', y='1',
+      hover_name="Formula",
+      color='org',
+  )
+  p.update_layout(
+      legend_title="chosen", legend_itemsizing='constant',
+      legend_orientation='h', legend_bgcolor="rgba(1,1,1,0)",
+      legend_y=0.05,
+      margin=dict(l=0, r=0, t=0, b=0),
+      width=400, height=400
+  )
+  p.update_yaxes(matches=None, visible=False)
+  p.update_xaxes(matches=None, visible=False)
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 200pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/bd7813d2d1d9cd1108cdd457bd977e8fd1a6aa99.svg]]
+:end:
+
 ** Future Work                                                     :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame

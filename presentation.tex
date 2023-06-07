@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 18:58
+% Created 2023-06-07 Wed 19:00
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -1005,7 +1005,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{frame}
 
 \section{Discovery of Suitable Compositions}
-\label{sec:org9d17fc3}
+\label{sec:org8c40697}
 \begin{frame}[label={sec:org57313ed}]{Make Predictions on \alert{40000} Hypothetical Compounds}
 \begin{columns}
 \begin{column}{0.4\columnwidth}
@@ -1089,27 +1089,9 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org8c40697}]{Interpreting t-SNE clusters}
-\begin{columns}
-\begin{column}{0.5\columnwidth}
- 
-\begin{center}
-\includesvg[width=200pt]{./.ob-jupyter/c7002c894b6ade243f089aabdefcb2c2b4d07a89}
-\end{center}
-\end{column}
-
-\begin{column}{0.5\columnwidth}
- 
-\begin{center}
-\includesvg[width=200pt]{./.ob-jupyter/bd7813d2d1d9cd1108cdd457bd977e8fd1a6aa99}
-\end{center}
-\end{column}
-\end{columns}
-\end{frame}
-
 \section{Summary and Conclusions}
-\label{sec:org0875c50}
-\begin{frame}[label={sec:orgbe8b3aa},fragile]{Seven Step Semiconductor Composition Optimization}
+\label{sec:orgd8888fb}
+\begin{frame}[label={sec:org9d17fc3},fragile]{Seven Step Semiconductor Composition Optimization}
  \begin{enumerate}
 \item preexisting data set of \textasciitilde{}500 samples from domain of \textasciitilde{}40000 single-site mixed compositions
 \item extract features using \texttt{cmcl}
@@ -1121,7 +1103,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:org46a7e04}]{Conclusions}
+\begin{frame}[label={sec:orgbe8b3aa}]{Conclusions}
 \begin{itemize}
 \item RFR yields the best model because
 \begin{itemize}
@@ -1138,7 +1120,7 @@ variables
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgd8888fb},fragile]{Publications Presentations and Other Contributions}
+\begin{frame}[label={sec:org46a7e04},fragile]{Publications Presentations and Other Contributions}
  \begin{columns}
 \begin{column}{0.66\columnwidth}
 \begin{block}{Articles}
@@ -1176,8 +1158,8 @@ variables
 \end{frame}
 
 \section{Credit}
-\label{sec:org8d1a04b}
-\begin{frame}[label={sec:orgc86571d}]{Acknowledgements}
+\label{sec:orgc86571d}
+\begin{frame}[label={sec:org0875c50}]{Acknowledgements}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{block}{Research Group}
@@ -1207,12 +1189,30 @@ RCAC Bell Computing Cluster
 \end{columns}
 \end{frame}
 \section{Bib}
-\label{sec:orgdff3e15}
+\label{sec:org8d1a04b}
 \begin{frame}[allowframebreaks]{References}
 \AtNextBibliography{\tiny}
 \printbibliography
 \end{frame}
 \appendix
+\begin{frame}[label={sec:orgdff3e15}]{Interpreting t-SNE clusters}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+ 
+\begin{center}
+\includesvg[width=200pt]{./.ob-jupyter/c7002c894b6ade243f089aabdefcb2c2b4d07a89}
+\end{center}
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+ 
+\begin{center}
+\includesvg[width=200pt]{./.ob-jupyter/bd7813d2d1d9cd1108cdd457bd977e8fd1a6aa99}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
 \begin{frame}[label={sec:org2d1c8fe}]{Future Work}
 \[
 \hat{y}_i = y_i + \epsilon_i \mbox{ for observations } i=1,…,N
