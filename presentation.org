@@ -2036,26 +2036,26 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :BEAMER_col: 0.7
 :END:
 #+begin_src jupyter-python
-  randdf = screen[~screen.Formula.str.contains(r"Pb", regex=False)][["Formula", "bg_eV"]].sample(10)
-  randdf = randdf.rename(columns={"bg_eV":"band gap [eV]"})
+  randdf = screen[~screen.Formula.str.contains(r"Pb", regex=False)].sort_values("DecoE_eV", ascending=True).head(10)
+  randdf = randdf[["Formula", "bg_eV"]].rename(columns={"bg_eV":"band gap [eV]"})
   randdf
 #+end_src
 
 #+RESULTS:
 :results:
 \scriptsize
-|       | Formula                                   | band gap [eV] |
-|-------+-------------------------------------------+---------------|
-| 18743 | FA0.125K0.750Rb0.125Ca1.000Br1.000        | 1.855247      |
-| 12770 | K1.000Sn1.000Br0.125Cl0.417I0.458         | 1.579396      |
-| 31435 | Cs0.625MA0.375Sr1.000Cl1.000              | 1.914944      |
-| 18623 | FA0.125K0.500MA0.125Rb0.250Sr1.000Br1.000 | 1.646356      |
-| 19146 | FA0.250K0.375MA0.250Rb0.125Sn1.000I1.000  | 1.480291      |
-| 2909  | Rb1.000Ca1.000Br0.250Cl0.167I0.583        | 1.701664      |
-| 13745 | K1.000Ge0.625Sr0.375Br1.000               | 1.705146      |
-| 30268 | Cs0.375FA0.125K0.125MA0.375Sn1.000Cl1.000 | 1.756766      |
-| 1505  | Rb1.000Ge1.000Br0.042Cl0.917I0.042        | 1.900707      |
-| 31436 | Cs0.625MA0.375Sr1.000Br1.000              | 1.971531      |
+|       | Formula                             | band gap [eV] |
+|-------+-------------------------------------+---------------|
+| 19290 | FA0.375Rb0.625Sn1.000I1.000         |          1.98 |
+| 19309 | FA0.375MA0.125Rb0.500Sn1.000Cl1.000 |          1.99 |
+| 19310 | FA0.375MA0.125Rb0.500Sn1.000Br1.000 |          1.95 |
+| 19306 | FA0.375MA0.125Rb0.500Sr1.000Cl1.000 |          1.95 |
+| 19308 | FA0.375MA0.125Rb0.500Sn1.000I1.000  |          1.70 |
+| 19307 | FA0.375MA0.125Rb0.500Sr1.000Br1.000 |          1.96 |
+| 19304 | FA0.375Rb0.625Ba1.000Br1.000        |          1.93 |
+| 19303 | FA0.375Rb0.625Ba1.000Cl1.000        |          1.89 |
+| 19305 | FA0.375MA0.125Rb0.500Sr1.000I1.000  |          1.74 |
+| 19302 | FA0.375Rb0.625Ba1.000I1.000         |          1.68 |
 :end:
 
 #+begin_src jupyter-python :post wrap(*this*, w="260pt")
@@ -2346,22 +2346,41 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 | train     | 0.081978 |
 
 * Summary and Conclusions
-** Review of Work                                                  :B_frame:
+** Seven Step Semiconductor Composition Optimization               :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
-- preexisting data set of ~500 samples from domain of ~40000 single-site mixed compositions
-- extract features using =cmcl=
-- train models of band gaps measured at multiple fidelities
-- ascertain best model
-- analyze model accuracy, interpretability of bias and variance
-- make predictions on whole sample domain
-- Screen for viable candidate compositions
+1. preexisting data set of ~500 samples from domain of ~40000 single-site mixed compositions
+2. extract features using =cmcl=
+3. train models of band gaps measured at multiple fidelities *using nine scoring criterion*
+4. optimize model parameters while selecting for high scores in high-fidelity subsets using =yogi=
+5. test best model, analyze accuracy, interpret predictions.
+6. make predictions on *entire sample space*
+7. screen for viable candidate compositions
 
-** TODO Publications Presentations and Other Contributions         :B_frame:
+** Conclusions                                                     :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
+- RFR yields the best model because
+  - it captures relevant feature interactions as corroborated by Pearson correlations
+  - it flexibly represents nonlinear relationships between feature interactions and band gap
+  - as an ensemble model, it reduces the variance of error
+- SISSO is remarkably accurate for its simplicity but it is limited
+  for high fidelity predictions due to the absence of some fidelity
+  variables
+- GPR has potential for further study alongside graph neural networks
+- *834/1251 candidates are lead free*
+- Top 10 most-stable lead-free compounds A-site mixed and mostly Iodides
+
+** DONE Publications Presentations and Other Contributions         :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-07 Wed 18:43]
+:END:
+
 *** Articles                                                :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.66
@@ -2377,7 +2396,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 :PROPERTIES:
 :BEAMER_col: 0.33
 :END:
-**** presentations                                               :B_block:
+**** Presentations                                               :B_block:
 :PROPERTIES:
 :BEAMER_env: block
 :END:
@@ -2395,19 +2414,6 @@ https://github.com/PanayotisManganaris/
 - =yogi=
 - =spyglass=
 - =pysisso=
-
-** Conclusions                                                     :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-- RFR yields the best model because
-  - it captures relevant feature interactions as corroborated by Pearson correlations
-  - it flexibly represents nonlinear relationships between feature interactions and band gap
-  - as an ensemble model, it reduces the variance of error
-- SISSO is remarkably accurate for its simplicity but it is limited
-  for high fidelity predictions due to the absence of some fidelity
-  variables
-- GPR has potential for further study alongside graph neural networks
 
 * Credit
 ** Acknowledgements                                                :B_frame:
