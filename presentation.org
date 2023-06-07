@@ -686,187 +686,6 @@ will be examined for solutions to these deficiencies using
 - data collected from literature
 - multi-fidelity machine learning
 
-** COMMENT compute distributions
-#+begin_src jupyter-python
-  dist = XX.loc[~X.LoT.isin(['EXP'])].iloc[:, 0:14].replace(
-      0, np.NaN
-  ).melt().dropna()
-
-  dist[['site', 'Element']] = dist['variable'].str.replace(
-      r"[\(\)']", "", regex=True
-  ).str.split(
-      ",", 1, expand=True
-  )
-#+end_src
-
-#+RESULTS:
-:results:
-:end:
-
-#+begin_src jupyter-python
-  def make_percent(df):
-      df = df.assign(variable = df.variable / df.variable.sum() * 100)
-      return df
-#+end_src
-
-#+RESULTS:
-:results:
-:end:
-** DONE Sample of 14-Dimensional Composition Space                 :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2023-06-03 Sat 15:42]
-:END:
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-- 500 unique compositions
-- 5 measurement fidelities
-- 1300 simulated band gaps
-- 90 experimentally measured band gaps
-  
-#+begin_src jupyter-python :post wrap(*this*, w="200pt")
-  p = px.sunburst(Y, path=['LoT','mix'])
-  p.update_layout(
-      margin=dict(l=0, r=0, t=0, b=0),
-      font_size=60
-  )
-  p.update_traces(insidetextorientation='horizontal',
-                  textinfo="label+value")
-  p.show(renderer='svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 200pt
-[[file:./.ob-jupyter/90faa4a4ad85bb6db363729920bb2c449385e86c.svg]]
-:end:
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.5
-:END:
-#+begin_src jupyter-python :post wrap(*this*, w="190pt")
-  freq = dist.groupby(['value', 'site', 'Element']).count().reset_index().sort_values('site')
-
-  p = make_subplots(cols=2, rows=2,
-                    subplot_titles=("A-site", None, "B-site", "X-site"),
-                    shared_xaxes=True,
-                    y_title="Element Frequency (%)",
-                    vertical_spacing=0.15)
-
-  elnum = {'A': 5, 'B': 6, 'X': 3}
-  rowdict = {0:1, 1:2, 2:2}
-  coldict = {0:1, 1:1, 2:2}
-
-  for i, g in enumerate(freq.site.unique()):
-      group = freq[freq.site == g].pipe(make_percent)
-      colors = dict(zip(group['Element'].unique(), px.colors.qualitative.Plotly))
-      traces = []
-      for count, (element, sub) in enumerate(group.groupby('Element')):
-          color_map = colors[element]
-          traces.append(
-              go.Bar(
-                  x=sub['value'], y=sub['variable'], marker=dict(color=color_map),
-                  name=element,
-                  legendgroup=g, legendgrouptitle_text=g[-1]+'-site',
-                  width=0.02, offsetgroup=count
-              )
-          )
-      for trace in traces:
-          p.add_trace(trace, col=coldict[i], row=rowdict[i])
-
-      p.update_xaxes(
-          title='Share of ' + g[-1] + ' Site',
-          title_font_size=30,
-          tickfont_size=24,
-          tickmode='array',
-          tickvals=np.linspace(0,1,9),
-          ticktext=[f'{f.as_integer_ratio()[0]}/{f.as_integer_ratio()[1]}' for f in np.linspace(0,1,9)],
-          col=coldict[i], row=rowdict[i]
-      )
-      p.update_yaxes(col=coldict[i], row=rowdict[i],
-                     tickfont_size=24,)
-
-
-  p.for_each_annotation(lambda a: a.update(font_size=30))
-
-  p.update_layout(
-      legend=dict(
-          bgcolor='rgba(0,0,0,0)',
-          orientation="h",
-          xanchor='center',
-          y=1.0, x=0.77,
-          itemsizing='constant',
-          font_size=20
-      ),
-
-      margin=dict(t=40,b=0,l=70,r=0),
-      width=600, height=700
-  )
-  p.show(renderer='svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 190pt
-[[file:./.ob-jupyter/95b93277e9406ce0d36f9f13562ea1f865cc5ead.svg]]
-:end:
-
-** DONE Collecting Data is Hard                                    :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2023-06-03 Sat 08:37]
-:END:
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.7
-:END:
-experiments take years to perform and much labor to organize
-[cite:@almora-2020-devic-perfor]
-
-#+DOWNLOADED: screenshot @ 2023-05-24 08:01:24
-#+attr_latex: :width 190
-[[file:Data/2023-05-24_08-01-24_screenshot.png]]
-
-\vspace{-0.5cm}DFT calculations take multiple
-- hours to converge at PBE level
-- days to converge at HSE level
-- days more to debug
-Years of work by Professor Arun and Jiaqi have generated
-the largest cubic HaP computational database.[cite:@yang-2023-high-throug]
-
-*** col                                                             :BMCOL:
-:PROPERTIES:
-:BEAMER_col: 0.3
-:END:
-#+begin_src jupyter-python :post wrap(*this*, w="120pt")
-    p = px.box(Y, y="bg_eV", x="LoT",
-               width=400, height=700)
-    p.update_xaxes(title_font_size=24, tickfont_size=30,
-                   tickangle=-35, title=None)
-    p.update_yaxes(title="Band Gap [eV]", title_font_size=30,
-                   tickfont_size=30)
-    p.show('svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 120pt
-#+attr_org: :width 640
-[[file:./.ob-jupyter/3822d7499fa7752e34ad5c4f42ca00509c26cbc3.svg]]
-:end:
-
 ** COMMENT Attractive Properties of Perovskites                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
@@ -1049,6 +868,187 @@ Literature provides examples of known performant ligands:
 # - discuss use of Electronegativity, etc, etc
 # pearson plots solidify the vector concept
 # - Show Correlations with each LoT!
+** COMMENT compute distributions
+#+begin_src jupyter-python
+  dist = XX.loc[~X.LoT.isin(['EXP'])].iloc[:, 0:14].replace(
+      0, np.NaN
+  ).melt().dropna()
+
+  dist[['site', 'Element']] = dist['variable'].str.replace(
+      r"[\(\)']", "", regex=True
+  ).str.split(
+      ",", 1, expand=True
+  )
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  def make_percent(df):
+      df = df.assign(variable = df.variable / df.variable.sum() * 100)
+      return df
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+** DONE Sample of 14-Dimensional Composition Space                 :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-03 Sat 15:42]
+:END:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- 500 unique compositions
+- 5 measurement fidelities
+- 1300 simulated band gaps
+- 90 experimentally measured band gaps
+  
+#+begin_src jupyter-python :post wrap(*this*, w="200pt")
+  p = px.sunburst(Y, path=['LoT','mix'])
+  p.update_layout(
+      margin=dict(l=0, r=0, t=0, b=0),
+      font_size=60
+  )
+  p.update_traces(insidetextorientation='horizontal',
+                  textinfo="label+value")
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 200pt
+[[file:./.ob-jupyter/90faa4a4ad85bb6db363729920bb2c449385e86c.svg]]
+:end:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="190pt")
+  freq = dist.groupby(['value', 'site', 'Element']).count().reset_index().sort_values('site')
+
+  p = make_subplots(cols=2, rows=2,
+                    subplot_titles=("A-site", None, "B-site", "X-site"),
+                    shared_xaxes=True,
+                    y_title="Element Frequency (%)",
+                    vertical_spacing=0.15)
+
+  elnum = {'A': 5, 'B': 6, 'X': 3}
+  rowdict = {0:1, 1:2, 2:2}
+  coldict = {0:1, 1:1, 2:2}
+
+  for i, g in enumerate(freq.site.unique()):
+      group = freq[freq.site == g].pipe(make_percent)
+      colors = dict(zip(group['Element'].unique(), px.colors.qualitative.Plotly))
+      traces = []
+      for count, (element, sub) in enumerate(group.groupby('Element')):
+          color_map = colors[element]
+          traces.append(
+              go.Bar(
+                  x=sub['value'], y=sub['variable'], marker=dict(color=color_map),
+                  name=element,
+                  legendgroup=g, legendgrouptitle_text=g[-1]+'-site',
+                  width=0.02, offsetgroup=count
+              )
+          )
+      for trace in traces:
+          p.add_trace(trace, col=coldict[i], row=rowdict[i])
+
+      p.update_xaxes(
+          title='Share of ' + g[-1] + ' Site',
+          title_font_size=30,
+          tickfont_size=24,
+          tickmode='array',
+          tickvals=np.linspace(0,1,9),
+          ticktext=[f'{f.as_integer_ratio()[0]}/{f.as_integer_ratio()[1]}' for f in np.linspace(0,1,9)],
+          col=coldict[i], row=rowdict[i]
+      )
+      p.update_yaxes(col=coldict[i], row=rowdict[i],
+                     tickfont_size=24,)
+
+
+  p.for_each_annotation(lambda a: a.update(font_size=30))
+
+  p.update_layout(
+      legend=dict(
+          bgcolor='rgba(0,0,0,0)',
+          orientation="h",
+          xanchor='center',
+          y=1.0, x=0.77,
+          itemsizing='constant',
+          font_size=20
+      ),
+
+      margin=dict(t=40,b=0,l=70,r=0),
+      width=600, height=700
+  )
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 190pt
+[[file:./.ob-jupyter/95b93277e9406ce0d36f9f13562ea1f865cc5ead.svg]]
+:end:
+
+** DONE Collecting Data is Hard                                    :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-03 Sat 08:37]
+:END:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
+experiments take years to perform and much labor to organize
+[cite:@almora-2020-devic-perfor]
+
+#+DOWNLOADED: screenshot @ 2023-05-24 08:01:24
+#+attr_latex: :width 190
+[[file:Data/2023-05-24_08-01-24_screenshot.png]]
+
+\vspace{-0.5cm}DFT calculations take multiple
+- hours to converge at PBE level
+- days to converge at HSE level
+- days more to debug
+Years of work by Professor Arun and Jiaqi have generated
+the largest cubic HaP computational database.[cite:@yang-2023-high-throug]
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="120pt")
+    p = px.box(Y, y="bg_eV", x="LoT",
+               width=400, height=700)
+    p.update_xaxes(title_font_size=24, tickfont_size=30,
+                   tickangle=-35, title=None)
+    p.update_yaxes(title="Band Gap [eV]", title_font_size=30,
+                   tickfont_size=30)
+    p.show('svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 120pt
+#+attr_org: :width 640
+[[file:./.ob-jupyter/3822d7499fa7752e34ad5c4f42ca00509c26cbc3.svg]]
+:end:
+
 ** Effect of DFT Functionals on Our Perovskites Data               :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
