@@ -659,9 +659,14 @@ Finally I performed hyper-parameter optimization by exhaustive grid search using
 [[file:./.ob-jupyter/1a3fd80c6a22dbce291d740dbb832e523b9d11eb.svg]]
 :end:
 
-The optimized models were the high performing (Table ref:tbl:LoTscores).
-The RFR hyper-parameters are listed in the appendix (Table ref:tbl:rfrHPO).
+Following hyperparameter optimization, the random forest model was the best performing compared to the gaussian process and SISSO regressions.
+It boasts an RMSE error on the total dataset of only 0.12 \unit{\electronvolts}.
+This combined with its RMSE error of 0.15 \unit{\electronvolts} on the experimental fidelity subset promises this model can make quality predictions of the band gap at the experimental fidelity.
+See table ref:tbl:LoTscores.
+This error compares favorably with the best models currently ranked by the Materials Project's MatBench standard[cite:@dunn-2020-bench-mater].
+My models use the stoichiometry of the compositions while the MatBench models require atomic structures in addition to stoichiometric information.
 
+The RFR hyper-parameters are listed in the appendix (Table ref:tbl:rfrHPO).
 The GPR model was tried with multiple kernels.
 Ultimately, the best was a non stationary Matern kernel with \(\nu = \frac{3}{2}\).
 
