@@ -1,4 +1,4 @@
-% Created 2023-06-03 Sat 18:08
+% Created 2023-06-07 Wed 10:58
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -197,8 +197,8 @@ inkscapedpi=300,
 \end{frame}
 
 \section{Background}
-\label{sec:orgc2eb295}
-\begin{frame}[label={sec:org8f7bb02}]{Photovoltaic (PV) Power Generation}
+\label{sec:org2b7a124}
+\begin{frame}[label={sec:orgfd91270}]{Photovoltaic (PV) Power Generation}
 \begin{columns}
 \begin{column}{0.3\columnwidth}
 \begin{center}
@@ -244,7 +244,7 @@ E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
 \end{column}
 \end{columns}
 \end{frame}
-\begin{frame}[label={sec:orgf79d3a7}]{Rapid Rise of Perovskite Photovoltaics}
+\begin{frame}[label={sec:org799d2cc}]{Rapid Rise of Perovskite Photovoltaics}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{center}
@@ -268,41 +268,7 @@ E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgae32b47}]{What's a Perovskite?}
-Notable oxide perovskites and properties circa 2006
-\autocite{jiang-2006-predic-lattic}
-\begin{columns}
-\begin{column}{0.5\columnwidth}
-\small
-\begin{center}
-\begin{tabular}{ll}
-<K,Ba>BiO3 & super-conduction\\[0pt]
-Pb<Zr,Ti>O3 & piezoelectric action\\[0pt]
-Pb<Mb,Mg>O3 & relaxor ferroelectric\\[0pt]
-BaTiO3 & dielectric properties\\[0pt]
-\end{tabular}
-\end{center}
-\end{column}
-\begin{column}{0.5\columnwidth}
-\small
-\begin{center}
-\begin{tabular}{ll}
-Pb<Zr,Ti>O3 & electro-optic\\[0pt]
-LaMnO3 & magneto-resistance\\[0pt]
-LaCrO3 & catalytic\\[0pt]
-BaCeO3 & photonic conductivity\\[0pt]
-\end{tabular}
-\end{center}
-\end{column}
-\end{columns}
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=170]{Introduction_To_Perovskites/2022-07-14_15-32-57_screenshot.png}
-\caption{Barium Titanate functional ceramic}
-\end{figure}
-\end{frame}
-
-\begin{frame}[label={sec:orgf525afb}]{Halide Perovskites}
+\begin{frame}[label={sec:org25984b2}]{Halide Perovskites}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{itemize}
@@ -342,7 +308,7 @@ X-site & I & Br & Cl &  &  & \\[0pt]
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgeecffb6}]{Perovskite Formability}
+\begin{frame}[label={sec:org88fcc44}]{Perovskite Formability}
 \begin{itemize}
 \item A must be much larger than B for Perovskite formation
 \item Various tolerance factors have been designed to describe this constraint
@@ -379,8 +345,8 @@ The following definitions approximate \(\alpha\) phase stability
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orga3ff486}]{My Thesis Research Overview}
 the work we did in \citetitle{yang-2023-high-throug}
+\begin{frame}[label={sec:orgb696d80}]{My Thesis Research Overview}
 \begin{itemize}
 \item created the multi-fidelity dataset covering the chemical domain
 \item decided the screening criterion used to judge viability of compositions
@@ -407,7 +373,7 @@ The work I did in \citetitle{manganaris-2023-multi-fidel}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgbeee08e}]{Design Goals in \alert{14-Dimensional} Composition Space}
+\begin{frame}[label={sec:orgc0e6297}]{Design Goals in \alert{14-Dimensional} Composition Space}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{block}{Deficiencies in Leading Perovskite PVs}
@@ -447,7 +413,7 @@ will be examined for solutions to these deficiencies using
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org3024697}]{Sample of 14-Dimensional Composition Space}
+\begin{frame}[label={sec:org2a430f1}]{Sample of 14-Dimensional Composition Space}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{itemize}
@@ -472,7 +438,7 @@ will be examined for solutions to these deficiencies using
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgbc51b19}]{Collecting Data is Hard}
+\begin{frame}[label={sec:orgc68b8e9}]{Collecting Data is Hard}
 \begin{columns}
 \begin{column}{0.7\columnwidth}
 experiments take years to perform and much labor to organize
@@ -502,8 +468,8 @@ the largest cubic HaP computational database.\autocite{yang-2023-high-throug}
 \end{frame}
 
 \section{Computational Methods In Materials Science}
-\label{sec:org75af648}
-\begin{frame}[label={sec:org8d1a790}]{Density Functional Theory (DFT)}
+\label{sec:org0c138b5}
+\begin{frame}[label={sec:org1ee19d0}]{Density Functional Theory (DFT)}
 \begin{itemize}
 \item Higher levels of theory (LoT) approximations of \(\hat{U}(n)\) account for more physics.
 \item VASP is used to perform these calculations at the appropriate LoT.
@@ -541,7 +507,7 @@ E = \bra{\psi}\hat{H}\ket{\psi} \implies E(n) &= \hat{T}(n) + \hat{U}(n) + \hat{
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org2be761c}]{DFT Calculation of Perovskite Band Gaps in Literature}
+\begin{frame}[label={sec:orgebb9776}]{DFT Calculation of Perovskite Band Gaps in Literature}
 \begin{center}
 \includegraphics[width=.9\linewidth]{Computational_Methods_In_Materials_Science/2023-05-24_05-33-49_screenshot.png}
 \end{center}
@@ -549,7 +515,7 @@ E = \bra{\psi}\hat{H}\ket{\psi} \implies E(n) &= \hat{T}(n) + \hat{U}(n) + \hat{
 HSE06 improves band gap predictions compared to PBE\autocite{chan-2010-effic-band}
 \end{frame}
 
-\begin{frame}[label={sec:org935614a}]{Machine Learning for Property Prediction}
+\begin{frame}[label={sec:org91eade9}]{Machine Learning for Property Prediction}
 \begin{columns}
 \begin{column}{0.7\columnwidth}
 \begin{center}
@@ -571,7 +537,7 @@ predict anything/make decisions\autocite{pablo-2019-new-front}
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org7af7803}]{Data Driven Framework for Perovskite Discovery}
+\begin{frame}[label={sec:org7c180a5}]{Data Driven Framework for Perovskite Discovery}
 \begin{center}
 \includegraphics[width=390]{DDD-flowchart.png}
 \end{center}
@@ -582,15 +548,15 @@ via ongoing inverse design work
 \end{frame}
 
 \section{Data}
-\label{sec:org4fbfe4c}
-\begin{frame}[label={sec:org1213889}]{Effect of DFT Functionals Levels of Theory}
+\label{sec:org8595ee1}
+\begin{frame}[label={sec:orgbf08fa9}]{Effect of DFT Functionals Levels of Theory}
  
 \begin{center}
 \includesvg[width=400pt]{./.ob-jupyter/618bfd7f0900f6415f0a4a0a8c242c95ccd16e7e}
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:org67a5bb5}]{Spectroscopic Limited Maximum Efficiency (SLME)}
+\begin{frame}[label={sec:org4e1033f}]{Spectroscopic Limited Maximum Efficiency (SLME)}
 SLME accounts for more energetic processes than Shockley-Queisser
 criterion (\(bg \approx 1.3\)) allowing selection on range of bandgaps
 determined according to level of theory\autocite[p.1]{yu-2012-ident-poten}
@@ -616,7 +582,7 @@ spectrum intensity of sunlight \(I_{sun}\), and the power \(P\) are
 all that is needed.
 \end{frame}
 
-\begin{frame}[label={sec:org13139b2}]{Absorbance Relates to Efficiency via Band Gap in Our Data}
+\begin{frame}[label={sec:org45dd923}]{Absorbance Relates to Efficiency via Band Gap in Our Data}
  
 \begin{center}
 \includesvg[width=370pt]{./.ob-jupyter/64174f234626288aaaca8eb9d0ba24f1cfdbe000}
@@ -629,7 +595,7 @@ Inform screening criterion reported by these results\autocite{yang-2023-high-thr
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgbc7713d},fragile]{Describing a Halide Perovskite}
+\begin{frame}[label={sec:org0e9f8a0},fragile]{Describing a Halide Perovskite}
  \begin{columns}
 \begin{column}{0.4\columnwidth}
 \begin{block}{14 Dimensional Chemical Vector}
@@ -665,7 +631,7 @@ MAPb(I0.9Br0.1)3   NaN  1.0  NaN  2.7  1.0  0.3
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org06edba0}]{40000 Composition Vectors projected to 2D}
+\begin{frame}[label={sec:org3c59447}]{40000 Composition Vectors projected to 2D}
 \begin{columns}
 \begin{column}{0.4\columnwidth}
 \begin{itemize}
@@ -687,7 +653,7 @@ MAPb(I0.9Br0.1)3   NaN  1.0  NaN  2.7  1.0  0.3
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org8b81894}]{Constituent Properties}
+\begin{frame}[label={sec:org8a3778e}]{Constituent Properties}
 \begin{block}{Twelve Properties per \(\ce{ABX_3}\) constituent}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
@@ -718,7 +684,7 @@ compute by averaging elemental properties obtained from Mendeleev database
 by atomic weight of constituent in compount
 \end{frame}
 
-\begin{frame}[label={sec:org556d4ae}]{Correlating Band Gap with 36 Dimensional Property vector}
+\begin{frame}[label={sec:orgba4745d}]{Correlating Band Gap with 36 Dimensional Property vector}
 band gap at higher levels of theory correlate with composition differently\autocite{yang-2023-high-throug}
 
  
@@ -728,8 +694,8 @@ band gap at higher levels of theory correlate with composition differently\autoc
 \end{frame}
 
 \section{Multi-Fidelity Learning}
-\label{sec:orgbf8bf45}
-\begin{frame}[label={sec:orgf869438}]{Multi-fidelity Machine Learning}
+\label{sec:orgacc14e3}
+\begin{frame}[label={sec:org4baaeb2}]{Multi-fidelity Machine Learning}
 \[
 \hat{y}_i = y_i + \epsilon_i \mbox{ for observations } i=1,…,N
 \]
@@ -748,7 +714,7 @@ band gap at higher levels of theory correlate with composition differently\autoc
 \end{itemize}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:org3286982}]{Random Forest Regression (RFR)}
+\begin{frame}[label={sec:org8dceefc}]{Random Forest Regression (RFR)}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{center}
@@ -771,7 +737,7 @@ The forest of random trees averages many paths
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgfd8b324}]{Gaussian Process Regression (GPR)}
+\begin{frame}[label={sec:org00bed4f}]{Gaussian Process Regression (GPR)}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 Informally, GPRs "remember" the training examples and judge unlabeled
@@ -815,7 +781,7 @@ the similarity function \(k(x, x')\)
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org5671a7a}]{Sure-Independence Screening and Sparsifying Operator (SISSO)}
+\begin{frame}[label={sec:org9836bfe}]{Sure-Independence Screening and Sparsifying Operator (SISSO)}
 Resulting in parsimonious models, e.g. for fatigue strength\autocite{he-2021-learn-inter}
 \begin{columns}
 \begin{column}{0.45\columnwidth}
@@ -846,7 +812,7 @@ Notice SIS re-iterations explain the residual\autocite{ghiringhelli-2017-learn-p
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgcefb415},fragile]{Tuning Multi-Fidelity Model Performance by Selecting Hyper-parameters}
+\begin{frame}[label={sec:org09b4d28},fragile]{Tuning Multi-Fidelity Model Performance by Selecting Hyper-parameters}
  \begin{columns}
 \begin{column}{0.7\columnwidth}
 \begin{center}
@@ -877,8 +843,8 @@ HP scoring via \texttt{Yogi} tools and SciKit-Learn\autocite{manganaris-2022-mrs
 \end{frame}
 
 \section{Models}
-\label{sec:orga9c4317}
-\begin{frame}[label={sec:org25d419c}]{Model Training Method}
+\label{sec:org8e1df55}
+\begin{frame}[label={sec:org2f549a8}]{Model Training Method}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{enumerate}
@@ -912,7 +878,7 @@ HP scoring via \texttt{Yogi} tools and SciKit-Learn\autocite{manganaris-2022-mrs
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgd1a201b}]{Test 282 Band Gap Predictions}
+\begin{frame}[label={sec:orga987518}]{Test 282 Band Gap Predictions}
  
 \begin{center}
 \includesvg[width=400pt]{./.ob-jupyter/3133b81a112f13e387878a1d018b864f057d9f03}
@@ -933,7 +899,7 @@ Best SISSO model using only 11 features outperforms OLS on 55 features
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgbc738aa}]{Compare RMSE of different subsets}
+\begin{frame}[label={sec:orgfdc5018}]{Compare RMSE of different subsets}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{center}
@@ -963,7 +929,7 @@ rmse HSE-PBE(SOC) & 0.13 & 0.13 & 0.47\\[0pt]
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgefc13f8}]{SISSO Expression}
+\begin{frame}[label={sec:org84588af}]{SISSO Expression}
 \begin{align*}
 bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
                        &-(B;\mbox{electron affinity}+B;\mbox{ionization energy}))\\
@@ -973,7 +939,7 @@ bg\mbox{ [eV]} = 1.752 &((X;\mbox{electronegativity}*A;\mbox{heat of fusion})\\
 \end{align*}
 \end{frame}
 
-\begin{frame}[label={sec:org72e6309}]{Shapely Additive Explanation (SHAP)}
+\begin{frame}[label={sec:orgc301ee3}]{Shapely Additive Explanation (SHAP)}
 SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \autocite{lundberg-2017-unified-approac}
 
@@ -982,15 +948,15 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgd8966a7}]{SHAP Analyze RFR}
+\begin{frame}[label={sec:org9fce750}]{SHAP Analyze RFR}
 \begin{center}
 \includegraphics[width=350]{Models/2023-05-24_09-40-46_screenshot.png}
 \end{center}
 \end{frame}
 
 \section{Discovery of Suitable Compositions}
-\label{sec:orgf679947}
-\begin{frame}[label={sec:org5da78f8}]{Make Predictions on \alert{40000} Hypothetical Compounds}
+\label{sec:org9d17fc3}
+\begin{frame}[label={sec:org57313ed}]{Make Predictions on \alert{40000} Hypothetical Compounds}
 \begin{columns}
 \begin{column}{0.4\columnwidth}
 \begin{itemize}
@@ -1009,7 +975,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org9650d6a}]{Screening Yields}
+\begin{frame}[label={sec:org0a19ef5}]{Screening Yields}
 \begin{columns}
 \begin{column}{0.3\columnwidth}
 \begin{center}
@@ -1044,7 +1010,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgc050f95}]{Screened Constituent Frequencies}
+\begin{frame}[label={sec:orge219a05}]{Screened Constituent Frequencies}
  
 \begin{center}
 \includesvg[width=400pt]{./.ob-jupyter/6319952505071b95f6f19f67c253faafb5f46d15}
@@ -1073,7 +1039,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgb88ffa3}]{Interpreting t-SNE clusters}
+\begin{frame}[label={sec:org8c40697}]{Interpreting t-SNE clusters}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
  
@@ -1092,8 +1058,8 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{frame}
 
 \section{Summary and Conclusions}
-\label{sec:org88fb796}
-\begin{frame}[label={sec:orgdd18e1b},fragile]{Review of Work}
+\label{sec:org0875c50}
+\begin{frame}[label={sec:orgbe8b3aa},fragile]{Review of Work}
  \begin{itemize}
 \item preexisting data set of \textasciitilde{}500 samples from domain of \textasciitilde{}40000 single-site mixed compositions
 \item extract features using \texttt{cmcl}
@@ -1105,7 +1071,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org42331f2},fragile]{Publications Presentations and Other Contributions}
+\begin{frame}[label={sec:org46a7e04},fragile]{Publications Presentations and Other Contributions}
  \begin{columns}
 \begin{column}{0.66\columnwidth}
 \begin{block}{Articles}
@@ -1142,7 +1108,7 @@ SHAP values quantify the contribution of a feature \(x_i \in X\) to a prediction
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgd66f1bf}]{Conclusions}
+\begin{frame}[label={sec:orgd8888fb}]{Conclusions}
 \begin{itemize}
 \item RFR yields the best model because
 \begin{itemize}
@@ -1158,8 +1124,8 @@ variables
 \end{frame}
 
 \section{Credit}
-\label{sec:org1adad09}
-\begin{frame}[label={sec:orgc3b3462}]{Acknowledgements}
+\label{sec:org8d1a04b}
+\begin{frame}[label={sec:orgc86571d}]{Acknowledgements}
 \begin{columns}
 \begin{column}{0.6\columnwidth}
 \begin{block}{Research Group}
@@ -1189,19 +1155,19 @@ RCAC Bell Computing Cluster
 \end{columns}
 \end{frame}
 \section{Bib}
-\label{sec:org51f55c6}
+\label{sec:orgdff3e15}
 \begin{frame}[allowframebreaks]{References}
 \AtNextBibliography{\tiny}
 \printbibliography
 \end{frame}
 \appendix
-\begin{frame}[label={sec:org90885e3}]{Data Pre-Processing}
+\begin{frame}[label={sec:org2d1c8fe}]{Data Pre-Processing}
 \begin{center}
 \includegraphics[width=300]{/home/panos/Pictures/flowcharts/data_proc.png}
 \end{center}
 Data pre-processing Workflow to Implement with Python Pandas
 \end{frame}
-\begin{frame}[label={sec:orgb48b12c}]{DFT Functionals Effect Band Structure Calculation in HaPs}
+\begin{frame}[label={sec:orgfb798ca}]{DFT Functionals Effect Band Structure Calculation in HaPs}
 \begin{itemize}
 \item D3
 \item SOC
@@ -1212,7 +1178,7 @@ Data pre-processing Workflow to Implement with Python Pandas
 \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgf6ed93b}]{SHAP Analyze GPR}
+\begin{frame}[label={sec:org5369737}]{SHAP Analyze GPR}
 \begin{center}
 \includegraphics[width=350]{Models/2023-05-24_09-42-08_screenshot.png}
 \end{center}

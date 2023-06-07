@@ -322,7 +322,7 @@ E_\gamma = \hbar\omega &= bg\,\si{\joule} \\
   - superconductors
   - quantum bits
 
-** DONE What's a Perovskite?                                       :B_frame:
+** DONE COMMENT What's a Perovskite?                                       :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
