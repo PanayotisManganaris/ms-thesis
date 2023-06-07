@@ -458,7 +458,7 @@ The following definitions approximate \alpha phase stability
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2023-06-03 Sat 14:10]
 :END:
-the work we did in [cite/title:@yang-2023-high-throug]
+the work we did in [cite/title:@yang-2023-high-throug][cite:@yang-2023-high-throug]
 - created the multi-fidelity dataset covering the chemical domain
 - decided the screening criterion used to judge viability of compositions
 
@@ -468,7 +468,7 @@ the work we did in [cite/title:@yang-2023-high-throug]
 | B-site | Pb | Sn | Ge | Ba | Sr | Ca |
 | X-site | I  | Br | Cl |    |    |    |
 
-The work I did in [cite/title:@manganaris-2023-multi-fidel]
+The work I did in [cite/title:@manganaris-2023-multi-fidel][cite:@manganaris-2023-multi-fidel]
 - methods for predicting band gaps at experimental fidelity
   - open-source tools developed for this work
   - made available to the broader materials science community
