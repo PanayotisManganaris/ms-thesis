@@ -468,6 +468,113 @@ o=\frac{r_B}{r_X}
 \tau < 4.18
 \]
 
+** DONE Spectroscopic Limited Maximum Efficiency (SLME)            :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-03 Sat 17:00]
+:END:
+SLME accounts for more energetic processes than Shockley-Queisser
+criterion (\(bg \approx 1.3\)) allowing selection on range of bandgaps
+determined according to level of theory[cite:@yu-2012-ident-poten p.1]
+
+\[
+a(E)=1-e^{-2\alpha(E)L}
+\]
+
+Here, \(\alpha(E)\) is the DFT computed optical absorption coefficient
+as a function of incident photon energy and \(L\) is the thickness of
+the absorber.
+
+\[
+J=e\int_{0}^{\infty} a(E)I_{sun}(E)dE - J_{0}(1-e^{\frac{eV}{kT}})
+\]
+
+\[
+\eta = \frac{P_{m}}{P_{in}}=\frac{\max(J \times V)}{P_{in}}
+\]
+
+To calculate SLME efficiency the current density \(J\), the light
+spectrum intensity of sunlight \(I_{sun}\), and the power \(P\) are
+all that is needed.
+
+** DONE Absorbance Relates to Efficiency via Band Gap in Our Data  :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+:LOGBOOK:
+- State "DONE"       from              [2023-05-26 Fri 15:21]
+:END:
+#+begin_src jupyter-python :post wrap(*this*, w="370pt")
+  p0 = make_subplots(rows=1, cols=2, shared_yaxes=True)
+
+  p1 = px.scatter(
+      Y[Y.LoT == "EXP"], x="bg_eV", y="efficiency", color="mix",
+  )
+  p2 = px.scatter(
+      Y[Y.LoT == "PBE"], x="bg_eV", y="efficiency", color="mix",
+  )
+
+  for trace1, trace2 in zip(p1.data, p2.data):
+      p0.add_trace(trace1, row=1, col=1)
+      p0.add_trace(trace2, row=1, col=2)
+
+  p0.update_xaxes(
+      range=(0, 4), title="Band Gap [eV]",
+      tickfont_size=20
+  )
+  p0.update_yaxes(
+      tickfont_size=20
+  )
+  p0.update_yaxes(row=1, col=1,
+                 title="Power Conversion Efficiency",
+                 )
+  p0.update_yaxes(row=1, col=2,
+                 title="SLME for PBE<br>Absorption Spectra",
+                 )
+
+  h_lin1 = go.layout.Shape(type='line',
+                           x0=1.0, y0=0.0,
+                           x1=1.0, y1=0.25,
+                           line=dict(color='black', width=2))
+  h_lin2 = go.layout.Shape(type='line',
+                           x0=2.0, y0=0.0,
+                           x1=2.0, y1=0.25,
+                           line=dict(color='black', width=2))
+  v_line = go.layout.Shape(type='line',
+                           x0=0.0, y0=0.15,
+                           x1=4.0, y1=0.15,
+                           line=dict(color='black', width=2))
+  rect = go.layout.Shape(type='rect', #line=dict(color='blue', width=2)
+                         x0=1.0, y0=0.15,
+                         x1=2.0, y1=0.25,
+                         fillcolor='blue', opacity=0.2)
+  p0.add_shape(h_lin1, row=1, col=2)
+  p0.add_shape(h_lin2, row=1, col=2)
+  p0.add_shape(v_line, row=1, col=2)
+  p0.add_shape(rect, row=1, col=2)
+
+  p0.update_layout(
+      margin=dict(t=0,b=0,l=0,r=0),
+      showlegend=False,
+      width=800, height=300
+  )
+
+  p0.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 370pt
+[[file:./.ob-jupyter/64174f234626288aaaca8eb9d0ba24f1cfdbe000.svg]]
+:end:
+
+Inform screening criterion reported by these results[cite:@yang-2023-high-throug] 
+- SLME used as computational proxy for PCE
+- Experimental data[cite:@almora-2020-devic-perfor] broadly agrees with PBE simulation
+
 ** DONE My Thesis Research Overview                                :B_frame:
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2023-06-03 Sat 14:10]
@@ -982,113 +1089,6 @@ Literature provides examples of known performant ligands:
 #+attr_latex: :width 400pt
 [[file:./.ob-jupyter/618bfd7f0900f6415f0a4a0a8c242c95ccd16e7e.svg]]
 :end:
-
-** DONE Spectroscopic Limited Maximum Efficiency (SLME)            :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2023-06-03 Sat 17:00]
-:END:
-SLME accounts for more energetic processes than Shockley-Queisser
-criterion (\(bg \approx 1.3\)) allowing selection on range of bandgaps
-determined according to level of theory[cite:@yu-2012-ident-poten p.1]
-
-\[
-a(E)=1-e^{-2\alpha(E)L}
-\]
-
-Here, \(\alpha(E)\) is the DFT computed optical absorption coefficient
-as a function of incident photon energy and \(L\) is the thickness of
-the absorber.
-
-\[
-J=e\int_{0}^{\infty} a(E)I_{sun}(E)dE - J_{0}(1-e^{\frac{eV}{kT}})
-\]
-
-\[
-\eta = \frac{P_{m}}{P_{in}}=\frac{\max(J \times V)}{P_{in}}
-\]
-
-To calculate SLME efficiency the current density \(J\), the light
-spectrum intensity of sunlight \(I_{sun}\), and the power \(P\) are
-all that is needed.
-
-** DONE Absorbance Relates to Efficiency via Band Gap in Our Data  :B_frame:
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-:LOGBOOK:
-- State "DONE"       from              [2023-05-26 Fri 15:21]
-:END:
-#+begin_src jupyter-python :post wrap(*this*, w="370pt")
-  p0 = make_subplots(rows=1, cols=2, shared_yaxes=True)
-
-  p1 = px.scatter(
-      Y[Y.LoT == "EXP"], x="bg_eV", y="efficiency", color="mix",
-  )
-  p2 = px.scatter(
-      Y[Y.LoT == "PBE"], x="bg_eV", y="efficiency", color="mix",
-  )
-
-  for trace1, trace2 in zip(p1.data, p2.data):
-      p0.add_trace(trace1, row=1, col=1)
-      p0.add_trace(trace2, row=1, col=2)
-
-  p0.update_xaxes(
-      range=(0, 4), title="Band Gap [eV]",
-      tickfont_size=20
-  )
-  p0.update_yaxes(
-      tickfont_size=20
-  )
-  p0.update_yaxes(row=1, col=1,
-                 title="Power Conversion Efficiency",
-                 )
-  p0.update_yaxes(row=1, col=2,
-                 title="SLME for PBE<br>Absorption Spectra",
-                 )
-
-  h_lin1 = go.layout.Shape(type='line',
-                           x0=1.0, y0=0.0,
-                           x1=1.0, y1=0.25,
-                           line=dict(color='black', width=2))
-  h_lin2 = go.layout.Shape(type='line',
-                           x0=2.0, y0=0.0,
-                           x1=2.0, y1=0.25,
-                           line=dict(color='black', width=2))
-  v_line = go.layout.Shape(type='line',
-                           x0=0.0, y0=0.15,
-                           x1=4.0, y1=0.15,
-                           line=dict(color='black', width=2))
-  rect = go.layout.Shape(type='rect', #line=dict(color='blue', width=2)
-                         x0=1.0, y0=0.15,
-                         x1=2.0, y1=0.25,
-                         fillcolor='blue', opacity=0.2)
-  p0.add_shape(h_lin1, row=1, col=2)
-  p0.add_shape(h_lin2, row=1, col=2)
-  p0.add_shape(v_line, row=1, col=2)
-  p0.add_shape(rect, row=1, col=2)
-
-  p0.update_layout(
-      margin=dict(t=0,b=0,l=0,r=0),
-      showlegend=False,
-      width=800, height=300
-  )
-
-  p0.show(renderer='svg')
-#+end_src
-
-#+RESULTS:
-:results:
- 
-#+attr_latex: :width 370pt
-[[file:./.ob-jupyter/64174f234626288aaaca8eb9d0ba24f1cfdbe000.svg]]
-:end:
-
-Inform screening criterion reported by these results[cite:@yang-2023-high-throug] 
-- SLME used as computational proxy for PCE
-- Experimental data[cite:@almora-2020-devic-perfor] broadly agrees with PBE simulation
 
 ** Describing a Halide Perovskite                                  :B_frame:
 :PROPERTIES:

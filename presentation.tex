@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 19:16
+% Created 2023-06-07 Wed 19:23
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -212,7 +212,7 @@ inkscapedpi=300,
 \end{frame}
 
 \section{Devices and Perovskites Background}
-\label{sec:org2b7a124}
+\label{sec:orgebb9776}
 \begin{frame}[label={sec:orgfd91270}]{Photovoltaic (PV) Power Generation}
 \begin{columns}
 \begin{column}{0.3\columnwidth}
@@ -373,7 +373,46 @@ o=\frac{r_B}{r_X}
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgb696d80}]{My Thesis Research Overview}
+\begin{frame}[label={sec:orgb696d80}]{Spectroscopic Limited Maximum Efficiency (SLME)}
+SLME accounts for more energetic processes than Shockley-Queisser
+criterion (\(bg \approx 1.3\)) allowing selection on range of bandgaps
+determined according to level of theory\autocite[p.1]{yu-2012-ident-poten}
+
+\[
+a(E)=1-e^{-2\alpha(E)L}
+\]
+
+Here, \(\alpha(E)\) is the DFT computed optical absorption coefficient
+as a function of incident photon energy and \(L\) is the thickness of
+the absorber.
+
+\[
+J=e\int_{0}^{\infty} a(E)I_{sun}(E)dE - J_{0}(1-e^{\frac{eV}{kT}})
+\]
+
+\[
+\eta = \frac{P_{m}}{P_{in}}=\frac{\max(J \times V)}{P_{in}}
+\]
+
+To calculate SLME efficiency the current density \(J\), the light
+spectrum intensity of sunlight \(I_{sun}\), and the power \(P\) are
+all that is needed.
+\end{frame}
+
+\begin{frame}[label={sec:orgc0e6297}]{Absorbance Relates to Efficiency via Band Gap in Our Data}
+ 
+\begin{center}
+\includesvg[width=370pt]{./.ob-jupyter/64174f234626288aaaca8eb9d0ba24f1cfdbe000}
+\end{center}
+
+Inform screening criterion reported by these results\autocite{yang-2023-high-throug} 
+\begin{itemize}
+\item SLME used as computational proxy for PCE
+\item Experimental data\autocite{almora-2020-devic-perfor} broadly agrees with PBE simulation
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org2a430f1}]{My Thesis Research Overview}
 The work we did in \citetitle{yang-2023-high-throug}\autocite{yang-2023-high-throug}
 \begin{itemize}
 \item created the multi-fidelity dataset covering the chemical domain
@@ -401,7 +440,7 @@ The work I did in \citetitle{manganaris-2023-multi-fidel}\autocite{manganaris-20
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgc0e6297}]{Design Goals in \alert{14-Dimensional} Composition Space}
+\begin{frame}[label={sec:orgc68b8e9}]{Design Goals in \alert{14-Dimensional} Composition Space}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{block}{Deficiencies in Leading Perovskite PVs}
@@ -441,7 +480,7 @@ will be examined for solutions to these deficiencies using
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org2a430f1}]{Sample of 14-Dimensional Composition Space}
+\begin{frame}[label={sec:org2b7a124}]{Sample of 14-Dimensional Composition Space}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{itemize}
@@ -466,7 +505,7 @@ will be examined for solutions to these deficiencies using
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgc68b8e9}]{Collecting Data is Hard}
+\begin{frame}[label={sec:org1ee19d0}]{Collecting Data is Hard}
 \begin{columns}
 \begin{column}{0.7\columnwidth}
 experiments take years to perform and much labor to organize
@@ -496,8 +535,8 @@ the largest cubic HaP computational database.\autocite{yang-2023-high-throug}
 \end{frame}
 
 \section{Computational Methods In Materials Science}
-\label{sec:org0c138b5}
-\begin{frame}[label={sec:org1ee19d0}]{Density Functional Theory and Simulation Fidelities}
+\label{sec:org4e1033f}
+\begin{frame}[label={sec:org91eade9}]{Density Functional Theory and Simulation Fidelities}
 Vienna \emph{ab initio} Simulation Program (VASP)\autocite{kresse-1996-effic-iterat} computes
 \begin{enumerate}
 \item ground state atomic structure of perovskite
@@ -522,7 +561,7 @@ Spin Orbit Coupling (SOC) Accounts for relativistic effects near heavy nuclei
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:orgebb9776}]{DFT Calculation of Perovskite Band Gaps in Literature}
+\begin{frame}[label={sec:org7c180a5}]{DFT Calculation of Perovskite Band Gaps in Literature}
 \begin{center}
 \includegraphics[width=.9\linewidth]{Computational_Methods_In_Materials_Science/2023-05-24_05-33-49_screenshot.png}
 \end{center}
@@ -530,7 +569,7 @@ Spin Orbit Coupling (SOC) Accounts for relativistic effects near heavy nuclei
 HSE06 improves band gap predictions compared to PBE\autocite{chan-2010-effic-band}
 \end{frame}
 
-\begin{frame}[label={sec:org91eade9}]{Machine Learning for Property Prediction}
+\begin{frame}[label={sec:org0c138b5}]{Machine Learning for Property Prediction}
 \begin{columns}
 \begin{column}{0.7\columnwidth}
 \begin{center}
@@ -551,7 +590,7 @@ predict anything/make decisions\autocite{pablo-2019-new-front}
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org7c180a5}]{Data Driven Framework for Perovskite Discovery}
+\begin{frame}[label={sec:orgbf08fa9}]{Data Driven Framework for Perovskite Discovery}
 \begin{center}
 \includegraphics[width=390]{DDD-flowchart.png}
 \end{center}
@@ -563,50 +602,11 @@ via ongoing inverse design work
 
 \section{Perovskites Band Gaps Data and Descriptors}
 \label{sec:org8595ee1}
-\begin{frame}[label={sec:orgbf08fa9}]{Effect of DFT Functionals on Our Perovskites Data}
+\begin{frame}[label={sec:org45dd923}]{Effect of DFT Functionals on Our Perovskites Data}
  
 \begin{center}
 \includesvg[width=400pt]{./.ob-jupyter/618bfd7f0900f6415f0a4a0a8c242c95ccd16e7e}
 \end{center}
-\end{frame}
-
-\begin{frame}[label={sec:org4e1033f}]{Spectroscopic Limited Maximum Efficiency (SLME)}
-SLME accounts for more energetic processes than Shockley-Queisser
-criterion (\(bg \approx 1.3\)) allowing selection on range of bandgaps
-determined according to level of theory\autocite[p.1]{yu-2012-ident-poten}
-
-\[
-a(E)=1-e^{-2\alpha(E)L}
-\]
-
-Here, \(\alpha(E)\) is the DFT computed optical absorption coefficient
-as a function of incident photon energy and \(L\) is the thickness of
-the absorber.
-
-\[
-J=e\int_{0}^{\infty} a(E)I_{sun}(E)dE - J_{0}(1-e^{\frac{eV}{kT}})
-\]
-
-\[
-\eta = \frac{P_{m}}{P_{in}}=\frac{\max(J \times V)}{P_{in}}
-\]
-
-To calculate SLME efficiency the current density \(J\), the light
-spectrum intensity of sunlight \(I_{sun}\), and the power \(P\) are
-all that is needed.
-\end{frame}
-
-\begin{frame}[label={sec:org45dd923}]{Absorbance Relates to Efficiency via Band Gap in Our Data}
- 
-\begin{center}
-\includesvg[width=370pt]{./.ob-jupyter/64174f234626288aaaca8eb9d0ba24f1cfdbe000}
-\end{center}
-
-Inform screening criterion reported by these results\autocite{yang-2023-high-throug} 
-\begin{itemize}
-\item SLME used as computational proxy for PCE
-\item Experimental data\autocite{almora-2020-devic-perfor} broadly agrees with PBE simulation
-\end{itemize}
 \end{frame}
 
 \begin{frame}[label={sec:org0e9f8a0},fragile]{Describing a Halide Perovskite}
