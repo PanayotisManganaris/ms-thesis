@@ -464,7 +464,7 @@ This is motivated by the fact that the absorption spectrum of a perovskite deter
 A well defined relationship therefore exists between the efficiency of a perovskite absorber and its true band gap.
 [cite:@yu-2012-ident-poten]
 The actual band gap (measured at the experimental fidelity) thus strongly predicts photovoltaic performance, and analysis of this relation informs the screening criterion.
-My work served to accelerate the design of high-performing photovoltaic devices by enabling more accurate rapid identification of candidate perovskites with desirable band gap properties.
+My work aims to accelerate the design of high-performing photovoltaic devices by enabling more accurate rapid identification of candidate perovskites with desirable band gap properties.
 
 ** Spectroscopic Limited Maximum Efficiency (SLME)
 Introduced by [cite/text:@yu-2012-ident-poten], the SLME is a convenient metric for evaluating a semiconductor's suitability for single junction photovoltaic (PV) absorption.

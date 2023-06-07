@@ -1,8 +1,8 @@
-\chapter{MACHINE LEARNING MODELS OF PEROVSKITE BAND GAP}
+\chapter{MODELS OF PEROVSKITE BAND GAP}
 \label{sec:org37dcca4}
 Novel halide perovskites with improved stability and optoelectronic properties can be designed via composition engineering at cation and/or anion sites.
 Data-driven methods, especially involving high-throughput first principles computations and subsequent ML modeling using unique material descriptors, are key to achieving this goal.
-I accessed a dataset consisting of -- among other characteristic properties -- simulated band gaps of a representative sample of halide perovskites (HaP).
+I used a dataset consisting of -- among other characteristic properties -- simulated band gaps of a representative sample of halide perovskites (HaP).
 The effects of mixing at different sites is described by the explicit fraction of a site occupied by a specific atomic or molecular species.
 Also, a set of abstract features obtained as the weighted averages of these species' bulk physical properties is used to bolster the feature space.
 
@@ -172,7 +172,7 @@ division & natural logarithm\\[0pt]
 \end{tabular}
 \end{table}
 
-\section{Methods}
+\section{Training and Evaluation Methodology}
 \label{sec:org3f842dd}
 Model training proceeded only after partitioning the dataset using an 80/20 train-test split.
 The split was made in a stratified manner, ensuring both partitions contained a proportionate fraction of samples from each fidelity subset.
