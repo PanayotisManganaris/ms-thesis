@@ -2527,6 +2527,45 @@ e.g \(\epsilon_i \sim N(0,\sigma_i^2)\), with \(\sigma_i^2\) being a function of
 #+attr_latex: :width 400pt
 [[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/d0b6ba16e4913fe81324e8170b2b5b241c1053c8.png]]
 
+** Compare to State of the Art Band Gap Predictions                :B_frame:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+- my models are not directly comparable with published leaders
+  - specialized for perovskites
+  - utilize multi-fidelity data
+- I've not yet tried them for other classes of materials
+- They *are* compatible with this benchmark
+
+*** col                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+\scriptsize
+| RFR perovskite compositions          | 0.0805 | 0.1247 |
+|--------------------------------------+--------+--------|
+| models of MatProj DFT band gaps      |    MAE |   RMSE |
+|--------------------------------------+--------+--------|
+| coGN                                 | 0.1559 | 0.3956 |
+| ALIGNN                               | 0.1861 | 0.4635 |
+| MegNet (kgcnn v2.1.0)                | 0.1934 | 0.4715 |
+| DimeNet++ (kgcnn v2.1.0)             | 0.1993 | 0.4720 |
+| Finder_v1.2 structure-based version  | 0.2193 | 0.4989 |
+| MODNet (v0.1.10)                     | 0.2199 | 0.4525 |
+| MODNet (v0.1.12)                     | 0.2199 | 0.4525 |
+| Finder_v1.2 composition-only version | 0.2308 | 0.4837 |
+| SchNet (kgcnn v2.1.0)                | 0.2352 | 0.5172 |
+| CrabNet                              | 0.2655 | 0.5898 |
+| AMMExpress v2020                     | 0.2824 | 0.5611 |
+| CGCNN v2019                          | 0.2972 | 0.6771 |
+| RF-SCM/Magpie                        | 0.3452 | 0.6125 |
+| Dummy                                | 1.3272 | 1.5989 |
+
 ** DONE Density Functional Theory (DFT)                            :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame

@@ -1,4 +1,4 @@
-% Created 2023-06-07 Wed 19:52
+% Created 2023-06-08 Thu 08:59
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -1260,7 +1260,49 @@ e.g \(\epsilon_i \sim N(0,\sigma_i^2)\), with \(\sigma_i^2\) being a function of
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:org250affb}]{Density Functional Theory (DFT)}
+\begin{frame}[label={sec:org250affb}]{Compare to State of the Art Band Gap Predictions}
+\begin{columns}
+\begin{column}{0.4\columnwidth}
+\begin{itemize}
+\item my models are not directly comparable with published leaders
+\begin{itemize}
+\item specialized for perovskites
+\item utilize multi-fidelity data
+\end{itemize}
+\item I've not yet tried them for other classes of materials
+\item They \alert{are} compatible with this benchmark
+\end{itemize}
+\end{column}
+
+\begin{column}{0.6\columnwidth}
+\scriptsize
+\begin{center}
+\begin{tabular}{lrr}
+RFR perovskite compositions & 0.0805 & 0.1247\\[0pt]
+\hline
+models of MatProj DFT band gaps & MAE & RMSE\\[0pt]
+\hline
+coGN & 0.1559 & 0.3956\\[0pt]
+ALIGNN & 0.1861 & 0.4635\\[0pt]
+MegNet (kgcnn v2.1.0) & 0.1934 & 0.4715\\[0pt]
+DimeNet++ (kgcnn v2.1.0) & 0.1993 & 0.4720\\[0pt]
+Finder\textsubscript{v1.2} structure-based version & 0.2193 & 0.4989\\[0pt]
+MODNet (v0.1.10) & 0.2199 & 0.4525\\[0pt]
+MODNet (v0.1.12) & 0.2199 & 0.4525\\[0pt]
+Finder\textsubscript{v1.2} composition-only version & 0.2308 & 0.4837\\[0pt]
+SchNet (kgcnn v2.1.0) & 0.2352 & 0.5172\\[0pt]
+CrabNet & 0.2655 & 0.5898\\[0pt]
+AMMExpress v2020 & 0.2824 & 0.5611\\[0pt]
+CGCNN v2019 & 0.2972 & 0.6771\\[0pt]
+RF-SCM/Magpie & 0.3452 & 0.6125\\[0pt]
+Dummy & 1.3272 & 1.5989\\[0pt]
+\end{tabular}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label={sec:org7fc7f25}]{Density Functional Theory (DFT)}
 \begin{itemize}
 \item Higher levels of theory (LoT) approximations of \(\hat{U}(n)\) account for more physics.
 \item VASP is used to perform these calculations at the appropriate LoT.
