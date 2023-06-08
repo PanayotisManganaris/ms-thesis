@@ -1644,7 +1644,7 @@ FS = 50.58 &\sqrt{\mbox{Diffusion T} \times (\ce{Cr} + \ce{Ni})}\\
 [[file:Computational_Methods_In_Materials_Science/2022-12-20_09-09-33_screenshot.png]]
 Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-physic]
 
-** Tuning Multi-Fidelity Model Performance by Selecting Hyper-parameters :B_frame:
+** Tuning Model Performance by Selecting Hyper-parameters          :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -1655,12 +1655,13 @@ Notice SIS re-iterations explain the residual[cite:@ghiringhelli-2017-learn-phys
 #+attr_latex: :width 280
 [[file:ML_pipe_annot.png]]
 
-*** scores employed                                         :B_block:BMCOL:
+*** nine scores                                             :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.3
 :BEAMER_env: block
 :END:
-HP scoring via =Yogi= tools and SciKit-Learn[cite:@manganaris-2022-mrs-comput].
+=Yogi= tools for concurrently scoring estimators.
+[cite:@manganaris-2022-mrs-comput]
 - (\(R^2\))
 - explained variance score
 - maximum error score

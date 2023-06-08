@@ -1,4 +1,4 @@
-% Created 2023-06-08 Thu 10:05
+% Created 2023-06-08 Thu 10:44
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt, aspectratio=169, presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -865,7 +865,7 @@ Notice SIS re-iterations explain the residual\autocite{ghiringhelli-2017-learn-p
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org09b4d28},fragile]{Tuning Multi-Fidelity Model Performance by Selecting Hyper-parameters}
+\begin{frame}[label={sec:org09b4d28},fragile]{Tuning Model Performance by Selecting Hyper-parameters}
  \begin{columns}
 \begin{column}{0.7\columnwidth}
 \begin{center}
@@ -874,8 +874,9 @@ Notice SIS re-iterations explain the residual\autocite{ghiringhelli-2017-learn-p
 \end{column}
 
 \begin{column}{0.3\columnwidth}
-\begin{block}{scores employed}
-HP scoring via \texttt{Yogi} tools and SciKit-Learn\autocite{manganaris-2022-mrs-comput}.
+\begin{block}{nine scores}
+\texttt{Yogi} tools for concurrently scoring estimators.
+\autocite{manganaris-2022-mrs-comput}
 \begin{itemize}
 \item (\(R^2\))
 \item explained variance score
