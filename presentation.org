@@ -1677,17 +1677,18 @@ HP scoring via =Yogi= tools and SciKit-Learn[cite:@manganaris-2022-mrs-comput].
 # - accounts for additional energetic processes
 # - dipole-allowed, dipole-forbidden, indirect band gap
 # focus on EXP rmse -- I have the ability!
-** NEXT Model Training Method                                      :B_frame:
+** DONE Model Training Method                                      :B_frame:
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
 :LOGBOOK:
+- State "DONE"       from "NEXT"       [2023-06-08 Thu 10:05]
 - State "NEXT"       from "TODO"       [2023-06-07 Wed 14:52]
 :END:
 # show test/train split and scoring flowchart
 *** col                                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.5
+:BEAMER_col: 0.6
 :END:
 1. partition dataset by 80/20 train/test split
    - hold out 282 test set
@@ -1701,14 +1702,55 @@ HP scoring via =Yogi= tools and SciKit-Learn[cite:@manganaris-2022-mrs-comput].
    - score on validation set
    - assess scores wholistically to determine best parameters
 
-*** RFR Learning Curves                                     :B_block:BMCOL:
+*** RFR Learning Curves                                             :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.5
-:BEAMER_env: block
+:BEAMER_col: 0.4
 :END:
 
-#+attr_latex: :width 190pt
-[[file:~/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/4b5d77be3d415aa5e9faadb59147a7c2f560e136.svg]]
+#+begin_src jupyter-python
+  lc = pd.read_csv(".//LearningCurves/rfr_t_bg.csv", index_col=0)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="140pt")
+  mask = lc.score.str.contains('rmse')
+  p = px.line(lc[mask], x='train_sizes', y='valuemean', error_y='valuestd',
+              facet_col='score', facet_col_wrap=2, color='partition',
+              height=900, width=600, 
+              facet_row_spacing=0.06,
+              facet_col_spacing=0.1,
+              title="RFR Learning Curves")
+  p.update_layout(font_family='arial narrow', font_size=15,
+                  hovermode='x')
+  p.update_yaxes(
+      matches=None, showticklabels=True,
+      title_font_size=30, tickfont_size=24
+  )
+  p.update_xaxes(
+      title_font_size=30, tickfont_size=24
+  )
+  p.update_layout(
+      legend = dict(itemsizing='constant', orientation='h', font_size=30, y=-0.1),
+      margin = dict(r=0),
+      title_font_size=30
+  )
+
+  p.for_each_yaxis(lambda a: a.update(title_text=a.title.text[:-4] if a.title.text else None))
+  p.for_each_xaxis(lambda a: a.update(title_text=a.title.text.replace("_", " ") if a.title.text else None))
+  p.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1].replace("_", " ")))
+  p.for_each_annotation(lambda a: a.update(font_size=30))
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 140pt
+[[file:./.ob-jupyter/fefcc9045a4b90480643b1f76250f805a1260a1f.svg]]
+:end:
 
 ** COMMENT make subplots
 *** rfr
