@@ -58,6 +58,19 @@
 :results:
 :end:
 
+* PRESENTATIONS
+:PROPERTIES:
+:CUSTOM_ID: presentations
+:END:
+- Poster for DS02 symposium at MRS Boston Fall 2022
+  [cite/title:@2022-novel-halid][cite:@2022-novel-halid]
+- Talk for Purdue Soft Materials symposium
+  [cite/title:@2022-machin-learn][cite:@2022-machin-learn]
+- Developed notebooks
+  [cite:@manganaris-2022-mrs-comput]
+  for MRS Honolulu Spring 2022 tutorial hosted on nanoHUB
+  [cite/title:@2022-ds00-tutor][cite:@2022-ds00-tutor]
+
 * PUBLICATIONS
 :PROPERTIES:
 :CUSTOM_ID: publications
@@ -71,6 +84,24 @@
 \nocite{gollapalli-2023-graph-neural}
 \nocite{edlabadkar-2023-drivin-halid}
 \nocite{yang-2023-discov-novel}
+
+\makeatletter
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{%
+      \printfield{labelprefix}%
+      \printfield{labelnumber}}}
+     {\setlength{\bibhang}{1in} %%%%% was 0pt
+      \setlength{\itemindent}{1in}%  -\leftmargin %%%%% was 0pt
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\leftmargin}{0pt}%  .22in % 0.42in
+      \setlength{\parsep}{\bibparsep}%
+      \setlength{\rightmargin}{0.33in}%
+      }%
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
+\makeatother
 
 \printbibliography[heading=none,category=myarticles]
 #+end_export

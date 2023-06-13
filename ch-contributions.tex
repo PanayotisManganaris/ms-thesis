@@ -1,27 +1,20 @@
-\chapter{PUBLICATIONS}
+\chapter{PRESENTATIONS}
 \label{sec:orgcd78d4b}
-
-\nocite{manganaris-2022-mrs-comput}
-\nocite{yang-2023-high-throug}
-\nocite{manganaris-2023-multi-fidel}
-\nocite{gollapalli-2023-graph-neural}
-\nocite{edlabadkar-2023-drivin-halid}
-\nocite{yang-2023-discov-novel}
-
-\printbibliography[heading=none,category=myarticles]
-
 \begin{itemize}
 \item Poster for DS02 symposium at MRS Boston Fall 2022
 \citetitle{2022-novel-halid}\autocite{2022-novel-halid}
 \item Talk for Purdue Soft Materials symposium
 \citetitle{2022-machin-learn}\autocite{2022-machin-learn}
-\item Developed notebooks for MRS Honolulu Spring 2022 tutorial hosted on nanoHUB
-\citetitle{2022-ds00-tutor}\autocite{manganaris-2022-mrs-comput}
+\item Developed notebooks
+\autocite{manganaris-2022-mrs-comput}
+for MRS Honolulu Spring 2022 tutorial hosted on nanoHUB
+\citetitle{2022-ds00-tutor}\autocite{2022-ds00-tutor}
 \end{itemize}
 
 \chapter{SOFTWARE AND DATA CONTRIBUTIONS}
 \label{sec:orga3ae64f}
 \section{Data Publication}
+\chapter{PUBLICATIONS}
 \label{sec:org052c030}
 I published the prepared sample data I used to the Materials Data Facility.
 It is available to download with a simple API call following installation and activation\footnote{\url{https://ai-materials-and-chemistry.gitbook.io/foundry/}} of the relevant packages and applications.
@@ -55,10 +48,33 @@ Listing \ref{lst:cmcl} demonstrates its use in extracting composition vectors fr
 A library of model evaluation tools to assist with exhaustive grid search is being maintained in the \texttt{yogi} repository.\footnote{\url{https://github.com/PanayotisManganaris/yogi}}
 A grid-search assistant under the \texttt{yogi.model\_selection.butler} module was used to optimize the hyper-parameters of models reported here.
 See documentation for the various grid-narrowing strategies available.
+\nocite{manganaris-2022-mrs-comput}
+\nocite{yang-2023-high-throug}
+\nocite{manganaris-2023-multi-fidel}
+\nocite{gollapalli-2023-graph-neural}
+\nocite{edlabadkar-2023-drivin-halid}
+\nocite{yang-2023-discov-novel}
 
 Matgenix\footnote{\url{https://github.com/Matgenix/pysisso}} company initially created a SciKit-learn compliant interface to the SISSO algorithm maintained by \textcite{ouyang-2018-sisso}.
 This code was forked and modified\footnote{\url{https://github.com/PanayotisManganaris/pysisso}} to enable the creation of the SIS domain engineered regressions primarily by creating a custom \texttt{Function Transformer} that may be seeded with the subspace information obtained by first training a SISSO regression using the conventional interface.
 This was done with the expectation that the resulting model would be superior for the purposes of this work, but it is generally applicable to any other applications demanding this sort of dimensionality reduction.
+\makeatletter
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{%
+      \printfield{labelprefix}%
+      \printfield{labelnumber}}}
+     {\setlength{\bibhang}{1in} %%%%% was 0pt
+      \setlength{\itemindent}{1in}%  -\leftmargin %%%%% was 0pt
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\leftmargin}{0pt}%  .22in % 0.42in
+      \setlength{\parsep}{\bibparsep}%
+      \setlength{\rightmargin}{0.33in}%
+      }%
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
+\makeatother
 
 \section{Tutorials}
 \label{sec:org5689b18}
@@ -67,3 +83,4 @@ I contributed to the development of a tutorial delivered in the Spring 2022 Mate
 This tutorial covered a variety of machine learning methods.
 It provides a detailed example of the use of \texttt{cmcl} and \texttt{yogi} in feature extraction and training multi-fidelity random forest models by score weighting respectively.
 The relevant notebooks were published on the Purdue university nanoHUB.
+\printbibliography[heading=none,category=myarticles]
