@@ -247,18 +247,6 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 [[file:./.ob-jupyter/1473d3cf1b8588ff107fa23f1a91440e2716ebbd.svg]]
 :end:
 
-** DONE GPR SHAP analysis
-:PROPERTIES:
-:UNNUMBERED: t
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2023-05-28 Sun 17:07]
-:END:
-
-#+CAPTION: label:fig:gprSHAP Gaussian Process Regression Band Gap SHAP Values
-#+attr_latex: :width 450pt
-[[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/31552cf23170d5409f0d7f373221bd1784e2b209.png]]
-
 ** SIS+RFR SHAP analysis
 :PROPERTIES:
 :UNNUMBERED: t
