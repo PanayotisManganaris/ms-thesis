@@ -33,7 +33,7 @@
 :PROPERTIES:
 :UNNUMBERED: t
 :END:
-I published the prepared sample data I used to the Materials Data Facility.
+The prepared sample data I used was published to the Materials Data Facility.
 It is available to download with a simple API call following installation and activation[fn:10] of the relevant packages and applications.
 
 #+begin_export latex
