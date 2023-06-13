@@ -8,7 +8,7 @@
 \def\ZZdocument{A Thesis}
 % May, August, December followed by a space
 % then year from 2020 to 2030
-\def\ZZgraduation{May 2023}
+\def\ZZgraduation{August 2023}
 \def\ZZtitle{
   Multi-fidelity Machine Learning for Perovskite Band Gap Predictions%
 %  This is the First Line\\[-6pt]
@@ -82,6 +82,9 @@
 \addtocategory{myarticles}{gollapalli-2023-graph-neural}
 \addtocategory{myarticles}{edlabadkar-2023-drivin-halid}
 \addtocategory{myarticles}{yang-2023-discov-novel}
+\addtocategory{myarticles}{2022-novel-halid}
+\addtocategory{myarticles}{2022-ds00-tutor}
+\addtocategory{myarticles}{2022-machin-learn}
 
 % If you don't want to ignore urldate fields,
 % comment out (put "%" before) the next ten lines.
@@ -254,8 +257,6 @@
 
 \include{ch-DFT+ML}
 
-\include{ch-contributions}
-
 %
 % This is only done if you are using BibLaTeX.
 %
@@ -297,10 +298,13 @@
 
 % Use ``\appendix'' for one appendix or ``\appendices'' for more than
 % one appendix.
-\appendix
+\appendices
 
-  % "About Appendices" appendix.
   \include{ap-additional-figs}
+
+  \include{ap-software+data}
+
+  \include{ch-contributions}
 
   % Print the index.
   % The index is optional.
