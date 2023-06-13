@@ -75,8 +75,7 @@ This code was forked and modified[fn:5] to enable the creation of the SIS domain
 This was done with the expectation that the resulting model would be superior for the purposes of this work, but it is generally applicable to any other applications demanding this sort of dimensionality reduction.
 
 A tutorial delivered in the Spring 2022 Materials Research Society conference details the use of these packages for multi-fidelity model training for materials property prediction.
-This is provided in the form of an iPython notebook hosted on the Purdue University nanoHUB.
-[cite/full:@manganaris-2022-mrs-comput]
+This is provided in the form of an iPython notebook [cite/full:@manganaris-2022-mrs-comput] hosted on the Purdue University nanoHUB.
 This provides only a detailed example of the use of =cmcl= and =yogi= in feature extraction and training multi-fidelity random forest models.
 Examples for the use of the modified pysisso code may be found in the github repository associated with our publication [cite/title:@manganaris-2023-multi-fidel].
 
