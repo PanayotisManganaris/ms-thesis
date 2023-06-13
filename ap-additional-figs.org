@@ -1,8 +1,8 @@
 #+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
 #+options: author:t broken-links:nil c:nil creator:nil
-#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:("TODO" "DONE" "NEXT") tex:t
-#+options: timestamp:t title:t toc:nil todo:nil |:t
+#+options: timestamp:t title:t toc:t todo:nil |:t
 #+title: ap-additional-figs
 #+date: <2023-05-10 Wed>
 #+author: Panayotis Manganaris
