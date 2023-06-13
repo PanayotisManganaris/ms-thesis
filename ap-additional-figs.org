@@ -63,6 +63,9 @@
 :CUSTOM_ID: additional figures
 :END:
 ** TODO Learning Curves
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
 Cross-validation within the training set is the only way of checking the generality of models during the grid search.
 Identifying the validation split size is necessary to obtain an understanding of how much data is needed to train a model that can generalize.
 
@@ -78,6 +81,10 @@ Shuffling is performed prior to generating each fold.
 The shuffle is seeded with a deterministic random state to ensure scores are comparable across partition size 
 
 ** Feature Distributions
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
 #+begin_src jupyter-python
   XXc = XX.iloc[:, 0:14].assign(mix=Y.mix).assign(org=Y.org)
   XXcm = pd.melt(
@@ -241,6 +248,9 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 :end:
 
 ** DONE GPR SHAP analysis
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2023-05-28 Sun 17:07]
 :END:
@@ -250,12 +260,18 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 [[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/31552cf23170d5409f0d7f373221bd1784e2b209.png]]
 
 ** SIS+RFR SHAP analysis
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
 
 #+CAPTION: label:fig:rfrSHAPe Random Forest Regression Band Gap on SIS domain SHAP Values
 #+attr_latex: :width 450pt
 [[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/d0b6ba16e4913fe81324e8170b2b5b241c1053c8.png]]
 
 ** SIS+GPR SHAP analysis
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
 
 #+CAPTION: label:fig:gprSHAPe Gaussian Process Regression Band Gap on SIS domain SHAP Values
 #+CAPTION:
@@ -263,6 +279,9 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 [[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/718541cd89c707a3acb068057f8bf25626eefd61.png]]
 
 ** Known Clustering in t-SNE Projections
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
 #+begin_src jupyter-python
   projdf = pd.read_csv("./proj_t_rfr_tsne_c.csv")
 #+end_src
@@ -333,6 +352,9 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 :end:
 
 ** Hyper-parameters of Best Random Forest Estimator
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
 
 #+CAPTION: label:tbl:rfrHPO Select hyper-parameters from exhaustive search of 31104 models
 |                            | Selected Space |

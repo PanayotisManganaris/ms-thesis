@@ -1,6 +1,6 @@
 \chapter{ADDITIONAL FIGURES}
 \label{sec:orgc89a13e}
-\section{Learning Curves}
+\section*{Learning Curves}
 \label{sec:orga7ccdab}
 Cross-validation within the training set is the only way of checking the generality of models during the grid search.
 Identifying the validation split size is necessary to obtain an understanding of how much data is needed to train a model that can generalize.
@@ -16,7 +16,7 @@ Meaning, 90\% of the training set is used for actual training and the remaining 
 Shuffling is performed prior to generating each fold.
 The shuffle is seeded with a deterministic random state to ensure scores are comparable across partition size 
 
-\section{Feature Distributions}
+\section*{Feature Distributions}
 \label{sec:org011016d}
  
 \begin{figure}[htbp]
@@ -60,7 +60,7 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 \caption{Distributions of Mean X-Site Properties}
 \end{figure}
 
-\section{GPR SHAP analysis}
+\section*{GPR SHAP analysis}
 \label{sec:org9cb877b}
 \begin{figure}[htbp]
 \centering
@@ -68,25 +68,23 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 \caption{\label{fig:gprSHAP} Gaussian Process Regression Band Gap SHAP Values}
 \end{figure}
 
-\section{SIS+RFR SHAP analysis}
+\section*{SIS+RFR SHAP analysis}
 \label{sec:org4ade3f5}
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=450pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/d0b6ba16e4913fe81324e8170b2b5b241c1053c8.png}
 \caption{\label{fig:rfrSHAPe} Random Forest Regression Band Gap on SIS domain SHAP Values}
 \end{figure}
 
-\section{SIS+GPR SHAP analysis}
+\section*{SIS+GPR SHAP analysis}
 \label{sec:org1d13a8e}
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=450pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/718541cd89c707a3acb068057f8bf25626eefd61.png}
 \caption{\label{fig:gprSHAPe} Gaussian Process Regression Band Gap on SIS domain SHAP Values}
 \end{figure}
 
-\section{Known Clustering in t-SNE Projections}
+\section*{Known Clustering in t-SNE Projections}
 \label{sec:org4aa92f2}
  
 \begin{figure}[htbp]
@@ -102,9 +100,8 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 \caption{\label{fig:chosen} Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset}
 \end{figure}
 
-\section{Hyper-parameters of Best Random Forest Estimator}
+\section*{Hyper-parameters of Best Random Forest Estimator}
 \label{sec:org6b04a78}
-
 \begin{table}[htbp]
 \caption{\label{tbl:rfrHPO} Select hyper-parameters from exhaustive search of 31104 models}
 \centering
