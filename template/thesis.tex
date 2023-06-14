@@ -1,4 +1,4 @@
-\ProvidesFile{thesis.tex}[2022-10-05 PurdueThesis thesis.tex file]
+\ProvidesFile{thesis.tex}[2023-06-13 PurdueThesis thesis.tex file]
 
 %
 %  The home page for the PurdueThesis software is
@@ -15,23 +15,16 @@
 %
 %  LaTeX systems include auxiliary programs to do bibliographies,
 %  indexes, etc.  The latexmk program runs the fewest programs needed
-%  to update your thesis.  latexmk runs automatically on Overleaf.  If
-%  you're LaTeXing your document on a non-Overleaf system you may need
-%  to run latexmk manually.
+%  to update your thesis.
 %
-%  This thesis contains Feynman diagrams in the ap-physics.tex file.
-%  For these to be processed correctly you must use the lualatex
-%  program:
+%  Overleaf runs latexmk automatically.  Click "Recompile" one final
+%  time after making all changes to make sure everything is done.
+%
+%  If you are using latexmk manually use
 %      latexmk -lualatex thesis
-%  (If your thesis doesn't have Feynman diagrams---the
-%      \include{ap-physics}
-%  command may be commented out by prefixing it with a
-%  '%') use pdflatex instead of lualatex:
-%      latexmk thesis
-%
-%  To make a final PDF file before you turn in your thesis do
-%      latexmk -g thesis
-%  This makes sure than everything is done for your final version.
+%  to recompile your thesis.  Type
+%      latexmk -f -g -lualatex thesis
+%  one final time after making all changes before turning in your thesis.        
 %
 %  References cited below:
 %
@@ -48,6 +41,19 @@
 %  In this file, change the example information to your information.
 %
 
+% For example, if \H works in the text of your thesis but not in the
+% bibliography let \ZZH be a synonym for the current value of \H.
+% This is done here so we can use \ZZH for a Hungarian double acute
+% accent in Paul Erdos' name in the bibliography.  \H gets redefined
+% somewhere below so it won't work in bibliographies (it still works
+% fine in text though).  If you won't be using Hungarian double acute
+% accents in a bibliography, you can put '%' before the next line to
+% make it a comment.
+%
+% "\oe" has the same problem and solution.
+\let\ZZH=\H
+% \let\ZZoe=\oe
+
 % institution
 % Choose an institution name from the following list:
 %     VALUE                   COMMENT
@@ -61,15 +67,15 @@
 % Choose a campus from the following list:
 %     VALUE               COMMENT
 %     Bloomington
-%     Fort\space Wayne
+%     Fort Wayne
 %     Hammond
 %     Indianapolis
 %     Manoa               don't include the macron character here,
 %                         it will get printed automatically
 %     Reno
 %     Westville
-%     West\space Lafayette
-\def\ZZcampus{West\space Lafayette}
+%     West Lafayette
+\def\ZZcampus{West Lafayette}
 
 
 % program
@@ -156,7 +162,7 @@
 %     Theatre
 %     Veterinary Clinical Sciences
 %     Youth Development and Agricultural Education
-\def\ZZprogram{Electrical and Computer Engineering}
+\def\ZZprogram{Materials Engineering}
 
 % degree
 % Choose a degree from the following list:
@@ -186,6 +192,7 @@
 %     Master of Science in Materials Engineering
 %     Master of Science in Nuclear Engineering
 \def\ZZdegree{Doctor of Philosophy}
+% \def\ZZdegree{Master of Science}
 
 % author
 % Put your name here.
@@ -357,10 +364,12 @@
 % for example,
 %     \ConfigureBibliography
 % to
-    % \ConfigureBibliography
-    \newcommand{\ZZBibProcessor}{BibLaTeX}
-    \usepackage[backend=biber, citestyle=apa, dashed=false, sortcites=true, style=apa]{biblatex}
-    \addbibresource{all-biblatex.bib}
+%     % \ConfigureBibliography
+%     \newcommand{\ZZBibProcessor}{BibLaTeX}
+%     \usepackage[backend=biber, citestyle=apa, dashed=false, sortcites=true, style=apa]{biblatex}
+%     \addbibresource{all-biblatex.bib}
+\ConfigureBibliography
+\addbibresource{all-bibtex.bib}
 
 %
 % This is only done if you are using BibLaTeX.
@@ -368,28 +377,33 @@
 %
 % If you don't want to ignore urldate fields,
 % comment out (put "%" before) the next ten lines.
-% \DeclareSourcemap
-%   {
-%     \maps[datatype=bibtex]
-%     {
-%       % Ignore "urldate = {...}" in .bib files.
-%       % See the first complete example on page 201 of
-%       %     https://mirrors.rit.edu/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
-%       \map
-%         {
-%           \step[fieldset=urldate, null]
-%         }
-%         % Enter approximate (circa) dates using, for example,
-%         % "year = c2020"  See
-%         %     https://tex.stackexchange.com/questions/224617/what-is-the-correct-way-to-handle-approximate-dates-in-biblatex
-%       \map[overwrite=false]
-%         {
-%           \step[fieldsource=year]
-%           \step[fieldset=sortyear, origfieldval, final]
-%           \step[fieldsource=sortyear, match={c}, replace={}]
-%         }
-%     }
-%   }
+%
+\DeclareSourcemap
+  {
+    \maps[datatype=bibtex]
+    {
+      % Ignore "urldate = {...}" in .bib files.
+      % See the first complete example on page 201 of
+      %     https://mirrors.rit.edu/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
+      \map
+        {
+          \step[fieldset=urldate, null]
+        }
+        % Enter approximate (circa) dates using, for example,
+        % "year = c2020"  See
+        %     https://tex.stackexchange.com/questions/224617/what-is-the-correct-way-to-handle-approximate-dates-in-biblatex
+      \map[overwrite=false]
+        {
+          \step[fieldsource=year]
+          \step[fieldset=sortyear, origfieldval, final]
+          \step[fieldsource=sortyear, match={c}, replace={}]
+        }
+    }
+  }
+
+% For \bm.
+% The bm package was last updated on 2022-01-05.
+\usepackage{bm}
 
 % To let {\bfseries\scshape text} work as expected.
 % See
@@ -558,26 +572,51 @@
 % For PurdueThesis, PuTh, TeX, LaTeX, METAFONT, METAPOST, etc. related logos.
 \usepackage{pa-logos}
 
-% (Or maybe use isomath instead?  -mark  2021-06-20)
-% Follow ISO 80000-2:2019
-%     o   put e, i, j, and pi in upright font automatically
-%     o   use, for example, "\di x" to get "\,mathrm{d}\/x"
-% This loads
-%     o   amsmath.sty (which is already loaded above)
-%     o   mathtools.sty
-%     o   upgreek.sty
-% Load the package.
+\usepackage{pdfpages}
+
+% Follow ISO 80000-2:2019:
+%   o  The e, i, j, and pi constants should be in an upright font.
+%   o  The ordinary derivative operator d should be in an upright font.
 \usepackage{pa-mismath}
-  % Tell mismath to put e, i, j, and pi in upright font automatically.
-  \enumber
-  \inumber
-  \jnumber
-  \pinumber
-  % To typeset math italic e, i, j, and pi use
-  %     \mathit e
-  %     \mathit i
-  %     \mathit j
-  %     \itpi
+  % For letter in ('e', 'i', 'j'):
+  %     o  \MathUp{letter} typesets letter in an upright font from now on.
+  %        Use \mathit{letter} to get a math italic letter
+  %        when Mathup{letter} is active.
+  %     o  \MathIt{letter} typesets letter in a math italic font from now on.
+  %        Use \mathup{letter} to get an upright letter
+  %        when MathIt{letter} is active.
+  %
+  % \pinumber typesets pi in an upright font from now on.
+  %  Use \itpi to get a math italic pi when \pinumber is active.
+  %  
+  % \pinormal typesets pi in a math italic font from now on.
+  % Use \text{\pi} to get an upright pi when \pinormal is active.
+  %
+  % Adjust these are needed for your document.
+  \MathUp{e}  \MathUp{i}  \MathUp{j}  \pinumber
+  %
+  % Use \di for ordinary derivative operator.
+  
+% This does not depend on the pa-mismath package.
+% Do more ISO 80000-2:2019 stuff.
+% Follow ISO 80000-2:2019:
+%   o  The partial derivative operator should be in an upright font.
+% The pa-mismath package defines "\di" as the ordinary differential operator.
+% Define "\pa" as the partial derivative operator.
+\def\pa{\rotatebox[origin=c]{14}{\partial}}
+
+% This does not depend on the pa-mismath package.
+% Do more ISO 80000-2:2019 stuff.
+% Follow ISO 80000-2:2019:
+%   o  Use \mathcal{F} for the Fourier transform.
+\def\Fourier{\mathcal{F}}
+
+% This does not depend on the pa-mismath package.
+% Do more ISO 80000-2:2019 stuff.
+% Follow ISO 80000-2:2019:
+%   o  Use \mathcal{L} for the Laplace transform.
+\def\Laplace{\mathcal{L}}
+
 
 % Define \MyRepeat{what}{repeat}.
 % Do "what" "repeat" number of times.
@@ -631,10 +670,10 @@
   % Draw the background after the foreground.
   \usetikzlibrary{backgrounds}	% drawing the background after the foreground
 
-% Needed for the Feynman diagram in ap-physics.tex.
-% Tikz-feynman requires LuaLaTeX instead of pdflatex be run.
-% LuaLaTeX screws up spacing in the list of figures so this
-% is not loaded and LuaLaTeX should not be used.
+% Needed for the Feynman diagram in ap-physics.tex.  Tikz-feynman
+% requires LuaLaTeX instead of pdflatex be run.  LuaLaTeX screws up
+% the horizontal position of the list of figures---this is a known bug.
+% The Thesis Office accepts theses with this problem.
 \usepackage[compat=1.1.0]{tikz-feynman}
 
 % The vertical space between a table heading and the table contents
@@ -741,6 +780,26 @@
 % \mbox{} is an empty math box.
 \newcommand{\NL}{\mbox{}\\}
 
+% In this document I use in-line tables a lot.
+% These are tables that are put in the document
+% where I want them to appear and they don't
+% use \begin{table} ... \end{table}
+
+\newenvironment{inlinetable}
+  {%
+    \begingroup
+      \singlespace
+      \mbox{}\\[-9pt]%
+      \noindent
+      \hspace*{2\parindent}%
+      \ignorespaces
+  }
+  {%
+      \mbox{}\\
+    \endgroup
+  }
+
+
 % Print a list of files used and their version numbers in the log file.
 \listfiles
 
@@ -754,7 +813,7 @@
 
 % For typographical conventions stuff including
 %     \Emph{...}
-%     \First{...}
+%     \FirstUsed{...}
 %     \Keys{...}
 %     \Literal{...}
 %     \Menu{...}
@@ -785,6 +844,11 @@
 
 \begin{document}
 
+\makeatletter
+\renewcommand{\ZZAppendixName}{APPENDIX}
+%%%% \renewcommand{\chaptername}{CHAPTER}
+\def\@@makechapterhead#1{\uppercase{\@chapapp~\thechapter. #1}}
+
 \setcounter{tocdepth}{3}
 
 \maketitle
@@ -811,8 +875,6 @@
 % Reference: TM2017, page 31.
 \include{ch-introduction}
 
-\include{ch-do-not-use-these-packages}
-
 % Summary and/or conclusions are optional but often used.
 % The summary and/or conclusions often are the last
 % the last major division(s) of the text.
@@ -825,8 +887,11 @@
 % Reference: TM2017 page 32.
 \include{ch-recommendations}
 
-% Test \begin{refsection}...\end{refsection}.
-\include{ch-test}
+% Test \begin{chapteracknowledgement} ... \end{chapteracknowledgement}
+\include{ch-test-chapteracknowledgement}
+
+% Test per-chapter references.
+\include{ch-test-per-chapter-references}
 
 % \immediate\setlength{\bibhang}{-3in}
 % \immediate\setlength{\itemindent}{3in}
@@ -893,6 +958,9 @@
   % "About Appendices" appendix.
   \include{ap-about-appendices}
 
+  % Accessibility.
+  \include{ap-accessibility}
+  
   % "Bugs" appendix.
   \include{ap-bugs}
 
@@ -901,9 +969,6 @@
 
   % Demonstrate how to do separate appendices per chapter.
   \include{ap-chapter-appendices}
-
-  % Demonstrate how to do separate references per chapter.
-  % \include{ap-chapter-references}
 
   % Citations and references.
   \include{ap-citations-references}
@@ -914,6 +979,9 @@
   % Defining commands.
   \include{ap-defining-commands}
 
+  % Deprecated software.
+  \include{ap-deprecated-software}
+
   % Figures.
   \include{ap-figures}
 
@@ -923,15 +991,15 @@
   % Graphics.
   \include{ap-graphics}
 
+  % How to debug LaTeX Problems.
+  \include{ap-how-to-debug-latex-problems}
+
   % Ignore these references.
   \include{ap-ignore-these-references}
 
   % Logos.
   \include{ap-logos}
 
-  % Miscellaneous.
-  \include{ap-miscellaneous}
-  
   % Numbers and Units.
   \include{ap-numbers-and-units}
 
@@ -977,19 +1045,8 @@
   % Music.
   \include{ap-music}
 
-  % The examples in ap-physics require LuaLaTeX but LuaLaTeX
-  % screws up the spacing in the List of Figures.  So, the
-  % ap-physics file is not included.
-  %
-  % For some reason, ap-physics doesn't work when using BibTeX.
-  % Just enclosing \include{ap-physics} in braces, i..e.,
-  %     {
-  %       \include{ap-physics}
-  %     }
-  % doesn't help so it is only loaded if we are using BibLaTeX.
-  %
-  % Physics-related exmples.
-  % \include{ap-physics}
+  % Physics.
+  \include{ap-physics}
 
   % Notes and footnotes are optional.
   % Reference: TM2017 page 34.
@@ -1001,7 +1058,7 @@
   \include{ap-vita}
 
   % Listing or including publications(s) is optional.
-  \include{ap-publications}
+%%%% \include{ap-publications}
 
   % Print the index.
   % The index is optional.
