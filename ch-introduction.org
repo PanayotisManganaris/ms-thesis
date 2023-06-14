@@ -656,7 +656,7 @@ This is due to the accidental accuracy of semi-local functionals without SOC for
 [[file:./.ob-jupyter/087a658e6bb000a199d1fd4552bd9bde2db00444.svg]]
 :end:
 
-#+begin_src jupyter-python :post wraptbl(*this*, c="label:tbl:expquant RMSE values of band gaps computed from different functionals compared with experimental (Exp) values")
+#+begin_src jupyter-python :post wraptbl(*this*, c="label:tbl:expquant RMSE values of band gaps computed from different functionals compared with experimental (EXP) values")
   tbl = pd.Series(
       [mean_squared_error(lot_compared['EXP'], lot_compared[lot]) for lot in lot_compared.columns[1:]],
       index=lot_compared.columns[1:]
@@ -670,7 +670,7 @@ This is due to the accidental accuracy of semi-local functionals without SOC for
 #+RESULTS:
 :results:
  
-#+CAPTION: label:tbl:expquant RMSE values of band gaps computed from different functionals compared with experimental (Exp) values 
+#+CAPTION: label:tbl:expquant RMSE values of band gaps computed from different functionals compared with experimental (EXP) values 
 |                 | RMSE vs EXP |
 |-----------------+-------------|
 | PBE             | 0.55        |
