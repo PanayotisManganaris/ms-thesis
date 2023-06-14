@@ -158,7 +158,7 @@ SIS features complexity is restricted to a maximum of 3 operations primarily to 
 The available operation set is outlined in table \ref{tbl:ops}.
 
 \begin{table}[htbp]
-\caption{\label{tbl:ops} operations for formation of combinatorial super-space}
+\caption{\label{tbl:ops} Operations for formation of combinatorial super-space}
 \centering
 \begin{tabular}{ll}
 Binary & Unary\\[0pt]
@@ -182,7 +182,7 @@ In order to specify the learning algorithm best at predicting the experimental f
 First an estimator pipeline was constructed as in figure \ref{fig:pipe}.
 Any sparse vectors were made dense and NaNs were filled with zeros by a \texttt{SimpleImputer}.
 The feature vectors were subject to l1 normalization so that the compound's stoichiometry converted to ratios.
-The estimator at the end was instantiated with default parameters and later had optimal settings injected.
+The estimator at the end of the pipeline was instantiated with default parameters and later had optimal settings injected.
 
 To find these settings, I opted for a \(K\)-folds validation strategy first necessitating an optimal value for \(K\) be found.
 This was done empirically, first by generating learning curves with \(K=10\) for each estimator.
@@ -191,13 +191,26 @@ The size of one fold would be the size of the validation set, with the remaining
 So, I doubled the number of samples at the knee, subtracted it from the size of the total training partition and used the result to determine the size of one fold.
 This method resulted in setting \(K = 3\) for GPR training and \(K = 4\) for RFR training.
 
-Finally I performed hyper-parameter optimization by exhaustive grid search using methods discussed in section \ref{sec:org8f9180a}.
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{MACHINE_LEARNING_MODELS_OF_PEROVSKITE_BAND_GAP/2023-06-05_14-20-21_screenshot.png}
 \caption{\label{fig:pipe} SciKit-Learn pipeline terminating in a default random forest estimator}
 \end{figure}
+
+Finally I performed hyper-parameter optimization by exhaustive grid search using methods discussed in section \ref{sec:org8f9180a}.
+Optimizing a model this way was expected to result in a good ability to interpolate perovskites properties in the well covered sample space detailed in figure \ref{fig:coverage}.
+Ideally, the resulting model need only extrapolate over the one-hot-encoded LoT dimensions.
+To confirm this, validation requires two approaches.
+
+In order, the first approach was critical to confirm the model was capable of predicting properties of entirely unseen compositions.
+A modified method of leave-one-out cross-validation was used to understand the distribution of possible errors.
+The optimally parametrized model was retrained on a dataset derived from the train set where one particular combination of elements is not present at all in any stoichiometry and tasked to make predictions on a validation set of the excluded compounds.
+To be clear, individual elements may be represented in the training set as long as they don't appear together in a single compound.
+This strategy better tested the model's ability to comprehend novel compounds which it saw many of in the total sample space.
+Additionally, this avoided the expense of true leave-one-out validation.
+The second validation was to test that the model can accurately predict the values for specific unseen elements at different levels of theory.
+In this case, test compounds need not be entirely unique because it was expected that the extrapolated predictions at higher levels of theory will leverage the better coverage of lower fidelity sample sets.
+So, finally, the test set is used and the resulting predictions are evaluated for accuracy.
 
 \section{Results}
 \label{sec:org7802582}
@@ -218,7 +231,7 @@ This error compares favorably with the best models currently ranked by the Mater
 My models use the stoichiometry of the compositions while the MatBench models require atomic structures in addition to stoichiometric information.
 
 The RFR hyper-parameters are listed in the appendix (Table \ref{tbl:rfrHPO}).
-The GPR model was tried with multiple kernels.
+The GPR model was tried with multiple kernels, where each can be .
 Ultimately, the best was a non stationary Matern kernel with \(\nu = \frac{3}{2}\).
 
 \subsection{SISSO Model and SIS Engineered Features}
