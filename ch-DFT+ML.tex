@@ -90,37 +90,37 @@ Our attempts to provide a domain with these characteristics results in the follo
 \end{itemize}
 \end{itemize}
 
-\section{Machine Learning Algorithms and Parameter Optimization}
+\section{Machine Learning Algorithms and Scoring Methodology}
 \label{sec:orgf7d8230}
-We train Random Forest Regression (RFR) and Gaussian Process Regression (GPR) models of band gap on the union of predictor features previously discussed.
-The RFR is a flexible nonlinear model, the GPR a principled linear model.
-Shapley Additive Explaination (SHAP) analysis of the models lends insight to the average physical impacts of 1) site-specific alloying and 2) using organic molecules in the Perovskite superstructure.
-Model development and feature extraction is performed using Python and SciKit-Learn v1.2.
+I trained Random Forest Regression (RFR) and Gaussian Process Regression (GPR) models to predict the band gap from the union of predictor features previously discussed.
+I chose to use the implementations of each of these algorithms packaged with the SciKit-Learn v1.2 package for python.
 \autocite{pedregosa-2011-scikit-learn} 
+The hypothesis sets offered to the task by each of these architectures differ dramatically.
+A RFR is a flexible nonlinear ensemble model consisting of decision trees, a simple algorithm that captures interactions between descriptors in the form of a comparative algorithm.
+Each tree is trained on a random subsample of the training data, resulting in different algorithms.
+The RFR prediction is made by following the algorithm of each tree to the target and averaging the results.
+The advantage of this approach is that each tree is highly biased to the data allowing even minute outliers to be accounted for.
+However, by using many of them, the variance in data can also be explained, thus reducing the variance of error.
+Naturally, the RFR benefits from using as much data as possible with as many estimators as possible.
 
-In order to monitor for possible categorical biases effecting regressions, nine metrics are used to evaluate the performance of each model over all alloy types at every stage of the hyper-parameter optimization.
-This is done simultaneously.
-in order to train models to be more faithful to the highest fidelity, the score for that subset is weighted as more important.
-So, only models that perform uniformly well on all alloy types and better on predicting the experimental dataset are selected.
-Naturally, perovskites mixing at a given site and of a given hybrid-organic/inorganic character were expected to perform significantly differently compared to perovskites containing different mixing/constituents.
-Classical learning methods require guidance to reasonably explain this mixing diversity and avoid confusion.
-I provided this guidance by training each model using two test/train splits.
-First, the optimal model parameters are chosen for their performance under a random split.
-A minimum of 3-fold cross-validation is performed for every set of model parameters that is considered.
+A GPR model is a principled linear model functioning very differently.
+Informally, GPRs "remember" the training examples and judge unlabeled data by its similarity to that aggregate memory.
+This is implemented as a kernel method leveraging some similarity function \(k(x, x')\).
+It works out that This function defines a "universe" of functions with varying characteristics and, simultaneously a density of functions which can be interpreted as a Bayesian prior on function space.
+Naturally, kernels require engineering to accommodate prior expectations. Additionally, they offer limited options for capturing non-differentiable stepwise functions.
+Of course, the random forest offers nothing but stepwise functions thus posing as the opposite end of the two extremes.
+By applying Bayes' rule with a likelihood function defined using the sampled data and solving for the posterior function distribution, a principled set of predictive functions is obtained.
+Averaging these functions yields the mean prediction (identical to a Kriging model's ridge) and their variability gives principled estimates of the error at each point in the domain.
+Due to this, the algorithm saturates after sufficient training and additional data ceases to benefit.
+The primary advantage of this method is simply that it works for any two quantifiably similar \(x\), potentially vectors, text, or graphs.
+This offers some possibilities for future research with enhanced features.
+However this comes at the cost of \(\mathcal{O}(N^3)\) training time complexity and a break down in efficacy in sparse, high-dimensional spaces.
 
-Finally, the optimized model's ability to extrapolate is
-tested by training/testing on splits determined with a groupwise K-fold splitting strategy.
-
-Two separate cross validation schemes are employed at each stage of the design process.
-First, the sample set is shuffled once and split to mitigate the models tendency to fit on sample order, then, stratified K-folds are generated in manner consistent with the types of each sample.
-The regressor is then trained on the subsets of each class.
-Its ability to extrapolate is independently metered on each validation fold consisting of members of the other classes.
-Second, the ability for a model trained on samples belonging to one class/status to extrapolate to samples of another class/status is tested as well.
-The samples again are shuffled and split.
-then the training set is separated using a grouping K-fold split strategy.
-
-A final best model is instantiated using the overall best performing parameters.
-These models are finally validated against the test sets originally split off from the sample in both their extrapolative ability and consistency 
+In order to monitor the performance of the regression during training nine metrics were used simultaneously to evaluate performance with respect to each fidelity and in the overall with attention to overall accuracy and maximum inaccuracy.
+These scores were used throughout the hyper-parameter optimization to judge which parameters resulted in the best validation performance.
+To train models to be more faithful to the highest fidelity, the score for that subset was weighted as more important.
+So, eventually, only models that performed uniformly well on all alloy types and better on predicting the experimental dataset were selected.
+From the various approaches tried, the best optimized model was selected to make experimental-quality predictions on all 37785 points in the sample space.
 This procedure in demonstrated in an online notebook by \textcite{manganaris-2022-mrs-comput} hosted on the Purdue nanoHUB.
 
 \section{Feature Engineering}
