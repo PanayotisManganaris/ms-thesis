@@ -2,7 +2,7 @@
 #+options: author:t broken-links:nil c:nil creator:nil
 #+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:("TODO" "DONE" "NEXT") tex:t
-#+options: timestamp:t title:t toc:t todo:t |:t
+#+options: timestamp:t title:t toc:t todo:nil |:t
 #+title: ap-software+data
 #+date: <2023-06-13 Tue>
 #+author: Panayotis Manganaris
@@ -29,7 +29,7 @@
 :CUSTOM_ID: contributions
 :END:
 
-** Data Publication
+** TODO Data Publication
 :PROPERTIES:
 :UNNUMBERED: t
 :END:
@@ -41,7 +41,6 @@ It is available to download with a simple API call following installation and ac
   \caption{\label{lst:MDF} How to load the Mannodi Group halide perovskites data set from the Materials Data Facility repository}
   \begin{CenteredBox}
     \begin{lstlisting}[language=python]
-# THIS IS PENDING
 f = Foundry(
     no_local_server=True,
     no_browser=True,
