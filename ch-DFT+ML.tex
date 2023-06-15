@@ -366,11 +366,11 @@ The x-axis shows the SHAP score for each point.
 The points are shaped in a violin plot to show the distribution of effects the presence of the given feature can have.
 Finally, on the color-axis, feature value specifies whether a particular score is a large or small absolute contributor of the sum to the prediction.
 
-For instance, in figure \ref{fig:rfrSHAP}, the B-site Electronegativity is often a strongly positive contributor to the RFR prediction.
-However, almost always in this case it is out-contributed by other features, it does not mostly determine the result but it is still valuable.
-On the contrary, when it is a strongly negative contributor it effectively determines the result.
+For instance, in figure \ref{fig:rfrSHAP}, the B-site Electronegativity is a strongly positive contributor to the RFR prediction.
+Large B-site electronegativities tend to result in a subtraction from the mean band gap of about 0.5 \unit{\electronvolt}.
+Small electronegativities tend to result in an addition to the mean band gap averaging 1.5 \unit{\electronvolt} but with much wider variability.
 It is interesting to see how models make use of features in light of basic bi-variate correlations.
-The only features that correlate strongly with band gap are illustrated in figure \ref{fig:rpear}.
+The only features that correlate strongly with band gap are summarized in figure \ref{fig:rpear}.
 Notably, the Random Forest Regression (RFR) primarily uses the highly correlated features, while the Gaussian Process Regression (GPR) primarily uses features with lower Pearson correlations.
 
 \begin{figure}[htbp]
