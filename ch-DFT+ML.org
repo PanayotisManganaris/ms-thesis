@@ -775,6 +775,134 @@ Nevertheless, the RFR model on the higher dimensional, sparser raw features is s
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2023-05-19 Fri 11:13]
 :END:
+*** COMMENT perform validation
+#+begin_src jupyter-python
+  cpipe = joblib.load("./Models/rfr_t_bg.joblib")
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  sss = StratifiedShuffleSplit(n_splits=1, train_size=0.8, random_state=1111)
+  train_idx, test_idx = next(sss.split(X, Y.lotord)) #stratify split by LoT categories
+  X_tr, X_ts = X.iloc[train_idx], X.iloc[test_idx]
+  Y_tr, Y_ts = Y.iloc[train_idx], Y.iloc[test_idx]
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python 
+  erdf = run_cv_report(cpipe, GroupKFold(n_splits=366), lot_scorings,
+                       X_tr, Y_tr[target].iloc[:,0], Y_tr.memord, Y_tr.members)  
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  pdf = pd.concat([
+      pd.merge(erdf.reset_index()['index'].str.split(' ').str[-1],
+               Y_tr.members.value_counts().reset_index(),
+               on=['index'], how='left').drop('index', axis=1),
+      erdf.reset_index(),
+  ], axis=1)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  pdf.loc[:, pdf.columns.str.contains("rmse", regex=True)] = pdf.loc[:, pdf.columns.str.contains("rmse", regex=True)] * -1
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  pdf['index'] = [
+      combo if count > 7 else 'rest of candidate<br>combinations' for combo, count in zip(
+          pdf['index'].to_list(), pdf.members.to_list()
+      )
+  ]
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+*** DONE Validation of Expected Error
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-06-15 Thu 01:28]
+:END:
+The errors reported in the prior section are promising but questionable due to the lack of testing of the model's ability to make predictions on completely novel compounds.
+Following the appropriate validation methodology outlined in section [[Training and Evaluation Methodology]] addresses this concern.
+This results in a distribution of errors with a mean EXP RMSE of about 0.2 \unit{\electronvolt}, which is only slightly worse than error obtained in the testing.
+The mean scores are better than the median, but this is mostly due to a small number of outlier compounds which are not very exotic, so it is unrealistic not to train on at least one example of them at a simulation fidelity.
+See figure ref:fig:errval.
+There is definitely a loss in validation performance as compared to the scores on the train set, see table ref:tbl:errval.
+Notice, the \(R^2\) score is missing because it can not be computed on validation sets that contain only a single sample.
+The explained variance (ev) score is poor on the test set, but nearly perfect on the train set.
+This is the biggest difference in the scoring by far, simply due to the higher variability of errors in the test sets.
+Certainly, the interpolation demanded of the model will not be perfect on wholly unseen compositions, but it seems that in the majority of instances, the prediction can be justifiably expected to be reasonably accurate.
+
+#+begin_src jupyter-python :post wrap(*this*, w="1000pt", c="label:fig:errval Distribution of leave-one-composition-out cross-validation errors weighted by the size of validation sets")
+    p = px.histogram(
+        pdf[pdf.partition=='test'],
+        x='rmse_EXP',
+        y='members',
+        facet_col='partition',
+        color='index',
+        text_auto=True,
+        width=800,
+        height=450,
+        # title="Distirbution of errors weighted by size of validation sets"
+    )
+    p.update_traces(texttemplate='%{y}', textposition='outside')
+    p.update_layout(legend=dict(font_size=14.5, title='Compound Members'),
+                    margin=dict(t=0))
+    p.update_yaxes(title='sum of validation set sizes')
+    p.update_xaxes(title='RMSE of experimental-fidelity prediction')
+    p.for_each_annotation(lambda a: a.update(text=""))
+    p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 1000pt
+#+CAPTION: label:fig:errval Distribution of leave-one-composition-out cross-validation errors weighted by the size of validation sets
+[[file:./.ob-jupyter/d44a36fb406250843e09ef8033a779d1b729d413.svg]]
+:end:
+
+#+begin_src jupyter-python :post wraptbl(c="label:tbl:errval Leave-one-composition-out cross-validation scored by complete suite")
+  wm = lambda x: np.average(x, weights=pdf.loc[x.index, "members"])
+  pdf.groupby('partition').agg(
+      {col:wm for col in pdf.columns if not col in ['r2', 'members', 'index', 'partition']}
+  ).T
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+CAPTION: label:tbl:errval Leave-one-composition-out cross-validation scored by complete suite 
+| partition            |  test | train |
+|----------------------+-------+-------|
+| ev                   | -2.48 |  0.99 |
+| maxerr               |  0.32 |  0.96 |
+| rmse                 |  0.22 |  0.10 |
+| rmse_EXP             |  0.22 |  0.06 |
+| rmse_PBE             |  0.18 |  0.11 |
+| rmse_HSE             |  0.22 |  0.11 |
+| rmse_HSE(SOC)        |  0.21 |  0.10 |
+| rmse_HSE-PBErel(SOC) |  0.20 |  0.10 |
+:end:
 
 *** DONE SHAP Analysis of Domain
 :LOGBOOK:

@@ -302,6 +302,44 @@ Nevertheless, the RFR model on the higher dimensional, sparser raw features is s
 
 \section{Discussion}
 \label{sec:orgb2d5fd7}
+\subsection{Validation of Expected Error}
+\label{sec:orgee265d6}
+The errors reported in the prior section are promising but questionable due to the lack of testing of the model's ability to make predictions on completely novel compounds.
+Following the appropriate validation methodology outlined in section \ref{sec:org3f842dd} addresses this concern.
+This results in a distribution of errors with a mean EXP RMSE of about 0.2 \unit{\electronvolt}, which is only slightly worse than error obtained in the testing.
+The mean scores are better than the median, but this is mostly due to a small number of outlier compounds which are not very exotic, so it is unrealistic not to train on at least one example of them at a simulation fidelity.
+See figure \ref{fig:errval}.
+There is definitely a loss in validation performance as compared to the scores on the train set, see table \ref{tbl:errval}.
+Notice, the \(R^2\) score is missing because it can not be computed on validation sets that contain only a single sample.
+The explained variance (ev) score is poor on the test set, but nearly perfect on the train set.
+This is the biggest difference in the scoring by far, simply due to the higher variability of errors in the test sets.
+Certainly, the interpolation demanded of the model will not be perfect on wholly unseen compositions, but it seems that in the majority of instances, the prediction can be justifiably expected to be reasonably accurate.
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=1000pt]{./.ob-jupyter/d44a36fb406250843e09ef8033a779d1b729d413}
+\caption{\label{fig:errval} Distribution of leave-one-composition-out cross-validation errors weighted by the size of validation sets}
+\end{figure}
+
+ 
+\begin{table}[htbp]
+\caption{\label{tbl:errval} Leave-one-composition-out cross-validation scored by complete suite}
+\centering
+\begin{tabular}{lrr}
+partition & test & train\\[0pt]
+\hline
+ev & -2.48 & 0.99\\[0pt]
+maxerr & 0.32 & 0.96\\[0pt]
+rmse & 0.22 & 0.10\\[0pt]
+rmse\textsubscript{EXP} & 0.22 & 0.06\\[0pt]
+rmse\textsubscript{PBE} & 0.18 & 0.11\\[0pt]
+rmse\textsubscript{HSE} & 0.22 & 0.11\\[0pt]
+rmse\textsubscript{HSE}(SOC) & 0.21 & 0.10\\[0pt]
+rmse\textsubscript{HSE}-PBErel(SOC) & 0.20 & 0.10\\[0pt]
+\end{tabular}
+\end{table}
+
 \subsection{SHAP Analysis of Domain}
 \label{sec:org0359b0f}
 SHAP scores are computed automatically for every dimension of every sample in the domain by the python SHAP package\footnote{\url{https://github.com/slundberg/shap}}.
