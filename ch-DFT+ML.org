@@ -801,7 +801,7 @@ These can serve as a high quality, introspective domain for the other architectu
 :END:
 We set the aim of decreasing \(\mathcal{O}(n^3)\) computational expense of GPR by \approx{}10 times.
 So, we aim to take 30 highly correlated features (slightly more than one half the number used by prior models) from these SIS subspaces.
-We expected this to solve the problems inherent to the raw [[Featurization of Chemistries]].
+We expected this to solve the problems inherent to the raw features obtained in section [[Featurization of Chemistries]].
 
 Fitting models to SIS features may leverage the denser and more continuous domain to improve extrapolative predictions.
 Potentially into the high-entropy domain, or simply Theory.
@@ -960,7 +960,7 @@ The explained variance (ev) score is poor on the test set, but nearly perfect on
 This is the biggest difference in the scoring by far, simply due to the higher variability of errors in the test sets.
 Certainly, the interpolation demanded of the model will not be perfect on wholly unseen compositions, but it seems that in the majority of instances, the prediction can be justifiably expected to be reasonably accurate.
 
-#+begin_src jupyter-python :post wrap(*this*, w="1000pt", c="label:fig:errval Distribution of leave-one-composition-out cross-validation errors weighted by the size of validation sets")
+#+begin_src jupyter-python :post wrap(*this*, w="400pt", c="label:fig:errval Distribution of leave-one-composition-out cross-validation errors weighted by the size of validation sets")
     p = px.histogram(
         pdf[pdf.partition=='test'],
         x='rmse_EXP',
@@ -984,7 +984,7 @@ Certainly, the interpolation demanded of the model will not be perfect on wholly
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 1000pt
+#+attr_latex: :width 400pt
 #+CAPTION: label:fig:errval Distribution of leave-one-composition-out cross-validation errors weighted by the size of validation sets
 [[file:./.ob-jupyter/d44a36fb406250843e09ef8033a779d1b729d413.svg]]
 :end:
@@ -1005,11 +1005,11 @@ Certainly, the interpolation demanded of the model will not be perfect on wholly
 | ev                   | -2.48 |  0.99 |
 | maxerr               |  0.32 |  0.96 |
 | rmse                 |  0.22 |  0.10 |
-| rmse_EXP             |  0.22 |  0.06 |
-| rmse_PBE             |  0.18 |  0.11 |
-| rmse_HSE             |  0.22 |  0.11 |
-| rmse_HSE(SOC)        |  0.21 |  0.10 |
-| rmse_HSE-PBErel(SOC) |  0.20 |  0.10 |
+| rmse EXP             |  0.22 |  0.06 |
+| rmse PBE             |  0.18 |  0.11 |
+| rmse HSE             |  0.22 |  0.11 |
+| rmse HSE(SOC)        |  0.21 |  0.10 |
+| rmse HSE-PBErel(SOC) |  0.20 |  0.10 |
 :end:
 
 *** DONE SHAP Analysis of Domain

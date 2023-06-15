@@ -349,7 +349,7 @@ They supplemented the cuts on band gap we developed for identifying high-perform
 ** Thesis Overview
 In chapter \ref{sec:org44ac04c}, I review the work we did in [cite/title:@yang-2023-high-throug][cite:@yang-2023-high-throug] to create a multi-fidelity dataset of perovskite band gaps.
 I then detail the methods I used for predicting band gaps and the models I obtained in chapter \ref{sec:orgbfd2f81}.
-Results and a discussion of their significance is given in chapter \ref{sec:orgbfd2f81}.
+Results and a discussion of their significance is given in chapter \ref{sec:org1da08e8}.
 The open-source tools I developed for this work have been made available to the broader materials science community.
 The essential qualities of these tools have been detailed in Appendix \ref{sec:orgc7f868a}.
 
@@ -687,7 +687,6 @@ Again, for simplicity, only cardinal mixing was considered in this study: that i
 The sample contains a reasonable balance of points representing each one of the cardinal mixing categories.
 This helped to ensure the ML algorithms learn relationships between fidelities, not differences in mix site or constituency distributions within each fidelity.
 Additionally, within each mix both purely inorganic samples and hybrid organic-inorganic samples were represented equally.
-# See [[Methods]] for details on how these categories were utilized in model development.
 See the coverage of this sample in figure ref:fig:coverage.
 
 #+begin_src jupyter-python :post wrap(*this*, w="450pt :options inkscapeformat=png, inkscapedpi=300", c="label:fig:lot_mix_org Share by count of total data apportioned from each experimental subcategory")

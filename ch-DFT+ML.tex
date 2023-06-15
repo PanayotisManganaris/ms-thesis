@@ -296,7 +296,7 @@ These can serve as a high quality, introspective domain for the other architectu
 \label{sec:org7802582}
 We set the aim of decreasing \(\mathcal{O}(n^3)\) computational expense of GPR by \(\approx\)10 times.
 So, we aim to take 30 highly correlated features (slightly more than one half the number used by prior models) from these SIS subspaces.
-We expected this to solve the problems inherent to the raw \ref{sec:orgd1d9e75}.
+We expected this to solve the problems inherent to the raw features obtained in section \ref{sec:orgd1d9e75}.
 
 Fitting models to SIS features may leverage the denser and more continuous domain to improve extrapolative predictions.
 Potentially into the high-entropy domain, or simply Theory.
@@ -330,7 +330,7 @@ Certainly, the interpolation demanded of the model will not be perfect on wholly
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=1000pt]{./.ob-jupyter/d44a36fb406250843e09ef8033a779d1b729d413}
+\includesvg[width=400pt]{./.ob-jupyter/d44a36fb406250843e09ef8033a779d1b729d413}
 \caption{\label{fig:errval} Distribution of leave-one-composition-out cross-validation errors weighted by the size of validation sets}
 \end{figure}
 
@@ -344,11 +344,11 @@ partition & test & train\\[0pt]
 ev & -2.48 & 0.99\\[0pt]
 maxerr & 0.32 & 0.96\\[0pt]
 rmse & 0.22 & 0.10\\[0pt]
-rmse\textsubscript{EXP} & 0.22 & 0.06\\[0pt]
-rmse\textsubscript{PBE} & 0.18 & 0.11\\[0pt]
-rmse\textsubscript{HSE} & 0.22 & 0.11\\[0pt]
-rmse\textsubscript{HSE}(SOC) & 0.21 & 0.10\\[0pt]
-rmse\textsubscript{HSE}-PBErel(SOC) & 0.20 & 0.10\\[0pt]
+rmse EXP & 0.22 & 0.06\\[0pt]
+rmse PBE & 0.18 & 0.11\\[0pt]
+rmse HSE & 0.22 & 0.11\\[0pt]
+rmse HSE(SOC) & 0.21 & 0.10\\[0pt]
+rmse HSE-PBErel(SOC) & 0.20 & 0.10\\[0pt]
 \end{tabular}
 \end{table}
 
