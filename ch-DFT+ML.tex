@@ -449,6 +449,7 @@ The strong preference for pure sites simply reflects that this sample space cont
 \label{sec:org1da08e8}
 A set of promising hypothetical compositions is identified by this work.
 I identified a set of 1251 promising perovskite compositions with desirable band gaps for Photovoltaic applications using a novel data-driven approach.
+The selected band gaps are predicted at an experimental fidelity with error likely ranging from 0.15 to 0.3 \unit{\eectronvolt}.
 Of the selected compositions 640 are purely inorganic, and 611 are hybrid-organic/inorganic.
 Table \ref{tbl:mixscreen} shows how the set subdivides by mixing.
 Only 40 of the original expertly designed sample pass the screening, the rest are untested to my knowledge.
@@ -457,7 +458,6 @@ Notably, 834 contain no lead.
 The 30 most stable lead-free compounds identified with band-gap in the 1-2 \unit{\electronvolt} range are listed in table \ref{tbl:pbfree}.
 
 I evaluated a variety of machine learning techniques and implemented simple but effective models for estimating band gap for perovskites from multi-fidelity data.
-On held-out test data, a random forest model achieved nearly an RMSE error of 0.12 on the whole dataset and 0.15 on the experimental subset.
 
 I found RFR models performed best in this setting, and believe this is because the architecture is an ensemble model so it reduces the variance of error by design.
 Additionally, the decision trees that make up the forest best identify and capture relevant feature interactions as corroborated by Pearson correlations.
@@ -467,6 +467,7 @@ The RFR properties that helped it perform best in this setting are not domain-sp
 
 In summary, I experimented with training multiple models to differentiate and treat appropriately observations with different fidelities and demonstrated good results with the RFR in particular.
 The Gaussian Process Regression was a very close second.
+The SISSO model and the RFR and GPR based on the SIS-selected superspace do not perform well, contrary to expectations.
 The GPR’s ability to theoretically deal with more complex descriptors deserves further study to realize its full potential.
 Further improving on the feature engineering and examining what can be learned about the relationship between structure and band gap might begin here.
 
