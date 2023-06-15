@@ -287,9 +287,10 @@ The operations in table ref:tbl:ops were used to create compound features.
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2023-06-05 Mon 21:55]
 :END:
+First, the sample set is shuffled to mitigate the models tendency to fit on sampling order.
 Model training proceeded only after partitioning the dataset using an 80/20 train-test split.
 The split was made in a stratified manner, ensuring both partitions contained a proportionate fraction of samples from each fidelity subset.
-The test set of 282 points was held out for evaluation.
+The test set of 282 points was held out for final evaluation.
 The training used the remaining 1123 data points.
 In order to specify the learning algorithm best at predicting the experimental fidelity from simulated data, a thorough grid-search of each algorithm's hyper-parameters was performed.
 First an estimator pipeline was constructed as in figure ref:fig:pipe.
@@ -323,6 +324,7 @@ Additionally, this avoided the expense of true leave-one-out validation.
 The second validation was to test that the model can accurately predict the values for specific unseen elements at different levels of theory.
 In this case, test compounds need not be entirely unique because it was expected that the extrapolated predictions at higher levels of theory will leverage the better coverage of lower fidelity sample sets.
 So, finally, the test set is used and the resulting predictions are evaluated for accuracy.
+Shapley Additive Explaination (SHAP) analysis of the models lends insight to the average physical impacts of 1) site-specific alloying, 2) using organic molecules in the Perovskite superstructure, and 3) the distribution of effects that a level of theory has on the prediction.
 
 ** DONE Results
 :PROPERTIES:
@@ -522,16 +524,24 @@ So, finally, the test set is used and the resulting predictions are evaluated fo
 [[file:./.ob-jupyter/1a3fd80c6a22dbce291d740dbb832e523b9d11eb.svg]]
 :end:
 
-Following hyperparameter optimization, the random forest model was the best performing compared to the gaussian process and SISSO regressions.
-It boasts an RMSE error on the total dataset of only 0.12 \unit{\electronvolt}.
+Following HPO these models are finally validated against the test sets originally split off from the sample for both their extrapolative ability and consistency.
+The random forest model was the best performing compared to the Gaussian process and SISSO regressions.
+The analysis of its ability to make extrapolative predictions on completely unknown compositions is discussed in the following section [[Discussion]].
+The RFR boasts an RMSE error on the total dataset of only 0.12 \unit{\electronvolt}.
 This combined with its RMSE error of 0.15 \unit{\electronvolt} on the experimental fidelity subset promises this model can make quality predictions of the band gap at the experimental fidelity.
 See table ref:tbl:LoTscores.
-This error compares favorably with the best models currently ranked by the Materials Project's MatBench standard[cite:@dunn-2020-bench-mater].
-My models use the stoichiometry of the compositions while the MatBench models require atomic structures in addition to stoichiometric information.
-
+This error compares favorably with the best models currently ranked by the Materials Project's MatBench standard.
+[cite:@dunn-2020-bench-mater]
+Notably, these models use only the stoichiometry of the compositions while most MatBench models require atomic structures in addition to stoichiometric information.
+Of course, these models are highly specialized to this sample space.
 The RFR hyper-parameters are listed in the appendix (Table ref:tbl:rfrHPO).
-The GPR model was tried with multiple kernels.
-Ultimately, the best was a non stationary Matern kernel with \(\nu = \frac{3}{2}\).
+
+The GPR model was tried with various kernels, both stationary and non-stationary, where each essentially describe the differentiability of the functions used in the posterior.
+Ultimately, the best was a non-stationary Matern kernel with \(\nu = \frac{3}{2}\).
+This kernel defines "rough" functions that are only once-differentiable.
+This makes sense considering the inability of GPR to capture step functions and the stepwise nature of the LoT encoding dimensions.
+Additionally, both the LoT dimensions and the composition vectors are sparse, which challenges the algorithm
+Nevertheless, it is a close second to the RFR and offers a propitious start to models utilizing more advanced features.
 
 *** DONE SISSO Model and SIS Engineered Features
 :LOGBOOK:

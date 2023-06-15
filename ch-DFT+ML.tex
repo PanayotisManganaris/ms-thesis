@@ -1,5 +1,5 @@
 \chapter{MODELS OF PEROVSKITE BAND GAP}
-\label{sec:org37dcca4}
+\label{sec:orgbfd2f81}
 Novel halide perovskites with improved stability and optoelectronic properties can be designed via composition engineering at cation and/or anion sites.
 Data-driven methods, especially involving high-throughput first principles computations and subsequent ML modeling using unique material descriptors, are key to achieving this goal.
 I used a dataset consisting of -- among other characteristic properties -- simulated band gaps of a representative sample of halide perovskites (HaP).
@@ -173,9 +173,10 @@ division & natural logarithm\\[0pt]
 
 \section{Training and Evaluation Methodology}
 \label{sec:org3f842dd}
+First, the sample set is shuffled to mitigate the models tendency to fit on sampling order.
 Model training proceeded only after partitioning the dataset using an 80/20 train-test split.
 The split was made in a stratified manner, ensuring both partitions contained a proportionate fraction of samples from each fidelity subset.
-The test set of 282 points was held out for evaluation.
+The test set of 282 points was held out for final evaluation.
 The training used the remaining 1123 data points.
 In order to specify the learning algorithm best at predicting the experimental fidelity from simulated data, a thorough grid-search of each algorithm's hyper-parameters was performed.
 First an estimator pipeline was constructed as in figure \ref{fig:pipe}.
@@ -210,11 +211,12 @@ Additionally, this avoided the expense of true leave-one-out validation.
 The second validation was to test that the model can accurately predict the values for specific unseen elements at different levels of theory.
 In this case, test compounds need not be entirely unique because it was expected that the extrapolated predictions at higher levels of theory will leverage the better coverage of lower fidelity sample sets.
 So, finally, the test set is used and the resulting predictions are evaluated for accuracy.
+Shapley Additive Explaination (SHAP) analysis of the models lends insight to the average physical impacts of 1) site-specific alloying, 2) using organic molecules in the Perovskite superstructure, and 3) the distribution of effects that a level of theory has on the prediction.
 
 \section{Results}
-\label{sec:org7802582}
+\label{sec:orgfa003dc}
 \subsection{Best Models on Raw Domain}
-\label{sec:orgb2d5fd7}
+\label{sec:orgf476608}
  
 \begin{figure}[htbp]
 \centering
@@ -222,19 +224,27 @@ So, finally, the test set is used and the resulting predictions are evaluated fo
 \caption{\label{fig:pairplots} model predictions vs true values at multiple fidelities}
 \end{figure}
 
-Following hyperparameter optimization, the random forest model was the best performing compared to the gaussian process and SISSO regressions.
-It boasts an RMSE error on the total dataset of only 0.12 \unit{\electronvolt}.
+Following HPO these models are finally validated against the test sets originally split off from the sample for both their extrapolative ability and consistency.
+The random forest model was the best performing compared to the Gaussian process and SISSO regressions.
+The analysis of its ability to make extrapolative predictions on completely unknown compositions is discussed in the following section \ref{sec:orgb2d5fd7}.
+The RFR boasts an RMSE error on the total dataset of only 0.12 \unit{\electronvolt}.
 This combined with its RMSE error of 0.15 \unit{\electronvolt} on the experimental fidelity subset promises this model can make quality predictions of the band gap at the experimental fidelity.
 See table \ref{tbl:LoTscores}.
-This error compares favorably with the best models currently ranked by the Materials Project's MatBench standard\autocite{dunn-2020-bench-mater}.
-My models use the stoichiometry of the compositions while the MatBench models require atomic structures in addition to stoichiometric information.
-
+This error compares favorably with the best models currently ranked by the Materials Project's MatBench standard.
+\autocite{dunn-2020-bench-mater}
+Notably, these models use only the stoichiometry of the compositions while most MatBench models require atomic structures in addition to stoichiometric information.
+Of course, these models are highly specialized to this sample space.
 The RFR hyper-parameters are listed in the appendix (Table \ref{tbl:rfrHPO}).
-The GPR model was tried with multiple kernels, where each can be .
-Ultimately, the best was a non stationary Matern kernel with \(\nu = \frac{3}{2}\).
+
+The GPR model was tried with various kernels, both stationary and non-stationary, where each essentially describe the differentiability of the functions used in the posterior.
+Ultimately, the best was a non-stationary Matern kernel with \(\nu = \frac{3}{2}\).
+This kernel defines "rough" functions that are only once-differentiable.
+This makes sense considering the inability of GPR to capture step functions and the stepwise nature of the LoT encoding dimensions.
+Additionally, both the LoT dimensions and the composition vectors are sparse, which challenges the algorithm
+Nevertheless, it is a close second to the RFR and offers a propitious start to models utilizing more advanced features.
 
 \subsection{SISSO Model and SIS Engineered Features}
-\label{sec:orgf476608}
+\label{sec:org3c8eaf2}
 The Sure Independence Screening and Sparsifying Operator (SISSO) is a specific combination of multiple data mining techniques chained together resulting in a symbolically expressed regression model.
 \autocite{ouyang-2018-sisso,ghiringhelli-2017-learn-physic} 
 
@@ -271,7 +281,7 @@ However, in the process of creating Equation \ref{eq:bgexp}, 150 SIS predictor v
 These can serve as a high quality, introspective domain for the other architectures to fit on.
 
 \subsection{Best Models on Engineered Domain}
-\label{sec:org3c8eaf2}
+\label{sec:org7802582}
 We set the aim of decreasing \(\mathcal{O}(n^3)\) computational expense of GPR by \(\approx\)10 times.
 So, we aim to take 30 highly correlated features (slightly more than one half the number used by prior models) from these SIS subspaces.
 We expected this to solve the problems inherent to the raw \ref{sec:orgd1d9e75}.
@@ -291,9 +301,9 @@ Nevertheless, the RFR model on the higher dimensional, sparser raw features is s
 \end{figure}
 
 \section{Discussion}
-\label{sec:org0359b0f}
+\label{sec:orgb2d5fd7}
 \subsection{SHAP Analysis of Domain}
-\label{sec:orgfa003dc}
+\label{sec:org0359b0f}
 SHAP scores are computed automatically for every dimension of every sample in the domain by the python SHAP package\footnote{\url{https://github.com/slundberg/shap}}.
 The sum of the expectation value of the target conditioned on the model features and the  SHAP scores computed for each predictor variable of a sample is the model's  prediction for that sample target.
 \autocite{lundberg-2017-unified-approac}
@@ -347,7 +357,7 @@ If anything, figure \ref{fig:clusters} confirms that the Iodine at the X site te
 \end{figure}
 
 \subsection{Predictions and Screening}
-\label{sec:orgee265d6}
+\label{sec:org37dcca4}
 Using the superior RFR model, I predict the band gap for all 37785 possible compositions demonstrating cardinal mixing within the bounds of a 2x2x2 perovskite super cell.
 That is eight A-sites shared by up to 5 constituents, 8 B-sites shared by up to six constituents, and 24 X-sites shared by up to 3 constituents.
 Given the good coverage achieved by our sample dataset (figure \ref{fig:coverage}) and according to the scores reported in Table \ref{tbl:LoTscores}, the RFR model is capable of predicting band gaps at the experimental fidelity with a 0.15 RMSE.
@@ -398,7 +408,7 @@ The strong preference for pure sites simply reflects that this sample space cont
 \end{figure}
 
 \chapter{CONCLUSIONS}
-\label{sec:orgbfd2f81}
+\label{sec:org1da08e8}
 A set of promising hypothetical compositions is identified by this work.
 I identified a set of 1251 promising perovskite compositions with desirable band gaps for Photovoltaic applications using a novel data-driven approach.
 Of the selected compositions 640 are purely inorganic, and 611 are hybrid-organic/inorganic.
