@@ -1,8 +1,8 @@
 #+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
 #+options: author:t broken-links:nil c:nil creator:nil
 #+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
-#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
-#+options: timestamp:t title:t toc:t todo:t |:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:("TODO" "DONE" "NEXT") tex:t
+#+options: timestamp:t title:t toc:t todo:nil |:t
 #+title: ch-contributions
 #+date: <2023-05-10 Wed>
 #+author: Panayotis Manganaris
@@ -71,7 +71,7 @@
   for MRS Honolulu Spring 2022 tutorial hosted on nanoHUB
   [cite/title:@2022-ds00-tutor][cite:@2022-ds00-tutor]
 
-* PUBLICATIONS
+* TODO PUBLICATIONS
 :PROPERTIES:
 :CUSTOM_ID: publications
 :END:
@@ -86,21 +86,22 @@
 \nocite{yang-2023-discov-novel}
 
 \makeatletter
-\defbibenvironment{bibliography}
-  {\list
-     {\printtext[labelnumberwidth]{%
-      \printfield{labelprefix}%
-      \printfield{labelnumber}}}
-     {\setlength{\bibhang}{1in} %%%%% was 0pt
-      \setlength{\itemindent}{1in}%  -\leftmargin %%%%% was 0pt
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\leftmargin}{0pt}%  .22in % 0.42in
-      \setlength{\parsep}{\bibparsep}%
-      \setlength{\rightmargin}{0.33in}%
-      }%
-      \renewcommand*{\makelabel}[1]{\hss##1}}
-  {\endlist}
-  {\item}
+\defbibenvironment{bibliography}{
+  \list
+  {\printtext[labelnumberwidth]{%
+      \printfield{prefixnumber}%
+      \printfield{labelnumber}%
+    }}
+  {\setlength{\bibhang}{1in} %%%%% was 0pt
+   \setlength{\itemindent}{1in}%  -\leftmargin %%%%% was 0pt
+   \setlength{\itemsep}{\bibitemsep}%
+   \setlength{\leftmargin}{0pt}%  .22in % 0.42in
+   \setlength{\parsep}{\bibparsep}%
+   \setlength{\rightmargin}{0.33in}%
+ }%
+}
+{\endlist}
+{\item}
 \makeatother
 
 \printbibliography[heading=none,category=myarticles]

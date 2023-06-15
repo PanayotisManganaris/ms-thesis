@@ -22,21 +22,22 @@ for MRS Honolulu Spring 2022 tutorial hosted on nanoHUB
 \nocite{yang-2023-discov-novel}
 
 \makeatletter
-\defbibenvironment{bibliography}
-  {\list
-     {\printtext[labelnumberwidth]{%
-      \printfield{labelprefix}%
-      \printfield{labelnumber}}}
-     {\setlength{\bibhang}{1in} %%%%% was 0pt
-      \setlength{\itemindent}{1in}%  -\leftmargin %%%%% was 0pt
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\leftmargin}{0pt}%  .22in % 0.42in
-      \setlength{\parsep}{\bibparsep}%
-      \setlength{\rightmargin}{0.33in}%
-      }%
-      \renewcommand*{\makelabel}[1]{\hss##1}}
-  {\endlist}
-  {\item}
+\defbibenvironment{bibliography}{
+  \list
+  {\printtext[labelnumberwidth]{%
+      \printfield{prefixnumber}%
+      \printfield{labelnumber}%
+    }}
+  {\setlength{\bibhang}{1in} %%%%% was 0pt
+   \setlength{\itemindent}{1in}%  -\leftmargin %%%%% was 0pt
+   \setlength{\itemsep}{\bibitemsep}%
+   \setlength{\leftmargin}{0pt}%  .22in % 0.42in
+   \setlength{\parsep}{\bibparsep}%
+   \setlength{\rightmargin}{0.33in}%
+ }%
+}
+{\endlist}
+{\item}
 \makeatother
 
 \printbibliography[heading=none,category=myarticles]
