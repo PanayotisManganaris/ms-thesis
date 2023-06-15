@@ -1,99 +1,98 @@
 \chapter{ADDITIONAL FIGURES}
-\label{sec:org6b04a78}
-\section*{Learning Curves}
-\label{sec:orga7ccdab}
-Cross-validation within the training set is the only way of checking the generality of models during the grid search.
-Identifying the validation split size is necessary to obtain an understanding of how much data is needed to train a model that can generalize.
-
-Learning curves are computed for each scorer.
-Notice that the error metrics are negated for consistency with the R\textsuperscript{2} and ev scores; the greater the number, the better the model performs.
-
-More data offers better chances.
-However, the smaller the split, the longer and more expensive the loop training becomes, e.g.
-10-fold splits makes for 10 sample scores at each partition size.
-Meaning, 90\% of the training set is used for actual training and the remaining 10\% is used for validation and this is repeated 10 times.
-
-Shuffling is performed prior to generating each fold.
-The shuffle is seeded with a deterministic random state to ensure scores are comparable across partition size 
-
+\label{sec:org1d13a8e}
 \section*{Feature Distributions}
-\label{sec:org011016d}
+\label{sec:orga7ccdab}
+These distributions show how the various descriptors distribute in one dimension.
+The preponderance of heavy settling in the high end of the range in most features suggests one reason why positive correlations are so popular in the simulated fidelities.
+Naturally, simulated fidelities have access to more data, which may spread more widely in the high density regions of the distribution.
+Alternatively the correlation flip seen between the EXP fidelity data and SIM fidelity data might be explained simply by the lack of Experimental measurements in the exotic parts of the domain.
+
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=450pt]{./.ob-jupyter/f724dca219c63ad7eaee9862431820dfe50fee59}
+\includesvg[width=400pt]{./.ob-jupyter/f724dca219c63ad7eaee9862431820dfe50fee59}
 \caption{Normalized Distribution of A-site Constituents}
 \end{figure}
 
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=450pt]{./.ob-jupyter/a9b04c2294b41e26ac120135615a3356cf9d5bc1}
+\includesvg[width=400pt]{./.ob-jupyter/a9b04c2294b41e26ac120135615a3356cf9d5bc1}
 \caption{Normalized Distribution of B-site Constituents}
 \end{figure}
 
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=450pt]{./.ob-jupyter/bc4f79d7b43f705748b87f8b8bcc5111a778bed2}
+\includesvg[width=400pt]{./.ob-jupyter/bc4f79d7b43f705748b87f8b8bcc5111a778bed2}
 \caption{Normalized Distribution of X-site Constituents}
 \end{figure}
 
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=450pt]{./.ob-jupyter/67142da5b3dcf51d03af83b5fe37bd3a4672b176}
+\includesvg[width=400pt]{./.ob-jupyter/67142da5b3dcf51d03af83b5fe37bd3a4672b176}
 \caption{Distributions of Mean A-Site Properties}
 \end{figure}
 
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=450pt]{./.ob-jupyter/3b53272412facd812fa6c52483d898ab67c2c602}
+\includesvg[width=400pt]{./.ob-jupyter/3b53272412facd812fa6c52483d898ab67c2c602}
 \caption{Distributions of Mean B-Site Properties}
 \end{figure}
 
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=450pt]{./.ob-jupyter/1473d3cf1b8588ff107fa23f1a91440e2716ebbd}
+\includesvg[width=400pt]{./.ob-jupyter/1473d3cf1b8588ff107fa23f1a91440e2716ebbd}
 \caption{Distributions of Mean X-Site Properties}
 \end{figure}
 
-\section*{SIS+RFR SHAP analysis}
-\label{sec:org9cb877b}
+\section*{SIS+RFR and SIS+GPR SHAP analysis}
+\label{sec:org011016d}
+The analysis of these models shows how the typical SIS feature is more explanatory.
+However it also shows that interpretability of such models is limited by the sensibility of the combinations used to create the feature.
+Thankfully, every feature illustrated in figures \ref{fig:rfrSHAPe} and \ref{fig:gprSHAPe} is constrained to create either unit-less features or features with coherent units.
+
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=450pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/d0b6ba16e4913fe81324e8170b2b5b241c1053c8.png}
+\includegraphics[width=400pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/d0b6ba16e4913fe81324e8170b2b5b241c1053c8.png}
 \caption{\label{fig:rfrSHAPe} Random Forest Regression Band Gap on SIS domain SHAP Values}
 \end{figure}
 
-\section*{SIS+GPR SHAP analysis}
-\label{sec:org4ade3f5}
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=450pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/718541cd89c707a3acb068057f8bf25626eefd61.png}
+\includegraphics[width=400pt]{/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/718541cd89c707a3acb068057f8bf25626eefd61.png}
 \caption{\label{fig:gprSHAPe} Gaussian Process Regression Band Gap on SIS domain SHAP Values}
 \end{figure}
 
 \section*{Known Clustering in t-SNE Projections}
-\label{sec:org1d13a8e}
+\label{sec:org9cb877b}
+At minimum, this tSNE projection captures the structure in the dataset arising due to the mixing.
+See figure \ref{fig:alloys}.
+Also, it seems some structure may be explained by whether a cluster contains points containing the organic species.
+Logically, the rest of the sub-clusters separate by the presence of constituent species.
+
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=450pt]{./.ob-jupyter/0b728e519df7ec4be07158baa922f385bcac7076}
+\includesvg[width=400pt]{./.ob-jupyter/0b728e519df7ec4be07158baa922f385bcac7076}
 \caption{\label{fig:alloys} Projection of sample space via t-SNE overlaid with labels indicating site of mixing}
 \end{figure}
 
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=450pt]{./.ob-jupyter/ff853be8186a432d26c0eb4b6565ffab8b056ad5}
+\includesvg[width=400pt]{./.ob-jupyter/ff853be8186a432d26c0eb4b6565ffab8b056ad5}
 \caption{\label{fig:chosen} Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset}
 \end{figure}
 
 \section*{Hyper-parameters of Best Random Forest Estimator}
-\label{sec:org4aa92f2}
+\label{sec:org4ade3f5}
+The parameters resulting in a SciKit-Learn RFR estimators best capable
+of predicting band gaps using my training methodology are given in table \ref{tbl:rfrHPO}.
+
 \begin{table}[htbp]
 \caption{\label{tbl:rfrHPO} Select hyper-parameters from exhaustive search of 31104 models}
 \centering

@@ -62,7 +62,7 @@
 :PROPERTIES:
 :CUSTOM_ID: additional figures
 :END:
-** TODO Learning Curves
+** TODO COMMENT Learning Curves
 :PROPERTIES:
 :UNNUMBERED: t
 :END:
@@ -85,6 +85,11 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 :UNNUMBERED: t
 :END:
 
+These distributions show how the various descriptors distribute in one dimension.
+The preponderance of heavy settling in the high end of the range in most features suggests one reason why positive correlations are so popular in the simulated fidelities.
+Naturally, simulated fidelities have access to more data, which may spread more widely in the high density regions of the distribution.
+Alternatively the correlation flip seen between the EXP fidelity data and SIM fidelity data might be explained simply by the lack of Experimental measurements in the exotic parts of the domain.
+
 #+begin_src jupyter-python
   XXc = XX.iloc[:, 0:14].assign(mix=Y.mix).assign(org=Y.org)
   XXcm = pd.melt(
@@ -97,7 +102,7 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 :results:
 :end:
 
-#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Normalized Distribution of A-site Constituents")
+#+begin_src jupyter-python :post wrap(p=*this*, w="400pt", c="Normalized Distribution of A-site Constituents")
   p = px.histogram(XXcm[XXcm.variable.str.contains("'A',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
                    barmode='overlay')
   p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
@@ -117,12 +122,12 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 #+CAPTION: Normalized Distribution of A-site Constituents
 [[file:./.ob-jupyter/f724dca219c63ad7eaee9862431820dfe50fee59.svg]]
 :end:
 
-#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Normalized Distribution of B-site Constituents")
+#+begin_src jupyter-python :post wrap(p=*this*, w="400pt", c="Normalized Distribution of B-site Constituents")
   p = px.histogram(XXcm[XXcm.variable.str.contains("'B',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
                    barmode='overlay')
   p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
@@ -139,12 +144,12 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 #+CAPTION: Normalized Distribution of B-site Constituents
 [[file:./.ob-jupyter/a9b04c2294b41e26ac120135615a3356cf9d5bc1.svg]]
 :end:
 
-#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Normalized Distribution of X-site Constituents")
+#+begin_src jupyter-python :post wrap(p=*this*, w="400pt", c="Normalized Distribution of X-site Constituents")
   p = px.histogram(XXcm[XXcm.variable.str.contains("'X',")], x="proportion", facet_col='variable', facet_col_wrap=7, color="mix",
                    #category_orders={'variable':["Ba", "Ge", "Cl", "Br", "I", "Sn", "Pb", "Cs", "FA", "MA", "Sr", "Ca", "Rb", "K"]}
                    barmode='overlay', height=300)
@@ -162,7 +167,7 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 #+CAPTION: Normalized Distribution of X-site Constituents
 [[file:./.ob-jupyter/bc4f79d7b43f705748b87f8b8bcc5111a778bed2.svg]]
 :end:
@@ -181,7 +186,7 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 :results:
 :end:
 
-#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Distributions of Mean A-Site Properties")
+#+begin_src jupyter-python :post wrap(p=*this*, w="400pt", c="Distributions of Mean A-Site Properties")
   p = px.histogram(XXpm[XXpm.variable.str.contains("'A',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
                    barmode='overlay')
   p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
@@ -198,12 +203,12 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 #+CAPTION: Distributions of Mean A-Site Properties
 [[file:./.ob-jupyter/67142da5b3dcf51d03af83b5fe37bd3a4672b176.svg]]
 :end:
 
-#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Distributions of Mean B-Site Properties")
+#+begin_src jupyter-python :post wrap(p=*this*, w="400pt", c="Distributions of Mean B-Site Properties")
   p = px.histogram(XXpm[XXpm.variable.str.contains("'B',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
                    barmode='overlay')
   p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
@@ -220,12 +225,12 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 #+CAPTION: Distributions of Mean B-Site Properties
 [[file:./.ob-jupyter/3b53272412facd812fa6c52483d898ab67c2c602.svg]]
 :end:
 
-#+begin_src jupyter-python :post wrap(p=*this*, w="450pt", c="Distributions of Mean X-Site Properties")
+#+begin_src jupyter-python :post wrap(p=*this*, w="400pt", c="Distributions of Mean X-Site Properties")
   p = px.histogram(XXpm[XXpm.variable.str.contains("'X',")], x="proportion", facet_col='variable', facet_col_wrap=3, color="mix",
                    barmode='overlay')
   p.for_each_annotation(lambda a: a.update(text="".join(a.text[16:-1].split("'"))))
@@ -242,28 +247,27 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 #+CAPTION: Distributions of Mean X-Site Properties
 [[file:./.ob-jupyter/1473d3cf1b8588ff107fa23f1a91440e2716ebbd.svg]]
 :end:
 
-** SIS+RFR SHAP analysis
+** SIS+RFR and SIS+GPR SHAP analysis
 :PROPERTIES:
 :UNNUMBERED: t
 :END:
+
+The analysis of these models shows how the typical SIS feature is more explanatory.
+However it also shows that interpretability of such models is limited by the sensibility of the combinations used to create the feature.
+Thankfully, every feature illustrated in figures ref:fig:rfrSHAPe and ref:fig:gprSHAPe is constrained to create either unit-less features or features with coherent units.
 
 #+CAPTION: label:fig:rfrSHAPe Random Forest Regression Band Gap on SIS domain SHAP Values
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 [[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/RFR/.ob-jupyter/d0b6ba16e4913fe81324e8170b2b5b241c1053c8.png]]
-
-** SIS+GPR SHAP analysis
-:PROPERTIES:
-:UNNUMBERED: t
-:END:
 
 #+CAPTION: label:fig:gprSHAPe Gaussian Process Regression Band Gap on SIS domain SHAP Values
 #+CAPTION:
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 [[file:/home/panos/Documents/manuscripts/DFT+ML+feature_engineering/GPR/.ob-jupyter/718541cd89c707a3acb068057f8bf25626eefd61.png]]
 
 ** Known Clustering in t-SNE Projections
@@ -286,7 +290,12 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 :results:
 :end:
 
-#+begin_src jupyter-python :post wrap(*this*, w="450pt", c="label:fig:alloys Projection of sample space via t-SNE overlaid with labels indicating site of mixing")
+At minimum, this tSNE projection captures the structure in the dataset arising due to the mixing.
+See figure ref:fig:alloys.
+Also, it seems some structure may be explained by whether a cluster contains points containing the organic species.
+Logically, the rest of the sub-clusters separate by the presence of constituent species.
+
+#+begin_src jupyter-python :post wrap(*this*, w="400pt", c="label:fig:alloys Projection of sample space via t-SNE overlaid with labels indicating site of mixing")
   p = px.scatter(
       projdf.replace(np.NaN, False),
       facet_col='perplexity', facet_col_wrap=4,
@@ -308,12 +317,12 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 #+CAPTION: label:fig:alloys Projection of sample space via t-SNE overlaid with labels indicating site of mixing
 [[file:./.ob-jupyter/0b728e519df7ec4be07158baa922f385bcac7076.svg]]
 :end:
 
-#+begin_src jupyter-python :post  wrap(*this*, w="450pt", c="label:fig:chosen Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset")
+#+begin_src jupyter-python :post  wrap(*this*, w="400pt", c="label:fig:chosen Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset")
   p = px.scatter(
       projdf,
       facet_col='perplexity', facet_col_wrap=4,
@@ -334,7 +343,7 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 #+RESULTS:
 :results:
  
-#+attr_latex: :width 450pt
+#+attr_latex: :width 400pt
 #+CAPTION: label:fig:chosen Projection of sample space via t-SNE overlaid with labels indicating presense of data points in screened subset
 [[file:./.ob-jupyter/ff853be8186a432d26c0eb4b6565ffab8b056ad5.svg]]
 :end:
@@ -343,6 +352,9 @@ The shuffle is seeded with a deterministic random state to ensure scores are com
 :PROPERTIES:
 :UNNUMBERED: t
 :END:
+
+The parameters resulting in a SciKit-Learn RFR estimators best capable
+of predicting band gaps using my training methodology are given in table ref:tbl:rfrHPO.
 
 #+CAPTION: label:tbl:rfrHPO Select hyper-parameters from exhaustive search of 31104 models
 |                            | Selected Space |
