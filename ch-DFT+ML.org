@@ -144,6 +144,43 @@ After the recommendation is made, the granularity of the grid is increased in th
 In general, no more than 2 or 3 exhaustive searches are needed over a given set of grids.
 Past this point, continuously variable hyper parameters can be individually optimized by plotting validation curves.
 
+** COMMENT compute pearson
+#+begin_src jupyter-python
+  lot_compared = Y.groupby(
+      "Formula", as_index=False
+  ).apply(
+      lambda df: df[["Formula", "bg_eV", "LoT"]].set_index(["Formula", "LoT"]).unstack("LoT")
+  )
+  lot_compared.index = lot_compared.index.droplevel(0)
+  lot_compared.columns = lot_compared.columns.droplevel(0)
+  lot_compared = lot_compared.reset_index()
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
+#+begin_src jupyter-python
+  formX = pd.concat([Y.Formula, XX], axis=1)# .reindex(index=lot_compared.index)
+  df = pd.merge(left=lot_compared, right=formX, how='left', on='Formula').set_index(
+      [c for c in formX.columns if not c in formX.select_dtypes(np.number).columns]
+  )
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+  
+#+begin_src jupyter-python
+  pearson = pd.DataFrame(np.corrcoef(df.fillna(0), rowvar=False),
+                         columns=df.columns,
+                         index=df.columns)
+#+end_src
+
+#+RESULTS:
+:results:
+:end:
+
 ** DONE Featurization of Chemistries
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2022-12-21 Wed 15:39]
@@ -192,13 +229,84 @@ However, a spare descriptor is generally bad for extrapolative modeling.
 When extrapolation is the aim, continuously distributed, unique, and linearly independent features are much more reliable.
 [cite:@lux-2020-inter-spars] 
 
-Our attempts to provide a domain with these characteristics results in the following raw feature space.
+Our attempts to provide a domain with these characteristics results in a raw feature space containing the following.
+Fourteen sparse composition vectors extracted from chemical formula using =cmcl=[fn:3].
+See figure ref:fig:pcomp.
+Thirty-six dense site-averaged-property vectors computed as a linear combination of composition vectors and measured elemental properties.
+[cite:@mentel-2014]
+See figure ref:fig:pprop.
+Finally, 5 categorical dimensions one-hot-encoding level of theory.
+This provides the categorical axis for multi-task learning.
+See table ref:tbl:LoTs.
 
-- 14 sparse composition vectors extracted from chemical formula using =cmcl=[fn:3]
-- 36 dense site-averaged property vectors computed as a linear combination of composition vectors and measured elemental properties [cite:@mentel-2014]
-- 5 categorical dimensions one-hot-encoding level of theory.
-  - this provides the categorical axis for multi-task learning
-  - see table ref:tbl:LoTs
+#+begin_src jupyter-python :post wrap(*this*, w="250pt", c="label:fig:pcomp How composition vectors correlate with target bandgaps")
+  sub = pearson.iloc[0:5, 5:19]
+  p = px.imshow(sub, color_continuous_scale='RdBu_r', zmin=-1, zmax=1,
+                labels=dict(color="Pearson Coefficient"),
+                # text_auto='.2f'
+                )
+  p.update_xaxes(tickangle=-40, tickfont_size = 30,
+                 tickmode='array',
+                 tickvals=list(range(sub.columns.shape[0])),
+                 ticktext=sub.columns.str.slice(6).str.replace("'", "").str.replace("_"," ")
+                 )
+  p.update_yaxes(tickangle=-40, tickfont_size = 30,
+                 tickmode = 'array',
+                 tickvals=list(range(sub.index.shape[0])),
+                 ticktext=[l + " bg" for l in sub.index.to_list()]
+                 )
+  p.update_layout(
+      coloraxis=dict(colorbar=dict(len=1, orientation='h', y=0.8)),
+      margin=dict(t=0,b=0,l=0,r=0),
+      font_size=20,
+      # paper_bgcolor='rgba(255,255,255,0)',
+      # plot_bgcolor='rgba(255,255,255,0)',
+  )
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 250pt
+#+CAPTION: label:fig:pcomp How composition vectors correlate with target bandgaps
+[[file:./.ob-jupyter/6035c4c998e735ff02c1615bf97afe8021a9fc1e.svg]]
+:end:
+
+#+begin_src jupyter-python :post wrap(*this*, w="400pt", c="label:fig:pprop How site-averaged-properties vectors correlate with target bandgaps")
+  sub = pearson.iloc[0:5, 19:55]
+  p = px.imshow(sub, color_continuous_scale='RdBu_r', zmin=-1, zmax=1,
+                labels=dict(color="Pearson Coefficient"),
+                height=400, width=1000, aspect='auto',
+                # text_auto='.2f'
+                )
+  p.update_xaxes(tickangle=-40, # tickfont_size = 30,
+                 tickmode='array',
+                 tickvals=list(range(sub.columns.shape[0])),
+                 ticktext=sub.columns.str.slice(6).str.replace("'", "").str.replace("_"," ")
+                 )
+  p.update_yaxes(tickangle=-40, # tickfont_size = 30,
+                 tickmode = 'array',
+                 tickvals=list(range(sub.index.shape[0])),
+                 ticktext=[l + " bg" for l in sub.index.to_list()]
+                 )
+  p.update_layout(coloraxis=dict(colorbar=dict(len=1, orientation='h', y=1)))
+  p.update_layout(
+      margin=dict(t=0,b=0,l=0,r=0),
+      font_size=20
+      # paper_bgcolor='rgba(255,255,255,0)',
+      # plot_bgcolor='rgba(255,255,255,0)',
+  )
+  p.show(renderer='svg')
+#+end_src
+
+#+RESULTS:
+:results:
+ 
+#+attr_latex: :width 400pt
+#+CAPTION: label:fig:pprop How site-averaged-properties vectors correlate with target bandgaps
+[[file:./.ob-jupyter/b1e989b1f8e5352cd90464130524ee512e9070d1.svg]]
+:end:
 
 ** DONE Machine Learning Algorithms and Scoring Methodology
 :LOGBOOK:

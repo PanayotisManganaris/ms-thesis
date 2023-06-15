@@ -78,17 +78,29 @@ However, a spare descriptor is generally bad for extrapolative modeling.
 When extrapolation is the aim, continuously distributed, unique, and linearly independent features are much more reliable.
 \autocite{lux-2020-inter-spars} 
 
-Our attempts to provide a domain with these characteristics results in the following raw feature space.
+Our attempts to provide a domain with these characteristics results in a raw feature space containing the following.
+Fourteen sparse composition vectors extracted from chemical formula using \texttt{cmcl}\textsuperscript{\ref{orge54c147}}.
+See figure \ref{fig:pcomp}.
+Thirty-six dense site-averaged-property vectors computed as a linear combination of composition vectors and measured elemental properties.
+\autocite{mentel-2014}
+See figure \ref{fig:pprop}.
+Finally, 5 categorical dimensions one-hot-encoding level of theory.
+This provides the categorical axis for multi-task learning.
+See table \ref{tbl:LoTs}.
 
-\begin{itemize}
-\item 14 sparse composition vectors extracted from chemical formula using \texttt{cmcl}\textsuperscript{\ref{orge54c147}}
-\item 36 dense site-averaged property vectors computed as a linear combination of composition vectors and measured elemental properties \autocite{mentel-2014}
-\item 5 categorical dimensions one-hot-encoding level of theory.
-\begin{itemize}
-\item this provides the categorical axis for multi-task learning
-\item see table \ref{tbl:LoTs}
-\end{itemize}
-\end{itemize}
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=250pt]{./.ob-jupyter/6035c4c998e735ff02c1615bf97afe8021a9fc1e}
+\caption{\label{fig:pcomp} How composition vectors correlate with target bandgaps}
+\end{figure}
+
+ 
+\begin{figure}[htbp]
+\centering
+\includesvg[width=400pt]{./.ob-jupyter/b1e989b1f8e5352cd90464130524ee512e9070d1}
+\caption{\label{fig:pprop} How site-averaged-properties vectors correlate with target bandgaps}
+\end{figure}
 
 \section{Machine Learning Algorithms and Scoring Methodology}
 \label{sec:orgf7d8230}
