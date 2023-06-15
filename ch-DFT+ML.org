@@ -1361,7 +1361,7 @@ The strong preference for pure sites simply reflects that this sample space cont
 
 A set of promising hypothetical compositions is identified by this work.
 I identified a set of 1251 promising perovskite compositions with desirable band gaps for Photovoltaic applications using a novel data-driven approach.
-The selected band gaps are predicted at an experimental fidelity with error likely ranging from 0.15 to 0.3 \unit{\eectronvolt}.
+The selected band gaps are predicted at an experimental fidelity with error likely ranging from 0.15 to 0.3 \unit{\electronvolt}.
 Of the selected compositions 640 are purely inorganic, and 611 are hybrid-organic/inorganic.
 Table ref:tbl:mixscreen shows how the set subdivides by mixing.
 Only 40 of the original expertly designed sample pass the screening, the rest are untested to my knowledge.
