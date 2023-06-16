@@ -45,9 +45,9 @@ The allure of A/B/X-site mixing, even the creation of high entropy perovskite al
 Perovskite properties have demonstrated highly nonlinear responses to changes in composition.
 It is hoped that exploiting this could lead to possibly eliminating toxic lead, reducing degradation under light exposure, and even improving resistance to adverse environmental conditions while also targeting specific optoelectronic performance markers.
 
-\begin{figure}[htbp]
+\begin{figure}[hp]
 \centering
-\includegraphics[width=250pt]{hybrid-HaP.png}
+\includegraphics[width=200pt]{hybrid-HaP.png}
 \caption{\(2\times{}2\times{}2\) \(\alpha\)-phase supercell with Methylammonium at the A-site}
 \end{figure}
 
@@ -86,18 +86,10 @@ X-site & I & Br & Cl &  &  & \\[0pt]
 \end{tabular}
 \end{table}
 
- 
-\begin{figure}[htbp]
+\begin{figure}[hp]
 \centering
 \includesvg[inkscapeformat=png, inkscapedpi=300,width=300pt]{./.ob-jupyter/835ba724468229103da0fd534aadf2acc7bb610c}
 \caption{\label{fig:domainstats} The cardinal mixing sample space contains equal fractions of each element}
-\end{figure}
-
- 
-\begin{figure}[htbp]
-\centering
-\includesvg[inkscapeformat=png, inkscapedpi=300,width=300pt]{./.ob-jupyter/9f2a6b3e88bd87edad16a8293ec22e2f0ce74780}
-\caption{\label{fig:domainmix} The cardinal mixing sample space contains mostly B-site mixed compounds}
 \end{figure}
 
 \section{Multi-fidelity Dataset}
@@ -113,6 +105,12 @@ It provided an excellent foundation for my work.
 The relatively large size of this dataset samples the space of all possible single-site mixed compositions with good coverage.
 This enables the training of interpolative models in the HaP composition space promising lower and less frequent error than if lesser coverage were used.
 In this dataset, all perovskite structures are cubic or pseudo-cubic, which aids my focus on investigating effects of composition and alloying on photovoltaic performance.
+
+\begin{figure}[hp]
+\centering
+\includesvg[inkscapeformat=png, inkscapedpi=300,width=300pt]{./.ob-jupyter/9f2a6b3e88bd87edad16a8293ec22e2f0ce74780}
+\caption{\label{fig:domainmix} The cardinal mixing sample space contains mostly B-site mixed compounds}
+\end{figure}
 
 \section{Perovskite Formability}
 \label{sec:org0cdae8d}
@@ -172,25 +170,19 @@ The solution to the Schrödinger equation is unfortunately intractable for even 
 Density functional theory is the leading method for tractably computing the energy of many electron interactions in quantum systems.
 DFT is founded on the Hohenberg Kohn relation proving an electron configuration fully determines the potential energy due to the nuclear configuration.
 To illustrate, the electron density at a position is the expectation value of the position of all electrons not at that position.
-This density emerges when computing the expectation value of the potential energy of a single electron \(r_k\)
-
+This density emerges when computing the expectation value of the potential energy of a single electron \(r_k\) due to the nuclei.
 \begin{equation}
 \label{eq:V_ext}
 \braket{\psi|\hat{V}_{nuc}(r_k)|\psi} = \int \di^3r_k \hat{V}_{nuc}(r_k)\int \Pi_{i=1}^{k-1}\di^3r_i\Pi_{i=k+1}^{n}\di^3r_i|\psi({r_i})|^2 = \int \hat{V}_{nuc}(r_k)n(r_k)\di^3r = \hat{V}(n)
 \end{equation}
-
-due to the nuclei.
 This expression is reversible, showing that for a given density there must be a unique \(\psi(n(r))\) expressed as a functional of the density.
 With the establishment of this density functional, any property of interest may be found entirely in terms of the density.
 The major benefit of this re-framing is that the density functional lives in 3-D space, whereas the wave function lives in 3n-D space.
-By circumventing the wave function, the many-electron problem solving for the configurational energy
-
+By circumventing the wave function, the many-electron problem solving for the configurational energy can be effectively cast to a sum of single-electron problems with theoretically no compromise on accuracy.
 \begin{equation}
 \label{eq:funco}
 E = \braket{\psi|\hat{H}|\psi} = \braket{\psi(n)|\hat{T}(n) + \hat{U}(n) + \hat{V}(n)|\psi(n)} \implies E(n) = \hat{T}(n) + \hat{U}(n) + \hat{V}(n)
 \end{equation}
-
-can be effectively cast to a sum of single-electron problems with theoretically no compromise on accuracy.
 Minimizing \(E(n(r))\) yields the ground state energy and ground state electron configuration.
 The electron-electron interaction \(\hat{U}(n(r))\) lacks a perfect solution and requires approximation.
 The system potential energy \(\hat{V}(n(r))\), as discussed, is uniquely defined in 3D space by the nuclei in the system.
@@ -294,10 +286,11 @@ Experimental data \autocite{almora-2020-devic-perfor} broadly agrees with PBE si
 Also, notice that even in just the sample dataset, there were candidates with potential to overtake the state of the art absorbers reported by NREL in figure \ref{fig:nrel}.
 This is propitious for the screening I conducted on the 40000 point sample space.
 
+\clearpage
  
 \begin{figure}[htbp]
 \centering
-\includesvg[width=400pt]{./.ob-jupyter/1111b77f7e7ed1fa50791a404ec9652e766a082b}
+\includesvg[width=300pt]{./.ob-jupyter/1111b77f7e7ed1fa50791a404ec9652e766a082b}
 \caption{\label{fig:slme} PBE SLME of sample compares to experimental PCE and cleanly demarcates competitive range of band gaps}
 \end{figure}
 
